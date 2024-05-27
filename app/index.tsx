@@ -5,7 +5,7 @@ import {
   WelcomeScreen,
   RegisterScreen,
   LoginScreen
-} from "./sata-lesmana"
+} from "./screen"
 const Stack = createNativeStackNavigator();
 
 function App() {
