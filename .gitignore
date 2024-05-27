@@ -1,0 +1,4 @@
+node_modules/
+.expo
+.vscode
+expo-env.d.ts
