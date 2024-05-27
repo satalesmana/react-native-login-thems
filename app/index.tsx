@@ -5,7 +5,7 @@ import {
   WelcomeScreen,
   RegisterScreen,
   LoginScreen
-} from "./Jabal Jala Raga"
+} from "./sata - lesmana"
 const Stack = createNativeStackNavigator();
 
 function App() {
