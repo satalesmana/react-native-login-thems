@@ -1,2 +1,2 @@
 tes page uts
-Ini adalah percobaan pertama Dwi Septiadi dalam membuat push 
+Ini adalah percobaan pertama Dwi Septiadi dalam melakukan push
