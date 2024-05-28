@@ -11,7 +11,7 @@ import {
   TouchableOpacity
 } from "react-native";
 import { MyButton } from "../../components"
-import { ICGoogle ,ICFacebook,ICApple,BGBawah } from "../../../assets"
+import { ICGoogle ,ICFacebook,ICApple,BGBawah,BGStatus } from "../../../assets"
 import React from "react" 
 
 const windowWidth = Dimensions.get("window").width;
@@ -37,7 +37,7 @@ export default function LoginScreen({ navigation }) {
         alert("Password tidak boleh kosong")
       }
 
-      navigation.navigate('Login')
+      navigation.navigate('Home')
     } catch (err) {
       Alert.alert('Error', err.message, [{
         text:'OK', onPress: () => {
@@ -48,12 +48,9 @@ export default function LoginScreen({ navigation }) {
   };
 
   return (
-    <ScrollView style={{ width: windowWidth, height: windowHeight }}>
-      <ImageBackground source={BGBawah} style={{position:'static',paddingVertical: 60}}
-      imageStyle={{
-        resizeMode: "cover",
-        alignSelf: "flex-end"
-      }}>
+    <ScrollView style={{ width: windowWidth, height: windowHeight,backgroundColor:'white' }}>
+         <Image source={BGStatus}/>
+
       <View style={{alignItems:'center'}}>
         <View style={{marginTop:50,alignItems:'center'}}>
           
@@ -98,7 +95,7 @@ export default function LoginScreen({ navigation }) {
   alignItems:'center',
   justifyContent:'center'
 }}>
-  <Text style={{fontFamily:('Outfit','Roboto'),fontWeight:'bold',color:'white',fontSize:19}}>Login</Text>
+  <Text style={{fontFamily:('Roboto','Outfit'),fontWeight:'bold',color:'white',fontSize:19}}>Login</Text>
 </TouchableOpacity>
         </View>
 
@@ -122,24 +119,28 @@ export default function LoginScreen({ navigation }) {
         </View>
         <View style={{flex:1,flexDirection:'row',justifyContent:'space-between',width:'50%',marginTop:30}}>
 
-          <TouchableOpacity style={{width:50,height:50,backgroundColor:'white',borderRadius:'50%',alignItems:'center',justifyContent:'center'}}>
+          <TouchableOpacity style={{width:50,height:50,backgroundColor:'#ECE9EC',borderRadius:'50%',alignItems:'center',justifyContent:'center'}}>
           <Image source={ICGoogle} />
 
           </TouchableOpacity>
           
-          <TouchableOpacity style={{width:50,height:50,backgroundColor:'white',borderRadius:'50%',alignItems:'center',justifyContent:'center'}}>
+          <TouchableOpacity style={{width:50,height:50,backgroundColor:'#ECE9EC',borderRadius:'50%',alignItems:'center',justifyContent:'center'}}>
           <Image source={ICFacebook} />
 
           </TouchableOpacity>
-          <TouchableOpacity style={{width:50,height:50,backgroundColor:'white',borderRadius:'50%',alignItems:'center',justifyContent:'center'}}>
+          <TouchableOpacity style={{width:50,height:50,backgroundColor:'#ECE9EC',borderRadius:'50%',alignItems:'center',justifyContent:'center'}}>
           <Image source={ICApple} />
 
           </TouchableOpacity>
         </View>
 
-        
       </View>
-      </ImageBackground>
+      <Image source={BGBawah} style={{   
+        position: 'absolute',
+        bottom: -150,
+        width: '100%',
+    }}
+         />
     </ScrollView>
   );
 }

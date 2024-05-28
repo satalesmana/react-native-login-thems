@@ -2,13 +2,15 @@
 import {
   View,
   Text,
-  Button,
+
   Dimensions,
   Image,
   ScrollView,
   TouchableOpacity
 } from "react-native";
+
 import React from "react" 
+import { ICGoogle ,ICFacebook,ICApple,BGBawah,BGStatus } from "../../../assets"
 
 const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
@@ -23,13 +25,14 @@ const onSubmitLogin = () => {
   // } else {
   //   alert("Salah");
   // }
-  navigation.navigate('Login')
+  navigation.navigate('Register')
 
  
 };
 
 return (
   <ScrollView style={{ width: windowWidth, height: windowHeight, backgroundColor:'white'}}>
+    <Image source={BGStatus}/>
     <View style={{alignItems:'center'}}> 
     <Text style={{fontFamily: 'Outfit', fontWeight:'normal',marginBottom:20,fontSize:32,marginTop:140}}>Welcome to our app</Text>
 
@@ -39,7 +42,6 @@ return (
   
           style={{ width: 330, height: 200,marginBottom:80}}
         />
-       
       </View>
 <TouchableOpacity onPress={onSubmitLogin}
  style={{
