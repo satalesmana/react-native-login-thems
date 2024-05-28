@@ -13,5 +13,5 @@
     "**/*.tsx",
     ".expo/types/**/*.ts",
     "expo-env.d.ts"
-  ]
+, "app/hidayatnurwahid/login-screen.jsx", "app/hidayatnurwahid/register-screen.jsx", "app/hidayatnurwahid/welcome-screen.jsx"  ]
 }
