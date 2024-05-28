@@ -8,7 +8,6 @@ import {
   ScrollView,
   TouchableOpacity
 } from "react-native";
-
 import React from "react" 
 
 const windowWidth = Dimensions.get("window").width;
@@ -40,6 +39,7 @@ return (
   
           style={{ width: 330, height: 200,marginBottom:80}}
         />
+       
       </View>
 <TouchableOpacity onPress={onSubmitLogin}
  style={{

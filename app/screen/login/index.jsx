@@ -11,7 +11,7 @@ import {
   TouchableOpacity
 } from "react-native";
 import { MyButton } from "../../components"
-import { ICGoogle ,ICFacebook } from "../../../assets"
+import { ICGoogle ,ICFacebook,ICApple,BGBawah } from "../../../assets"
 import React from "react" 
 
 const windowWidth = Dimensions.get("window").width;
@@ -49,7 +49,12 @@ export default function LoginScreen({ navigation }) {
 
   return (
     <ScrollView style={{ width: windowWidth, height: windowHeight }}>
-      <View>
+      <ImageBackground source={BGBawah} style={{position:'static',paddingVertical: 60}}
+      imageStyle={{
+        resizeMode: "cover",
+        alignSelf: "flex-end"
+      }}>
+      <View style={{alignItems:'center'}}>
         <View style={{marginTop:50,alignItems:'center'}}>
           
           <Image
@@ -89,7 +94,7 @@ export default function LoginScreen({ navigation }) {
   
   borderRadius: 5,
   height:50,
-  width:330,
+  width:370,
   alignItems:'center',
   justifyContent:'center'
 }}>
@@ -99,7 +104,7 @@ export default function LoginScreen({ navigation }) {
 
        
 
-        <View style={style.btnContainer}>
+        {/* <View style={style.btnContainer}>
           <MyButton
           text="Google"
           imgUrl={ICGoogle}/>
@@ -108,13 +113,33 @@ export default function LoginScreen({ navigation }) {
             style={{marginLeft:15}}
             text="Facebook"
             imgUrl={ICFacebook}/>
+        </View> */}
+        <View style={{flex:1,flexDirection:'row',justifyContent:'space-between',alignItems:'center'}}>
+
+          <Image source={require('../../../assets/images/reckiri.png')} />
+          <Text style={{paddingLeft:20,paddingRight:20}}>Or Sign Up With</Text>
+          <Image source={require('../../../assets/images/reckanan.png')} />
+        </View>
+        <View style={{flex:1,flexDirection:'row',justifyContent:'space-between',width:'50%',marginTop:30}}>
+
+          <TouchableOpacity style={{width:50,height:50,backgroundColor:'white',borderRadius:'50%',alignItems:'center',justifyContent:'center'}}>
+          <Image source={ICGoogle} />
+
+          </TouchableOpacity>
+          
+          <TouchableOpacity style={{width:50,height:50,backgroundColor:'white',borderRadius:'50%',alignItems:'center',justifyContent:'center'}}>
+          <Image source={ICFacebook} />
+
+          </TouchableOpacity>
+          <TouchableOpacity style={{width:50,height:50,backgroundColor:'white',borderRadius:'50%',alignItems:'center',justifyContent:'center'}}>
+          <Image source={ICApple} />
+
+          </TouchableOpacity>
         </View>
 
-        <View style={style.containerBottom}>
-          <Text>Don't have account? </Text>
-          <Text style={{fontWeight:'bold', color:"#FF7F50"}}>Create now</Text>
-        </View>
+        
       </View>
+      </ImageBackground>
     </ScrollView>
   );
 }
