@@ -5,6 +5,7 @@ import {
   Image,
   ScrollView,
   Alert,
+  Dimensions
 } from "react-native";
 // import { MyButton } from "../../components";
 // import { ICGoogle } from "../../../assets";
@@ -16,7 +17,7 @@ export default function LoginScreen() {
   return (
     <ScrollView>
       <View>
-        <Image source={require('../../../assets/images/gamabar.png')}></Image>
+        <Image source={require('../../../assets/images/gambar.png')}></Image>
         <Text>Login Screen</Text>
       </View>
     </ScrollView>
