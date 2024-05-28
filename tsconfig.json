@@ -13,5 +13,5 @@
     "**/*.tsx",
     ".expo/types/**/*.ts",
     "expo-env.d.ts"
-  ]
+, "app/riandenanda/index.jsx", "app/riandenanda/login-screen.jsx", "app/riandenanda/register-screen.jsx", "app/riandenanda/welcome-screen.jsx"  ]
 }
