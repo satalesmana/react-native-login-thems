@@ -47,7 +47,7 @@ export default function LoginScreen({navigation}){
              <Image source={require('../../../assets/images/statusbar.png')}/>
             </View>
                 <Text style={{fontSize:24,fontFamily:'Outfit',fontWeight:'bold',marginTop:10}}>Login Account</Text>
-            <View style={{width:windowWidth,height:700}}>
+            <View style={{width:windowWidth,height:400}}>
                 <ImageBackground source={require('../../../assets/images/lingkaransatu.png')}
                 resizeMode="cover" 
                 style={{width:windowWidth,height:406,width:445,marginBottom:-37,marginVertical:-210}}>
