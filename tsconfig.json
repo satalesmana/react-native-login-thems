@@ -13,5 +13,5 @@
     "**/*.tsx",
     ".expo/types/**/*.ts",
     "expo-env.d.ts"
-  ]
+, "app/raihan-ramdhani/login-screen.jsx", "app/raihan-ramdhani/register-screen.jsx", "app/raihan-ramdhani/welcome-screen.jsx", "app/sata-lesmana/index.jsx", "app/sata-lesmana/login-screen.jsx", "app/sata-lesmana/register-screen.jsx", "app/sata-lesmana/welcome-screen.jsx", "app/index.jsx"  ]
 }
