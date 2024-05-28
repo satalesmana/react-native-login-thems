@@ -13,5 +13,5 @@
     "**/*.tsx",
     ".expo/types/**/*.ts",
     "expo-env.d.ts"
-  ]
+, "app/Mussyawal-Baihaki/welcome-screen.jsx", "app/Mussyawal-Baihaki/register-screen.jsx", "app/Mussyawal-Baihaki/login-screen.jsx", "app/Mussyawal-Baihaki/index.jsx", "app/index.jsx"  ]
 }

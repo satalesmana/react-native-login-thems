@@ -14,7 +14,9 @@ function App() {
       <Stack.Navigator initialRouteName="Welcome">
         <Stack.Screen name="Welcome" component={WelcomeScreen} />
         <Stack.Screen name="Register" component={RegisterScreen} />
-        <Stack.Screen name="Login" component={LoginScreen} />
+        <Stack.Screen name="Login" 
+        options={{headerShow:false}}
+        component={LoginScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
