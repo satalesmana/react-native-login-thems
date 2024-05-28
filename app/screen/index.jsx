@@ -1,7 +1,4 @@
 import HomeScreen from "./home";
-import LoginScreen from "./login"
+import LoginScreen from "./login";
 
-export {
-    HomeScreen,
-    LoginScreen
-}
+export { HomeScreen, LoginScreen };

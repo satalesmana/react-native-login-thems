@@ -1,4 +1,4 @@
-import { 
+import {
   View,
   Text,
   TextInput,
@@ -6,116 +6,98 @@ import {
   Pressable,
   Dimensions,
   Image,
-  ScrollView
-} from 'react-native';
-import { MyButton } from '../../components'    
-import { ICGoogle, ICFacebook } from '../../../assets';       
-import React from 'react'
+  ScrollView,
+} from "react-native";
+import { MyButton } from "../../components";
+import { ICGoogle, ICFacebook, ICTwitter } from "../../../assets";
+import React from "react";
 
-const windowWidth = Dimensions.get('window').width;
+const windowWidth = Dimensions.get("window").width;
 
-export default function HomeScreen(){
-  const [email, onChangeEmail] = React.useState('')
-  const [pasword, onChangePassword] = React.useState('')
-
-  const onSubmitLogin =()=>{
-    alert(email)
-  }
-
+export default function HomeScreen({ navigation }) {
   return (
     <ScrollView>
       <View>
-        <Text style={style.textLoginStyle}>Welcome To Our Apps</Text>
-        <View style={{ width: windowWidth, height: 400}}>
+        <Text style={style.welcomeToOurApps}>Welcome To Our Apps</Text>
+        <View style={{ width: windowWidth, height: 500 }}>
+          <View style={style.brandStyle}>
+            <Image source={require("../../../assets/images/home.png")} />
+          </View>
 
-              <View style={style.brandStyle}>
-                <Image 
-                  source={ require('../../../assets/images/home.png') } 
-                />
-              </View>
-
-              <Pressable style={style.buttonNext} onPress={onSubmitLogin}>
-              <Text style={style.text}>Next</Text>
-              </Pressable>
-
-        </View>
-      
-        <View style={style.container}>
-          <Text style={style.textLabel}>Email</Text>
-          <TextInput
-            style={style.textInputStyle}
-            onChangeText={onChangeEmail}
-            placeholder='type username or email'
-            placeholderTextColor='#c7c7c7'
-            value={email}/>
-
-          <Text style={[style.textLabel,{marginTop:20}]}>Password</Text>
-          <TextInput
-            style={[style.textInputStyle, {marginBottom:12}]}
-            onChangeText={onChangePassword}
-            placeholder='type your password'
-            placeholderTextColor='#c7c7c7'
-            value={pasword}/>
-
+          <Pressable
+            style={style.buttonNext}
+            onPress={() => navigation.navigate("Login")}
+          >
+            <Text style={style.text}>Next</Text>
+          </Pressable>
+          <View>
+            <Text style={style.orVia}>Or Via Social Media</Text>
+          </View>
         </View>
 
         <View style={style.btnContainer}>
-        <MyButton 
-        text="Google"
-        imgUrl={ICGoogle}/>
-
-        <MyButton
-          text="Facecbook"
-          imgUrl={ICFacebook}/>
-         </View>
-       
+          <MyButton imgUrl={ICGoogle} />
+          <MyButton imgUrl={ICFacebook} />
+          <MyButton imgUrl={ICTwitter} />
+        </View>
       </View>
     </ScrollView>
   );
 }
 
 const style = StyleSheet.create({
-  container: { 
-    padding:20
+  welcomeToOurApps: {
+    fontSize: 22,
+    marginTop: 100,
+    fontWeight: "400",
+    lineHeight: 22,
+    textAlign: "center",
+    fontFamily: "Roboto, sans-serif",
+    color: "rgba(29,34,38,1)",
   },
-  buttonNext:{
-    width:50,
-    height:50,
-    backgroundColor: 'black',
+  brandStyle: {
+    width: 400,
+    marginTop: 80,
+    marginBottom: 80,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  buttonNext: {
+    width: 40,
+    height: 35,
+    alignItems: "center",
+    justifyContent: "center",
+    marginLeft: 105,
+    marginRight: 100,
+    paddingLeft: 100,
+    paddingRight: 100,
+    paddingTop: 10,
+    paddingBottom: 10,
+    borderRadius: 50,
+    boxSizing: "border-box",
+    backgroundColor: "#1F59B6",
   },
   text: {
-    fontSize: 16,
-    lineHeight: 21,
-    fontWeight: 'bold',
-    letterSpacing: 0.25,
-    color: 'white',
+    color: "white",
+    fontSize: 18,
+    lineHeight: "22px",
+    fontFamily: "Roboto, sans-serif",
+    fontWeight: "300",
+    letterSpacing: 1,
   },
-  textInputStyle:{
-    height: 40,
-    marginTop: 12,
-    borderWidth: 1,
-    padding: 10,
+  orVia: {
+    color: "black",
+    fontSize: "15",
+    lineHeight: "8",
+    fontFamily: "Roboto, sans-serif",
+    fontWeight: "400",
+    textAlign: "center",
+    justifyContent: "center",
   },
-  textLoginStyle:{
-    fontSize:22,
-    marginTop:50,
-    fontWeight:'400',
-    textAlign:'center'
+  btnContainer: {
+    flex: 1,
+    flexDirection: "row",
+    paddingLeft: 125,
+    paddingRight: 125,
   },
-  brandStyle:{
-    width:380,
-    marginTop:50,
-    alignItems:'center',
-    justifyContent:'center'
-  },
-  textLabel:{
-    fontSize:12,
-    fontWeight:'bold'
-  },
-  btnContainer:{
-    flex:1,
-    flexDirection:'row',
-    paddingLeft:30,
-    paddingRight:30
-  }
-})
+});
