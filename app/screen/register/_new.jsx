@@ -1,24 +1,31 @@
-import React, { useState } from "react";
 import {
   View,
   Text,
   TextInput,
   StyleSheet,
-  Dimensions,
   Pressable,
+  Dimensions,
   Image,
   ScrollView,
 } from "react-native";
-import Icon from "react-native-vector-icons/FontAwesome";
-
-import { ICGoogle, ICFacebook, ICTwitter } from "../../../assets";
+import {
+  ICGoogle,
+  ICFacebook,
+  ICTwitter,
+  Mail,
+  Lock,
+  Check,
+  Eye,
+} from "../../../assets";
 import { MyButton } from "../../components";
+import React, { useState } from "react";
+import Icon from "react-native-vector-icons/FontAwesome";
 
 const windowWidth = Dimensions.get("window").width;
 
-export default function LoginScreen({ navigation }) {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+export default function RegisterScreen({ navigation }) {
+  const { username, setUsername } = useState("");
+  const { password, setPassword } = useState("");
 
   return (
     <ScrollView contentContainerStyle={style.container}>
