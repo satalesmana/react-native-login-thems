@@ -14,15 +14,13 @@ const style = StyleSheet.create({
     // backgroundColor: "green",
     padding: 10,
     borderColor:'#e1e6ed',
-    backgroundColor: '#d8e2f2',
-    borderWidth:0.5,
     borderRadius:5,
     flex:1,
     flexDirection:'row',
     justifyContent:'center'
   },
   gambar: {
-    width: 40,
-    height: 40,
+    width: 30,
+    height: 30,
   }
 });

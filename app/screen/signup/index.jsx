@@ -44,11 +44,12 @@ export default function SignupScreen({ navigation }) {
   };
 
   return (
-    <ScrollView>
+    <ScrollView style={{backgroundColor:"black"}}>
+        <View style={style.whiteCover}>
+          <View style={style.lineUp}></View>
       <Text style={style.heading1}>Create Your Account</Text>
       <Text style={style.heading2}>Create Account for exploring news</Text>
-
-      <View>
+    
         <View style={{ width: windowWidth, height: 400 }}>
           <View style={style.logo}>
             <Image source={require("../../../assets/images/Logo25.png")} />
@@ -57,7 +58,7 @@ export default function SignupScreen({ navigation }) {
         </View>
 
         <View style={style.container}>
-          <Text style={style.textLabel}>Firstname</Text>
+          <Text style={style.textLabel}>First Name</Text>
           <View style={style.boxInput}>
             <View style={{ flex: 1, marginVertical: "auto", marginLeft: 15 }}>
               <Image
@@ -67,7 +68,7 @@ export default function SignupScreen({ navigation }) {
             <TextInput
               style={style.textInputStyle}
               onChangeText={onChangeEmail}
-              placeholder={"First name"}
+              placeholder={"First Name"}
               placeholderTextColor="#c7c7c7"
               value={email}
             />
@@ -119,13 +120,14 @@ export default function SignupScreen({ navigation }) {
           </View>
 
           
-
+<View style={style.buttonView}>
           <TouchableOpacity
             onPress={onSubmitLogin}
             style={style.Buttoncontinue}
           >
             <Text style={style.textContinue}>Continue</Text>
           </TouchableOpacity>
+</View>
         </View>
       </View>
     </ScrollView>
@@ -143,6 +145,23 @@ const style = StyleSheet.create({
     backgroundColor: "#F8F7FB",
     borderStyle: "solid",
   },
+  whiteCover: {
+    width: windowWidth,
+    backgroundColor: "white",
+    borderTopRightRadius: 25,
+    borderRadius : 20, marginTop: 20,
+    borderTopLeftRadius: 25,
+    height: "120%",
+  },
+  lineUp: {
+    height: 5,
+    width: "15%",
+    borderRadius: 20,
+    alignSelf: "center",
+    backgroundColor: "#DFE2EB",
+    marginTop: 20,
+    marginBottom : 20
+  },
   textContinue: {
     textAlign: "center",
     marginVertical: "auto",
@@ -152,14 +171,20 @@ const style = StyleSheet.create({
   Buttoncontinue: {
     marginTop: 10,
     backgroundColor: "red",
-    height: 40,
+    width: "90%",
+    height: 45,
     alignSelf: "center",
     borderRadius: 10,
     flexDirection: "row",
   },
   textInputStyle: {
-    padding: 10,
+    padding: 9,
     width: "88%",
+  },
+  buttonView:{
+justifyContent:"center",
+alignItems: "center",
+alignContent : "center"
   },
   heading1: {
     fontSize: 24,

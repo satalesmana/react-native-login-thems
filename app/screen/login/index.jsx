@@ -11,15 +11,17 @@ import {
   Alert,
 } from "react-native";
 import { TouchableOpacity } from "react-native";
-import React from "react";
+import React ,{useState}from "react";
 import { MyButton } from "../../component";
 import { ICFacebook, ICGoogle, ICApple } from '../../../assets'  
+import { CheckBox } from "react-native-web";
 
 const windowWidth = Dimensions.get("window").width;
 
 export default function LoginScreen({ navigation }) {
   const [email, onChangeEmail] = React.useState("");
   const [pasword, onChangePassword] = React.useState("");
+  const[isSelected,setSelection] = useState(false);
 
   const goSignup = () => {
     navigation.navigate("Signup");
@@ -49,13 +51,15 @@ export default function LoginScreen({ navigation }) {
   };
 
   return (
-    <ScrollView>
+    <ScrollView style={{backgroundColor:"black"}}>
+        <View style={style.whiteCover}>
+          <View style={style.lineUp}></View>
+
       <Text style={style.textLoginStyle}>Welcome Back!</Text>
       <Text style={style.textAccountStyle}>
         Let's login for explore continues
       </Text>
 
-      <View>
         <View style={{ width: windowWidth, height: 400 }}>
           <View style={style.logo}>
             <Image source={require("../../../assets/images/Logo25.png")} />
@@ -75,7 +79,7 @@ export default function LoginScreen({ navigation }) {
             <TextInput
               style={style.textInputStyle}
               onChangeText={onChangeEmail}
-              placeholder={"First name"}
+              placeholder={"Enter your email"}
               placeholderTextColor="#c7c7c7"
               value={email}
             />
@@ -96,24 +100,27 @@ export default function LoginScreen({ navigation }) {
               value={pasword}
             />
           </View>
+          <View style={style.containerdua}>
+            <View style={style.checkboxContainer}>
+              <CheckBox value={isSelected}onValueChange={setSelection}style={style.checkbox}/>
+              <Text style={style.label}> Keep me signed in</Text>
+            </View>
+              <Text style={style.forget}> forget password</Text>
+
+          </View>
           <TouchableOpacity onPress={onSubmitLogin} style={style.buttonLogin}>
-            <Text style={style.textSignin}>Get Started</Text>
+            <Text style={style.textSignin}>Sign in</Text>
           </TouchableOpacity>
         </View>
 
-        <View style={{ alignSelf: "center", flexDirection: "row" }}>
-          <Text>Don't have account?</Text>
-          <Text onPress={goSignup} style={style.textCreate}>
-            Create Now
-          </Text>
-        </View>
-      </View>
-      <MyButton>
+<View>
+  <Text style={style.textViaStyle}>──────── Or Via Social Media ────────</Text>
+</View>
       <View style={style.btnContainer}>
         <View>
         <MyButton
           imgUrl={ICFacebook}/>
-          </View>
+            </View>
           <View>
           <MyButton
             imgUrl={ICGoogle}/>
@@ -124,7 +131,13 @@ export default function LoginScreen({ navigation }) {
             imgUrl={ICApple}/>
             </View>
         </View>
-      </MyButton>
+        <View style={{ alignSelf: "center", flexDirection: "row" }}>
+          <Text>Don't have account?</Text>
+          <Text onPress={goSignup} style={style.textCreate}>
+            Create Now
+          </Text>
+        </View>
+      </View>
     </ScrollView>
   );
 }
@@ -150,10 +163,27 @@ const style = StyleSheet.create({
     marginTop: 30,
     backgroundColor: "red",
     height: 40,
-    width: "70%",
+    width: "90%",
     alignSelf: "center",
     borderRadius: 10,
     flexDirection: "row",
+  },
+  whiteCover: {
+    width: windowWidth,
+    backgroundColor: "white",
+    borderTopRightRadius: 25,
+    borderRadius : 20, marginTop: 20,
+    borderTopLeftRadius: 25,
+    height: "167%",
+  },
+  lineUp: {
+    height: 5,
+    width: "15%",
+    borderRadius: 20,
+    alignSelf: "center",
+    backgroundColor: "#DFE2EB",
+    marginTop: 20,
+    marginBottom : 20
   },
   textCreate: {
     fontWeight: "bold",
@@ -198,5 +228,36 @@ const style = StyleSheet.create({
   },
   btnContainer1: {
     marginRight:15
+  },
+  containerdua:{
+    flex:1,
+    alignItems:'center',
+    justifyContent:'center'
+  },
+  checkboxContainer:{
+    flexDirection:'row',
+    paddingHorizontal:20,
+    paddingLeft:3,
+    paddingRight:3,
+    marginBottom:20
+  },
+  checkbox:{
+    alignSelf: "flex-start",
+    marginLeft: -180,
+    marginTop: 5
+  },
+  label:{
+    marginTop:3
+  },
+  forget:{
+    marginTop: 3,
+    alignSelf:"flex-end",
+    color: "red"
+  },
+  textViaStyle:{
+    textAlign:'center',
+    alignContent: "center",
+    alignSelf: "center",
+    textAlign:"center",
   }
 });

@@ -23,8 +23,9 @@ export default function WelcomeScreen({ navigation }) {
     navigation.navigate("Login");
   };
   return (
+    
     <ScrollView style={{ backgroundColor: "black" }}>
-      <View>
+      <View style={{ borderRadius : 20, marginTop: 20}}>
         <View style={style.whiteCover}>
           <View style={style.lineUp}></View>
         </View>
