@@ -46,7 +46,23 @@ export default function LoginScreen({navigation}){
         <View style={style.statusbarStyle}>
              <Image source={require('../../../assets/images/statusbar.png')}/>
             </View>
-                <Text style={{fontSize:24,fontFamily:'Outfit',fontWeight:'bold',marginTop:10}}>Login Account</Text>
+            <View style={style.inputContainer}>
+            <View style={style.inputView}>
+              <TextInput
+                style={style.inputText}
+                placeholder="Login Account"
+              
+                autoCorrect={false}
+                autoCapitalize="none"
+                secureTextEntry
+              />
+              <Image
+                source={require('../../../assets/images/User.png')}
+                style={{ width: 15, height: 15, marginLeft:-90 }}
+              />
+            </View>
+            </View>
+            
                 <Text style={{marginRight:20,fontSize:15}}>Welcome Back !</Text>
             <View style={{width:windowWidth,height:600}}>
                 <ImageBackground source={require('../../../assets/images/lingkaransatu.png')}
@@ -123,7 +139,36 @@ const style=StyleSheet.create({
         flex:1,
         flexDirection:'row',
         justifyContent:'center',
-        padding:30
+        padding:30,
+    },
+    userStyle:{
+    paddingHorizontal: 1,
+    marginBottom: 4,
+    flexDirection: "row",
+    },
+    loginView:{
+      marginLeft:5,
+      marginTop:10
+    },
+    inputContainer: {
+      alignItems: "center",
+      justifyContent: "center",
+    },
+    inputView: {
+      gap: 0.2,
+      width: "73%",
+      paddingHorizontal: 20,
+      marginBottom: 5,
+      flexDirection: "row",
+      alignItems: "center",
+      alignSelf: "center",
+      paddingLeft: 5,
+      paddingRight: 5,
+      marginRight:100
+    },
+    inputText:{
+      fontSize:15,
+      fontWeight:'bold'
     }
     
     
