@@ -1,7 +1,6 @@
 import {
   View,
   Text,
-  TextInput,
   StyleSheet,
   Pressable,
   Dimensions,
@@ -18,8 +17,8 @@ export default function HomeScreen({ navigation }) {
   return (
     <ScrollView>
       <View>
-        <Text style={style.welcomeToOurApps}>Welcome To Our Apps</Text>
         <View style={{ width: windowWidth, height: 500 }}>
+          <Text style={style.welcomeToOurApps}>Welcome To Our Apps</Text>
           <View style={style.brandStyle}>
             <Image source={require("../../../assets/images/home.png")} />
           </View>
@@ -29,9 +28,16 @@ export default function HomeScreen({ navigation }) {
               style={style.buttonNext}
               onPress={() => navigation.navigate("Login")}
             >
-              <Text style={style.text}>Next</Text>
+              <View>
+                <Text style={style.text}>Next</Text>
+              </View>
             </Pressable>
-            <Text style={style.orVia}> ──────── Or Via Social Media  ────────</Text>
+
+            <View style={style.viewVia}>
+              <Text style={style.orVia}>
+                ──────── Or Via Social Media ────────
+              </Text>
+            </View>
           </View>
 
           <View style={style.btnContainer}>
@@ -48,17 +54,17 @@ export default function HomeScreen({ navigation }) {
 const style = StyleSheet.create({
   welcomeToOurApps: {
     fontSize: 22,
-    marginTop: 100,
+    marginTop: 110,
     fontWeight: "400",
-    lineHeight: 20,
+    lineHeight: 25,
     textAlign: "center",
-    fontFamily: "Roboto, sans-serif",
+    fontFamily: "Roboto",
     color: "rgba(29,34,38,1)",
   },
   brandStyle: {
     width: 400,
-    marginTop: 80,
-    marginBottom: 80,
+    marginTop: 100,
+    marginBottom: 100,
     alignItems: "center",
     justifyContent: "center",
     alignSelf: "center",
@@ -74,28 +80,29 @@ const style = StyleSheet.create({
     alignSelf: "center",
     paddingLeft: 100,
     paddingRight: 100,
-    paddingTop: 8,
-    paddingBottom: 8,
+    paddingTop: 10,
+    paddingBottom: 10,
     borderRadius: 50,
-    boxSizing: "border-box",
     backgroundColor: "#1F59B6",
   },
   text: {
     color: "white",
     fontSize: 18,
-    lineHeight: "22px",
-    fontFamily: "Roboto, sans-serif",
+    fontFamily: "Roboto",
     fontWeight: "300",
-    letterSpacing: 1,
+  },
+  viewVia: {
+    alignContent: "center",
+    marginTop: 50,
+    marginBottom: 5,
+    textAlign: "center",
+    justifyContent: "center",
   },
   orVia: {
     color: "black",
     fontSize: "15",
-    lineHeight: "3",
-    fontFamily: "Roboto, sans-serif",
-    fontWeight: "400",
-    textAlign: "center",
-    justifyContent: "center",
+    fontFamily: "Roboto",
+    fontWeight: "300",
   },
   btnContainer: {
     flex: 1,

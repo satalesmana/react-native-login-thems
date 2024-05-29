@@ -23,7 +23,7 @@ import React, { useState } from "react";
 
 const windowWidth = Dimensions.get("window").width;
 
-export default function LoginScreen({navigation}) {
+export default function LoginScreen({ navigation }) {
   const { username, setUsername } = useState("");
   const { password, setPassword } = useState("");
 
@@ -48,7 +48,10 @@ export default function LoginScreen({navigation}) {
                 autoCapitalize="none"
                 secureTextEntry
               />
-              <Image source={Check} style={{ width: 15, height: 15 }} />
+              <Image
+                source={Check}
+                style={{ width: 15, height: 15, marginLeft: 30 }}
+              />
             </View>
             <View style={style.inputView}>
               <Image source={Lock} style={{ width: 17, height: 18 }} />
@@ -61,7 +64,10 @@ export default function LoginScreen({navigation}) {
                 autoCorrect={false}
                 autoCapitalize="none"
               />
-              <Image source={Eye} style={{ width: 17, height: 13 }} />
+              <Image
+                source={Eye}
+                style={{ width: 17, height: 13, marginLeft: 30 }}
+              />
             </View>
             <View style={style.forgotView}>
               <Text style={style.forgotPassword}>Forgot Password?</Text>
@@ -75,35 +81,38 @@ export default function LoginScreen({navigation}) {
             >
               <Text style={style.text}>Login</Text>
             </Pressable>
-            <Text style={style.orVia}>──────── Or Via Social Media  ────────</Text>
-
-          <View style={style.btnContainer}>
-            <MyButton imgUrl={ICGoogle} />
-            <MyButton imgUrl={ICFacebook} />
-            <MyButton imgUrl={ICTwitter} />
+            <View style={style.viewVia}>
+              <Text style={style.orVia}>
+                ──────── Or Via Social Media ────────
+              </Text>
+            </View>
+            <View style={style.btnContainer}>
+              <MyButton imgUrl={ICGoogle} />
+              <MyButton imgUrl={ICFacebook} />
+              <MyButton imgUrl={ICTwitter} />
+            </View>
           </View>
-          </View>
 
-
-<View style={style.linkContainer}>
-
-          <Text style={style.accountText}>
-            Don't have an account? 
-            <Text style={style.linkRegister}
-              onClick={() => navigation.navigate("Register")}
-            >
-              <u>Register Now</u>
+          <View style={style.linkContainer}>
+            <Text style={style.accountText}>
+              Don't have an account?
+              <Text
+                style={style.linkRegister}
+                onClick={() => navigation.navigate("Register")}
+              >
+                <u>Register Now</u>
+              </Text>
             </Text>
-          </Text>
-          <Text style={style.accountText}>
-            By signing up, you are agree with our  
-            <a style={style.linkRegister}
-              onClick={() => navigation.navigate("Home")}
-            >
-              <u>Terms & Conditions</u>
-            </a>
-          </Text>
-</View>
+            <Text style={style.accountText}>
+              By signing up, you are agree with our
+              <a
+                style={style.linkRegister}
+                onClick={() => navigation.navigate("Home")}
+              >
+                <u>Terms & Conditions</u>
+              </a>
+            </Text>
+          </View>
         </View>
       </View>
     </ScrollView>
@@ -113,17 +122,17 @@ export default function LoginScreen({navigation}) {
 const style = StyleSheet.create({
   welcomeBack: {
     fontSize: 22,
-    marginTop: 50,
+    marginTop: 110,
     fontWeight: "400",
-    lineHeight: 22,
+    lineHeight: 25,
     textAlign: "center",
-    fontFamily: "Roboto, sans-serif",
+    fontFamily: "Roboto",
     color: "rgba(29,34,38,1)",
   },
   brandStyle: {
     width: 400,
-    marginTop: 60,
-    marginBottom: 35,
+    marginTop: 90,
+    marginBottom: 90,
     alignItems: "center",
     justifyContent: "center",
     alignSelf: "center",
@@ -141,7 +150,7 @@ const style = StyleSheet.create({
     alignItems: "center",
     alignSelf: "center",
     borderBottomColor: "#1B1B1B",
-    borderBottomWidth: 1,
+    borderBottomWidth: "thin",
     paddingLeft: 5,
     paddingRight: 5,
   },
@@ -161,7 +170,7 @@ const style = StyleSheet.create({
     color: "black",
     fontSize: 12,
     lineHeight: "22px",
-    fontFamily: "Roboto, sans-serif",
+    fontFamily: "Roboto",
     fontWeight: "300",
   },
   buttonView: {
@@ -187,26 +196,33 @@ const style = StyleSheet.create({
     color: "white",
     fontSize: 15,
     lineHeight: "22px",
-    fontFamily: "Roboto, sans-serif",
+    fontFamily: "Roboto",
     fontWeight: "300",
     letterSpacing: 1,
+  },
+  viewVia: {
+    alignContent: "center",
+    marginTop: 25,
+    marginBottom: 5,
+    textAlign: "center",
+    justifyContent: "center",
   },
   orVia: {
     color: "black",
     fontSize: "15",
     lineHeight: "3",
-    fontFamily: "Roboto, sans-serif",
+    fontFamily: "Roboto",
     fontWeight: "400",
-    textAlign: "center",  
+    textAlign: "center",
   },
   btnContainer: {
     flex: 1,
     flexDirection: "row",
     alignItems: "center",
-    marginBottom:5
+    marginBottom: 5,
   },
 
-  linkContainer:{
+  linkContainer: {
     fontWeight: "400",
     lineHeight: 22,
     textAlign: "center",
@@ -222,11 +238,11 @@ const style = StyleSheet.create({
     fontFamily: "Roboto, sans-serif",
     color: "rgba(29,34,38,1)",
   },
-  linkRegister:{
+  linkRegister: {
     fontSize: 12,
 
     color: "blue",
     marginLeft: 2,
-    fontStyle: "underline"
-  }
+    fontStyle: "underline",
+  },
 });
