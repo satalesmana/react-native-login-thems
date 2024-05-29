@@ -53,13 +53,7 @@ export default function LoginScreen() {
           </Text>
         </View>
 
-        <TextInput
-          style={style.TextinputStyle}
-          onChangeText={onChangeNumber}
-          value={number}
-          placeholder="useless placeholder"
-          keyboardType="numeric"
-        />
+        
 
       </View>
     </ScrollView>
