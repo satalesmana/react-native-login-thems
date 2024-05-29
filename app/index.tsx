@@ -19,11 +19,10 @@ function App() {
         <Stack.Screen name="Register" component={RegisterScreen} 
          options={{headerShown:false}}
         />
-<<<<<<< HEAD
+
         <Stack.Screen name="Login" component={LoginScreen} options={{headerShown:false}} />
-=======
-        <Stack.Screen name="Login" component={LoginScreen} />
->>>>>>> d61e4d7b985134ba13f8649b1c261af53e1af1cd
+
+
       </Stack.Navigator>
     </NavigationContainer>
   );
