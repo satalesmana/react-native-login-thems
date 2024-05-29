@@ -6,7 +6,8 @@ import {
     TouchableOpacity,
     Dimensions,
     ScrollView,
-    Alert
+    Alert,
+    ImageBackground
   } from 'react-native';
   import { MyButton } from '../../components'
   import { ICFacebook, ICGoogle, ICApple } from '../../../assets'
@@ -54,10 +55,15 @@ import {
       <ScrollView>
         <View>
           <View style={{ width: windowWidth, height: 200 }}>
-            <Text style={style.textLoginStyle}>Create Account</Text>
-            <Text style={style.textLoginStyle2}>Create an account so you can explore all the existing jobs</Text>
+            <Text style={style.textLoginStyle}>Create</Text>
+            <Text style={style.textLoginStyle2}>Account :)</Text>
           </View>
-  
+          <View>
+          <ImageBackground
+            style={style.image}
+            source={require("../../../assets/images/union2.png")}
+          ></ImageBackground>
+        </View>
           <View style={style.container}>
             <Text style={style.textLabel}></Text>
             <TextInput
@@ -84,30 +90,15 @@ import {
               value={confirm_pasword} />  
 
             <TouchableOpacity onPress={onSubmitLogin} style={style.buttonLogin}>
-              <Text style={style.textSignin}>Sign In</Text>
+              <Text style={style.textSignin}>Sign Up</Text>
             </TouchableOpacity>
   
           </View>
   
-          <Text onPress={onSubmitAccount} style={style.textContinueStyle}>
-          Already have an account</Text>
-          <Text style={style.textContinueStyle2}>
-            Or continue with
-          </Text>
+          
           
           <View style={style.btnContainer}>
-          <View>
-            <MyButton style={style.btnContainer1}
-              imgUrl={ICGoogle} />
-          </View>
-          <View>
-            <MyButton style={style.btnContainer1}
-              imgUrl={ICFacebook} />
-              </View>
-          <View>
-            <MyButton style={style.btnContainer1}
-              imgUrl={ICApple} />
-              </View>
+         
             </View>
         </View>
       </ScrollView>
@@ -119,11 +110,11 @@ import {
       padding: 20
     },
     textInputStyle: {
-      height: 62,
-      marginTop: 12,
-      borderWidth: 1,
+      height: 70,
+      marginTop: 5,
       padding: 10,
-      borderRadius:10,
+      borderBottom: 'black',
+      borderBottomWidth: StyleSheet.hairlineWidth
     },
     textForgot: {
       marginTop: 5,
@@ -136,7 +127,8 @@ import {
       fontSize: 32,
       marginTop: 50,
       fontWeight: 'bold',
-      textAlign: 'center',
+      textAlign: 'left',
+      marginLeft:30,
       color:'#000000',
     
     },
@@ -145,24 +137,24 @@ import {
       marginVertical: "auto",
       color: "white",
       flex: 1,
-      fontSize: 18
+      fontSize: 25
     },
     buttonLogin: {
       backgroundColor: '#000000',
       height: 60,
-      width: '100%',
+      width: '50%',
       alignSelf: "center",
-      borderRadius: 10,
+      borderRadius: 55,
       flexDirection: "row",
       marginTop:40
     },
     textLoginStyle2: {
-      fontSize: 15,
-      marginTop: 25,
+      fontSize: 32,
       fontWeight: 'bold',
-      textAlign: 'center',
+      textAlign: 'left',
       width:240,
-      alignSelf: 'center',
+      marginLeft:30,
+      alignSelf: 'left',
     },
     brandStyle: {
       marginTop: 100,

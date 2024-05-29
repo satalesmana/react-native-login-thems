@@ -30,7 +30,7 @@ export default function LoginScreen({ navigation }) {
         throw Error('Password is required')
       }
 
-      navigation.navigate(' ')
+      navigation.navigate('Home ')
     } catch (err) {
       Alert.alert('Error', err.message, [
         {

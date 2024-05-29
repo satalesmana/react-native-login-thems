@@ -26,7 +26,7 @@ export default function WelcomeScreen({ navigation }) {
             style={style.image}
             source={require("../../../assets/images/union.png")}
           ></ImageBackground>
-        </View>
+        </View> 
         <View>
           <ImageBackground
             style={style.image2}
@@ -87,6 +87,7 @@ const style = StyleSheet.create({
     fontSize: 15,
   },
   signin: {
+    justifyContent:'center',
     flexDirection: "row",
     width: "70%",
     alignSelf: "center",
