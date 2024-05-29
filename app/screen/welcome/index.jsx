@@ -9,9 +9,9 @@ export default function WelcomeScreen({navigation}){
     return(
         <ScrollView>
             <View>
-            <View style={style.statusbarStyle}>
-                            <Image source={require('../../../assets/images/statusbar.png')}/>
-                        </View>
+            {/* <View style={style.statusbarStyle}>
+            <Image source={require('../../../assets/images/statusbar.png')}/>
+            </View> */}
                 <View style={{width:windowWidth,height:720}}>
                     <ImageBackground source={require('../../../assets/images/lingkaransatu.png')}
                     resizeMode="cover" 

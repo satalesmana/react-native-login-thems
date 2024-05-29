@@ -13,9 +13,9 @@ export default function HomeScreen(){
     return(
         <ScrollView>
         <View>
-        <View style={style.statusbarStyle}>
+        {/* <View style={style.statusbarStyle}>
                         <Image source={require('../../../assets/images/statusbar.png')}/>
-                    </View>
+                    </View> */}
                     <Text style={{fontWeight:'Semibold',fontSize:24,fontFamily:'Outfit',marginLeft:20,marginTop:20}}>Register</Text>
             <View style={{width:windowWidth,height:400}}>
                 <ImageBackground source={require('../../../assets/images/lingkaransatu.png')}

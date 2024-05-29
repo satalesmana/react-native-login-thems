@@ -43,9 +43,9 @@ export default function LoginScreen({navigation}){
     return(
         <ScrollView>
         <View>
-        <View style={style.statusbarStyle}>
+        {/* <View style={style.statusbarStyle}>
              <Image source={require('../../../assets/images/statusbar.png')}/>
-            </View>
+            </View> */}
             <View style={style.inputContainer}>
             <View style={style.inputView}>
               <TextInput
