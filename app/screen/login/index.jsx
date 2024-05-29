@@ -47,7 +47,8 @@ export default function LoginScreen({navigation}){
              <Image source={require('../../../assets/images/statusbar.png')}/>
             </View>
                 <Text style={{fontSize:24,fontFamily:'Outfit',fontWeight:'bold',marginTop:10}}>Login Account</Text>
-            <View style={{width:windowWidth,height:400}}>
+                <Text style={{marginRight:20,fontSize:15}}>Welcome Back !</Text>
+            <View style={{width:windowWidth,height:600}}>
                 <ImageBackground source={require('../../../assets/images/lingkaransatu.png')}
                 resizeMode="cover" 
                 style={{width:windowWidth,height:406,width:445,marginBottom:-37,marginVertical:-210}}>
@@ -69,7 +70,7 @@ export default function LoginScreen({navigation}){
             color='#FFC600'
             title="Login"/>
             <View style={style.containerWith}>
-                <Text style={[style.textContinueStyle,{textAlign:'center',marginTop:10}]}>Or Continue With</Text>
+                <Text style={[style.textContinueStyle,{textAlign:'center',marginTop:10}]}>──────── Or Continue With  ────────</Text>
             </View>
             </View>
             <View style={style.btnContainer}>

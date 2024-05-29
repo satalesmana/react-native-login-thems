@@ -14,7 +14,7 @@ function App() {
     <NavigationContainer independent={true}>
       <Stack.Navigator initialRouteName="Welcome">
       <Stack.Screen name="Welcome" component={WelcomeScreen}options={{headerShown:false}}/>
-      <Stack.Screen name="Login" component={LoginScreen} />
+      <Stack.Screen name="Login" component={LoginScreen} options={{headerShown:false}}/>
         <Stack.Screen name="Home" component={HomeScreen} options={{headerShown:false}}/>
       </Stack.Navigator>
     </NavigationContainer>

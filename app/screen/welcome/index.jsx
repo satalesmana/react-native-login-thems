@@ -12,7 +12,7 @@ export default function WelcomeScreen({navigation}){
             <View style={style.statusbarStyle}>
                             <Image source={require('../../../assets/images/statusbar.png')}/>
                         </View>
-                <View style={{width:windowWidth,height:700}}>
+                <View style={{width:windowWidth,height:720}}>
                     <ImageBackground source={require('../../../assets/images/lingkaransatu.png')}
                     resizeMode="cover" 
                     style={{width:windowWidth,height:406,width:445,marginBottom:-37,marginVertical:-210}}>
