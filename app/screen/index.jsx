@@ -1,9 +1,8 @@
-import LoginScreen from "./login-screen"
-import RegisterScreen from "./register-screen"
-import WelcomeScreen from "./welcome-screen"
-
-export {
+import HomeScreen from "./home";
+import LoginScreen from "./login";
+import RegisterScreen from "./register";
+export{
+    HomeScreen,
     LoginScreen,
-    RegisterScreen,
-    WelcomeScreen
+    RegisterScreen
 }
