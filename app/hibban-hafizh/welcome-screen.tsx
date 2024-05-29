@@ -38,7 +38,10 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#EEF5FF',   
+<<<<<<< HEAD
     marginBottom:60
+=======
+>>>>>>> d61e4d7b985134ba13f8649b1c261af53e1af1cd
   },
   container2: {
     flex: 1,
@@ -46,7 +49,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     padding: 10,
     marginBottom: 15,
+<<<<<<< HEAD
     marginRight:60
+=======
+    right:15
+>>>>>>> d61e4d7b985134ba13f8649b1c261af53e1af1cd
   },
   welcomeText: {
     fontSize: 73,
@@ -65,7 +72,10 @@ const styles = StyleSheet.create({
   width: 30, // Adjust width as needed
     height: 550,
     resizeMode: 'contain',
+<<<<<<< HEAD
     marginLeft:-3
+=======
+>>>>>>> d61e4d7b985134ba13f8649b1c261af53e1af1cd
   },
   button: {
     backgroundColor: '#6B4EFF',
@@ -86,4 +96,8 @@ const styles = StyleSheet.create({
     opacity: 0.8,
     textAlign: 'center'
   },
+<<<<<<< HEAD
 });
+=======
+});
+>>>>>>> d61e4d7b985134ba13f8649b1c261af53e1af1cd

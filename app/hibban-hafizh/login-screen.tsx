@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React from 'react';
 import { StyleSheet, Text, View, TextInput, TouchableOpacity, ImageBackground } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
@@ -187,3 +188,17 @@ const styles = StyleSheet.create({
 });
 
 export default RegisterScreen;
+=======
+import { View, Text } from 'react-native';
+
+export default function LoginScreen(){
+    return (
+        <View 
+          style={{ flex: 1, alignItems: 'center', 
+              justifyContent: 'center' 
+              }}>
+          <Text>Login Screen</Text>
+        </View>
+      );
+}
+>>>>>>> d61e4d7b985134ba13f8649b1c261af53e1af1cd
