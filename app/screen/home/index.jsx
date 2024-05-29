@@ -32,9 +32,9 @@ const onSubmitLogin = () => {
 
 return (
   <ScrollView style={{ width: windowWidth, height: windowHeight, backgroundColor:'white'}}>
-    <Image source={BGStatus}/>
+
     <View style={{alignItems:'center'}}> 
-    <Text style={{fontFamily: 'Outfit', fontWeight:'normal',marginBottom:20,fontSize:32,marginTop:140}}>Welcome to our app</Text>
+    <Text style={{ fontWeight:'normal',marginBottom:20,fontSize:32,marginTop:140}}>Welcome to our app</Text>
 
       <View style={{}}>
         <Image

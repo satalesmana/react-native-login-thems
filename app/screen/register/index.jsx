@@ -11,7 +11,7 @@ import {
     TouchableOpacity
   } from "react-native";
   import { MyButton } from "../../components"
-  import { ICGoogle ,ICFacebook,ICApple,BGBawah,BGStatus } from "../../../assets"
+  import { ICGoogle ,ICFacebook,ICApple,BGBawah,BGStatus,drawpink } from "../../../assets"
   import React from "react" 
   
   const windowWidth = Dimensions.get("window").width;
@@ -52,14 +52,14 @@ import {
     };
   
     return (
-      <ScrollView style={{ width: windowWidth, height: windowHeight,backgroundColor:'white' }}>
-           <Image source={BGStatus}/>
+      <ScrollView style={{ flex:1,width: windowWidth, height: windowHeight,backgroundColor:'white' }}>
+           
 
-        <View style={{alignItems:'center'}}>
-          <View style={{marginTop:50,alignItems:'center'}}>
+        <View >
+          <View style={{marginTop:35,alignItems:'center'}}>
             
             <Image
-              source={require("../../../assets/images/drawpink.png")}
+              source={drawpink}
       
               style={{ width: 300, height: 180}}
             />
@@ -69,13 +69,14 @@ import {
           </View>
   
           <View style={style.container}>
-            <Text style={{fontFamily: 'Outfit', fontWeight:'normal',marginTop:20,fontSize:24}}>Register Account</Text>
+            <Text style={{fontWeight:'bold',marginTop:10,marginBottom:10,fontSize:24}}>Register Account</Text>
             <TextInput
               style={style.textInputStyle}
               onChangeText={onChangeFullname}
-              placeholder="Fullname"
+              placeholder="Full Name"
               placeholderTextColor="#2F2E41"
               value={fullname}
+              height='50'
             />
             <TextInput
               style={style.textInputStyle}
@@ -83,6 +84,8 @@ import {
               placeholder="Username , email & phone number"
               placeholderTextColor="#2F2E41"
               value={email}
+              height='50'
+
             />
   
             
@@ -92,24 +95,27 @@ import {
               placeholder="Password"
               placeholderTextColor="#2F2E41"
               value={pass}
+              height='50'
+
             />
         
-             <Text style={style.textForgotStyle}>
-          Forgot Password ?
-          </Text>
+            
+          </View>
+          <View style={{alignItems:'center'}}>
+            <View style={{marginLeft:30,marginRight:30,marginTop:25}}>
           <TouchableOpacity onPress={onSubmitLogin}
    style={{
     backgroundColor: 'rgba(11, 110, 254, 1)',
     
     borderRadius: 5,
     height:50,
-    width:370,
+    width:320,
     alignItems:'center',
     justifyContent:'center'
   }}>
-    <Text style={{fontFamily:('Roboto','Outfit'),fontWeight:'bold',color:'white',fontSize:19}}>Login</Text>
+    <Text style={{fontFamily:'Roboto',fontWeight:'bold',color:'white',fontSize:19}}>Login</Text>
   </TouchableOpacity>
-          </View>
+  </View>
   
          
   
@@ -123,27 +129,30 @@ import {
               text="Facebook"
               imgUrl={ICFacebook}/>
           </View> */}
-          <View style={{flex:1,flexDirection:'row',justifyContent:'space-between',alignItems:'center'}}>
+          <View style={{marginTop:30,flex:1,flexDirection:'row',justifyContent:'space-between',alignItems:'center'}}>
   
             <Image source={require('../../../assets/images/reckiri.png')} />
             <Text style={{paddingLeft:20,paddingRight:20}}>Or Sign Up With</Text>
             <Image source={require('../../../assets/images/reckanan.png')} />
           </View>
+          </View>
+          <View style={{alignItems:'center'}}>
           <View style={{flex:1,flexDirection:'row',justifyContent:'space-between',width:'50%',marginTop:30}}>
   
-            <TouchableOpacity style={{width:50,height:50,backgroundColor:'#ECE9EC',borderRadius:'50%',alignItems:'center',justifyContent:'center'}}>
+            <TouchableOpacity style={{width:50,height:50,backgroundColor:'#ECE9EC',borderRadius:50,alignItems:'center',justifyContent:'center'}}>
             <Image source={ICGoogle} />
   
             </TouchableOpacity>
             
-            <TouchableOpacity style={{width:50,height:50,backgroundColor:'#ECE9EC',borderRadius:'50%',alignItems:'center',justifyContent:'center'}}>
+            <TouchableOpacity style={{width:50,height:50,backgroundColor:'#ECE9EC',borderRadius:50,alignItems:'center',justifyContent:'center'}}>
             <Image source={ICFacebook} />
   
             </TouchableOpacity>
-            <TouchableOpacity style={{width:50,height:50,backgroundColor:'#ECE9EC',borderRadius:'50%',alignItems:'center',justifyContent:'center'}}>
+            <TouchableOpacity style={{width:50,height:50,backgroundColor:'#ECE9EC',borderRadius:50,alignItems:'center',justifyContent:'center'}}>
             <Image source={ICApple} />
   
             </TouchableOpacity>
+          </View>
           </View>
   
         </View>

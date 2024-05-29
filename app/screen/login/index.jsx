@@ -3,15 +3,13 @@ import {
   Text,
   TextInput,
   StyleSheet,
-  Button,
-  ImageBackground,
   Dimensions,
   Image,
   ScrollView,
   TouchableOpacity
 } from "react-native";
 import { MyButton } from "../../components"
-import { ICGoogle ,ICFacebook,ICApple,BGBawah,BGStatus } from "../../../assets"
+import { ICGoogle ,ICFacebook,ICApple,BGBawah,BGStatus,draw } from "../../../assets"
 import React from "react" 
 
 const windowWidth = Dimensions.get("window").width;
@@ -19,6 +17,7 @@ const windowHeight = Dimensions.get("window").height;
 
 export default function LoginScreen({ navigation }) {
   const [email, onChangeEmail] = React.useState("");
+  const [fullname, onChangeFullname] = React.useState("");
   const [pass, onChangePassword] = React.useState("");
 
   const onSubmitLogin = () => {
@@ -33,11 +32,14 @@ export default function LoginScreen({ navigation }) {
       if(email.trim().length === 0){
         alert("Email tidak boleh kosong")
       }
+      if(fullname.trim().length === 0){
+        alert("Fullname tidak boleh kosong")
+      }
       if(pass.trim().length === 0){
         alert("Password tidak boleh kosong")
       }
 
-      navigation.navigate('Home')
+      navigation.navigate('Login')
     } catch (err) {
       Alert.alert('Error', err.message, [{
         text:'OK', onPress: () => {
@@ -48,14 +50,14 @@ export default function LoginScreen({ navigation }) {
   };
 
   return (
-    <ScrollView style={{ width: windowWidth, height: windowHeight,backgroundColor:'white' }}>
-         <Image source={BGStatus}/>
+    <View style={{ flex:1,width: windowWidth, height: windowHeight,backgroundColor:'white' }}>
+         
 
-      <View style={{alignItems:'center'}}>
+      <View>
         <View style={{marginTop:50,alignItems:'center'}}>
           
           <Image
-            source={require("../../../assets/images/draw.png")}
+            source={draw}
     
             style={{ width: 300, height: 180}}
           />
@@ -65,7 +67,8 @@ export default function LoginScreen({ navigation }) {
         </View>
 
         <View style={style.container}>
-          <Text style={{fontFamily: 'Outfit', fontWeight:'normal',marginTop:20,fontSize:24}}>Login Detail</Text>
+          <Text style={{fontWeight:'normal',marginTop:20,fontSize:24,fontWeight:'bold'}}>Login Details</Text>
+          
           <TextInput
             style={style.textInputStyle}
             onChangeText={onChangeEmail}
@@ -82,22 +85,26 @@ export default function LoginScreen({ navigation }) {
             placeholderTextColor="#2F2E41"
             value={pass}
           />
+      
            <Text style={style.textForgotStyle}>
         Forgot Password ?
         </Text>
+        </View>
+        <View style={{alignItems:'center'}}>
+          <View style={{marginLeft:30,marginRight:30}}>
         <TouchableOpacity onPress={onSubmitLogin}
  style={{
   backgroundColor: 'rgba(11, 110, 254, 1)',
   
   borderRadius: 5,
   height:50,
-  width:370,
+  width:320,
   alignItems:'center',
   justifyContent:'center'
 }}>
-  <Text style={{fontFamily:('Roboto','Outfit'),fontWeight:'bold',color:'white',fontSize:19}}>Login</Text>
+  <Text style={{fontFamily:'Roboto',fontWeight:'bold',color:'white',fontSize:19}}>Login</Text>
 </TouchableOpacity>
-        </View>
+</View>
 
        
 
@@ -111,37 +118,46 @@ export default function LoginScreen({ navigation }) {
             text="Facebook"
             imgUrl={ICFacebook}/>
         </View> */}
-        <View style={{flex:1,flexDirection:'row',justifyContent:'space-between',alignItems:'center'}}>
+          <Text style={{marginBottom:-28,marginTop:30}}>Or Sign Up With</Text>
 
-          <Image source={require('../../../assets/images/reckiri.png')} />
-          <Text style={{paddingLeft:20,paddingRight:20}}>Or Sign Up With</Text>
-          <Image source={require('../../../assets/images/reckanan.png')} />
+        <View style={{marginTop:20,flex:1,flexDirection:'row',justifyContent:'space-between',alignItems:'center'}}>
+
+          <Image source={require('../../../assets/images/reckiri.png')} style={{marginRight:60}} />
+
+          <Image source={require('../../../assets/images/reckanan.png')} style={{marginLeft:60}} />
         </View>
-        <View style={{flex:1,flexDirection:'row',justifyContent:'space-between',width:'50%',marginTop:30}}>
 
-          <TouchableOpacity style={{width:50,height:50,backgroundColor:'#ECE9EC',borderRadius:'50%',alignItems:'center',justifyContent:'center'}}>
+        </View>
+        <View style={{alignItems:'center'}}>
+        <View style={{flex:1,flexDirection:'row',justifyContent:'space-between',width:'50%',marginTop:50}}>
+
+          <TouchableOpacity style={{width:50,height:50,backgroundColor:'#ECE9EC',borderRadius:50,alignItems:'center',justifyContent:'center'}}>
           <Image source={ICGoogle} />
 
           </TouchableOpacity>
           
-          <TouchableOpacity style={{width:50,height:50,backgroundColor:'#ECE9EC',borderRadius:'50%',alignItems:'center',justifyContent:'center'}}>
+          <TouchableOpacity style={{width:50,height:50,backgroundColor:'#ECE9EC',borderRadius:50,alignItems:'center',justifyContent:'center'}}>
           <Image source={ICFacebook} />
 
           </TouchableOpacity>
-          <TouchableOpacity style={{width:50,height:50,backgroundColor:'#ECE9EC',borderRadius:'50%',alignItems:'center',justifyContent:'center'}}>
+          <TouchableOpacity style={{width:50,height:50,backgroundColor:'#ECE9EC',borderRadius:50,alignItems:'center',justifyContent:'center'}}>
           <Image source={ICApple} />
 
           </TouchableOpacity>
         </View>
+        </View>
 
       </View>
+      <View style={{alignItems:'center'}}>
       <Image source={BGBawah} style={{   
-        position: 'absolute',
-        bottom: -150,
+      
+        bottom:40,
         width: '100%',
     }}
          />
-    </ScrollView>
+         </View>
+      
+    </View>
   );
 }
 
@@ -181,7 +197,6 @@ const style = StyleSheet.create({
   textForgotStyle:{
     textAlign:'right',
     padding:10,
-    marginBottom:20
   },
   containerBottom:{
     flex:1,
