@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, Button, StyleSheet, TouchableOpacity, Image, Dimensions, } from 'react-native';
+import { View, Text, TextInput, Button, StyleSheet, TouchableOpacity, Image, Dimensions, ScrollView,} from 'react-native';
 
 export default function LoginScreen({navigation}){
       const goHome=()=>{
@@ -19,6 +19,7 @@ export default function LoginScreen({navigation}){
     };
 
     return (
+        <ScrollView>
         <View style={{ width: windowWidth }}>
             <View style={{ width: windowWidth, marginTop: 50, marginRight: 45 }}>
                 <Image
@@ -71,6 +72,7 @@ export default function LoginScreen({navigation}){
                 </View>
             </View>
         </View>
+        </ScrollView>
     );
 };
 const styles = StyleSheet.create({

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image, Dimensions} from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image, Dimensions, ScrollView} from 'react-native';
 
 
 const windowWidth = Dimensions.get('window').width;
@@ -21,6 +21,7 @@ export default function RegisterScreen({navigation}){
   };
 
   return (
+    <ScrollView>
     <View style={{ width: windowWidth }}>
             <View style={{ width: windowWidth, marginTop: 50 }}>
                 <Image
@@ -60,6 +61,7 @@ export default function RegisterScreen({navigation}){
         <Text style={styles.loginText}>Already a member? Log In</Text>
       </View>
       </View>
+      </ScrollView>
   );
 };
 
