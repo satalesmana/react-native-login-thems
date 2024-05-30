@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { StyleSheet, Text, View, TouchableOpacity,Button,  Image, Dimensions,  } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, Dimensions,  } from 'react-native';
 
 
 interface NavigationProps {
@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#EEF5FF',   
     width:windowWidth,
-    marginBottom:60,
+    marginBottom:0,
   },
   container2: {
     flex: 1,
@@ -63,9 +63,9 @@ const styles = StyleSheet.create({
   subText: {
     fontSize: 23,
     color: '#1D2226', // Purple text color
-    marginBottom: 30,
+    marginBottom: 70,
+    marginTop: -20,
     opacity: 0.6,
-    marginTop: -10,
     fontFamily:'Roboto'
   },
   sidebar: {
@@ -81,14 +81,14 @@ const styles = StyleSheet.create({
     backgroundColor: '#6B4EFF',
     paddingVertical: 10,
     paddingHorizontal: 40,
-    width: 300, 
-    height:75,
+    width: 375 , 
+    height: 60,
     borderRadius: 50,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.8,
-    shadowRadius: 2,
-    elevation: 5,
+    shadowOpacity: 1,
+    shadowRadius: 3,
+    elevation: 10,
     alignContent:'center'
   },
   buttonText: {
@@ -97,7 +97,7 @@ const styles = StyleSheet.create({
     fontFamily:'Roboto',
     opacity: 0.8,
     textAlign: 'center',
-    top:10
+    top:7.5
   },
 
 });

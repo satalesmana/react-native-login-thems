@@ -29,7 +29,7 @@ const RegisterScreen = ({navigation}: NavigationProps) => {
             placeholder="Your Name"
             placeholderTextColor="#6B6B6B"
           />
-          <Icon name="person-outline" size={20} color="#6B6B6B" style={styles.icon} />
+          <Icon name="person-outline" size={30} color="#6B6B6B" style={styles.icon} />
         </View>
         <View style={styles.inputContainer}>
           <TextInput
@@ -37,7 +37,7 @@ const RegisterScreen = ({navigation}: NavigationProps) => {
             placeholder="Email Address"
             placeholderTextColor="#6B6B6B"
           />
-          <Icon name="mail-outline" size={20} color="#6B6B6B" style={styles.icon} />
+          <Icon name="mail-outline" size={30} color="#6B6B6B" style={styles.icon} />
         </View>
         <View style={styles.inputContainer}>
           <TextInput
@@ -46,7 +46,7 @@ const RegisterScreen = ({navigation}: NavigationProps) => {
             placeholderTextColor="#6B6B6B"
             secureTextEntry
           />
-          <Icon name="lock-closed-outline" size={20} color="#6B6B6B" style={styles.icon} />
+          <Icon name="lock-closed-outline" size={30} color="#6B6B6B" style={styles.icon} />
         </View>
         <TouchableOpacity style={styles.loginButton} onPress={() => navigation.navigate('Login')} >
           <Text style={styles.loginButtonText}>LOGIN</Text>
@@ -56,13 +56,13 @@ const RegisterScreen = ({navigation}: NavigationProps) => {
       <Text style={styles.orText}>or Register with</Text>
       <View style={styles.socialIcons}>
         <TouchableOpacity style={{backgroundColor: 'white', borderRadius:50, width:70, height:70, alignItems:'center', justifyContent:'center'}}>
-          <Icon name="logo-google" size={50} color="#4285F4"  />
+          <Icon name="logo-google" size={50} color="#6C63FF"  />
         </TouchableOpacity  >
         <TouchableOpacity style={{backgroundColor: 'white', borderRadius:50, width:70, height:70, alignItems:'center', justifyContent:'center'}} >
-          <Icon name="logo-facebook" size={50} color="#3b5998" />
+          <Icon name="logo-facebook" size={50} color="#6C63FF" />
         </TouchableOpacity>
         <TouchableOpacity style={{backgroundColor: 'white', borderRadius:50, width:70, height:70, alignItems:'center', justifyContent:'center'}} >
-          <Icon name="logo-twitter" size={50} color="#1DA1F2" />
+          <Icon name="logo-twitter" size={50} color="#6C63FF" />
         </TouchableOpacity>
       </View>
       <View style={styles.footer}>
@@ -95,14 +95,15 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   loginText: {
-    color: '#6B6B6B',
+    color: '#1D2226',
     fontSize: 53,
     position: 'absolute',
     marginTop: 60,
-    left:-105
+    left:-105, 
+    opacity: 0.6
   },
   signUpText: {
-    color: '#6B4EFF',
+    color: '#6C63FF',
     fontSize: 103,
     // fontWeight: 'bold',
     bottom: -15,
@@ -111,11 +112,12 @@ const styles = StyleSheet.create({
     opacity: 0.8
   },
   subHeaderText: {
-    color: '#6B6B6B',
+    color: '#1D2226',
     fontSize: 23,
     marginLeft:130,
     bottom: -15,
-    marginBottom:30
+    marginBottom:30,
+    opacity:0.6
   },
   form: {
     width:550,
@@ -149,7 +151,7 @@ const styles = StyleSheet.create({
     marginRight: 10,
   },
   loginButton: {
-    backgroundColor: '#6B4EFF',
+    backgroundColor: '#6C63FF',
     paddingVertical: 15,
     borderRadius: 40,
     alignItems: 'center',
@@ -188,19 +190,21 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   footerText: {
-    color: '#6B6B6B',
+    color: '#1A1A1A',
     fontSize: 15,
     marginVertical: 5,
-    textAlign:'center'
-
+    textAlign:'center',
+    opacity: 0.7,
+    marginBottom: 15
   },
   loginLink: {
-    color: '#6B4EFF',
+    color: '#6C63FF',
     textDecorationLine: 'underline',
   },
   termsText: {
-    color: '#6B6B6B',
+    color: '#1A1A1A',
     fontSize: 15,
+    opacity: 0.7
   },
   terms2Text: {
     textDecorationLine: 'underline'

@@ -30,7 +30,7 @@ const LoginScreen = ({navigation}: NavigationProps) => {
             placeholder="Email Address"
             placeholderTextColor="#6B6B6B"
           />
-          <Icon name="mail-outline" size={20} color="#6B6B6B" style={styles.icon} />
+          <Icon name="mail-outline" size={30} color="#6B6B6B" style={styles.icon} />
         </View>
         <View style={styles.inputContainer}>
           <TextInput
@@ -39,7 +39,7 @@ const LoginScreen = ({navigation}: NavigationProps) => {
             placeholderTextColor="#6B6B6B"
             secureTextEntry
           />
-          <Icon name="lock-closed-outline" size={20} color="#6B6B6B" style={styles.icon} />
+          <Icon name="lock-closed-outline" size={30} color="#6B6B6B" style={styles.icon} />
         </View>
         <TouchableOpacity style={styles.loginButton} onPress={() => navigation.navigate('Welcome')} >
           <Text style={styles.loginButtonText}>LOGIN</Text>
@@ -51,17 +51,17 @@ const LoginScreen = ({navigation}: NavigationProps) => {
       <Text style={styles.orText}>or login with</Text>
       <View style={styles.socialIcons}>
         <TouchableOpacity style={{backgroundColor: 'white', borderRadius:50, width:70, height:70, alignItems:'center', justifyContent:'center'}}>
-          <Icon name="logo-google" size={50} color="#4285F4"  />
+          <Icon name="logo-google" size={50} color="#6C63FF"  />
         </TouchableOpacity  >
         <TouchableOpacity style={{backgroundColor: 'white', borderRadius:50, width:70, height:70, alignItems:'center', justifyContent:'center'}} >
-          <Icon name="logo-facebook" size={50} color="#3b5998" />
+          <Icon name="logo-facebook" size={50} color="#6C63FF" />
         </TouchableOpacity>
         <TouchableOpacity style={{backgroundColor: 'white', borderRadius:50, width:70, height:70, alignItems:'center', justifyContent:'center'}} >
-          <Icon name="logo-twitter" size={50} color="#1DA1F2" />
+          <Icon name="logo-twitter" size={50} color="#6C63FF" />
         </TouchableOpacity>
       </View>
       <View style={styles.footer}>
-        <Text style={styles.footerText}>Don't have an account? <Text style={styles.loginLink} onPress={() => navigation.navigate('Register')} >Create New Now</Text></Text>
+        <Text style={styles.footerText}>Don't have an account? <Text style={styles.Createlink} onPress={() => navigation.navigate('Register')} >Create New Now</Text></Text>
         <Text style={styles.termsText}>By signing up, you are agree with our <Text style={styles.terms2Text}>Terms & Conditions</Text></Text>
       </View>
     </View>
@@ -97,7 +97,7 @@ const styles = StyleSheet.create({
     left:350
   },
   LoginText: {
-    color: '#6B4EFF',
+    color: '#6C63FF',
     fontSize: 103,
     // fontWeight: 'bold',
     bottom: -15,
@@ -144,7 +144,7 @@ const styles = StyleSheet.create({
     marginRight: 10,
   },
   loginButton: {
-    backgroundColor: '#6B4EFF',
+    backgroundColor: '#6C63FF',
     paddingVertical: 15,
     borderRadius: 40,
     alignItems: 'center',
@@ -163,7 +163,7 @@ const styles = StyleSheet.create({
     top: 5
   },
   forgottext: {
-   right:-280,
+   right:-275,
    fontFamily: 'Roboto',
    fontSize: 14
   },
@@ -189,19 +189,21 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   footerText: {
-    color: '#6B6B6B',
+    color: '#1A1A1A',
     fontSize: 15,
     marginVertical: 5,
-    textAlign:'center'
-
+    textAlign:'center',
+    marginBottom: 15,
+    opacity: 0.7
   },
-  loginLink: {
-    color: '#6B4EFF',
+  Createlink: {
+    color: '#6C63FF',
     textDecorationLine: 'underline',
   },
   termsText: {
-    color: '#6B6B6B',
+    color: '#1A1A1A',
     fontSize: 15,
+    opacity: 0.7
   },
   terms2Text: {
     textDecorationLine: 'underline'
