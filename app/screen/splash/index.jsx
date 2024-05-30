@@ -1,6 +1,7 @@
-import { View, Text, StyleSheet } from 'react-native';
-import { LinearGradient } from 'expo-linear-gradient';
+import { View, Text, StyleSheet, Image, Dimensions} from 'react-native';
 import { useEffect } from 'react';
+import { ICSpsc } from '../../../assets'
+
 
 export default function SplashScreen({navigation}){
     useEffect(()=>{
@@ -10,27 +11,20 @@ export default function SplashScreen({navigation}){
     },[navigation])
 
     return (
-        <LinearGradient colors={['#4c669f', '#3b5998', '#192f6a']} 
-            style={styles.linearGradient}>
-            <View style={styles.textContainer}>
-                <Text style={styles.textSpalash}>Facebook</Text>
+        <View style={{backgroundColor : '#0D2063'}}>
+            <View style={styles.brandStyle}>
+                <Image source={require("../../../assets/images/splash-sc.png")} />
             </View>
-        </LinearGradient>
+        </View>
     );
 }
 
 const styles = StyleSheet.create({
-    linearGradient: {
-        flex: 1,
-    },
-    textContainer:{ 
-        flex: 1, 
-        alignItems: 'center', 
-        justifyContent: 'center' 
-    },
-    textSpalash:{
-        color:'white',
-        fontSize:25,
-        fontWeight:'bold'
+
+    brandStyle: {
+        marginTop: 250,
+        marginBottom: 250,
+        alignItems: "center",
+        justifyContent: "center",
     }
 })

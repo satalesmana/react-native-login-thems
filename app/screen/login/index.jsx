@@ -50,19 +50,15 @@ export default function LoginScreen({navigation}){
   return (
     <ScrollView>
       <View>
-        <View style={{ width: windowWidth, height: 400}}>
-          <ImageBackground 
-            source={ require('../../../assets/images/Subtract.png') } 
-            resizeMode="cover"
-            style={{width:windowWidth, height:400}}>
+        <View style={{ width: windowWidth}}>
               <View style={style.brandStyle}>
                 <Image 
-                  source={ require('../../../assets/images/Brand.png') } 
+                  source={ require('../../../assets/images/logres.png') } 
                 />
               </View>
               
-            <Text style={style.textLoginStyle}>Login</Text>
-          </ImageBackground>
+            <Text style={style.textLoginStyle}>Welcome back!</Text>
+            <Text style={style.textLogin2Style}>Login to your account</Text>
         </View>
       
         <View style={style.container}>
@@ -126,14 +122,22 @@ const style = StyleSheet.create({
     padding: 10,
   },
   textLoginStyle:{
-    fontSize:32,
-    marginTop:150,
-    fontWeight:'bold',
-    textAlign:'center'
+    fontSize:24,
+    marginTop:50,
+    marginLeft: 30,
+    fontWeight:'700',
+    opacity : 0.8
+    
+  },
+  textLogin2Style:{
+    fontSize:13,
+    marginLeft: 32,
+    fontWeight:'500',
+    opacity : 0.3
     
   },
   brandStyle:{
-    marginTop:100,
+    marginTop:50,
     alignItems:'center',
     justifyContent:'center'
   },
