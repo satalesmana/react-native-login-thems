@@ -1,4 +1,4 @@
-import { View,Text,TextInput,StyleSheet,Button,ImageBackground,Dimensions,Image,ScrollView} from "react-native";
+import { View,Text,TextInput,StyleSheet,TouchableOpacity,ImageBackground,Dimensions,Image,ScrollView} from "react-native";
 import React from 'react'
 const windowWidth = Dimensions.get('window').width;
 
@@ -25,14 +25,15 @@ export default function WelcomeScreen({navigation}){
                         </View>
                     </ImageBackground>
                     <Text style={style.textExploreStyle}>Explore the app</Text>
+                    <View style={style.loremStyle}>
                     <Text style={style.textLoremStyle}>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores sit nam earum odit quos illum quae, nulla officiis sed a cum repellat commodi, corrupti laudantium illo ab architecto molestiae aliquam?</Text>
-                   
+                    </View>
                 </View>
-                <View style={{width : "80%", alignContent : "center",  alignSelf : "center"}}>
-                  <Button
-            onPress={() => navigation.navigate('Home')}
-            color='#FFC600'
-            title="Let's started"/>  
+                <View style={{width : "80%", alignContent : "center",  alignSelf : "center", color:"black"}}>
+                  <TouchableOpacity style={{backgroundColor :"#FFC600",padding:10}}
+            onPress={() => navigation.navigate('Home')} >
+            <Text style={{color : "black", alignSelf : "center"}}>Let's started</Text>
+                    </TouchableOpacity>  
                 </View>
                 
             </View>
@@ -57,7 +58,13 @@ const style=StyleSheet.create({
         fontSize:15,
         marginTop:10,
         textAlign:'center',
-        marginBottom:10
+        marginBottom:10,
+        
+    },
+    loremStyle:{
+        width:300,
+        justifyContent:'center',
+        alignSelf:'center'
     },
    containesatu:{
     textAlign:'center',
