@@ -4,17 +4,23 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import {
   WelcomeScreen,
   RegisterScreen,
-  LoginScreen
-} from "./satalesmana"
+  LoginScreen,
+  HomeScreen
+} from "./jabaljalaraga-screen"
 const Stack = createNativeStackNavigator();
 
 function App() {
   return (
     <NavigationContainer independent={true}>
       <Stack.Navigator initialRouteName="Welcome">
-        <Stack.Screen name="Welcome" component={WelcomeScreen} />
-        <Stack.Screen name="Register" component={RegisterScreen} />
-        <Stack.Screen name="Login" component={LoginScreen} />
+        <Stack.Screen name="Welcome" component={WelcomeScreen}
+        options={{headerShown:false}}
+        />
+        <Stack.Screen name="Register" component={RegisterScreen}
+        options={{headerShown:false}} />
+        <Stack.Screen name="Login" component={LoginScreen}
+        options={{headerShown:false}} />
+        <Stack.Screen name="Home" component={HomeScreen}/>
       </Stack.Navigator>
     </NavigationContainer>
   );
