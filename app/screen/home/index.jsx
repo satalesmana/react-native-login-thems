@@ -34,9 +34,7 @@ export default function HomeScreen({ navigation }) {
             </Pressable>
 
             <View style={style.viewVia}>
-              <Text style={style.orVia}>
-                ──────── Or Via Social Media ────────
-              </Text>
+              <Text style={style.orVia}>Or Via Social Media</Text>
             </View>
           </View>
 
@@ -91,8 +89,8 @@ const style = StyleSheet.create({
   },
   viewVia: {
     alignContent: "center",
-    marginTop: 50,
-    marginBottom: 5,
+    marginTop: 35,
+    marginBottom: 15,
     textAlign: "center",
     justifyContent: "center",
   },
@@ -100,7 +98,7 @@ const style = StyleSheet.create({
     color: "black",
     fontSize: "15",
     fontFamily: "Roboto",
-    fontWeight: "300",
+    fontWeight: "100",
   },
   btnContainer: {
     flex: 1,

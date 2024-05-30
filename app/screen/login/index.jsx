@@ -67,7 +67,7 @@ export default function LoginScreen({ navigation }) {
           <Text style={style.text}>Login</Text>
         </Pressable>
         <View style={style.viewVia}>
-          <Text style={style.orVia}>──────── Or Via Social Media ────────</Text>
+          <Text style={style.orVia}> Or Via Social Media </Text>
         </View>
         <View style={style.btnContainer}>
           <MyButton imgUrl={ICGoogle} />
@@ -77,7 +77,7 @@ export default function LoginScreen({ navigation }) {
       </View>
 
       <Text style={style.accountText}>
-        Don't have an account?
+        Don't have an account?{" "}
         <Text
           style={style.linkRegister}
           onPress={() => navigation.navigate("Register")}
@@ -86,10 +86,10 @@ export default function LoginScreen({ navigation }) {
         </Text>
       </Text>
       <Text style={style.accountText}>
-        By signing up, you are agree with our
+        By signing up, you are agree with our{" "}
         <Text
           style={style.linkRegister}
-          onPress={() => navigation.navigate("TermsConditions")}
+          onPress={() => navigation.navigate("Home")}
         >
           Terms & Conditions
         </Text>
@@ -102,8 +102,8 @@ const style = StyleSheet.create({
   container: {
     flexGrow: 1,
     alignItems: "center",
-    paddingTop: 110,
-    paddingBottom: 20,
+    paddingTop: 80,
+    paddingBottom: 25,
   },
   welcomeBack: {
     fontSize: 22,
@@ -111,11 +111,11 @@ const style = StyleSheet.create({
     textAlign: "center",
     fontFamily: "Roboto",
     color: "rgba(29,34,38,1)",
-    marginBottom: 30,
+    marginBottom: 25,
   },
   brandStyle: {
     marginTop: 50,
-    marginBottom: 90,
+    marginBottom: 70,
     alignItems: "center",
   },
   inputContainer: {
@@ -127,7 +127,7 @@ const style = StyleSheet.create({
     width: "90%",
     flexDirection: "row",
     alignItems: "center",
-    marginBottom: 10,
+    marginBottom: 20,
   },
   imgStyleLeft: {
     width: 20,
@@ -167,7 +167,7 @@ const style = StyleSheet.create({
     paddingVertical: 8,
     paddingHorizontal: 32,
     elevation: 3,
-    marginBottom: 20,
+    marginBottom: 5,
   },
   text: {
     fontSize: 16,
@@ -177,19 +177,22 @@ const style = StyleSheet.create({
     color: "white",
   },
   viewVia: {
-    marginTop: 50,
-    marginBottom: 2,
+    alignContent: "center",
+    marginTop: 35,
+    marginBottom: 15,
+    textAlign: "center",
+    justifyContent: "center",
   },
   orVia: {
     color: "black",
-    fontSize: 15,
+    fontSize: "15",
     fontFamily: "Roboto",
-    fontWeight: "300",
+    fontWeight: "100",
   },
   btnContainer: {
     flexDirection: "row",
     paddingHorizontal: 125,
-    paddingBottom: 100,
+    paddingBottom: 20,
   },
   accountText: {
     color: "black",
@@ -197,12 +200,11 @@ const style = StyleSheet.create({
     fontFamily: "Roboto",
     fontWeight: "300",
     textAlign: "center",
-    marginBottom: 10,
+    marginBottom: 20,
   },
   linkRegister: {
-    fontSize: 12,
+    fontSize: 14,
     color: "blue",
-    marginLeft: 2,
-    fontStyle: "italic",
+    textDecorationLine: "underline",
   },
 });
