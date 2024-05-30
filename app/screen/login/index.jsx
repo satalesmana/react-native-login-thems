@@ -14,7 +14,7 @@ import { TouchableOpacity } from "react-native";
 import React ,{useState}from "react";
 import { MyButton } from "../../component";
 import { ICFacebook, ICGoogle, ICApple } from '../../../assets'  
-import { CheckBox } from "react-native-web";
+
 
 const windowWidth = Dimensions.get("window").width;
 
@@ -100,11 +100,6 @@ export default function LoginScreen({ navigation }) {
               value={pasword}
             />
           </View>
-          <View style={style.containerdua}>
-            <View style={style.checkboxContainer}>
-              <CheckBox value={isSelected}onValueChange={setSelection}style={style.checkbox}/>
-              <Text style={style.label}> Keep me signed in</Text>
-            </View>
               <Text style={style.forget}> forget password</Text>
 
           </View>
@@ -114,7 +109,7 @@ export default function LoginScreen({ navigation }) {
         </View>
 
 <View>
-  <Text style={style.textViaStyle}>──────── Or Via Social Media ────────</Text>
+  <Text style={style.textViaStyle}>──────── You can Connect with ────────</Text>
 </View>
       <View style={style.btnContainer}>
         <View>
@@ -132,12 +127,12 @@ export default function LoginScreen({ navigation }) {
             </View>
         </View>
         <View style={{ alignSelf: "center", flexDirection: "row" }}>
-          <Text>Don't have account?</Text>
+          <Text>Don't have an account?</Text>
           <Text onPress={goSignup} style={style.textCreate}>
-            Create Now
+            Sign Up here
           </Text>
         </View>
-      </View>
+   
     </ScrollView>
   );
 }
@@ -188,7 +183,7 @@ const style = StyleSheet.create({
   textCreate: {
     fontWeight: "bold",
     width: 100,
-    marginLeft: 3,
+    marginLeft:3,
   },
   textInputStyle: {
     padding: 10,
@@ -240,11 +235,6 @@ const style = StyleSheet.create({
     paddingLeft:3,
     paddingRight:3,
     marginBottom:20
-  },
-  checkbox:{
-    alignSelf: "flex-start",
-    marginLeft: -180,
-    marginTop: 5
   },
   label:{
     marginTop:3
