@@ -58,7 +58,7 @@ export default function LoginScreen({navigation}){
               />
               <Image
                 source={require('../../../assets/images/User.png')}
-                style={{ width: 15, height: 15, marginLeft:-90 }}
+                style={{ width: 15, height: 15, marginLeft:-0.2 }}
               />
             </View>
             </View>
