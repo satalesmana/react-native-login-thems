@@ -11,17 +11,16 @@ import {
   Alert,
 } from "react-native";
 import { TouchableOpacity } from "react-native";
-import React ,{useState}from "react";
+import React, { useState } from "react";
 import { MyButton } from "../../component";
-import { ICFacebook, ICGoogle, ICApple } from '../../../assets'  
-
+import { ICFacebook, ICGoogle, ICApple } from "../../../assets";
 
 const windowWidth = Dimensions.get("window").width;
 
 export default function LoginScreen({ navigation }) {
   const [email, onChangeEmail] = React.useState("");
   const [pasword, onChangePassword] = React.useState("");
-  const[isSelected,setSelection] = useState(false);
+  const [isSelected, setSelection] = useState(false);
 
   const goSignup = () => {
     navigation.navigate("Signup");
@@ -51,16 +50,16 @@ export default function LoginScreen({ navigation }) {
   };
 
   return (
-    <ScrollView style={{backgroundColor:"black"}}>
-        <View style={style.whiteCover}>
-          <View style={style.lineUp}></View>
+    <ScrollView style={{ backgroundColor: "black" }}>
+      <View style={style.whiteCover}>
+        <View style={style.lineUp}></View>
 
-      <Text style={style.textLoginStyle}>Welcome Back!</Text>
-      <Text style={style.textAccountStyle}>
-        Let's login for explore continues
-      </Text>
+        <Text style={style.textLoginStyle}>Welcome Back!</Text>
+        <Text style={style.textAccountStyle}>
+          Let's login for explore continues
+        </Text>
 
-        <View style={{ width: windowWidth, height: 400 }}>
+        <View style={{ width: windowWidth, height: 600 }}>
           <View style={style.logo}>
             <Image source={require("../../../assets/images/Logo25.png")} />
             <Text style={style.textGamingStyle}>REXDOUS GAMING</Text>
@@ -100,39 +99,41 @@ export default function LoginScreen({ navigation }) {
               value={pasword}
             />
           </View>
-              <Text style={style.forget}> forget password</Text>
-
-          </View>
-          <TouchableOpacity onPress={onSubmitLogin} style={style.buttonLogin}>
-            <Text style={style.textSignin}>Sign in</Text>
-          </TouchableOpacity>
+          <Text style={style.forget}> forget password</Text>
         </View>
-
-<View>
-  <Text style={style.textViaStyle}>──────── You can Connect with ────────</Text>
-</View>
-      <View style={style.btnContainer}>
+        <TouchableOpacity onPress={onSubmitLogin} style={style.buttonLogin}>
+          <Text style={style.textSignin}>Sign in</Text>
+        </TouchableOpacity>
         <View>
-        <MyButton
-          imgUrl={ICFacebook}/>
-            </View>
-          <View>
-          <MyButton
-            imgUrl={ICGoogle}/>
+          <Text style={style.textViaStyle}>
+            ──────── You can Connect with ────────
+          </Text>
+          <View style={style.btnContainer}>
+            <View>
+              <MyButton imgUrl={ICFacebook} />
             </View>
             <View>
-          <MyButton
-            style={{marginLeft:15}}
-            imgUrl={ICApple}/>
+              <MyButton imgUrl={ICGoogle} />
             </View>
+            <View>
+              <MyButton style={{ marginLeft: 15 }} imgUrl={ICApple} />
+            </View>
+          </View>
         </View>
         <View style={{ alignSelf: "center", flexDirection: "row" }}>
-          <Text>Don't have an account?</Text>
-          <Text onPress={goSignup} style={style.textCreate}>
-            Sign Up here
-          </Text>
-        </View>
-   
+        <Text>Don't have an account?</Text>
+        <Text onPress={goSignup} style={style.textCreate}>
+          Sign Up here
+        </Text>
+      </View>
+      </View>
+
+      {/* <View style={{ alignSelf: "center", flexDirection: "row" }}>
+        <Text>Don't have an account?</Text>
+        <Text onPress={goSignup} style={style.textCreate}>
+          Sign Up here
+        </Text>
+      </View> */}
     </ScrollView>
   );
 }
@@ -167,7 +168,8 @@ const style = StyleSheet.create({
     width: windowWidth,
     backgroundColor: "white",
     borderTopRightRadius: 25,
-    borderRadius : 20, marginTop: 20,
+    borderRadius: 20,
+    marginTop: 20,
     borderTopLeftRadius: 25,
     height: "167%",
   },
@@ -178,12 +180,13 @@ const style = StyleSheet.create({
     alignSelf: "center",
     backgroundColor: "#DFE2EB",
     marginTop: 20,
-    marginBottom : 20
+    marginBottom: 20,
   },
   textCreate: {
     fontWeight: "bold",
     width: 100,
-    marginLeft:3,
+    marginLeft: 3,
+    color:'red'
   },
   textInputStyle: {
     padding: 10,
@@ -218,36 +221,38 @@ const style = StyleSheet.create({
   },
   btnContainer: {
     flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'center'
+    flexDirection: "row",
+    justifyContent: "center",
+    marginTop: '5%'
   },
   btnContainer1: {
-    marginRight:15
+    marginRight: 15,
   },
-  containerdua:{
-    flex:1,
-    alignItems:'center',
-    justifyContent:'center'
+  containerdua: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
   },
-  checkboxContainer:{
-    flexDirection:'row',
-    paddingHorizontal:20,
-    paddingLeft:3,
-    paddingRight:3,
-    marginBottom:20
+  checkboxContainer: {
+    flexDirection: "row",
+    paddingHorizontal: 20,
+    paddingLeft: 3,
+    paddingRight: 3,
+    marginBottom: 20,
   },
-  label:{
-    marginTop:3
-  },
-  forget:{
+  label: {
     marginTop: 3,
-    alignSelf:"flex-end",
-    color: "red"
   },
-  textViaStyle:{
-    textAlign:'center',
+  forget: {
+    marginTop: 3,
+    alignSelf: "flex-end",
+    color: "red",
+  },
+  textViaStyle: {
+    textAlign: "center",
     alignContent: "center",
     alignSelf: "center",
-    textAlign:"center",
-  }
+    textAlign: "center",
+    marginTop: '5%'
+  },
 });
