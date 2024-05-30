@@ -182,7 +182,7 @@ const style = StyleSheet.create({
   },
   buttonLogin: {
     backgroundColor: '#000000',
-    height: 70,
+    height: 49,
     marginTop: 0,
     width: '100%',
     alignSelf: "center",
