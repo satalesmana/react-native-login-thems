@@ -26,11 +26,15 @@ export default function WelcomeScreen({navigation}){
                     </ImageBackground>
                     <Text style={style.textExploreStyle}>Explore the app</Text>
                     <Text style={style.textLoremStyle}>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores sit nam earum odit quos illum quae, nulla officiis sed a cum repellat commodi, corrupti laudantium illo ab architecto molestiae aliquam?</Text>
-                    <Button
-            onPress={() => navigation.navigate('Login')}
-            color='#FFC600'
-            title="Let's Start"/>
+                   
                 </View>
+                <View style={{width : "80%", alignContent : "center",  alignSelf : "center"}}>
+                  <Button
+            onPress={() => navigation.navigate('Home')}
+            color='#FFC600'
+            title="Let's started"/>  
+                </View>
+                
             </View>
         </ScrollView>
     );
@@ -54,5 +58,12 @@ const style=StyleSheet.create({
         marginTop:10,
         textAlign:'center',
         marginBottom:10
-    }
+    },
+   containesatu:{
+    textAlign:'center',
+   alignContent : "center",
+   alignItems : "center",
+   alignSelf:"center",
+   width:"10%"
+   }
 })
