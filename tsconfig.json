@@ -10,7 +10,17 @@
   },
   "include": [
     "**/*.ts",
-    "**/*.tsx",
+    "**/*.jsx",
+    ".expo/types/**/*.js",
+    "expo-env.d.js",
+    "components/index.jsx",
+    "components/my_button.jsx",
+    "screen/home/index.jsx",
+    "screen/login/index.jsx",
+    "screen/register/index.jsx",
+    "screen/welcome/index.jsx",
+    "screen/welcome/index.jsx",
+    "screen/welcome/index.jsx",
     ".expo/types/**/*.ts",
     "expo-env.d.ts"
   ]
