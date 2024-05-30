@@ -23,13 +23,15 @@ export const FbButton=({title, onPress})=>{
 const styles = StyleSheet.create({
     linearGradient: {
       flex: 1,
+      marginLeft :45,
+      marginTop : 30,
       paddingLeft: 15,
       paddingRight: 15,
-      borderRadius: 5
+      borderRadius: 5,
+      width: 290
     },
     buttonText: {
-      fontSize: 18,
-      fontFamily: 'Gill Sans',
+      fontSize: 14,
       textAlign: 'center',
       margin: 10,
       color: '#ffffff',

@@ -62,20 +62,18 @@ export default function LoginScreen({navigation}){
         </View>
       
         <View style={style.container}>
-          <Text style={style.textLabel}>Email</Text>
           <TextInput
             style={style.textInputStyle}
             onChangeText={onChangeEmail}
-            placeholder='type username or email'
-            placeholderTextColor='#c7c7c7'
+            placeholder='Email'
+            placeholderTextColor='black'
             value={email}/>
 
-          <Text style={[style.textLabel,{marginTop:20}]}>Password</Text>
           <TextInput
             style={[style.textInputStyle, {marginBottom:12}]}
             onChangeText={onChangePassword}
-            placeholder='type your password'
-            placeholderTextColor='#c7c7c7'
+            placeholder='Password'
+            placeholderTextColor='black'
             value={pasword}/>
 
           <FbButton
@@ -86,10 +84,16 @@ export default function LoginScreen({navigation}){
         </View>
 
         <Text style={style.textContinueStyle}>
-          Or continue with
+          Forgot password?
         </Text>
 
-        <View style={style.btnContainer}>
+        <View style={style.sosmed}>
+          <Image source={ require('../../../assets/images/Fb.png') } />
+          <Image source={ require('../../../assets/images/Google.png') } />
+          <Image source={ require('../../../assets/images/LinkedIn.png') } />
+        </View>
+
+        {/* <View style={style.btnContainer}>
           <MyButton
             text="Google"
             imgUrl={ICGoogle}/>
@@ -98,12 +102,12 @@ export default function LoginScreen({navigation}){
             style={{marginLeft:15}}
             text="Facebook"
             imgUrl={ICFacebook}/>
-        </View>
+        </View> */}
 
         <View style={style.containerBottom}>
           <Text>Don't have account? </Text>
           <TouchableOpacity onPress={onRegister}>
-            <Text style={{fontWeight:'bold'}}>Create now</Text>
+            <Text style={{fontWeight:'bold'}}>Sign Up</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -113,25 +117,28 @@ export default function LoginScreen({navigation}){
 
 const style = StyleSheet.create({
   container: { 
-    padding:20
+    padding:5
   },
   textInputStyle:{
-    height: 40,
-    marginTop: 12,
+    height: 50,
+    marginLeft:45,
+    marginTop: 30,
     borderWidth: 1,
     padding: 10,
+    borderRadius : 6,
+    width :290
   },
   textLoginStyle:{
     fontSize:24,
     marginTop:50,
-    marginLeft: 30,
+    marginLeft: 45,
     fontWeight:'700',
     opacity : 0.8
     
   },
   textLogin2Style:{
     fontSize:13,
-    marginLeft: 32,
+    marginLeft: 46,
     fontWeight:'500',
     opacity : 0.3
     
@@ -153,12 +160,24 @@ const style = StyleSheet.create({
   },
   textContinueStyle:{
     textAlign:'center',
-    padding:10
+    padding:30,
+    opacity: 0.6,
+    fontSize:13
   },
   containerBottom:{
     flex:1,
     flexDirection:'row',
     justifyContent:'center',
-    padding:30
+    padding:10
+  },
+  sosmed:{
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    width: '45%' ,
+    marginBottom: 20,
+    marginTop:10,
+    marginLeft: 120,
+    alignItems:'center'
   }
-})
+}
+)
