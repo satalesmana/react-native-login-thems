@@ -11,10 +11,7 @@ export default function WelcomeScreen({navigation}){
         <ScrollView>
             <View>
                     <View style={style.welcomeStyle}>
-                    <ImageBackground 
-            source={ require('../../../assets/images/welcome.jpg') } 
-            resizeMode="cover"
-            style={{width:windowWidth, height:450}}/>
+                    <Image source={require('../../../assets/images/welcome.jpg')}/>
                         <Text style={[style.appStyle,{fontSize:30,fontWeight:'bold'}]}>Welcome to the app</Text>
                         <Text style={[style.appStyle,{fontSize:15,textAlign:'center'}]}>We're excited to help you book and manage your service appointments with ease</Text>
                         <Image source={require('../../../assets/images/lingkaran.jpg')}/>
