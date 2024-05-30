@@ -10,7 +10,7 @@ import {
     ScrollView
   } from 'react-native';           
 import { MyButton } from '../compenents';
-import { ICGoogle,ICFacebook,ICTwit } from '../../../assets';
+import { ICGoogle,ICFacebook,ICApple } from '../../../assets';
 import React from 'react';
   const windowWidth = Dimensions.get('window').width;
 export default function LoginScreen(){
@@ -67,7 +67,7 @@ export default function LoginScreen(){
               </View>
           <View>
             <MyButton style={style.btnContainer1}
-              imgUrl={ICTwit} />
+              imgUrl={ICApple} />
               </View>
             </View>
          </View>
@@ -108,8 +108,7 @@ export default function LoginScreen(){
       },
       btnContainer1:{
         marginRight:15
-      },
-
+      }
      }
          
      })
