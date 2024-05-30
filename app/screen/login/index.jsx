@@ -1,10 +1,6 @@
-import { View, Text, TextInput, StyleSheet, Button, ImageBackground, Dimensions, Image, ScrollView, Alert} from 'react-native';
-import React from 'react'
-import {MyButton} from '../../components'
+import { View, Text, TextInput, StyleSheet, Button, ScrollView, Alert} from 'react-native';
+import {MyButton} from '../../components/my_button'
 import {ICGoogle} from '../../../assets'
-
-
-const windowWidth = Dimensions.get('window').width;
 
 export default function LoginScreen({navigation}){
 const[email, onChangeEmail] = React.useState('')
@@ -52,21 +48,19 @@ return(
                placeholder='Enter your password'
                placeholderTextColor ='#c7c7c7'
                value ={password}/>
+            <TouchableOpacity>
+            <Text style={[style.textLabel]}>Forgot Password?</Text>
+            </TouchableOpacity>
 
-    <Button onPress={onSubmitLogin}
-    color='#000113'
-    title="Login"></Button>
+    <Button style={color="#2e960e"} onPress={onSubmitLogin} title="Login"></Button>
     </View>
-    <Text style={style.textContinueStyle}>Or Continue With</Text>
-    <View style={style.btnContainer}>
-    <MyButton
-    text="Google" imgUrl={ICGoogle}/>
+    <View>
+    <Text style={style.textContinueStyle}>or login with</Text>
+        <View style={style.btnContainer}>
+    <MyButton text="Login with Google" imgUrl={ICGoogle}/>
+        </View>
     </View>
-    <View style={style.containerBottom}>
-        <Text style={{color:'#AEB6BF'}}>Don't have account? </Text>
-        <Text style={{fontWeight:'bold'}}>Create Now</Text>
-    </View>
-    </View>
+</View>
     </ScrollView>
 );
 }
