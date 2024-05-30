@@ -66,7 +66,7 @@ const onSubmitLogin=()=>{
             text=""
             imgUrl={ICapple}/>
             </View>
-            <Text style={[style.textContinueStyle,{textAlign:'center',marginTop:10 ,color:'#0000ff'}]}>Already have an account? Register Now</Text>
+            <Text style={[style.textContinueStyle,{textAlign:'center',marginTop:10 ,color:'#0000ff'}]}onPress={() => navigation.navigate('Register')}>Already have an account? Register Now</Text>
             </View>
             </View>
         </ScrollView>

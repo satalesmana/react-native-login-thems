@@ -16,7 +16,7 @@ export default function WelcomeScreen({navigation}){
     }
     return(
         <ScrollView>
-            <View style={{width:windowWidth,marginVertical:700,height:30}}>
+            <View style={{width:windowWidth,marginVertical:700,height:30,}}>
             <ImageBackground 
             source={require('../../../assets/images/tanaman.png')}
             resizeMode="cover" 
@@ -32,14 +32,16 @@ export default function WelcomeScreen({navigation}){
             onPress={() => navigation.navigate('Login')}
             color='#000000'
             title="Login"/>
+            <View style={style.container}>
             <Button
             onPress={() => navigation.navigate('Register')}
             color='#5f9ea0'
             title="Register"/>
-            <Text style={[style.textContinueStyle,{textAlign:'center',marginTop:10 ,color:'#0000ff'}]}>Already have an account?Register Now</Text>
+            <Text style={[style.textContinueStyle,{textAlign:'center',marginTop:10 ,color:'#0000ff'}]}>Continue as a guest</Text>
             </View>
             </View>
-              </View>
+            </View>
+            </View>
         </ScrollView>
     );
 }
