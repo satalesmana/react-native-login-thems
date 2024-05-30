@@ -125,8 +125,9 @@ const style = StyleSheet.create({
   textLoginStyle: {
     fontSize: 32,
     marginTop: 50,
+    marginLeft: 25,
     fontWeight: 'bold',
-    textAlign: 'center',
+    textAlign: 'left',
     color:'#000000',
   
   },
@@ -148,10 +149,11 @@ const style = StyleSheet.create({
   textLoginStyle2: {
     fontSize: 22,
     marginTop: 25,
+    marginLeft: 25,
     fontWeight: 'bold',
-    textAlign: 'center',
+    textAlign: 'left',
     width:240,
-    alignSelf: 'center',
+    alignSelf: 'left',
   },
   brandStyle: {
     marginTop: 100,

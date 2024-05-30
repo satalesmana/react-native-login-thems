@@ -137,8 +137,9 @@ import {
     textLoginStyle: {
       fontSize: 32,
       marginTop: 50,
+      marginLeft: 25,
       fontWeight: 'bold',
-      textAlign: 'center',
+      textAlign: 'left',
       color:'#45484A',
     
     },
@@ -161,10 +162,11 @@ import {
     textLoginStyle2: {
       fontSize: 32,
       marginTop: 50,
+      marginLeft: 25,
       fontWeight: 'bold',
-      textAlign: 'center',
+      textAlign: 'left',
       width:240,
-      alignSelf: 'center',
+      alignSelf: 'left',
     },
     brandStyle: {
       marginTop: 100,
