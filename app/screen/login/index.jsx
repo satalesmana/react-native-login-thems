@@ -30,7 +30,7 @@ export default function LoginScreen({ navigation }) {
   return (
     <ScrollView>
       <View>
-        <View style={{ width: windowWidth, height: 50 }}>
+        <View style={{ width: windowWidth }}>
           <View style={style.UserStyle1}>
             <Text style={[style.LoginStyle]}>Login</Text>
             <Image source={require("../../../assets/images/User.png")} />

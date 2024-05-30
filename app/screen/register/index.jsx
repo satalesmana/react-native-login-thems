@@ -38,10 +38,10 @@ export default function RegisterScreen({navigation}) {
 
        <View style={style.container}>
         <View style={style.textInputStyle}>
-        <TextInput style={{gap : 10, marginHorizontal : 3, borderColor : "black", width : 50, height : 50, borderWidth : 1.4, borderRadius : 10, textAlign : "center" }}placeholder="8"/>
-        <TextInput style={{gap : 10, marginHorizontal : 3, borderColor : "black", width : 50, height : 50, borderWidth : 1.4, borderRadius : 10, textAlign : "center" }}placeholder="5"/>
-        <TextInput style={{gap : 10, marginHorizontal : 3, borderColor : "#F2796B", width : 50, height : 50, borderWidth : 1.4, borderRadius : 10, textAlign : "center" }}placeholder="2"/>
-        <TextInput style={{gap : 10, marginHorizontal : 3, borderColor : "black", width : 50, height : 50, borderWidth : 1.4, borderRadius : 10, textAlign : "center" }}placeholder=""/>
+        <TextInput style={{gap : 10, marginHorizontal : 3, borderColor : "black", width : 50, height : 50, borderWidth : 1.4, borderRadius : 10, textAlign : "center" }}/>
+        <TextInput style={{gap : 10, marginHorizontal : 3, borderColor : "black", width : 50, height : 50, borderWidth : 1.4, borderRadius : 10, textAlign : "center" }}/>
+        <TextInput style={{gap : 10, marginHorizontal : 3, borderColor : "black", width : 50, height : 50, borderWidth : 1.4, borderRadius : 10, textAlign : "center" }}/>
+        <TextInput style={{gap : 10, marginHorizontal : 3, borderColor : "black", width : 50, height : 50, borderWidth : 1.4, borderRadius : 10, textAlign : "center" }}/>
         </View>
        </View>
 
