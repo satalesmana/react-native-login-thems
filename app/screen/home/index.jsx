@@ -3,12 +3,12 @@ import React from 'react'
 
 const windowWidth = Dimensions.get('window').width;
 
-export default function HomeScreen(){
+export default function HomeScreen({navigation}){
     const [username, onChangeUsername] = React.useState('')
     const [email, onChangeEmail] = React.useState('')
     const [password, onChangePassword] = React.useState('')
     const onSubmitHome=()=>{
-
+        navigation.navigate('Login')
     }
     return(
         <ScrollView>
@@ -41,7 +41,7 @@ export default function HomeScreen(){
             </View>
             <View style={style.containerdua}>
                 <Text>Alredy have an account?</Text>
-                <Text style={{fontWeight:'bold'}}>Login</Text>
+                <Text style={{fontWeight:'bold',color:'#0C1F22'}}  onPress={() => navigation.navigate('Login')}>Login</Text>
             </View>
         </View>
     </ScrollView>

@@ -1,5 +1,5 @@
-import ICGoogle from'./images/google.png'
-import ICFacebook from'./images/Frame.png'
+import ICGoogle from'./images/google_logo.png'
+import ICFacebook from'./images/Group.png'
 import ICVictor from'./images/victor.png'
 
 export{

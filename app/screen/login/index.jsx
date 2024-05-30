@@ -69,7 +69,7 @@ export default function LoginScreen({navigation}){
                 resizeMode="cover" 
                 style={{width:windowWidth,height:406,width:445,marginBottom:-37,marginVertical:-210}}>
                     <ImageBackground source={require('../../../assets/images/lingkarandua.png')}
-                    style={{width:windowWidth,height:342,width:342,marginBottom:50,marginLeft:100}}>
+                    style={{width:windowWidth,height:342,width:342,marginBottom:100,marginLeft:100}}>
                     </ImageBackground>
 
                     <View style={style.MiniStyle}>
@@ -86,20 +86,21 @@ export default function LoginScreen({navigation}){
             color='#FFC600'
             title="Login"/>
             <View style={style.containerWith}>
-                <Text style={[style.textContinueStyle,{textAlign:'center',marginTop:10}]}>──────── Or Continue With  ────────</Text>
+                <Text style={[style.textContinueStyle,{textAlign:'center',marginTop:25}]}>──────── Or Signin up with  ────────</Text>
             </View>
             </View>
             <View style={style.btnContainer}>
         <MyButton 
-        text="Google"
         imgUrl={ICGoogle}/>
         <MyButton style={{marginLeft:15}}
-          text="Facecbook"
           imgUrl={ICFacebook}/>
           <MyButton style={{marginLeft:15}}
-          text="Apple"
           imgUrl={ICVictor}/>
          </View>
+         <View style={style.not}>
+          <Text>Not Register yet ?</Text>
+          <Text style={style.textCreateStyle}  onPress={() => navigation.navigate('Home')}>Create Account</Text>
+        </View>
         </View>
     </ScrollView>
     );
@@ -108,18 +109,20 @@ export default function LoginScreen({navigation}){
 const style=StyleSheet.create({
     container: { 
         padding:20,
-        marginTop:-200
+        marginTop:-350
       },
     MiniStyle:{
        marginTop:-20,
        marginBottom:500,
        alignItems:'center',
-       justifyContent:'center'
+       justifyContent:'center',
+       marginRight:30
     },
     textInputStyle:{
         height:40,
-        marginTop:10,
+        marginTop:1,
         borderWidth:1,
+        borderColor:'#6C6A6A',
         padding:10,
         marginBottom:10
     },
@@ -168,6 +171,16 @@ const style=StyleSheet.create({
     },
     inputText:{
       fontSize:15,
+      fontWeight:'bold'
+    },
+    not:{
+    flex:1,
+    flexDirection:'row',
+    justifyContent:'center',
+    padding:30
+    },
+    textCreateStyle:{
+      color:'#0C1F22',
       fontWeight:'bold'
     }
     

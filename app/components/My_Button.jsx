@@ -17,10 +17,11 @@ const style =StyleSheet.create({
         padding:10,
         borderColor:'grey',
         backgroundColor:'#ffff',
-        borderWidth:0.5,
-        borderRadius:5,
+        // borderWidth:0.5,
+        borderRadius:10,
         flex:1,
         flexDirection:'row',
         justifyContent:'center',
+        height:50,
     }
 })

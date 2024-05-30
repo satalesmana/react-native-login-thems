@@ -29,7 +29,7 @@ export default function WelcomeScreen({navigation}){
                     <Button
             onPress={() => navigation.navigate('Login')}
             color='#FFC600'
-            title="Get Started"/>
+            title="Let's Start"/>
                 </View>
             </View>
         </ScrollView>
@@ -52,6 +52,7 @@ const style=StyleSheet.create({
     textLoremStyle:{
         fontSize:15,
         marginTop:10,
-        textAlign:'center'
+        textAlign:'center',
+        marginBottom:10
     }
 })
