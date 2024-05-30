@@ -41,8 +41,8 @@ export default function RegisterScreen({navigation}){
                         onPress={() => navigation.navigate('Welcome')}
                          color='#0000FF'
                         title="Sign up"/>
-                </View>
-                <Text style={[style.textOrStyle,{textAlign:'center'}]}>──────── Or Sign in with  ────────</Text>
+                </View> 
+                <Text style={{textAlign:'center',marginTop:20}}>──────── Or Sign in with  ────────</Text>
                 <View style={style.btnContainer}>
                      <MyButton 
                      text="Continue with google"
@@ -78,4 +78,7 @@ const style = StyleSheet.create({
         marginBottom:200
         
     },
+    btnContainer:{
+        marginTop:50,
+    }
 })

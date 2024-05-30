@@ -29,7 +29,6 @@ export default function LoginScreen({navigation}){
               }},
             ]);
           }
-      
         }
 
     return(
@@ -57,21 +56,21 @@ export default function LoginScreen({navigation}){
                     ios_backgroundColor="#3e3e3e"
                     onValueChange={toggleSwitch}
                     value={isEnabled}/>
-                    <Text style={style.label}>Keep me Signed in</Text>
+                    <Text style={{marginVertical:'auto'}}>Keep me Signed in</Text>
                     </View>
                     <View style={style.buttonStyle}>
                     <Button
                         onPress={() => navigation.navigate('Register')}
                          color='#0000FF'
                         title="Login"/>
-                         <Text style={[style.textOrStyle,{textAlign:'center'}]}>──────── Or Sign in with  ────────</Text>
+                         <Text style={{textAlign:'center',marginTop:20}}>──────── Or Sign in with  ────────</Text>
                     </View>
                     <View style={style.btnContainer}>
                      <MyButton 
                      text="Continue with google"
                      imgUrl={ICGoogle}/>
                 </View>
-                <Text style={[style.textCreateStyle,{textAlign:'center',color:'blue',fontSize:20,fontWeight:'bold'}]}>Create new account</Text>
+                <Text style={[style.textCreateStyle,{textAlign:'center',color:'blue',fontSize:20,fontWeight:'bold',marginBottom:20,marginTop:30}]} onPress={()=>navigation.navigate('Register')}>Create new account</Text>
                 </View>
         </ScrollView>
     );
@@ -96,8 +95,8 @@ const style = StyleSheet.create({
     },
     containerdua:{
         flex:1,
+        flexDirection:"row",
+        marginBottom:35,
         alignItems:"baseline",
-        justifyContent:"center"
-    },
-    
+    },   
 })

@@ -21,7 +21,7 @@ export default function WelcomeScreen({navigation}){
                         onPress={() => navigation.navigate('Login')}
                         color='#0000FF'
                         title="Login"/>
-                        <Text style={[style.textCreateStyle,{textAlign:'center',color:'blue',fontSize:20,fontWeight:'bold'}]}>Create new account</Text>
+                        <Text style={[style.textCreateStyle,{textAlign:'center',color:'blue',fontSize:20,fontWeight:'bold'}]} onPress={()=>navigation.navigate('Register')}>Create new account</Text>
                     </View>
                 </View>
         </ScrollView>
@@ -30,7 +30,7 @@ export default function WelcomeScreen({navigation}){
 
 const style = StyleSheet.create({
     welcomeStyle:{
-        marginTop:200,
+        marginTop:100,
         alignItems:'center',
         justifyContent:'center' 
     },
