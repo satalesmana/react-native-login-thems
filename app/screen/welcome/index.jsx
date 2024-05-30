@@ -10,10 +10,6 @@ export default function WelcomeScreen({navigation}){
     return(
         <ScrollView>
             <View>
-                <View style={{width:windowWidth, height:900}}>
-                <View style={style.statusbarStyle}>
-                            <Image source={require('../../../assets/images/statusbar.jpg')}/>
-                        </View>
                     <View style={style.welcomeStyle}>
                         <Image source={require('../../../assets/images/welcome.jpg')}/>
                         <Text style={[style.appStyle,{fontSize:30,fontWeight:'bold'}]}>Welcome to the app</Text>
@@ -28,7 +24,6 @@ export default function WelcomeScreen({navigation}){
                         <Text style={[style.textCreateStyle,{textAlign:'center',color:'blue',fontSize:20,fontWeight:'bold'}]}>Create new account</Text>
                     </View>
                 </View>
-            </View>
         </ScrollView>
     );
 }

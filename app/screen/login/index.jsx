@@ -1,16 +1,16 @@
-import { View,Text,TextInput,StyleSheet,Button,ImageBackground,Dimensions,Image,ScrollView} from 'react-native';
+import { View,Text,TextInput,StyleSheet,Button,Switch,ImageBackground,Dimensions,Image,ScrollView} from 'react-native';
 import { MyButton } from '../components';
 import { ICGoogle } from '../../../assets';
 import React, { useState } from "react";
-import { CheckBox } from "react-native-web";
 
 
 const windowWidth = Dimensions.get('window').width;
 export default function LoginScreen({navigation}){
     const [email, onChangeEmail] = React.useState('')
     const [password, onChangePassword] = React.useState('')
-    const [isSelected,setSelection]=useState(false);
-    
+    const [isEnabled, setIsEnabled] = useState(false);
+    const toggleSwitch = () => setIsEnabled(previousState => !previousState);
+
     const onSubmitLogin=()=>{
         try{
             if(email.trim().length === 0 ){
@@ -35,12 +35,8 @@ export default function LoginScreen({navigation}){
     return(
         <ScrollView>
             <View>
-            <View style={{width:windowWidth, height:500}}>
-                <View style={style.statusbarStyle}>
-                 <Image source={require('../../../assets/images/statusbar.jpg')}/>
-                </View>
                     <Text style={[style.textLoginStyle,{fontSize:20,fontWeight:'bold',marginTop:20}]}>Login</Text>
-                    <Text style={[style.textWelcomeStyle,{fontSize:15,marginBottom:20}]}>Welcome to the back to the app</Text>
+                    <Text>Welcome to the back to the app</Text>
                     <View style={style.containter}>
                     <Text style={style.textLabel}>Email Addres</Text>
                     <TextInput style={[style.textInputStyle, {marginBottom:12}]}onChangeText={onChangeEmail}
@@ -55,26 +51,28 @@ export default function LoginScreen({navigation}){
                     value={password}/>
                     </View>
                     <View style={style.containerdua}>
-                        <View style={style.checkboxContainerdua}>
-                        <CheckBox value={isSelected}onValueChange={setSelection}style={style.checkbox}/>
-                        <Text style={style.label}>Keep me Signed in</Text>
-                        </View>
-                        </View>
+                    <Switch
+                    trackColor={{false: '#767577', true: '#81b0ff'}}
+                    thumbColor={isEnabled ? '#f5dd4b' : '#f4f3f4'}
+                    ios_backgroundColor="#3e3e3e"
+                    onValueChange={toggleSwitch}
+                    value={isEnabled}/>
+                    <Text style={style.label}>Keep me Signed in</Text>
+                    </View>
                     <View style={style.buttonStyle}>
                     <Button
                         onPress={() => navigation.navigate('Register')}
                          color='#0000FF'
                         title="Login"/>
-                         <Text style={[style.textOrStyle,{textAlign:'center'}]}>──────── Or Via Social Media  ────────</Text>
-                        <Text style={[style.textCreateStyle,{textAlign:'center',color:'blue',fontSize:20,fontWeight:'bold'}]}>Create new account</Text>
+                         <Text style={[style.textOrStyle,{textAlign:'center'}]}>──────── Or Sign in with  ────────</Text>
                     </View>
                     <View style={style.btnContainer}>
                      <MyButton 
                      text="Continue with google"
                      imgUrl={ICGoogle}/>
                 </View>
+                <Text style={[style.textCreateStyle,{textAlign:'center',color:'blue',fontSize:20,fontWeight:'bold'}]}>Create new account</Text>
                 </View>
-            </View>
         </ScrollView>
     );
 }
@@ -98,12 +96,8 @@ const style = StyleSheet.create({
     },
     containerdua:{
         flex:1,
-    },
-    checkboxContainerdua:{
-        flexDirection:'row',
-        marginBottom:20,
-        textAlign:'right',
-        marginLeft:30
+        alignItems:"baseline",
+        justifyContent:"center"
     },
     
 })

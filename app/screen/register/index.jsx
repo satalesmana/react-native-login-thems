@@ -14,10 +14,7 @@ export default function RegisterScreen({navigation}){
     return(
         <ScrollView>
             <View>
-                <View style={{width:windowWidth, height:500}}>
-                <View style={style.statusbarStyle}>
-                            <Image source={require('../../../assets/images/statusbar.jpg')}/>
-                        </View>
+            
                     <Text style={[style.textRegisterStyle,{fontSize:20,fontWeight:'bold', marginBottom:20,marginTop:20}]}>Create New Account</Text>
                     <View style={style.containtertiga}>
                     <Text style={style.textLabel}>Nama</Text>
@@ -41,17 +38,20 @@ export default function RegisterScreen({navigation}){
                         <Text style={[style.textTermStyle,{color:'blue',fontWeight:'bold'}]}>terms of service</Text>
                     </View>
                     <Button
-                        onPress={() => navigation.navigate('Register')}
+                        onPress={() => navigation.navigate('Welcome')}
                          color='#0000FF'
                         title="Sign up"/>
                 </View>
-                <Text style={[style.textOrStyle,{textAlign:'center'}]}>──────── Or Via Social Media  ────────</Text>
+                <Text style={[style.textOrStyle,{textAlign:'center'}]}>──────── Or Sign in with  ────────</Text>
                 <View style={style.btnContainer}>
                      <MyButton 
                      text="Continue with google"
                      imgUrl={ICGoogle}/>
                 </View>
-            </View>
+                <View style={style.containeempat}>
+                        <Text>All ready have an account?</Text>
+                        <Text style={[style.textTermStyle,{color:'blue',fontWeight:'bold'}]}>sign in</Text>
+                    </View>
         </ScrollView>
     );
 }
