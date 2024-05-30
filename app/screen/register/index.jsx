@@ -9,23 +9,21 @@ import {
     Alert,
     ImageBackground
   } from 'react-native';
-  import { MyButton } from '../../components'
-  import { ICFacebook, ICGoogle, ICApple } from '../../../assets'
   import React from 'react'
-  
+
   const windowWidth = Dimensions.get('window').width;
-  
+
   export default function RegisterScreen({ navigation }) {
     const [email, onChangeEmail] = React.useState('')
     const [pasword, onChangePassword] = React.useState('')
     const [confirm_pasword, onConfirmPassword] = React.useState('')
-  
+
     const onSubmitLogin = () => {
       try {
         if (email.trim().length === 0) {
           throw Error('Email is required')
         }
-  
+
         if (pasword.trim().length === 0) {
           throw Error('Password is required')
         }
@@ -33,7 +31,7 @@ import {
         if (confirm_pasword.trim().length === 0) {
             throw Error('Password')
           }
-  
+
         navigation.navigate('Home')
       } catch (err) {
         Alert.alert('Error', err.message, [
@@ -44,25 +42,28 @@ import {
           },
         ]);
       }
-  
+
     }
 
     const onSubmitAccount = () => {
         navigation.navigate('Login')
     }
-  
+
     return (
       <ScrollView>
         <View>
-          <View style={{ width: windowWidth, height: 200 }}>
+          <View style={{ width: windowWidth, height: 180 }}>
             <Text style={style.textLoginStyle}>Create</Text>
             <Text style={style.textLoginStyle2}>Account :)</Text>
           </View>
           <View>
-          <ImageBackground
-            style={style.image}
-            source={require("../../../assets/images/union2.png")}
-          ></ImageBackground>
+          <View style={{ width: windowWidth, height: 70}}>
+          <ImageBackground 
+            source={ require('../../../assets/images/union2.png') } 
+            resizeMode="cover"
+            style={{width:windowWidth, height:650}}>
+          </ImageBackground>
+        </View>
         </View>
           <View style={style.container}>
             <Text style={style.textLabel}></Text>
@@ -72,7 +73,7 @@ import {
               placeholder='Email'
               placeholderTextColor='gray'
               value={email} />
-  
+
             <Text style={[style.textLabel, { marginTop: 10 }]}></Text>
             <TextInput
               style={[style.textInputStyle]}
@@ -80,31 +81,31 @@ import {
               placeholder='Password'
               placeholderTextColor='gray'
               value={pasword} />
-            
+
             <Text style={[style.textLabel, { marginTop: 10 }]}></Text>
             <TextInput
               style={[style.textInputStyle]}
               onChangeText={onConfirmPassword}
               placeholder='Confirm Password'
               placeholderTextColor='gray'
-              value={confirm_pasword} />  
+              value={confirm_pasword} />
 
             <TouchableOpacity onPress={onSubmitLogin} style={style.buttonLogin}>
               <Text style={style.textSignin}>Sign Up</Text>
             </TouchableOpacity>
-  
+
           </View>
-  
-          
-          
+
+
+
           <View style={style.btnContainer}>
-         
+
             </View>
         </View>
       </ScrollView>
     );
   }
-  
+
   const style = StyleSheet.create({
     container: {
       padding: 20
@@ -125,12 +126,12 @@ import {
     },
     textLoginStyle: {
       fontSize: 32,
-      marginTop: 50,
+      marginTop: 140,
       fontWeight: 'bold',
       textAlign: 'left',
-      marginLeft:30,
+      marginLeft:30,  
       color:'#000000',
-    
+
     },
     textSignin: {
       textAlign: "center",
@@ -169,7 +170,7 @@ import {
       flex: 1,
       flexDirection: 'row',
       justifyContent: 'center',
-      
+
     },
     btnContainer1:{
       marginRight:15

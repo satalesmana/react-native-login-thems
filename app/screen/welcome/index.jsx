@@ -2,13 +2,13 @@ import {
   View,
   Text,
   StyleSheet,
-  ImageBackground,
+  Image,
   ScrollView,
+  Dimensions,
   TouchableOpacity,
 } from "react-native";
-import { MyButton } from "../../components";
 import React from "react";
-import { MySigin } from "../../components";
+const windowWidth = Dimensions.get('window').width;
 
 export default function WelcomeScreen({ navigation }) {
   const onSubmitAccount = () => {
@@ -21,31 +21,30 @@ export default function WelcomeScreen({ navigation }) {
   return (
     <ScrollView>
       <View>
-        <View>
-          <ImageBackground
-            style={style.image}
-            source={require("../../../assets/images/union.png")}
-          ></ImageBackground>
-        </View> 
-        <View>
+        <View style={{width: windowWidth, height: 400}}>
+          <Image
+            source={require("../../../assets/images/welcome1.png")}
+            style={{marginLeft:100}}></Image>
+        </View>
+        {/* <View>
           <ImageBackground
             style={style.image2}
             source={require("../../../assets/images/maskgroup.png")}
           ></ImageBackground>
-        </View>
+        </View> */}
 
-        <View style={{ marginTop: 150 }}>
-          <Text style={style.textLoginStyle}>Discover Your</Text>
-          <Text style={style.textLoginStyle}>Dream Job here</Text>
+        <View style={{ }}>
+          <Text style={style.textLoginStyle}>Let’s Get
+            </Text>
+          <Text style={style.textLoginStyle}>Started</Text>
           <Text style={style.textLoginStyle2}>
-            Explore all the existing job roles based on your interest and study
-            major
+            Grow Together
           </Text>
         </View>
 
         <View style={style.signin}>
           <TouchableOpacity onPress={onSubmitAccount} style={style.buttonLogin}>
-            <Text style={[style.textSignin, { color: "white" }]}>Sign In</Text>
+            <Text style={[style.textSignin, { color: "white" }]}>Join Now</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -55,7 +54,7 @@ export default function WelcomeScreen({ navigation }) {
 
 const style = StyleSheet.create({
   container: {
-    padding: 20,
+    padding: 10,
   },
   image: {
     padding: 130,
@@ -68,13 +67,12 @@ const style = StyleSheet.create({
     height: 40,
     marginTop: 12,
     borderWidth: 1,
-    padding: 10,
   },
   buttonLogin: {
-    backgroundColor: "#1F41BB",
+    backgroundColor: "#000000",
     height: 40,
     width: "50%",
-    borderRadius: 8,
+    borderRadius: 25,
     flexDirection: "row",
     marginRight: 10,
   },
@@ -82,32 +80,28 @@ const style = StyleSheet.create({
   textSignin: {
     textAlign: "center",
     marginVertical: "auto",
-    fontWeight: "bold",
+    fontWeight: "regular",
     flex: 1,
-    fontSize: 15,
   },
   signin: {
-    justifyContent:'center',
-    flexDirection: "row",
-    width: "70%",
-    alignSelf: "center",
+    width: "80%",
     height: 50,
     fontWeight: "bold",
+    marginLeft:40,
+    justifyContent:"center",
+    alignItems:"center"
   },
   // Text
   textLoginStyle: {
-    fontSize: 30,
+    fontSize: 65,
     fontWeight: "bold",
-    textAlign: "center",
-    alignSelf: "center",
-    color: "#1F41BB",
+    marginLeft:40,
   },
   textLoginStyle2: {
     fontSize: 12,
-    textAlign: "center",
-    width: 240,
-    alignSelf: "center",
-    marginVertical: 15,
+    fontWeight: "bold",
+    marginLeft:40,
+    marginBottom:20
   },
   //
   brandStyle: {
