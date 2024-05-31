@@ -6,11 +6,11 @@ import { MyButton, MyButton2, MyButton3 } from '../../components/my_button';
 const windowWidth = Dimensions.get('window').width;
 export default function MenuScreen({navigation}){
 
-const onLogin =()=>{
-    navigation.navigate('login')
+const onLogin=()=>{
+    navigation.navigate("login")
     }
-const onRegister =()=>{
-    navigation.navigate('register')
+const onRegister=()=>{
+    navigation.navigate("register")
     }
 
 return(
