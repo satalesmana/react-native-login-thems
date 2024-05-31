@@ -1,16 +1,16 @@
-import { StyleSheet, View, Button, ScrollView, Dimensions, Image} from 'react-native';
-import {ICgoogle, IMG} from '../../../assets'
+import { StyleSheet, View, ScrollView, Dimensions, Image} from 'react-native';
+import {ICGoogle} from '../../../assets'
 import React from 'react'
-import { MyButton } from '../../components/my_button';
+import { MyButton, MyButton2, MyButton3 } from '../../components/my_button';
 
 const windowWidth = Dimensions.get('window').width;
 export default function MenuScreen({navigation}){
 
 const onLogin =()=>{
-    navigation.navigate('Login')
+    navigation.navigate('login')
     }
 const onRegister =()=>{
-    navigation.navigate('Register')
+    navigation.navigate('register')
     }
 
 return(
@@ -18,18 +18,16 @@ return(
 <View>
     <View>
         <View style={{width: windowWidth, height:200}}/>
-        <Image source={require('../../../assets/images/Image.png')}></Image>
+        <Image style={{marginLeft:10}}source={require('../../../assets/images/Image.png')}></Image>
     </View>
 
-<View style={style.btnContainer}>
-    <Button style={{borderWidth:10}}onPress={onRegister}
-    text="Register"/>
-    <Button style={[color="#2e960e", {marginLeft:15}]}onPress={onLogin}
-    text="Login"/>
+    <View style={style.btnContainer}>
+    <MyButton3 onPress={onRegister} text="Register"/>
+    <MyButton2 style={[{marginLeft:10}]} onPress={onLogin} text="Login"/>
     </View>
 
-<View style={style.btnContainer}>
-<MyButton title="Login with Google" ImageURL={ICgoogle}></MyButton>
+<View style={style.btnContainer2}>
+<MyButton text="Login with Google" imgUrl={ICGoogle}></MyButton>
 </View>
 </View>
 </ScrollView>
@@ -40,18 +38,21 @@ const style= StyleSheet.create({
     container: {
         padding:20
     },
-    brandStyle:{
-        marginTop:40,
-        alignItems:'center',
-        justifyContent:'center',
-        flex: 2
-    },
     btnContainer:{
+        marginTop:180,
         flex:2,
         flexDirection:'row',
         padding:20,
         paddingRight:20,
-        borderRadaius:15
+        borderRadius:15
+    },
+    btnContainer2:{
+        marginTop:-25,
+        justifyContent:"center",
+        flex:2,
+        flexDirection:'row',
+        padding:20,
+        paddingRight:20,
+        borderRadius:15,
     }
-
 })

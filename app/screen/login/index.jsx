@@ -1,6 +1,10 @@
-import { View, Text, TextInput, StyleSheet, Button, ScrollView, Alert} from 'react-native';
-import {MyButton} from '../../components/my_button'
+import { View, Text, TextInput, StyleSheet, ScrollView, Alert, Dimensions, TouchableOpacity} from 'react-native';
+import {MyButton, MyButton2} from '../../components/my_button'
 import {ICGoogle} from '../../../assets'
+import React from 'react'
+
+
+const windowWidth = Dimensions.get('window').width;
 
 export default function LoginScreen({navigation}){
 const[email, onChangeEmail] = React.useState('')
@@ -16,7 +20,7 @@ const onSubmitLogin =()=>{
             throw Error('Harap masukkan password anda')
         }
 
-    navigation.navigate('Home')
+    navigation.navigate('home')
 }catch (err){
     Alert.alert('Error', err.message,[
         {text: 'OK', onPress: () =>{
@@ -26,19 +30,22 @@ const onSubmitLogin =()=>{
 }
 }
 
+const onChangePass=()=>{
+    navigation.navigate("#")
+}
+
 return(
 <ScrollView>
-    <View>
+<View>
     <View style={{width: windowWidth, height:400}}>
     <Text style={style.textLoginStyle}>Login</Text>
-    </View>
         <View style={style.container}>
             <Text style={style.textLabel}>E-mail</Text>
             <TextInput 
             style={style.textInputStyle}
             onChangeText={onChangeEmail}
             placeholder='Enter your email'
-            placeholderTextColor='#c7c7c7'
+            placeholderTextColor='#b8b8ba'
             value={email}/>
 
             <Text style={[style.textLabel, {marginTop:20}]}>Password</Text>
@@ -46,17 +53,18 @@ return(
             style={[style.textInputStyle, {marginBottom:12}]}
                onChangeText={onChangePassword} 
                placeholder='Enter your password'
-               placeholderTextColor ='#c7c7c7'
+               placeholderTextColor ='#b8b8ba'
                value ={password}/>
-            <TouchableOpacity>
-            <Text style={[style.textLabel]}>Forgot Password?</Text>
+            <TouchableOpacity  onPress={onChangePass}>
+            <Text style={[style.textLabel2]}>Forgot Password?</Text>
             </TouchableOpacity>
 
-    <Button style={color="#2e960e"} onPress={onSubmitLogin} title="Login"></Button>
+            <MyButton2 onPress={onSubmitLogin} text="Login"></MyButton2>
+        </View>
     </View>
-    <View>
+<View style={style.container2}>
     <Text style={style.textContinueStyle}>or login with</Text>
-        <View style={style.btnContainer}>
+        <View>
     <MyButton text="Login with Google" imgUrl={ICGoogle}/>
         </View>
     </View>
@@ -67,17 +75,24 @@ return(
 
 const style= StyleSheet.create({
     container: {
-        padding:20
+        padding:20,
+        marginTop:20
+    },
+    container2: {
+        padding:20,
+        marginTop:380
     },
     textInputStyle:{
-        height:40,
+        height:50,
         marginTop:12,
-        borderWidth:1,
+        borderWidth:1.5,
+        borderRadius:10,
+        borderColor:'#b8b8ba',
         padding:10,
     },
     textLoginStyle:{
         fontSize:32,
-        marginTop:150,
+        marginTop:100,
         fontWeight:'bold',
         textAlign:'center'
     },
@@ -90,19 +105,17 @@ const style= StyleSheet.create({
         fontSize:12,
         fontWeight:'bold'
     },
-    btnContainer:{
-        flex:2,
-        flexDirection:'row',
-        padding:20,
+    textLabel2:{
+        fontSize:12,
+        fontWeight:'bold',
+        textAlign:"right",
+        color:"#4397f7",
+        textDecorationLine:"underline",
+        marginBottom:60
     },
     textContinueStyle:{
-        textAlign: 'center'
-    },
-    containerBottom:{
-        flex:1,
-        flexDirection:'row',
-        justifyContent:'center',
-        margin:50
+        textAlign: 'center',
+        color:"#8f8e8d",
+        marginBottom:20
     }
-
 })

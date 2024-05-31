@@ -1,64 +1,65 @@
-import { View, Text, StyleSheet, ScrollView, TouchableOpacity} from "react-native";  
+import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Dimensions} from "react-native";  
 import { CustomeInput } from '../../components/input';
-import { MyButton } from '../../components/my_button';
+import { MyButton2 } from '../../components/my_button';
+import React from 'react'
 
+const windowWidth = Dimensions.get('window').width;
 export default function RegisterInputFormScreen(){
+
+    const onTOS=()=>{
+        navigation.navigate("#")
+    }
+    const onPolicy=()=>{
+        navigation.navigate("#")
+    }
+
     return(
-        <ScrollView style={style.container}>
+        <ScrollView>
             <View style={{width: windowWidth, height:400}}>
-            <Text style={style.textLoginStyle}>Register</Text>
+            <Text style={style.textHeader}>Register</Text>
             </View>
 
-<View style={style.container}>
-            <Text style={style.textLabel}>First Name</Text>
-            <TextInput style={style.textInputStyle} onChangeText={onChangeName} placeholderTextColor='#c7c7c7'
-            value={name1}/>
-
-            <Text style={[style.textLabel, {marginLeft:20}]}>Last name</Text>
-            <TextInput style={style.textInputStyle} onChangeText={onChangeName2} placeholderTextColor='#c7c7c7'
-            value={name2}/>
-
-            <Text style={[style.textLabel, {marginTop:20}]}>E-mail</Text>
-            <TextInput style={style.textInputStyle} onChangeText={onChangeEmail} placeholderTextColor='#c7c7c7'
-            value={email}/>
-            <View>
-            <Text style={[style.textLabel, {marginTop:20}]}>Password</Text>
-            <TextInput style={[style.textInputStyle, {marginBottom:12}]} onChangeText={onChangePassword} placeholderTextColor ='#c7c7c7'
-            value ={password}/>
-            <Text>must contain 8 char.</Text>
-            </View>
-            <Text style={[style.textLabel, {marginTop:20}]}>Confirm Password</Text>
-            <TextInput style={[style.textInputStyle, {marginBottom:12}]} placeholderTextColor ='#c7c7c7'
-            value ={password}/>
-            <View style={style.containerInput}>
-                <CustomeInput label="First name"/>
-                <CustomeInput label="Last name"/>
-                <CustomeInput label="Passeord"/>
-                <CustomeInput label="Confirm Password"/>
-            </View>
+<View style={style.containerInput}>
+    <CustomeInput label="First Name"/>
+    <CustomeInput style={[{marginLeft:20}]} label="Last Name"/>
+    <CustomeInput label="E-mail"/>
+    <CustomeInput label="Password"/> <Text style={style.note}>must contain 8 char.</Text>
+    <CustomeInput label="Confirm Password"/>
 </View>
-            <MyButton title="Create Account"/>
-            <View>
-                <Text>By continuing, you agree to our </Text>
-                <TouchableOpacity onPress={onTOS}> Term of Service</TouchableOpacity>
-                <Text> And </Text>
-                <TouchableOpacity onPress={onPolicy}>Privacy Policy</TouchableOpacity>
-            </View>
-        </ScrollView>
+    <MyButton2 style={[{marginLeft:20, marginRight:20}]}text="Create Account"/>
+
+    <Text style={style.terms}>By continuing, you agree to our&nbsp;
+        <TouchableOpacity style={[style.textLabel2]} onPress={onTOS}><Text>Term of Service</Text></TouchableOpacity>
+        &nbsp;And&nbsp; 
+        <TouchableOpacity style={[style.textLabel2]} onPress={onPolicy}><Text>Privacy Policy</Text></TouchableOpacity>
+    </Text>
+</ScrollView>
     )
 }
 
 const style = StyleSheet.create({
-    container:{
-        padding:15
+    textHeader:{
+        fontSize:32,
+        marginTop:100,
+        fontWeight:'bold',
+        textAlign:'center'
     },
     containerInput:{
-        marginTop:20,
-        marginBottom:20
+        marginTop: -200,
+        marginBottom:20,
+        padding:20
     },
-    textHeader:{
-        fontWeight:'700',
-        fontSize:24,
+    note:{
+        color:"#929694"
     },
-    
+    textLabel2:{
+        fontSize:12,
+        fontWeight:'bold',
+        color:"#4397f7",
+        textDecorationLine:"underline"
+    },
+    terms:{
+        padding:20,
+        textAlign:"center"
+    } 
 })
