@@ -3,6 +3,7 @@ import {
     Text,
     TextInput,
     StyleSheet,
+    TouchableOpacity,
     Button,
     ImageBackground,
     Dimensions,
@@ -81,10 +82,16 @@ export default function LoginScreen({navigation}){
             <TextInput style={style.textInputStyle}onChangeText={onChangeEmail}placeholder='Enter Email id'placeholderTextColor='#c7c7c7' value={email}/>
             <TextInput style={style.textInputStyle}onChangeText={onChangePassword}placeholder='Enter Your Password'placeholderTextColor='#c7c7c7'value={password}/>
             <Text style={[style.textForgetStyle,{fontSize:15,fontWeight:'bold',textAlign:'center',marginRight:-200,marginBottom:20}]}>Forget Your Password?</Text>
-            <Button
+            {/* <Button
             onPress={() => navigation.navigate('Home')}
             color='#FFC600'
-            title="Login"/>
+            title="Login"/> */}
+            <View style={{width : "80%", alignContent : "center",  alignSelf : "center", color:"black"}}>
+                  <TouchableOpacity style={{backgroundColor :"#FFC600",padding:10}}
+            onPress={() => navigation.navigate('Home')} >
+            <Text style={{color : "black", alignSelf : "center"}}>Login</Text>
+                    </TouchableOpacity>  
+                </View>
             <View style={style.containerWith}>
                 <Text style={[style.textContinueStyle,{textAlign:'center',marginTop:25}]}>──────── Or Signin up with  ────────</Text>
             </View>

@@ -1,4 +1,4 @@
-import { View,Text,TextInput,StyleSheet,Button,ImageBackground,Dimensions,Image,ScrollView } from "react-native";
+import { View,Text,TextInput,StyleSheet,TouchableOpacity,Button,ImageBackground,Dimensions,Image,ScrollView } from "react-native";
 import React from 'react'
 
 const windowWidth = Dimensions.get('window').width;
@@ -34,10 +34,16 @@ export default function HomeScreen({navigation}){
             <TextInput style={style.textInputStyle}onChangeText={onChangeUsername}placeholder='username' placeholderTextColor='#c7c7c7'value={username}/>
             <TextInput style={style.textInputStyle}onChangeText={onChangeEmail}placeholder='Enter Email id'placeholderTextColor='#c7c7c7' value={email}/>
             <TextInput style={style.textInputStyle}onChangeText={onChangePassword}placeholder='Enter Your Password'placeholderTextColor='#c7c7c7'value={password}/>
-            <Button
+            {/* <Button
             onPress={() => navigation.navigate('Home')}
             color='#FFC600'
-            title="Register"/>
+            title="Register"/> */}
+            </View>
+            <View style={{width : "80%", alignContent : "center",  alignSelf : "center", color:"black"}}>
+            <TouchableOpacity style={{backgroundColor :"#FFC600",padding:10}}
+            onPress={() => navigation.navigate('Home')} >
+            <Text style={{color : "black", alignSelf : "center"}}>Login</Text>
+            </TouchableOpacity>  
             </View>
             <View style={style.containerdua}>
                 <Text>Alredy have an account?</Text>
