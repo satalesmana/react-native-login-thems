@@ -7,11 +7,13 @@ import {
     Image
 } from "react-native"
 import { Email } from "../../assets";
+import { Person } from "../../assets";
 export const CustomeInput=({
     value,
     label,
     onChangeText,
-    placeholder
+    placeholder,
+    source
 })=>{
     const [isActive, setIsActive] = useState(false);
 
@@ -20,7 +22,7 @@ export const CustomeInput=({
             <Text style={{marginLeft:"10%",marginBottom:"3%",color:"white",}}>{label}</Text>
             <View style={styles.email}>
                 <View style={styles.imgEmail}>
-                  <Image source={Email}></Image>
+                  <Image source={source}></Image>
                 </View>
             <TextInput 
                 style={ isActive ? styles.inputActive : styles.input }
@@ -32,6 +34,7 @@ export const CustomeInput=({
                 value={value}/>
                 </View>
         </View>
+        
     )
 }
 
@@ -53,6 +56,7 @@ const styles = StyleSheet.create({
         marginVertical: "auto",
         marginLeft: 15,
       },
+    
     input:{
         flexDirection: "row",
         height: 45,

@@ -14,6 +14,7 @@ import { setemail, setname, setpass } from '../../store/reducer/registerReducer'
 import React from "react";
 import { MyButton, CustomeInput} from "../../component";
 import { ICGoogle, ICFacebook, ICMacOs } from "../../../assets";
+
 import { LinearGradient } from "expo-linear-gradient";
 import { GB2, GB3, GB4, GB5, Key, Person, Email } from "../../../assets";
 
@@ -69,22 +70,18 @@ export default function CreateScreen({ navigation }) {
                 <CustomeInput value={register.email} 
                     onChangeText={(value)=>dispatch(setemail(value))}
                     placeholder="Your Email"
+                    source={Email}
                     label="Email"/>
+                    
              
 
-              <Text style={style.textLabelName}>Your Name</Text>
-              <View style={style.inputan}>
-                <View style={style.imgPerson}>
-                  <Image source={Person}></Image>
-                </View>
-                <TextInput
-                  style={style.textInputStyle}
-                  onChangeText={onChangeName}
-                  placeholder={"Your Name"}
-                  placeholderTextColor="#c7c7c7"
-                  value={name}
-                />
-              </View>
+               <View style={style.textLabelName}>
+                <CustomeInput value={register.name} 
+                    onChangeText={(value)=>dispatch(setname(value))}
+                    placeholder="Your name"
+                    source={Person}
+                    label="name"/>
+                    </View>
 
               <Text
                 style={[style.textLabel, { marginTop: 20, marginLeft: 35 }]}
@@ -213,7 +210,7 @@ const style = StyleSheet.create({
     color: "#c7c7c7",
     marginBottom: 10,
     marginTop: 10,
-    marginLeft: 35,
+    marginLeft: 0,
   },
   btnContainer: {
     flex: 1,
