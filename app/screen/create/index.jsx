@@ -9,8 +9,10 @@ import {
   ScrollView,
   Alert,
 } from "react-native";
+import { useSelector, useDispatch } from 'react-redux'
+import { setemail, setname, setpass } from '../../store/reducer/registerReducer'
 import React from "react";
-import { MyButton } from "../../component";
+import { MyButton, CustomeInput} from "../../component";
 import { ICGoogle, ICFacebook, ICMacOs } from "../../../assets";
 import { LinearGradient } from "expo-linear-gradient";
 import { GB2, GB3, GB4, GB5, Key, Person, Email } from "../../../assets";
@@ -18,6 +20,8 @@ import { GB2, GB3, GB4, GB5, Key, Person, Email } from "../../../assets";
 const windowWidth = Dimensions.get("window").width;
 
 export default function CreateScreen({ navigation }) {
+  const register = useSelector((state) => state.register.formInput)
+    const dispatch = useDispatch()
   const [email, onChangeEmail] = React.useState("");
   const [name, onChangeName] = React.useState("");
   const [pass, onChangePassword] = React.useState("");
@@ -62,21 +66,11 @@ export default function CreateScreen({ navigation }) {
             <Text style={style.text2}>Free Forever. No Credit Card Needed</Text>
 
             <View style={style.container}>
-              <Text style={[style.textLabel, { marginLeft: 35 }]}>
-                Email Adress
-              </Text>
-              <View style={style.email}>
-                <View style={style.imgEmail}>
-                  <Image source={Email}></Image>
-                </View>
-                <TextInput
-                  style={style.textInputStyle}
-                  onChangeText={onChangeEmail}
-                  placeholder={"Your Email"}
-                  placeholderTextColor="#c7c7c7"
-                  value={email}
-                />
-              </View>
+                <CustomeInput value={register.email} 
+                    onChangeText={(value)=>dispatch(setemail(value))}
+                    placeholder="Your Email"
+                    label="Email"/>
+             
 
               <Text style={style.textLabelName}>Your Name</Text>
               <View style={style.inputan}>

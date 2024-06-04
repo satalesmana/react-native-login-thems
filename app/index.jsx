@@ -2,10 +2,13 @@ import * as React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { LoginScreen, HomeScreen, WelcomeScreen, CreateScreen } from "./screen";
+import { Provider } from 'react-redux'
+import store from './store'
 const Stack = createNativeStackNavigator();
 
 function App() {
   return (
+    <Provider store={store}> 
     <NavigationContainer independent={true}>
       <Stack.Navigator initialRouteName="Welcome">
         <Stack.Screen
@@ -26,6 +29,7 @@ function App() {
         ></Stack.Screen>
       </Stack.Navigator>
     </NavigationContainer>
+    </Provider>
   );
 }
 
