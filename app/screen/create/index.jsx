@@ -75,31 +75,21 @@ export default function CreateScreen({ navigation }) {
                     
              
 
-               <View style={style.textLabelName}>
+               
                 <CustomeInput value={register.name} 
                     onChangeText={(value)=>dispatch(setname(value))}
                     placeholder="Your name"
                     source={Person}
                     label="name"/>
-                    </View>
-
-              <Text
-                style={[style.textLabel, { marginTop: 20, marginLeft: 35 }]}
-              >
-                Password
-              </Text>
-              <View style={style.inputan}>
-                <View style={style.imgKey}>
-                  <Image source={Key}></Image>
-                </View>
-                <TextInput
-                  style={[style.textInputStyle]}
-                  onChangeText={onChangePassword}
-                  placeholder="Password"
-                  placeholderTextColor="#c7c7c7"
-                  value={pass}
-                />
-              </View>
+                   
+                <CustomeInput value={register.pass} 
+                    onChangeText={(value)=>dispatch(setpass(value))}
+                    placeholder="Your Password"
+                    source={Key}
+                    label="password"/>
+                    
+            
+              
               <LinearGradient
                 style={style.view2}
                 colors={["#9C3FE4", "#C65647"]}
