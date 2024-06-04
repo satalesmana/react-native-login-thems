@@ -11,24 +11,30 @@ import {
 import React, { useState } from "react";
 import { ICGoogle, ICFacebook } from "../../../assets";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { CustomeInput } from "../../component";
+import { setEmail, setPassword, setConfirmPassword } from "../../store/reducer/registerReducer";
+import { useSelector, useDispatch } from 'react-redux'
 
 const windowWidth = Dimensions.get("window").width;
 
 export default function SignUpScreen({ navigation }) {
+  const register = useSelector((state) => state.register.formInput)
+  const dispatch = useDispatch()
+
   const [email, onChangeEmail] = React.useState("");
 
   // State variable to hold the password
-  const [password, setPassword] = useState("");
+  // const [password, setPassword] = useState("");
   const [password2, setPassword2] = useState("");
 
   // State variable to track password visibility
-  const [showPassword, setShowPassword] = useState(false);
+  // const [showPassword, setShowPassword] = useState(false);
   const [showPassword2, setShowPassword2] = useState(false);
 
   // Function to toggle the password visibility state
-  const toggleShowPassword = () => {
-    setShowPassword(!showPassword);
-  };
+  // const toggleShowPassword = () => {
+  //   setShowPassword(!showPassword);
+  // };
   const toggleShowPassword2 = () => {
     setShowPassword2(!showPassword2);
   };
@@ -38,7 +44,7 @@ export default function SignUpScreen({ navigation }) {
   };
 
   return (
-    <ScrollView backgroundColor = 'white'>
+    <ScrollView backgroundColor='white'>
       <View>
         <Text style={style.header}>Sign Up</Text>
 
@@ -52,7 +58,7 @@ export default function SignUpScreen({ navigation }) {
             value={email}
           />
         </View>
-        <View style={style.Input2}>
+        {/* <View style={style.Input2}>
           <TextInput
             style={[style.textInputStyle, { flex: 8 }]}
             secureTextEntry={!showPassword}
@@ -69,6 +75,17 @@ export default function SignUpScreen({ navigation }) {
             style={style.iconEye}
             onPress={toggleShowPassword}
           />
+        </View> */}
+
+        <View style={style.Input2}>
+          <CustomeInput value={register.setPassword} onChangeText={(value) => dispatch(setPassword(value))} />
+          {/* <MaterialCommunityIcons
+            name={showPassword ? "eye-off" : "eye"}
+            size={20}
+            color="#aaa"
+            style={style.iconEye}
+            onPress={toggleShowPassword}
+          /> */}
         </View>
 
         <View style={style.Input3}>
