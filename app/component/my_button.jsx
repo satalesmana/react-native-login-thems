@@ -4,7 +4,18 @@ export const MyButton = (props) => {
   return (
     <TouchableOpacity style={[style.Bebas, props.style]}>
       <Image source={props.imgUrl} style={style.gambar} />
-      <Text style={{marginLeft: 10, fontSize: 15, color: 'white'}}>{props.text}</Text>
+      <Text style={{ marginLeft: 10, fontSize: 15, color: 'white' }}>{props.text}</Text>
+    </TouchableOpacity>
+  );
+};
+export const ButtonRed = ({label, onPress}) => {
+
+  return (
+    <TouchableOpacity
+      onPress={onPress}
+      style={style.buttonLogin}
+    >
+      <Text style={style.textSignUp}>{label}</Text>
     </TouchableOpacity>
   );
 };
@@ -24,5 +35,19 @@ const style = StyleSheet.create({
   gambar: {
     width: 40,
     height: 40,
-  }
+  },
+  buttonLogin: {
+    marginTop: "7%",
+    backgroundColor: "#F71B33",
+    height: 56,
+    width: "90%",
+    alignSelf: "center",
+    borderRadius: 10,
+  },
+  textSignUp: {
+    textAlign: "center",
+    marginVertical: "auto",
+    fontSize: 18,
+    color: "white",
+  },
 });

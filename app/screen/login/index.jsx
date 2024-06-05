@@ -11,6 +11,7 @@ import {
 import React, { useState } from "react";
 import { ICGoogle, ICFacebook } from "../../../assets";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { ButtonRed } from "../../component";
 
 const windowWidth = Dimensions.get("window").width;
 
@@ -35,11 +36,7 @@ export default function LoginScreen({ navigation }) {
   };
 
   const onSubmitLogin = () => {
-    if (email == user && password == pass) {
-      navigation.navigate("Home");
-    } else {
-      alert("Email or Password is Wrong");
-    }
+    alert('Baru Sampai Sini')
   };
 
   return (
@@ -74,9 +71,9 @@ export default function LoginScreen({ navigation }) {
         />
       </View>
       <Text style={style.forgot}>Forgot Password ?</Text>
-      <TouchableOpacity onPress={onSubmitLogin} style={style.btnLogin}>
-        <Text style={style.textLogin}>Log in</Text>
-      </TouchableOpacity>
+      
+      <ButtonRed label='Sign In' onPress={onSubmitLogin}></ButtonRed>
+      
       <View style={style.viewAccount}>
         <Text style={{ fontSize: 15 }}>Don't have an account?</Text>
         <Text onPress={goSignUp} style={style.textSign}>

@@ -1,6 +1,5 @@
 import {
   View,
-  StyleSheet,
   Dimensions,
   Image,
   ScrollView,
@@ -21,12 +20,12 @@ export default function WelcomeScreen({ navigation }) {
 
   return (
     <ScrollView>
-      <View style={{ width: windowWidth, height: windowHeight }}>
         <LinearGradient
           colors={["#FF1F3C", "#F8828F"]}
           start={[0, 0]}
           end={[1, 1]}
           location={[0.25, 0.4, 1]}
+          style={{ width: windowWidth, height: windowHeight }}
         >
           <View style={{ height: "70%" }}>
             <Image
@@ -36,9 +35,6 @@ export default function WelcomeScreen({ navigation }) {
           </View>
           <Image source={food} style={{ alignSelf: "flex-end" }} />
         </LinearGradient>
-      </View>
     </ScrollView>
   );
 }
-
-const style = StyleSheet.create({});
