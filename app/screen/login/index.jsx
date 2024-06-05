@@ -13,6 +13,8 @@ import {
 import { MyButton } from "../components";
 import { ICGoogle } from "../../../assets";
 import React, { useState } from "react";
+import { TouchableOpacity } from "react-native-web";
+
 
 const windowWidth = Dimensions.get("window").width;
 
@@ -92,13 +94,24 @@ export default function LoginScreen({ navigation }) {
           <Text style={{ marginVertical: "auto" }}>Keep me Signed in</Text>
         </View>
 
-        <View style={style.buttonStyle}>
-          <Button
-            onPress={() => navigation.navigate("Register")}
-            color="#0000FF"
-            title="Login"
-          />
-        </View>
+
+        <TouchableOpacity
+          style={style.loginStyle}
+          onPress={() => navigation.navigate("Home")}
+          title="Login"
+        >
+          <Text
+            style={{
+              fontSize: 15,
+              textAlign: "center",
+              marginVertical: "auto",
+              color: "white",
+            }}
+          >
+            Login
+          </Text>
+        </TouchableOpacity>
+
 
         <View>
           <Text style={{ textAlign: "center", marginTop: 20, marginBottom:20, color: 'grey' }}>
@@ -161,9 +174,15 @@ const style = StyleSheet.create({
     fontWeight: "bold",
   },
 
-  buttonStyle: {
-    borderRadius: 50,
-  },
+  loginStyle: {
+      marginTop: 20,
+      height: 40,
+      width: "93%",
+      alignSelf: "center",
+      borderRadius: 30,
+      backgroundColor: "#2F4EFF",
+  },  
+
   containter: {
     padding: 20,
   },
