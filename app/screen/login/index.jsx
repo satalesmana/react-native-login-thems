@@ -124,7 +124,7 @@ const style = StyleSheet.create({
   },
   inputView: {
     gap: 10,
-    width: "90%",
+    width: "150%",
     flexDirection: "row",
     alignItems: "center",
     marginBottom: 20,

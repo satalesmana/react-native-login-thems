@@ -4,25 +4,67 @@ import {
   Text,
   TextInput,
   StyleSheet,
-  Dimensions,
   Pressable,
   Image,
   ScrollView,
 } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
-
+import { useSelector, useDispatch } from "react-redux";
+import {
+  setFirstName,
+  setEmail,
+  setPassword,
+  setConfirmPassword,
+} from "../../store/reducer/registerReducer";
 import { ICGoogle, ICFacebook, ICTwitter } from "../../../assets";
 import { MyButton } from "../../components";
 
-const windowWidth = Dimensions.get("window").width;
-
 export default function RegisterScreen({ navigation }) {
+  const register = useSelector((state) => state.register.formInput);
+  const dispatch = useDispatch();
+
+  const onNextInput = () => {
+    try {
+      if (register.firstName === null || register.firstName === "") {
+        throw Error("Name is required");
+      }
+
+      if (register.email === null || register.email === "") {
+        throw Error("Email is required");
+      }
+
+      if (register.password === null || register.password === "") {
+        throw Error("Password is required");
+      }
+
+      if (
+        register.confirmPassword === null ||
+        register.confirmPassword === ""
+      ) {
+        throw Error("Confirm Password is required");
+      }
+
+      navigation.navigate("Home");
+    } catch (err) {
+      Alert.alert("Error", err.message, [
+        {
+          text: "OK",
+          onPress: () => {
+            console.log("ERR");
+          },
+        },
+      ]);
+    }
+  };
+
   return (
     <ScrollView contentContainerStyle={style.container}>
       <Text style={style.welcomeBack}>Register</Text>
+
       <View style={style.brandStyle}>
         <Image source={require("../../../assets/images/home.png")} />
       </View>
+
       <View style={style.inputContainer}>
         <View style={style.inputView}>
           <Icon
@@ -31,11 +73,15 @@ export default function RegisterScreen({ navigation }) {
             color="blue"
             style={style.imgStyleLeft}
           />
+
           <TextInput
             style={style.inputText}
+            value={register.firstName}
+            onChangeText={(value) => dispatch(setFirstName(value))}
             placeholder="Enter your name"
             placeholderTextColor="black"
           />
+
           <Icon
             name="check"
             size={18}
@@ -43,6 +89,7 @@ export default function RegisterScreen({ navigation }) {
             style={(style.imgStyleRight, { marginRight: 2 })}
           />
         </View>
+
         <View style={style.inputView}>
           <Icon
             name="envelope"
@@ -50,11 +97,15 @@ export default function RegisterScreen({ navigation }) {
             color="blue"
             style={style.imgStyleLeft}
           />
+
           <TextInput
             style={style.inputText}
-            placeholder="Enter your email or username"
+            value={register.email}
+            onChangeText={(value) => dispatch(setEmail(value))}
+            placeholder="Enter your email"
             placeholderTextColor="black"
           />
+
           <Icon
             name="check"
             size={18}
@@ -62,13 +113,31 @@ export default function RegisterScreen({ navigation }) {
             style={(style.imgStyleRight, { marginRight: 2 })}
           />
         </View>
+
         <View style={style.inputView}>
           <Icon name="lock" size={18} color="blue" style={style.imgStyleLeft} />
+
           <TextInput
             style={style.inputText}
+            value={register.password}
+            onChangeText={(value) => dispatch(setPassword(value))}
             placeholder="Enter your password"
             placeholderTextColor="black"
           />
+
+          <Icon name="eye" size={15} color="#000" style={style.imgStyleLeft} />
+        </View>
+        <View style={style.inputView}>
+          <Icon name="lock" size={18} color="blue" style={style.imgStyleLeft} />
+
+          <TextInput
+            style={style.inputText}
+            value={register.confirmPassword}
+            onChangeText={(value) => dispatch(setConfirmPassword(value))}
+            placeholder="Confirm your password"
+            placeholderTextColor="black"
+          />
+
           <Icon name="eye" size={15} color="#000" style={style.imgStyleLeft} />
         </View>
       </View>
@@ -80,9 +149,11 @@ export default function RegisterScreen({ navigation }) {
         >
           <Text style={style.text}>Register</Text>
         </Pressable>
+
         <View style={style.viewVia}>
           <Text style={style.orVia}> Or Via Social Media </Text>
         </View>
+
         <View style={style.btnContainer}>
           <MyButton imgUrl={ICGoogle} />
           <MyButton imgUrl={ICFacebook} />
@@ -99,6 +170,7 @@ export default function RegisterScreen({ navigation }) {
           Login Now
         </Text>
       </Text>
+
       <Text style={style.accountText}>
         By signing up, you are agree with our{" "}
         <Text
@@ -139,7 +211,7 @@ const style = StyleSheet.create({
   },
   inputView: {
     gap: 10,
-    width: "90%",
+    width: "150%",
     flexDirection: "row",
     alignItems: "center",
     marginBottom: 20,
