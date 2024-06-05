@@ -28,10 +28,10 @@ function App() {
           options={{headerShown:false}}
           component={RegisterInputNameScreen} />
 
-        <Stack.Screen name="RegisterDate" component={RegisterInputDateScreen} />
+        {/* <Stack.Screen name="RegisterDate" component={RegisterInputDateScreen} />
         <Stack.Screen name="RegisterGender" component={RegisterInputGenderScreen} />
         <Stack.Screen name="RegisterEmail" component={RegisterInputEmailScreen} />
-        <Stack.Screen name="RegisterPassword" component={RegisterInputPasswordScreen} />
+        <Stack.Screen name="RegisterPassword" component={RegisterInputPasswordScreen} /> */}
       </Stack.Navigator>
     </NavigationContainer>
   );

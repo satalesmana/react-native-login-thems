@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, Image, Dimensions} from 'react-native';
+import { View, StyleSheet, Image} from 'react-native';
 import { useEffect } from 'react';
 import { ICSpsc } from '../../../assets'
 
@@ -11,20 +11,20 @@ export default function SplashScreen({navigation}){
     },[navigation])
 
     return (
-        <View style={{backgroundColor : '#0D2063'}}>
-            <View style={styles.brandStyle}>
-                <Image source={require("../../../assets/images/splash-sc.png")} />
-            </View>
+        <View style={styles.container}>
+            <Image
+                source={ICSpsc}
+            />
         </View>
     );
 }
 
 const styles = StyleSheet.create({
 
-    brandStyle: {
-        marginTop: 250,
-        marginBottom: 250,
-        alignItems: "center",
-        justifyContent: "center",
+    container: {
+        backgroundColor : '#0D2063',
+        flex:1,
+        justifyContent: 'center',
+        alignItems: 'center',
     }
 })
