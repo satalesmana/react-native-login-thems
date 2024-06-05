@@ -7,6 +7,7 @@ import {
   Pressable,
   Image,
   ScrollView,
+  Alert
 } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
 import { useSelector, useDispatch } from "react-redux";
@@ -14,12 +15,14 @@ import {
   setFirstName,
   setEmail,
   setPassword,
-  setConfirmPassword,
+  // setConfirmPassword,
+  resetRegisterData
 } from "../../store/reducer/registerReducer";
 import { ICGoogle, ICFacebook, ICTwitter } from "../../../assets";
 import { MyButton } from "../../components";
 
 export default function RegisterScreen({ navigation }) {
+  const[confirmPassword,setConfirmPassword] = useState(null)
   const register = useSelector((state) => state.register.formInput);
   const dispatch = useDispatch();
 
@@ -36,15 +39,42 @@ export default function RegisterScreen({ navigation }) {
       if (register.password === null || register.password === "") {
         throw Error("Password is required");
       }
-
-      if (
-        register.confirmPassword === null ||
-        register.confirmPassword === ""
-      ) {
-        throw Error("Confirm Password is required");
+      if(confirmPassword !== register.password){
+        throw Error(`Confirm password doesn't match`)
       }
+      let message  = `Name : ${register.firstName}\n`
+                message += `Email : ${register.email} \n`
+                message += `Password : ${register.password} \n`
+      Alert.alert('Confirm', message,[
+      {
+        text:'cancel',
+        onPress:()=>console.log('Cancel Pressed'),
+        style:'cancel',
+      },{
+        text:'Submit',onPress:async()=>{
+          const res = await ApiLib.post('/action/insertOne',
+          {
+            "dataSource":"Cluster0",
+            "database" : "uasghw",
+            "collection" : "users",
+            "document" : register
+          }
+        )
+        if(res.data?.insertedId){
+          dispatch(resetRegisterData())
+          navigation.navigate("Login")
+        }
+        }
+      },
+    ]);
+      // if (
+      //   register.confirmPassword === null ||
+      //   register.confirmPassword === ""
+      // ) {
+      //   throw Error("Confirm Password is required");
+      // }
 
-      navigation.navigate("Home");
+      // navigation.navigate("Home");
     } catch (err) {
       Alert.alert("Error", err.message, [
         {

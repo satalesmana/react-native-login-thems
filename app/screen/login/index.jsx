@@ -9,6 +9,7 @@ import {
   Image,
   ScrollView,
 } from "react-native";
+import ApiLib from "../../lib/ApiLib";
 import Icon from "react-native-vector-icons/FontAwesome";
 
 import { ICGoogle, ICFacebook, ICTwitter } from "../../../assets";
@@ -19,7 +20,9 @@ const windowWidth = Dimensions.get("window").width;
 export default function LoginScreen({ navigation }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-
+  const onSubmitLogin = async()=>{
+    setLoaading(true)
+  }
   return (
     <ScrollView contentContainerStyle={style.container}>
       <Text style={style.welcomeBack}>Welcome Back!</Text>
