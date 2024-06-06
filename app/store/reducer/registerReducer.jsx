@@ -1,32 +1,35 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice } from "@reduxjs/toolkit";
 
 export const registerSlice = createSlice({
-  name:'register',
+  name: "register",
   initialState: {
-    formInput:{
-        email: null,
-        password: null,
-        confirmPassword: null
-    }
+    formInput: {
+      email: null,
+      password: null,
+    },
   },
   reducers: {
-    setEmail:(state, action) => {
-        state.formInput.email = action.payload
+    setEmail: (state, action) => {
+      state.formInput.email = action.payload;
     },
-    setPassword:(state, action) => {
-        state.formInput.password = action.payload
+    setPassword: (state, action) => {
+      state.formInput.password = action.payload;
     },
-    setConfirmPassword:(state, action) => {
-        state.formInput.confirmPassword = action.payload
-    }
+    resetRegisterData: (state) => {
+      state.formInput = {
+        firstName: null,
+        sureName: null,
+        gender: null,
+        email: null,
+        password: null,
+        birthDate: null,
+      };
+    },
   },
-})
+});
 
 // Action creators are generated for each case reducer function
-export const { 
-    setEmail,
-    setPassword,
-    setConfirmPassword
- } = registerSlice.actions
+export const { setEmail, setPassword, setConfirmPassword, resetRegisterData } =
+  registerSlice.actions;
 
-export default registerSlice.reducer
+export default registerSlice.reducer;

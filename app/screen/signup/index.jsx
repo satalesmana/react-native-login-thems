@@ -7,65 +7,105 @@ import {
   Image,
   ScrollView,
   TouchableOpacity,
+  Alert,
 } from "react-native";
+import {useState} from 'react'
 import { ICGoogle, ICFacebook } from "../../../assets";
 import { CustomeInput, CustomePassword, ButtonRed } from "../../component";
 import { setEmail, setPassword, setConfirmPassword } from "../../store/reducer/registerReducer";
 import { useSelector, useDispatch } from 'react-redux'
+import ApiLib from "../../lib/ApiLib"
 
 export default function SignUpScreen({ navigation }) {
   const register = useSelector((state) => state.register.formInput)
   const dispatch = useDispatch()
+  const [confirmPassword, setConfirmPassword] = useState(null)
 
   const goLogin = () => {
+
     navigation.navigate("Login");
     // alert("Daftar Bermasalah")
   };
   const goSignUp = () => {
-    // navigation.navigate("Login");
-    alert("Belom Ada Lanjutan")
+    if (register.password === confirmPassword) {
+      let message = `Email : ${register.email} \n`
+      // message += `Password: ${register.password} \n`
+      // message += `Confirm Password: ${register.confirmPassword} \n`
+
+      // Alert.alert('Confirm', message)
+      Alert.alert('Confirm', message, [
+        {
+          text: 'Cancel',
+          onPress: () => console.log('Cancel Pressed'),
+          style: 'cancel',
+        }, {
+          text: 'Submit', onPress: async () => {
+            const res = await ApiLib.post('/action/insertOne',
+              {
+                "dataSource": "Cluster0",
+                "database": "lp3i-mobile-app",
+                "collection": "users",
+                "document": register
+              }
+            )
+
+            if (res.data?.insertedId) {
+              dispatch(resetRegisterData())
+              navigation.navigate("Login")
+            }
+
+          }
+        },
+      ]);
+
+      // navigation.navigate("Login");
+
+    }
+    else {
+      alert("Gagal")
+    }
   };
 
   return (
     <ScrollView backgroundColor='white'>
-        <Text style={style.header}>Sign Up</Text>
+      <Text style={style.header}>Sign Up</Text>
 
-        <CustomeInput label='Email' placeholder="Email Address" value={register.setEmail} onChangeText={(value) => dispatch(setEmail(value))} />
-        <CustomePassword placeholder="Password" value={register.setPassword} onChangeText={(value) => dispatch(setPassword(value))} />
-        <CustomePassword placeholder="Confirm Password" value={register.setConfirmPassword} onChangeText={(value) => dispatch(setConfirmPassword(value))} />
+      <CustomeInput label='Email' placeholder="Email Address" value={register.setEmail} onChangeText={(value) => dispatch(setEmail(value))} />
+      <CustomePassword placeholder="Password" value={register.setPassword} onChangeText={(value) => dispatch(setPassword(value))} />
+      <CustomePassword placeholder="Confirm Password" value={confirmPassword} onChangeText={(value)=>setConfirmPassword(value)} />
 
-        <ButtonRed onPress={goSignUp} label='Sign Up'></ButtonRed>
+      <ButtonRed onPress={goSignUp} label='Sign Up'></ButtonRed>
 
-        <View style={style.viewAccount}>
-          <Text style={{ fontSize: 15 }}>Have an account?</Text>
-          <Text onPress={goLogin} style={style.textSignIn}>
-            Sign In
-          </Text>
+      <View style={style.viewAccount}>
+        <Text style={{ fontSize: 15 }}>Have an account?</Text>
+        <Text onPress={goLogin} style={style.textSignIn}>
+          Sign In
+        </Text>
+      </View>
+
+      <View style={style.viewOR}>
+        <View style={style.garis} />
+        <View>
+          <Text style={style.textOR}>OR</Text>
         </View>
+        <View style={style.garis} />
+      </View>
 
-        <View style={style.viewOR}>
-          <View style={style.garis} />
-          <View>
-            <Text style={style.textOR}>OR</Text>
-          </View>
-          <View style={style.garis} />
-        </View>
+      <TouchableOpacity style={style.btnFb}>
+        <Image
+          source={ICGoogle}
+          style={{ marginLeft: "3%", marginVertical: "auto" }}
+        ></Image>
+        <Text style={style.textFG}>Sign Up with Google</Text>
+      </TouchableOpacity>
 
-        <TouchableOpacity style={style.btnFb}>
-          <Image
-            source={ICGoogle}
-            style={{ marginLeft: "3%", marginVertical: "auto" }}
-          ></Image>
-          <Text style={style.textFG}>Sign Up with Google</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity style={style.btnFb}>
-          <Image
-            source={ICFacebook}
-            style={{ marginLeft: "4%", marginVertical: "auto" }}
-          ></Image>
-          <Text style={style.textFG}>Sign Up with Facebook</Text>
-        </TouchableOpacity>
+      <TouchableOpacity style={style.btnFb}>
+        <Image
+          source={ICFacebook}
+          style={{ marginLeft: "4%", marginVertical: "auto" }}
+        ></Image>
+        <Text style={style.textFG}>Sign Up with Facebook</Text>
+      </TouchableOpacity>
     </ScrollView>
   );
 }

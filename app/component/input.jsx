@@ -60,27 +60,28 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         backgroundColor: '#fff6f5',
         width: '85%',
-        alignSelf: 'center'
+        alignSelf: 'center',
+        borderRadius: 10
     },
     text: {
         marginLeft: '10%'
     },
     inputActive: {
         height: 52,
+        padding: 15,
         // marginTop: 12,
         borderWidth: 1,
-        padding: 25,
         borderColor: "#c7d3ff",
         borderRadius: 10,
         backgroundColor: "#FFF6F5",
         width: '85%',
         alignSelf: 'center',
-        flex: 8
+        flex: 8,
     },
     input: {
         height: 52,
         borderRadius: 10,
-        padding: 25,
+        padding: 15,
         width: "85%",
         alignSelf: "center",
         backgroundColor: '#FFF6F5',
