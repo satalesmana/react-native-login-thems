@@ -91,17 +91,6 @@ export default function LoginScreen({navigation}){
           <Image source={ require('../../../assets/images/LinkedIn.png') } />
         </View>
 
-        {/* <View style={style.btnContainer}>
-          <MyButton
-            text="Google"
-            imgUrl={ICGoogle}/>
-
-          <MyButton
-            style={{marginLeft:15}}
-            text="Facebook"
-            imgUrl={ICFacebook}/>
-        </View> */}
-
         <View style={style.containerBottom}>
           <Text>Don't have account? </Text>
           <TouchableOpacity onPress={onRegister}>
