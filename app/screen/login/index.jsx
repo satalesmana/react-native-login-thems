@@ -7,18 +7,19 @@ import {
   Image,
   ScrollView,
   TouchableOpacity,
+  ActivityIndicator,
+  Alert
 } from "react-native";
 import React, { useState } from "react";
 import { ICGoogle, ICFacebook } from "../../../assets";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { ButtonRed } from "../../component";
+import ApiLib from "../../lib/ApiLib"
 
 const windowWidth = Dimensions.get("window").width;
 
 export default function LoginScreen({ navigation }) {
-  const [email, onChangeEmail] = React.useState("");
-  const user = "Percobaan";
-  const pass = 123;
+  const [email, onChangeEmail] = React.useState('')
 
   // State variable to hold the password
   const [password, setPassword] = useState("");
@@ -31,13 +32,69 @@ export default function LoginScreen({ navigation }) {
     setShowPassword(!showPassword);
   };
 
+  const [loading, setLoading] = React.useState(false)
   const goSignUp = () => {
     navigation.navigate("SignUp");
   };
 
-  const onSubmitLogin = () => {
-    alert('Baru Sampai Sini')
-  };
+  // const onSubmitLogin = () => {
+  //   alert('Baru Sampai Sini')
+  // };
+
+  const onSubmitLogin = async () => {
+    setLoading(true)
+    try {
+      if (email.trim().length === 0) {
+        throw Error('Email is required')
+      }
+
+      if (password.trim().length === 0) {
+        throw Error('Password is required')
+      }
+
+      const res = await ApiLib.post('/action/findOne', {
+        "dataSource": "Cluster0",
+        "database": "lp3i-mobile-app",
+        "collection": "users",
+        "filter": {
+          "email": email,
+          "password": password
+        }
+      }
+      )
+      setLoading(false)
+      if (res.data.document != null) {
+        navigation.replace("Home")
+      } else {
+        Alert.alert('Error', "Username & password tidak sesuai", [
+          {
+            text: 'OK', onPress: () => {
+              console.log('ERR')
+            }
+          },
+        ]);
+      }
+
+
+    } catch (err) {
+      setLoading(false)
+      Alert.alert('Error', err.message, [
+        {
+          text: 'OK', onPress: () => {
+            console.log('ERR')
+          }
+        },
+      ]);
+    }
+  }
+
+  if (loading) {
+    return (
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+        <ActivityIndicator size="large" color="#0000ff" />
+      </View>
+    )
+  }
 
   return (
     <ScrollView backgroundColor="white">
@@ -71,9 +128,9 @@ export default function LoginScreen({ navigation }) {
         />
       </View>
       <Text style={style.forgot}>Forgot Password ?</Text>
-      
+
       <ButtonRed label='Sign In' onPress={onSubmitLogin}></ButtonRed>
-      
+
       <View style={style.viewAccount}>
         <Text style={{ fontSize: 15 }}>Don't have an account?</Text>
         <Text onPress={goSignUp} style={style.textSign}>
