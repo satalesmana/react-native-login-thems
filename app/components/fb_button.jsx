@@ -2,7 +2,8 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { 
     TouchableOpacity,
     Text,
-    StyleSheet
+    StyleSheet,
+    ImageBackground
 } from 'react-native'
 
 
