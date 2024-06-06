@@ -15,7 +15,7 @@ export default function HomeScreen() {
   return (
     <ScrollView>
       <View style={style.ikbarpuanjito}>
-        <Text>Ikbar puan jito</Text>
+        <Text>Ikbar puanjito</Text>
       </View>
     </ScrollView>
   );
