@@ -1,9 +1,7 @@
 import {
   View,
   Text,
-  TextInput,
   StyleSheet,
-  Dimensions,
   Image,
   ScrollView,
   TouchableOpacity,
@@ -12,7 +10,7 @@ import {
 import {useState} from 'react'
 import { ICGoogle, ICFacebook } from "../../../assets";
 import { CustomeInput, CustomePassword, ButtonRed } from "../../component";
-import { setEmail, setPassword, setConfirmPassword } from "../../store/reducer/registerReducer";
+import { setEmail, setPassword, resetRegisterData } from "../../store/reducer/registerReducer";
 import { useSelector, useDispatch } from 'react-redux'
 import ApiLib from "../../lib/ApiLib"
 
@@ -29,8 +27,6 @@ export default function SignUpScreen({ navigation }) {
   const goSignUp = () => {
     if (register.password === confirmPassword) {
       let message = `Email : ${register.email} \n`
-      // message += `Password: ${register.password} \n`
-      // message += `Confirm Password: ${register.confirmPassword} \n`
 
       // Alert.alert('Confirm', message)
       Alert.alert('Confirm', message, [

@@ -17,19 +17,15 @@ export const registerSlice = createSlice({
     },
     resetRegisterData: (state) => {
       state.formInput = {
-        firstName: null,
-        sureName: null,
-        gender: null,
         email: null,
         password: null,
-        birthDate: null,
       };
     },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { setEmail, setPassword, setConfirmPassword, resetRegisterData } =
+export const { setEmail, setPassword, resetRegisterData } =
   registerSlice.actions;
 
 export default registerSlice.reducer;
