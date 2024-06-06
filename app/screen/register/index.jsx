@@ -15,48 +15,22 @@ import React from "react"
 
 const windowWidth = Dimensions.get("window").width;
 
-export default function LoginScreen({ navigation }) {
+export default function CreateScreen({ navigation }) {
   const [email, onChangeEmail] = React.useState("");
   const [number, onChangeNumber] = React.useState("");
   const [pass, onChangePassword] = React.useState("");
 
-  const onSubmitLogin = () => {
-    // if (email == "gebby" && pass == 123) {
-    //   alert("Sudah Benar");
-    //   navigation.navigate("HomeScreen");
-    // } else {
-    //   alert("Salah");
-    // }
+  const gotologin = () => {
+    navigation.navigate('Login')
 
-    try {
-      if(email.trim().length === 0){
-        alert("Email tidak boleh kosong")
-      }
-      if(pass.trim().length === 0){
-        alert("Password tidak boleh kosong")
-      }
-
-      navigation.navigate('Create')
-    } catch (err) {
-      Alert.alert('Error', err.message, [{
-        text:'OK', onPress: () => {
-          console.log('ERR')
-        }},
-      ]);
-    }
-  };
-
-  const gotosignup = () => {
-    navigation.navigate('Create')
-  }
-
+}
   return (
     <ScrollView>
       <View>
-        <View style={{ width: windowWidth, height: 110 }}>
+        <View style={{ width: windowWidth, height: 100 }}>
 
-            <Text style={style.textLoginStyle}>Hi, Welcome Back! 👋</Text>
-            <Text style={{textAlign:'center',color:"#c7c7c7"}}>Hello again, you've been missed!</Text>
+            <Text style={style.textLoginStyle}>Create an Account !</Text>
+            <Text style={{textAlign: 'center',color: "#c7c7c7"}}>Connect With Your Friends Today !</Text>
         </View>
 
         <View style={style.container}>
@@ -68,9 +42,17 @@ export default function LoginScreen({ navigation }) {
             placeholderTextColor="#c7c7c7"
             value={email}
           />
+          <Text style={[style.textLabel, { marginTop: 15 }]}>Phone Number</Text>
+          <TextInput
+            style={[style.textInputStyle,]}
+            onChangeText={onChangeNumber}
+            placeholder="Enter Your PhoneNumber"
+            placeholderTextColor="#c7c7c7"
+            value={number}
+          />
 
-<Text style={[style.textLabel, {marginBottom:20,marginTop:15 }]}>Password</Text>
-<Image source={require('../../../assets/images/mata.jpeg')} style={{marginBottom: -40, marginLeft:300, tintColor:"#c7c7c7"}}/>
+<Text style={[style.textLabel, { marginBottom:20,marginTop:15 }]}>Password</Text>
+<Image source={require('../../../assets/images/mata.jpeg')} style={{marginBottom: -40,marginLeft:300,tintColor:"#c7c7c7"}}/>
           <TextInput
             style={[style.textInputStyle, { marginBottom: 5 }]}
             onChangeText={onChangePassword}
@@ -82,7 +64,7 @@ export default function LoginScreen({ navigation }) {
           <Text style={{fontWeight:'bold', color:'black',marginRight: 70}}>Remember Me</Text>
           <Text style={{fontWeight:'bold', color:'red',marginLeft: 60}}>Forgot Password</Text>
         </View>
-          <Button color="#4E0189" title="Login"/>
+          <Button color="#4E0189" title="Sign Up" />
         </View>
 
         <View style={{ flexDirection: 'row', alignItems: 'center' }}>
@@ -106,8 +88,8 @@ export default function LoginScreen({ navigation }) {
         </View>
 
         <View style={style.containerBottom}>
-          <Text>Don't have an account? </Text>
-          <Text onPress={gotosignup} style={{fontWeight:'blue', color:'#4E0189'}}> Sign Up </Text>
+          <Text>Already have an account ? </Text>
+          <Text onPress={gotologin} style={{fontWeight:'blue', color:'#4E0189'}}> Login </Text>
         </View>
       </View>
     </ScrollView>
@@ -131,7 +113,6 @@ const style = StyleSheet.create({
     fontWeight: "bold",
     marginTop: 35,
     textAlign: 'center'
-
   },
   brandStyle: {
     marginTop: 100,
@@ -162,6 +143,7 @@ const style = StyleSheet.create({
     padding:30,
     marginTop:150
   },
+
   textForgot: {
     flex:1,
     flexDirection:'row',
@@ -169,4 +151,5 @@ const style = StyleSheet.create({
     padding:10,
     marginBottom:20
   }
+
 });

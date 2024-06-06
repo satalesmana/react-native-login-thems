@@ -1,12 +1,7 @@
-import ICGoogle from'./images/icongoogle.png'
-import ICFacebook from'./images/Frame.png'
-import ICapple from'./images/apple.png'
+import GitHub from './images/github.jpeg'
+import GitLab from './images/lithub.jpeg'
 
-export{
-    ICGoogle,
-    ICFacebook,
-    ICapple
+export {
+    GitHub,
+    GitLab
 }
-
-
-
