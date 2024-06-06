@@ -83,11 +83,11 @@ export default function LoginScreen({ navigation }) {
         </View>
         </View>
         <View style={style.containerBottom}>
-        <Text onPress={onSubmitLoginRegis} style={style.textContinueStyle}>
+        <Text  style={style.textContinueStyle}>
         Don't have account?
         </Text>
 
-          <Text style={{fontWeight:'semibold', textAlign:'center'}}>Create now</Text>
+          <Text style={{fontWeight:'semibold', textAlign:'center',textDecorationLine: 'underline'}} onPress={onSubmitLoginRegis} >Create now</Text>
         </View>
       </View>
     </ScrollView>
