@@ -49,11 +49,7 @@ export default function LoginScreen({ navigation }) {
       if (res.data.document != null) {
         navigation.replace("Dashboard");
       } else {
-<<<<<<< HEAD
-        Alert.alert("Error", "Username & password tidak sesuai", [
-=======
-        Alert.alert("Error", "Username & Pass tidak sesuai", [
->>>>>>> 83f0a77533158622bed70da0516d8fa7897689f4
+        Alert.alert("Error", "Username & Password tidak sesuai", [
           {
             text: "OK",
             onPress: () => {

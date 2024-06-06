@@ -2,7 +2,6 @@ import {
     View,
     Text,
     StyleSheet,
-    Pressable,
     Dimensions,
     Image,
     ScrollView,
@@ -16,9 +15,9 @@ import React from "react";
       <ScrollView>
         <View>
           <View style={{ width: windowWidth, height: 500 }}>
-            <Text style={style.welcomeToOurApps}>Welcome To Our Apps</Text>
+            <Text style={style.welcomeToOurApps}>Welcome To GHW App</Text>
             <View style={style.brandStyle}>
-              <Image source={require("../../../assets/images/home.png")} />
+              <Image source={require("../../../assets/images/dash.jpg")} />
             </View>
           </View>
         </View>
