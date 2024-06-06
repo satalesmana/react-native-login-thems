@@ -17,7 +17,7 @@ import React from "react";
           <View style={{ width: windowWidth, height: 500 }}>
             <Text style={style.welcomeToOurApps}>Welcome To GHW App</Text>
             <View style={style.brandStyle}>
-              <Image source={require("../../../assets/images/dash.jpg")} />
+              <Image style={{width : 200, height : 250}} source={require("../../../assets/images/dash.jpeg")} />
             </View>
           </View>
         </View>
@@ -36,8 +36,7 @@ import React from "react";
       color: "rgba(29,34,38,1)",
     },
     brandStyle: {
-      width: 400,
-      marginTop: 100,
+      marginTop: 200,
       marginBottom: 100,
       alignItems: "center",
       justifyContent: "center",
