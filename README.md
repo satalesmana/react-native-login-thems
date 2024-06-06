@@ -1,6 +1,6 @@
 # Welcome to your Expo app 👋
 
-Hai kami dari kelompok 5 jabal,arifin,husein,kiki
+Hai kami
 
 This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
 
