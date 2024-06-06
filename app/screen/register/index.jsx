@@ -7,7 +7,7 @@ import {
   Pressable,
   Image,
   ScrollView,
-  Alert
+  Alert,
 } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
 import { useSelector, useDispatch } from "react-redux";
@@ -16,13 +16,13 @@ import {
   setEmail,
   setPassword,
   // setConfirmPassword,
-  resetRegisterData
+  resetRegisterData,
 } from "../../store/reducer/registerReducer";
 import { ICGoogle, ICFacebook, ICTwitter } from "../../../assets";
 import { MyButton } from "../../components";
 
 export default function RegisterScreen({ navigation }) {
-  const[confirmPassword,setConfirmPassword] = useState(null)
+  const [confirmPassword, setConfirmPassword] = useState(null);
   const register = useSelector((state) => state.register.formInput);
   const dispatch = useDispatch();
 
@@ -39,42 +39,40 @@ export default function RegisterScreen({ navigation }) {
       if (register.password === null || register.password === "") {
         throw Error("Password is required");
       }
-      if(confirmPassword !== register.password){
-        throw Error(`Confirm password doesn't match`)
-      }
-      let message  = `Name : ${register.firstName}\n`
-                message += `Email : ${register.email} \n`
-                message += `Password : ${register.password} \n`
-      Alert.alert('Confirm', message,[
-      {
-        text:'cancel',
-        onPress:()=>console.log('Cancel Pressed'),
-        style:'cancel',
-      },{
-        text:'Submit',onPress:async()=>{
-          const res = await ApiLib.post('/action/insertOne',
-          {
-            "dataSource":"Cluster0",
-            "database" : "uasghw",
-            "collection" : "users",
-            "document" : register
-          }
-        )
-        if(res.data?.insertedId){
-          dispatch(resetRegisterData())
-          navigation.navigate("Login")
-        }
-        }
-      },
-    ]);
-      // if (
-      //   register.confirmPassword === null ||
-      //   register.confirmPassword === ""
-      // ) {
-      //   throw Error("Confirm Password is required");
-      // }
 
-      // navigation.navigate("Home");
+      if (confirmPassword === null || confirmPassword === "") {
+        throw Error("Confirm Password is required");
+      }
+
+      if (confirmPassword !== register.password) {
+        throw Error(`Confirm password doesn't match`);
+      }
+
+      let message = `Name : ${register.firstName}\n`;
+      message += `Email : ${register.email} \n`;
+      message += `Password : ${register.password} \n`;
+      Alert.alert("Confirm", message, [
+        {
+          text: "cancel",
+          onPress: () => console.log("Cancel Pressed"),
+          style: "cancel",
+        },
+        {
+          text: "Submit",
+          onPress: async () => {
+            const res = await ApiLib.post("/action/insertOne", {
+              dataSource: "Cluster0",
+              database: "uasghw",
+              collection: "users",
+              document: register,
+            });
+            if (res.data?.insertedId) {
+              dispatch(resetRegisterData());
+              navigation.navigate("Login");
+            }
+          },
+        },
+      ]);
     } catch (err) {
       Alert.alert("Error", err.message, [
         {
@@ -157,14 +155,15 @@ export default function RegisterScreen({ navigation }) {
 
           <Icon name="eye" size={15} color="#000" style={style.imgStyleLeft} />
         </View>
+
         <View style={style.inputView}>
           <Icon name="lock" size={18} color="blue" style={style.imgStyleLeft} />
 
           <TextInput
             style={style.inputText}
-            value={register.confirmPassword}
-            onChangeText={(value) => dispatch(setConfirmPassword(value))}
-            placeholder="Confirm your password"
+            value={confirmPassword}
+            onChangeText={(value) => setConfirmPassword(value)}
+            placeholder="Enter your confirm password"
             placeholderTextColor="black"
           />
 
@@ -173,10 +172,7 @@ export default function RegisterScreen({ navigation }) {
       </View>
 
       <View style={style.buttonView}>
-        <Pressable
-          style={style.buttonLogin}
-          onPress={() => navigation.navigate("Login")}
-        >
+        <Pressable style={style.buttonLogin} onPress={onNextInput}>
           <Text style={style.text}>Register</Text>
         </Pressable>
 
