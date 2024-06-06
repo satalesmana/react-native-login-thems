@@ -30,7 +30,7 @@ export default function LoginScreen({navigation}){
               throw Error('Password is required')
             }
       
-            navigation.navigate('Home')
+            navigation.navigate('RegisterName')
           }catch(err){
             Alert.alert('Error', err.message, [
               {text: 'OK', onPress: () => {
@@ -106,7 +106,7 @@ export default function LoginScreen({navigation}){
          </View>
          <View style={style.not}>
           <Text>Not Register yet ?</Text>
-          <Text style={style.textCreateStyle}  onPress={() => navigation.navigate('Home')}>Create Account</Text>
+          <Text style={style.textCreateStyle}  onPress={() => navigation.navigate('RegisterName')}>Create Account</Text>
         </View>
         </View>
     </ScrollView>

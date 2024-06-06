@@ -1,8 +1,12 @@
-import HomeScreen from "./home";
 import LoginScreen from "./login";
 import WelcomeScreen from "./welcome";
+import HomeScreen from "./home";
+import{
+    RegisterInputNameScreen,
+} from "./register"
 export{
-    HomeScreen,
     LoginScreen,
-    WelcomeScreen
+    WelcomeScreen,
+    RegisterInputNameScreen,
+    HomeScreen
 }
