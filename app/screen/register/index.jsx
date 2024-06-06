@@ -7,6 +7,7 @@ import {
   Pressable,
   Image,
   ScrollView,
+  Alert,
 } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
 import { useSelector, useDispatch } from "react-redux";
@@ -14,66 +15,63 @@ import {
   setFirstName,
   setEmail,
   setPassword,
-  setConfirmPassword,
+  resetRegisterData,
 } from "../../store/reducer/registerReducer";
 import { ICGoogle, ICFacebook, ICTwitter } from "../../../assets";
 import { MyButton } from "../../components";
+import ApiLib from "../../lib/ApiLib";
 
 export default function RegisterScreen({ navigation }) {
+  const [confirmPassword, setConfirmPassword] = useState("");
   const register = useSelector((state) => state.register.formInput);
   const dispatch = useDispatch();
 
   const onNextInput = () => {
     try {
-      if (register.firstName === null || register.firstName === "") {
-        throw Error("Name is required");
-      }
+      if (!register.firstName) throw Error("Name is required");
+      if (!register.email) throw Error("Email is required");
+      if (!register.password) throw Error("Password is required");
+      if (!confirmPassword) throw Error("Confirm Password is required");
+      if (confirmPassword !== register.password) throw Error("Confirm password doesn't match");
 
-      if (register.email === null || register.email === "") {
-        throw Error("Email is required");
-      }
+      const message = `Name : ${register.firstName}\nEmail : ${register.email}\nPassword : ${register.password}\n`;
 
-      if (register.password === null || register.password === "") {
-        throw Error("Password is required");
-      }
-
-      if (
-        register.confirmPassword === null ||
-        register.confirmPassword === ""
-      ) {
-        throw Error("Confirm Password is required");
-      }
-
-      navigation.navigate("Home");
-    } catch (err) {
-      Alert.alert("Error", err.message, [
+      Alert.alert("Confirm", message, [
         {
-          text: "OK",
-          onPress: () => {
-            console.log("ERR");
+          text: "Cancel",
+          onPress: () => console.log("Cancel Pressed"),
+          style: "cancel",
+        },
+        {
+          text: "Submit",
+          onPress: async () => {
+            const res = await ApiLib.post("/action/insertOne", {
+              dataSource: "Cluster0",
+              database: "uasghw",
+              collection: "users",
+              document: register,
+            });
+            if (res.data?.insertedId) {
+              dispatch(resetRegisterData());
+              navigation.navigate("Login");
+            }
           },
         },
       ]);
+    } catch (err) {
+      Alert.alert("Error", err.message, [{ text: "OK" }]);
     }
   };
 
   return (
     <ScrollView contentContainerStyle={style.container}>
       <Text style={style.welcomeBack}>Register</Text>
-
       <View style={style.brandStyle}>
         <Image source={require("../../../assets/images/home.png")} />
       </View>
-
       <View style={style.inputContainer}>
         <View style={style.inputView}>
-          <Icon
-            name="envelope"
-            size={15}
-            color="blue"
-            style={style.imgStyleLeft}
-          />
-
+          <Icon name="envelope" size={15} color="blue" style={style.imgStyleLeft} />
           <TextInput
             style={style.inputText}
             value={register.firstName}
@@ -81,23 +79,10 @@ export default function RegisterScreen({ navigation }) {
             placeholder="Enter your name"
             placeholderTextColor="black"
           />
-
-          <Icon
-            name="check"
-            size={18}
-            color="blue"
-            style={(style.imgStyleRight, { marginRight: 2 })}
-          />
+          <Icon name="check" size={18} color="blue" style={[style.imgStyleRight, { marginRight: 2 }]} />
         </View>
-
         <View style={style.inputView}>
-          <Icon
-            name="envelope"
-            size={15}
-            color="blue"
-            style={style.imgStyleLeft}
-          />
-
+          <Icon name="envelope" size={15} color="blue" style={style.imgStyleLeft} />
           <TextInput
             style={style.inputText}
             value={register.email}
@@ -105,78 +90,55 @@ export default function RegisterScreen({ navigation }) {
             placeholder="Enter your email"
             placeholderTextColor="black"
           />
-
-          <Icon
-            name="check"
-            size={18}
-            color="blue"
-            style={(style.imgStyleRight, { marginRight: 2 })}
-          />
+          <Icon name="check" size={18} color="blue" style={[style.imgStyleRight, { marginRight: 2 }]} />
         </View>
-
         <View style={style.inputView}>
           <Icon name="lock" size={18} color="blue" style={style.imgStyleLeft} />
-
           <TextInput
             style={style.inputText}
             value={register.password}
             onChangeText={(value) => dispatch(setPassword(value))}
             placeholder="Enter your password"
             placeholderTextColor="black"
+            secureTextEntry
           />
-
           <Icon name="eye" size={15} color="#000" style={style.imgStyleLeft} />
         </View>
         <View style={style.inputView}>
           <Icon name="lock" size={18} color="blue" style={style.imgStyleLeft} />
-
           <TextInput
             style={style.inputText}
-            value={register.confirmPassword}
-            onChangeText={(value) => dispatch(setConfirmPassword(value))}
-            placeholder="Confirm your password"
+            value={confirmPassword}
+            onChangeText={setConfirmPassword}
+            placeholder="Enter your confirm password"
             placeholderTextColor="black"
+            secureTextEntry
           />
-
           <Icon name="eye" size={15} color="#000" style={style.imgStyleLeft} />
         </View>
       </View>
-
       <View style={style.buttonView}>
-        <Pressable
-          style={style.buttonLogin}
-          onPress={() => navigation.navigate("Login")}
-        >
+        <Pressable style={style.buttonLogin} onPress={onNextInput}>
           <Text style={style.text}>Register</Text>
         </Pressable>
-
         <View style={style.viewVia}>
           <Text style={style.orVia}> Or Via Social Media </Text>
         </View>
-
         <View style={style.btnContainer}>
           <MyButton imgUrl={ICGoogle} />
           <MyButton imgUrl={ICFacebook} />
           <MyButton imgUrl={ICTwitter} />
         </View>
       </View>
-
       <Text style={style.accountText}>
         Already have an account?{" "}
-        <Text
-          style={style.linkRegister}
-          onPress={() => navigation.navigate("Login")}
-        >
+        <Text style={style.linkRegister} onPress={() => navigation.navigate("Login")}>
           Login Now
         </Text>
       </Text>
-
       <Text style={style.accountText}>
         By signing up, you are agree with our{" "}
-        <Text
-          style={style.linkRegister}
-          onPress={() => navigation.navigate("Home")}
-        >
+        <Text style={style.linkRegister} onPress={() => navigation.navigate("Home")}>
           Terms & Conditions
         </Text>
       </Text>
@@ -211,7 +173,7 @@ const style = StyleSheet.create({
   },
   inputView: {
     gap: 10,
-    width: "150%",
+    width: "90%",
     flexDirection: "row",
     alignItems: "center",
     marginBottom: 20,
