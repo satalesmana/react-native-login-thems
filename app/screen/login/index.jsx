@@ -8,7 +8,10 @@ import {
   Pressable,
   Image,
   ScrollView,
+  ActivityIndicator,
+  Alert
 } from "react-native";
+import ApiLib from "../../lib/ApiLib";
 import Icon from "react-native-vector-icons/FontAwesome";
 
 import { ICGoogle, ICFacebook, ICTwitter } from "../../../assets";
@@ -17,8 +20,60 @@ import { MyButton } from "../../components";
 const windowWidth = Dimensions.get("window").width;
 
 export default function LoginScreen({ navigation }) {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, onChangeEmail] = React.useState("");
+  const [password, onChangePassword] = React.useState("");
+  const [loading, setLoading] = React.useState(false); // Changed from "false" to false
+
+  const onSubmitLogin = async () => {
+    setLoading(true);
+    try {
+      if (email.trim().length === 0) {
+        throw Error("Email is required");
+      }
+
+      if (password.trim().length === 0) {
+        throw Error("Password is required");
+      }
+
+      const res = await ApiLib.post("/action/findOne", {
+        dataSource: "Cluster0",
+        database: "uasghw",
+        collection: "users",
+        filter: {
+          email: email,
+          password: password,
+        },
+      });
+
+      setLoading(false);
+      if (res.data.document != null) {
+        navigation.replace("Dashboard");
+      } else {
+        Alert.alert("Error", "Username & password tidak sesuai", [
+          {
+            text: "OK",
+            onPress: () => {
+              console.log("ERR");
+            },
+          },
+        ]);
+      }
+    } catch (err) {
+      setLoading(false);
+      Alert.alert("Error", err.message, [
+        {
+          text: "OK",
+          onPress: () => {
+            console.log("ERR");
+          },
+        },
+      ]);
+    }
+  };
+
+  const onRegister = () => {
+    navigation.navigate("Register");
+  };
 
   return (
     <ScrollView contentContainerStyle={style.container}>
@@ -36,7 +91,9 @@ export default function LoginScreen({ navigation }) {
           />
           <TextInput
             style={style.inputText}
-            placeholder="Enter your email or username"
+            onChangeText={onChangeEmail}
+            value={email}
+            placeholder="Enter your email"
             placeholderTextColor="black"
           />
           <Icon
@@ -50,6 +107,8 @@ export default function LoginScreen({ navigation }) {
           <Icon name="lock" size={18} color="blue" style={style.imgStyleLeft} />
           <TextInput
             style={style.inputText}
+            onChangeText={onChangePassword}
+            value={password}
             placeholder="Enter your password"
             placeholderTextColor="black"
           />
@@ -60,11 +119,13 @@ export default function LoginScreen({ navigation }) {
         <Text style={style.forgotPassword}>Forgot Password?</Text>
       </View>
       <View style={style.buttonView}>
-        <Pressable
-          style={style.buttonLogin}
-          onPress={() => navigation.navigate("Login")}
-        >
-          <Text style={style.text}>Login</Text>
+        <Pressable disabled={loading} style={style.buttonLogin} onPress={onSubmitLogin}>
+          {/* Use conditional rendering to show either button or activity indicator */}
+          {loading ? (
+            <ActivityIndicator size="small" color="white" />
+          ) : (
+            <Text style={style.text}>Login</Text>
+          )}
         </Pressable>
         <View style={style.viewVia}>
           <Text style={style.orVia}> Or Via Social Media </Text>
@@ -78,14 +139,11 @@ export default function LoginScreen({ navigation }) {
 
       <Text style={style.accountText}>
         Don't have an account?{" "}
-        <Text
-          style={style.linkRegister}
-          onPress={() => navigation.navigate("Register")}
-        >
+        <Text style={style.linkRegister} onPress={onRegister}>
           Register Now
         </Text>
       </Text>
-      <Text style={style.accountText}>
+      {/* <Text style={style.accountText}>
         By signing up, you are agree with our{" "}
         <Text
           style={style.linkRegister}
@@ -93,11 +151,10 @@ export default function LoginScreen({ navigation }) {
         >
           Terms & Conditions
         </Text>
-      </Text>
+      </Text> */}
     </ScrollView>
   );
 }
-
 const style = StyleSheet.create({
   container: {
     flexGrow: 1,
@@ -124,7 +181,7 @@ const style = StyleSheet.create({
   },
   inputView: {
     gap: 10,
-    width: "150%",
+    width: "90%",
     flexDirection: "row",
     alignItems: "center",
     marginBottom: 20,
