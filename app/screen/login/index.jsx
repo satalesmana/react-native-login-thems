@@ -9,6 +9,7 @@ import {
   Image,
   ScrollView,
   ActivityIndicator,
+  Alert
 } from "react-native";
 import ApiLib from "../../lib/ApiLib";
 import Icon from "react-native-vector-icons/FontAwesome";
@@ -21,7 +22,8 @@ const windowWidth = Dimensions.get("window").width;
 export default function LoginScreen({ navigation }) {
   const [email, onChangeEmail] = React.useState("");
   const [password, onChangePassword] = React.useState("");
-  const [loading, setLoading] = React.useState("false");
+  const [loading, setLoading] = React.useState(false); // Changed from "false" to false
+
   const onSubmitLogin = async () => {
     setLoading(true);
     try {
@@ -29,7 +31,7 @@ export default function LoginScreen({ navigation }) {
         throw Error("Email is required");
       }
 
-      if (pasword.trim().length === 0) {
+      if (password.trim().length === 0) {
         throw Error("Password is required");
       }
 
@@ -45,9 +47,9 @@ export default function LoginScreen({ navigation }) {
 
       setLoading(false);
       if (res.data.document != null) {
-        navigation.replace("Home");
+        navigation.replace("Dashboard");
       } else {
-        Alert.alert("Error", "Username & password tidak sesuai", [
+        Alert.alert("Error", "Username & Pass tidak sesuai", [
           {
             text: "OK",
             onPress: () => {
@@ -72,14 +74,6 @@ export default function LoginScreen({ navigation }) {
   const onRegister = () => {
     navigation.navigate("Register");
   };
-
-  // if (loading) {
-  //   return (
-  //     <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-  //       <ActivityIndicator size="small" color="#0000ff" />
-  //     </View>
-  //   );
-  // }
 
   return (
     <ScrollView contentContainerStyle={style.container}>
@@ -125,8 +119,13 @@ export default function LoginScreen({ navigation }) {
         <Text style={style.forgotPassword}>Forgot Password?</Text>
       </View>
       <View style={style.buttonView}>
-        <Pressable style={style.buttonLogin} onPress={onSubmitLogin}>
-          <Text style={style.text}>Login</Text>
+        <Pressable disabled={loading} style={style.buttonLogin} onPress={onSubmitLogin}>
+          {/* Use conditional rendering to show either button or activity indicator */}
+          {loading ? (
+            <ActivityIndicator size="small" color="white" />
+          ) : (
+            <Text style={style.text}>Login</Text>
+          )}
         </Pressable>
         <View style={style.viewVia}>
           <Text style={style.orVia}> Or Via Social Media </Text>
@@ -156,7 +155,6 @@ export default function LoginScreen({ navigation }) {
     </ScrollView>
   );
 }
-
 const style = StyleSheet.create({
   container: {
     flexGrow: 1,
@@ -183,7 +181,7 @@ const style = StyleSheet.create({
   },
   inputView: {
     gap: 10,
-    width: "150%",
+    width: "90%",
     flexDirection: "row",
     alignItems: "center",
     marginBottom: 20,
