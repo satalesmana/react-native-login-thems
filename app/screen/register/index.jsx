@@ -189,6 +189,6 @@ import {
       flex: 1,
       flexDirection: 'row',
       justifyContent: 'center',
-      padding: 30
+      padding: 25
     }
   })
