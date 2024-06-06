@@ -114,7 +114,7 @@ const style = StyleSheet.create({
     height: 40,
     marginTop: 5,
     padding: 10,
-    borderBottom: 'black',
+    borderBottom: 'tomato',
     borderBottomWidth: StyleSheet.hairlineWidth
   },
   textForgot: {
