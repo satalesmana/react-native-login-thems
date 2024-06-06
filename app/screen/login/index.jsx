@@ -6,29 +6,36 @@ import {
   TouchableOpacity,
   Dimensions,
   ScrollView,
-  Alert
+  Alert,
+  ActivityIndicator
 } from 'react-native';
 import { MyButton } from '../../components'
 import { ICFacebook, ICGoogle, ICApple } from '../../../assets'
-import React from 'react'
+import React, { useState } from 'react'
 
 const windowWidth = Dimensions.get('window').width;
 
 export default function LoginScreen({ navigation }) {
   const [email, onChangeEmail] = React.useState('')
-  const [pasword, onChangePassword] = React.useState('')
+  const [password, onChangePassword] = React.useState('')
+  const [loading, setLoading] = useState(false)
 
-  const onSubmitLogin = () => {
+  const onSubmitLogin = async () => {
     try {
       if (email.trim().length === 0) {
         throw Error('Email is required')
       }
 
-      if (pasword.trim().length === 0) {
+      if (password.trim().length === 0) {
         throw Error('Password is required')
       }
 
-      navigation.navigate('Home')
+      setLoading(true)
+      // Simulate a login request
+      setTimeout(() => {
+        navigation.navigate('Home')
+        setLoading(false)
+      }, 2000)
     } catch (err) {
       Alert.alert('Error', err.message, [
         {
@@ -38,20 +45,18 @@ export default function LoginScreen({ navigation }) {
         },
       ]);
     }
-
   }
+
   const onSubmitLoginRegis = () => {
     navigation.navigate('Register')
   }
-
 
   return (
     <ScrollView>
       <View>
         <View style={{ width: windowWidth, height: 200 }}>
           <Text style={style.textLoginStyle}>Login Here</Text>
-          <Text style={style.textLoginStyle2}>Welcome back you’ve
-            been missed!</Text>
+          <Text style={style.textLoginStyle2}>Welcome back you’ve been missed!</Text>
         </View>
 
         <View style={style.container}>
@@ -70,7 +75,7 @@ export default function LoginScreen({ navigation }) {
             placeholder='Enter Password'
             placeholderTextColor='gray'
             secureTextEntry={true}
-            value={pasword} />
+            value={password} />
           <Text style={style.textForgot}>Forgot Your Password?</Text>
           <TouchableOpacity onPress={onSubmitLogin} style={style.buttonLogin}>
             <Text style={style.textSignin}>Sign In</Text>
@@ -84,27 +89,49 @@ export default function LoginScreen({ navigation }) {
         <Text style={style.textContinueStyle2}>
           Or continue with
         </Text>
-        
+
         <View style={style.btnContainer}>
-        <View>
-          <MyButton style={style.btnContainer1}
-            imgUrl={ICGoogle} />
-        </View>
-        <View>
-          <MyButton style={style.btnContainer1}
-            imgUrl={ICFacebook} />
-            </View>
-        <View>
-          <MyButton style={style.btnContainer1}
-            imgUrl={ICApple} />
-            </View>
+          <View>
+            <MyButton style={style.btnContainer1}
+              imgUrl={ICGoogle} />
           </View>
+          <View>
+            <MyButton style={style.btnContainer1}
+              imgUrl={ICFacebook} />
+          </View>
+          <View>
+            <MyButton style={style.btnContainer1}
+              imgUrl={ICApple} />
+          </View>
+        </View>
+
+        {loading && (
+          <View style={style.loadingContainer}>
+            <ActivityIndicator size="large" color="#0000ff" />
+            <Text style={style.loadingText}>Loading...</Text>
+          </View>
+        )}
       </View>
     </ScrollView>
   );
 }
 
 const style = StyleSheet.create({
+  loadingContainer: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'rgba(0,0,0,0.5)'
+  },
+  loadingText: {
+    fontSize: 18,
+    color: '#fff',
+    marginTop: 10
+  },
   container: {
     padding: 20
   },

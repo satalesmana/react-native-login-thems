@@ -1,103 +1,110 @@
 import {
-    View,
-    Text,
-    TextInput,
-    StyleSheet,
-    TouchableOpacity,
-    Dimensions,
-    ScrollView,
-    Alert
-  } from 'react-native';
-  import { MyButton } from '../../components'
-  import { ICFacebook, ICGoogle, ICApple } from '../../../assets'
-  import React from 'react'
-  
-  const windowWidth = Dimensions.get('window').width;
-  
-  export default function RegisterScreen({ navigation }) {
-    const [email, onChangeEmail] = React.useState('')
-    const [pasword, onChangePassword] = React.useState('')
-    const [confirm_pasword, onConfirmPassword] = React.useState('')
-  
-    const onSubmitLogin = () => {
-      try {
-        if (email.trim().length === 0) {
-          throw Error('Email is required')
-        }
-  
-        if (pasword.trim().length === 0) {
-          throw Error('Password is required')
-        }
+  View,
+  Text,
+  TextInput,
+  StyleSheet,
+  TouchableOpacity,
+  Dimensions,
+  ScrollView,
+  Alert,
+  ActivityIndicator
+} from 'react-native';
+import { MyButton } from '../../components'
+import { ICFacebook, ICGoogle, ICApple } from '../../../assets'
+import React, { useState } from 'react'
 
-        if (confirm_pasword.trim().length === 0) {
-            throw Error('Password')
-          }
-  
-        navigation.navigate('Login')
-      } catch (err) {
-        Alert.alert('Error', err.message, [
-          {
-            text: 'OK', onPress: () => {
-              console.log('ERR')
-            }
-          },
-        ]);
+const windowWidth = Dimensions.get('window').width;
+
+export default function RegisterScreen({ navigation }) {
+  const [email, onChangeEmail] = React.useState('')
+  const [password, onChangePassword] = React.useState('')
+  const [confirmPassword, onConfirmPassword] = React.useState('')
+  const [loading, setLoading] = useState(false)
+
+  const onSubmitLogin = async () => {
+    try {
+      if (email.trim().length === 0) {
+        throw Error('Email is required')
       }
-  
-    }
 
-    const onSubmitAccount = () => {
+      if (password.trim().length === 0) {
+        throw Error('Password is required')
+      }
+
+      if (confirmPassword.trim().length === 0) {
+        throw Error('Confirm Password is required')
+      }
+
+      setLoading(true)
+      // Simulate a registration request
+      setTimeout(() => {
         navigation.navigate('Login')
+        setLoading(false)
+      }, 2000)
+    } catch (err) {
+      Alert.alert('Error', err.message, [
+        {
+          text: 'OK', onPress: () => {
+            console.log('ERR')
+          }
+        },
+      ]);
     }
-  
-    return (
-      <ScrollView>
-        <View>
-          <View style={{ width: windowWidth, height: 200 }}>
-            <Text style={style.textLoginStyle}>Create Account</Text>
-            <Text style={style.textLoginStyle2}>Create an account so you can explore all the existing jobs</Text>
-          </View>
-  
-          <View style={style.container}>
-            <Text style={style.textLabel}></Text>
-            <TextInput
-              style={style.textInputStyle}
-              onChangeText={onChangeEmail}
-              placeholder='Email'
-              placeholderTextColor='gray'
-              value={email} />
-  
-            <Text style={[style.textLabel, { marginTop: 10 }]}></Text>
-            <TextInput
-              style={[style.textInputStyle]}
-              onChangeText={onChangePassword}
-              placeholder='Password'
-              secureTextEntry={true}
-              placeholderTextColor='gray'
-              value={pasword} />
-            
-            <Text style={[style.textLabel, { marginTop: 10 }]}></Text>
-            <TextInput
-              style={[style.textInputStyle]}
-              onChangeText={onConfirmPassword}
-              placeholder='Confirm Password'
-              placeholderTextColor='gray'
-              secureTextEntry={true}
-              value={confirm_pasword} />
+  }
 
-            <TouchableOpacity onPress={onSubmitLogin} style={style.buttonLogin}>
-              <Text style={style.textSignin}>Sign In</Text>
-            </TouchableOpacity>
-  
-          </View>
-  
-          <Text onPress={onSubmitAccount} style={style.textContinueStyle}>
-          Already have an account</Text>
-          <Text style={style.textContinueStyle2}>
-            Or continue with
-          </Text>
-          
-          <View style={style.btnContainer}>
+  const onSubmitAccount = () => {
+    navigation.navigate('Login')
+  }
+
+  return (
+    <ScrollView>
+      <View>
+        <View style={{ width: windowWidth, height: 200 }}>
+          <Text style={style.textLoginStyle}>Create Account</Text>
+          <Text style={style.textLoginStyle2}>Create an account so you can explore all the existing jobs</Text>
+        </View>
+
+        <View style={style.container}>
+          <Text style={style.textLabel}></Text>
+          <TextInput
+            style={style.textInputStyle}
+            onChangeText={onChangeEmail}
+            placeholder='Email'
+            placeholderTextColor='gray'
+            value={email} />
+
+          <Text style={[style.textLabel, { marginTop: 10 }]}></Text>
+          <TextInput
+            style={[style.textInputStyle]}
+            onChangeText={onChangePassword}
+            placeholder='Password'
+            secureTextEntry={true}
+            placeholderTextColor='gray'
+            value={password} />
+
+          <Text style={[style.textLabel, { marginTop: 10 }]}></Text>
+          <TextInput
+            style={[style.textInputStyle]}
+            onChangeText={onConfirmPassword}
+            placeholder='Confirm Password'
+            placeholderTextColor='gray'
+            secureTextEntry={true}
+            value={confirmPassword} />
+
+          <TouchableOpacity onPress={onSubmitLogin} style={style.buttonLogin}>
+            <Text style={style.textSignin}>Sign In</Text>
+          </TouchableOpacity>
+
+        </View>
+
+        <Text onPress={onSubmitAccount} style={style.textContinueStyle}>
+          Already have an account
+        </Text>
+        <Text style={style.textContinueStyle2}>
+          Or continue with
+        </Text>
+
+        <View style={style.btnContainer}>
           <View>
             <MyButton style={style.btnContainer1}
               imgUrl={ICGoogle} />
@@ -105,20 +112,42 @@ import {
           <View>
             <MyButton style={style.btnContainer1}
               imgUrl={ICFacebook} />
-              </View>
+          </View>
           <View>
             <MyButton style={style.btnContainer1}
               imgUrl={ICApple} />
-              </View>
-            </View>
+          </View>
         </View>
-      </ScrollView>
-    );
-  }
+
+        {loading && (
+          <View style={style.loadingContainer}>
+            <ActivityIndicator size="large" color="#0000ff" />
+            <Text style={style.loadingText}>Loading...</Text>
+          </View>
+        )}
+      </View>
+    </ScrollView>
+  );
+}
   
   const style = StyleSheet.create({
     container: {
       padding: 20
+    },
+    loadingContainer: {
+      position: 'absolute',
+      top: 0,
+      left: 0,
+      right: 0,
+      bottom: 0,
+      justifyContent: 'center',
+      alignItems: 'center',
+      backgroundColor: 'rgba(0,0,0,0.5)'
+    },
+    loadingText: {
+      fontSize: 18,
+      color: '#fff',
+      marginTop: 10
     },
     textInputStyle: {
       height: 60,
