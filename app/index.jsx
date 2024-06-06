@@ -8,7 +8,6 @@ import {
   RegisterScreen
 } from "./screen"
 const Stack = createNativeStackNavigator();
-
 function App() {
   return (
     <NavigationContainer independent={true}>
