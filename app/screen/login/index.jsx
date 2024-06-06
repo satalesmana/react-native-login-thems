@@ -9,20 +9,75 @@ import {
   Image,
   ScrollView,
 } from "react-native";
-import ApiLib from "../../lib/ApiLib";
 import Icon from "react-native-vector-icons/FontAwesome";
-
 import { ICGoogle, ICFacebook, ICTwitter } from "../../../assets";
 import { MyButton } from "../../components";
-
+import React from "react";
+import ApiLib from "../../lib/ApiLib"
 const windowWidth = Dimensions.get("window").width;
 
 export default function LoginScreen({ navigation }) {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const onSubmitLogin = async()=>{
-    setLoaading(true)
+  // const [username, setUsername] = useState("");
+  // const [password, setPassword] = useState("");
+  const [email, onChangeEmail] = React.useState('')
+  const [password, onChangePassword] = React.useState('')
+  const [loading, setLoading] = React.useState(false)
+  const onSubmitLogin =async ()=>{
+    setLoading(true)
+    try{
+      if(email.trim().length === 0 ){
+        throw Error('Email is required')
+      }
+
+      if(pasword.trim().length === 0 ){
+        throw Error('Password is required')
+      }
+
+      const res =  await ApiLib.post('/action/findOne',{
+              "dataSource": "Cluster0",
+              "database": "uasghw",
+              "collection": "users",
+              "filter": {
+                "email": email,
+                "password": pasword
+              }
+          }
+      )
+      setLoading(false)
+      if(res.data.document != null){
+        navigation.replace("Home")
+      }else{
+        Alert.alert('Error', "Username & password tidak sesuai", [
+          {text: 'OK', onPress: () => {
+            console.log('ERR')
+          }},
+        ]);
+      }
+      
+
+    }catch(err){
+      setLoading(false)
+      Alert.alert('Error', err.message, [
+        {text: 'OK', onPress: () => {
+          console.log('ERR')
+        }},
+      ]);
+    }
   }
+
+
+  const onRegister=()=>{
+    navigation.navigate("Welcome")
+  }
+
+  if (loading) {
+    return (
+      <View style={{ flex:1, justifyContent: 'center', alignItems: 'center'}}>
+        <ActivityIndicator size="large" color="#0000ff" />
+      </View>
+    )
+  }
+
   return (
     <ScrollView contentContainerStyle={style.container}>
       <Text style={style.welcomeBack}>Welcome Back!</Text>
@@ -38,7 +93,7 @@ export default function LoginScreen({ navigation }) {
             style={style.imgStyleLeft}
           />
           <TextInput
-            style={style.inputText}
+            style={style.inputText}onChangeText={onChangeEmail}
             placeholder="Enter your email or username"
             placeholderTextColor="black"
           />
@@ -52,7 +107,7 @@ export default function LoginScreen({ navigation }) {
         <View style={style.inputView}>
           <Icon name="lock" size={18} color="blue" style={style.imgStyleLeft} />
           <TextInput
-            style={style.inputText}
+            style={style.inputText}onChangeText={onChangePassword}
             placeholder="Enter your password"
             placeholderTextColor="black"
           />

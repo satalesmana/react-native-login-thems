@@ -1,7 +1,7 @@
 import * as React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { LoginScreen, HomeScreen, RegisterScreen } from "./screen";
+import { LoginScreen, HomeScreen, RegisterScreen, WelcomeScreen} from "./screen";
 import store from "./store";
 import { Provider } from "react-redux";
 
@@ -21,6 +21,11 @@ function App() {
             options={{ headerShown: false }}
             name="Login"
             component={LoginScreen}
+          />
+           <Stack.Screen
+            options={{ headerShown: false }}
+            name="Welcome"
+            component={WelcomeScreen}
           />
           <Stack.Screen
             options={{ headerShown: false }}
