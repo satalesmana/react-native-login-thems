@@ -6,7 +6,7 @@ export default function HomeScreen(){
         style={{ flex: 1, alignIems: 'center',
             justifyContent: 'center'
         }}>
-            <Text>Home Screen</Text>
+            <Text style={[{justifyContent:'center'}]}>Home Screen</Text>
         </View> 
     );
 }
