@@ -1,8 +1,9 @@
-import { View, Text, TextInput, StyleSheet, ScrollView, Alert, Dimensions, TouchableOpacity } from 'react-native';
+import { View, Text, TextInput, StyleSheet, ScrollView, Alert, Dimensions, TouchableOpacity,  ActivityIndicator } from 'react-native';
 import { MyButton, MyButton2 } from '../../components/my_button'
 import { ICGoogle } from '../../../assets'
 import React, { useState } from 'react'
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import ApiLib from "../../lib/Apilib"
 
 const windowWidth = Dimensions.get('window').width;
 
@@ -10,11 +11,13 @@ export default function LoginScreen({ navigation }) {
     const [email, onChangeEmail] = React.useState('')
     const [password, setPassword] = useState("");
     const [showPassword, setShowPassword] = useState(false);
+    const [loading, setLoading] = React.useState(false);
     const toogleShowPassword = () => {
         setShowPassword(!showPassword);
     };
 
-    const onSubmitLogin = () => {
+    const onSubmitLogin =async () => {
+        setLoading(true)
         try {
             if (email.trim().length === 0) {
                 throw Error('Harap masukkan email anda')
@@ -23,21 +26,52 @@ export default function LoginScreen({ navigation }) {
                 throw Error('Harap masukkan password anda')
             }
 
+            const res =  await ApiLib.post('/action/findOne',{
+                "dataSource": "Cluster0",
+                "database": "lp3i-mobile",
+                "collection": "users",
+                "filter": {
+                  "email": email,
+                  "password": password
+                }
+            }
+        )
+        setLoading(false)
+      if(res.data.document != null){
+        navigation.replace("Home")
+      }else{
+        Alert.alert('Error', "Username & password tidak sesuai", [
+          {text: 'OK', onPress: () => {
+            console.log('ERR')
+          }},
+        ]);
+      }
+
             navigation.navigate('home')
         } catch (err) {
-            Alert.alert('Error', err.message, [
-                {
-                    text: 'OK', onPress: () => {
-                        console.log('ERR')
-                    }
-                },
-            ]);
+            setLoading(false)
+            alert('Sallah')
+            // Alert.alert('Error', err.message, [
+            //     {
+            //         text: 'OK', onPress: () => {
+            //             console.log('ERR')
+            //         }
+            //     },
+            // ]);
         }
     }
 
     const onChangePass = () => {
         navigation.navigate("#")
     }
+
+    if (loading) {
+        return (
+          <View style={{ flex:1, justifyContent: 'center', alignItems: 'center'}}>
+            <ActivityIndicator size="large" color="#0000ff" />
+          </View>
+        )
+      }
 
     return (
         <ScrollView>
