@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { Provider } from 'react-redux';
 import{
   MenuScreen,
   LoginScreen,
@@ -11,6 +12,7 @@ const Stack = createNativeStackNavigator();
 
 function App() {
   return (
+    <Provider store={store}>
     <NavigationContainer independent={true}>
       <Stack.Navigator initialRouteName="menu">
         <Stack.Screen name="menu" options={{headerShown:false}} component={MenuScreen} />
@@ -19,6 +21,7 @@ function App() {
         <Stack.Screen name="register" options={{headerShown:false}} component={RegisterInputFormScreen} />
       </Stack.Navigator>
     </NavigationContainer>
+    </Provider>
   );
 }
 
