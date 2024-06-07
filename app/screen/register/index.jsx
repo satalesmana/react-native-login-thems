@@ -4,6 +4,7 @@ import { ICGoogle } from '../../../assets';
 import React, { useState } from "react";
 const windowWidth = Dimensions.get('window').width;
 
+
 export default function RegisterScreen({navigation}){
     const [nama, onChangeNama] = React.useState('')
     const [email, onChangeEmail] = React.useState('')
