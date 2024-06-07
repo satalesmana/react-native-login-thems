@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "lp3i-mobile-app",
-    "slug": "lp3i-mobile-app",
+    "name": "react-native-login-thems",
+    "slug": "react-native-login-thems",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
