@@ -89,8 +89,8 @@ const style = StyleSheet.create({
   },
   viewVia: {
     alignContent: "center",
-    marginTop: 35,
-    marginBottom: 15,
+    marginTop: 50,
+    marginBottom: 2,
     textAlign: "center",
     justifyContent: "center",
   },

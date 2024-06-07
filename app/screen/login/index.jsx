@@ -9,10 +9,10 @@ import {
   Image,
   ScrollView,
   ActivityIndicator,
-  Alert
+  Alert,
 } from "react-native";
 import ApiLib from "../../lib/ApiLib";
-import Icon from "react-native-vector-icons/FontAwesome";
+import Icon from "react-native-vector-icons/Feather";
 
 import { ICGoogle, ICFacebook, ICTwitter } from "../../../assets";
 import { MyButton } from "../../components";
@@ -23,6 +23,11 @@ export default function LoginScreen({ navigation }) {
   const [email, onChangeEmail] = React.useState("");
   const [password, onChangePassword] = React.useState("");
   const [loading, setLoading] = React.useState(false); // Changed from "false" to false
+  const [showPass, setShowPassword] = React.useState(true);
+
+  const handleShowPassword = () => {
+    setShowPassword(!showPass);
+  };
 
   const onSubmitLogin = async () => {
     setLoading(true);
@@ -83,12 +88,7 @@ export default function LoginScreen({ navigation }) {
       </View>
       <View style={style.inputContainer}>
         <View style={style.inputView}>
-          <Icon
-            name="envelope"
-            size={15}
-            color="blue"
-            style={style.imgStyleLeft}
-          />
+          <Icon name="mail" size={20} color="blue" style={style.imgStyleLeft} />
           <TextInput
             style={style.inputText}
             onChangeText={onChangeEmail}
@@ -98,28 +98,47 @@ export default function LoginScreen({ navigation }) {
           />
           <Icon
             name="check"
-            size={18}
+            size={22}
             color="blue"
-            style={(style.imgStyleRight, { marginRight: 2 })}
+            style={(style.imgStyleRight, { marginRight: -2 })}
           />
         </View>
-        <View style={style.inputView}>
-          <Icon name="lock" size={18} color="blue" style={style.imgStyleLeft} />
+        <View
+          style={{
+            gap: 10,
+            width: "90%",
+            flexDirection: "row",
+            alignItems: "center",
+            marginBottom: 10,
+          }}
+        >
+          <Icon name="lock" size={20} color="blue" style={style.imgStyleLeft} />
           <TextInput
             style={style.inputText}
             onChangeText={onChangePassword}
             value={password}
             placeholder="Enter your password"
             placeholderTextColor="black"
+            secureTextEntry={showPass}
           />
-          <Icon name="eye" size={15} color="#000" style={style.imgStyleLeft} />
+          <Icon
+            name={showPass === true ? "eye-off" : "eye"}
+            size={20}
+            color="#000"
+            style={style.imgStyleLeft}
+            onPress={() => handleShowPassword()}
+          />
         </View>
       </View>
       <View style={style.forgotView}>
         <Text style={style.forgotPassword}>Forgot Password?</Text>
       </View>
       <View style={style.buttonView}>
-        <Pressable disabled={loading} style={style.buttonLogin} onPress={onSubmitLogin}>
+        <Pressable
+          disabled={loading}
+          style={style.buttonLogin}
+          onPress={onSubmitLogin}
+        >
           {/* Use conditional rendering to show either button or activity indicator */}
           {loading ? (
             <ActivityIndicator size="small" color="white" />
@@ -159,8 +178,8 @@ const style = StyleSheet.create({
   container: {
     flexGrow: 1,
     alignItems: "center",
-    paddingTop: 80,
-    paddingBottom: 25,
+    paddingTop: 50,
+    paddingBottom: 35,
   },
   welcomeBack: {
     fontSize: 22,
@@ -168,11 +187,11 @@ const style = StyleSheet.create({
     textAlign: "center",
     fontFamily: "Roboto",
     color: "rgba(29,34,38,1)",
-    marginBottom: 25,
+    marginBottom: 20,
   },
   brandStyle: {
-    marginTop: 50,
-    marginBottom: 70,
+    marginTop: 25,
+    marginBottom: 50,
     alignItems: "center",
   },
   inputContainer: {
@@ -184,7 +203,7 @@ const style = StyleSheet.create({
     width: "90%",
     flexDirection: "row",
     alignItems: "center",
-    marginBottom: 20,
+    marginBottom: 35,
   },
   imgStyleLeft: {
     width: 20,
@@ -206,7 +225,7 @@ const style = StyleSheet.create({
     alignSelf: "flex-end",
     marginRight: 55,
     marginTop: 2,
-    marginBottom: 20,
+    marginBottom: 50,
   },
   forgotPassword: {
     color: "black",
@@ -235,8 +254,8 @@ const style = StyleSheet.create({
   },
   viewVia: {
     alignContent: "center",
-    marginTop: 35,
-    marginBottom: 15,
+    marginTop: 50,
+    marginBottom: 2,
     textAlign: "center",
     justifyContent: "center",
   },
@@ -249,7 +268,7 @@ const style = StyleSheet.create({
   btnContainer: {
     flexDirection: "row",
     paddingHorizontal: 125,
-    paddingBottom: 20,
+    paddingBottom: 50,
   },
   accountText: {
     color: "black",

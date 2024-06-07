@@ -9,7 +9,7 @@ import {
   ScrollView,
   Alert,
 } from "react-native";
-import Icon from "react-native-vector-icons/FontAwesome";
+import Icon from "react-native-vector-icons/Feather";
 import { useSelector, useDispatch } from "react-redux";
 import {
   setFirstName,
@@ -25,6 +25,15 @@ export default function RegisterScreen({ navigation }) {
   const [confirmPassword, setConfirmPassword] = useState("");
   const register = useSelector((state) => state.register.formInput);
   const dispatch = useDispatch();
+  const [showPass, setShowPassword] = React.useState(true);
+  const [showConfPass, setShowConfPassword] = React.useState(true);
+
+  const handleShowPassword = () => {
+    setShowPassword(!showPass);
+  };
+  const handleShowConfPassword = () => {
+    setShowConfPassword(!showConfPass);
+  };
 
   const onNextInput = () => {
     try {
@@ -32,7 +41,8 @@ export default function RegisterScreen({ navigation }) {
       if (!register.email) throw Error("Email is required");
       if (!register.password) throw Error("Password is required");
       if (!confirmPassword) throw Error("Confirm Password is required");
-      if (confirmPassword !== register.password) throw Error("Confirm password doesn't match");
+      if (confirmPassword !== register.password)
+        throw Error("Confirm password doesn't match");
 
       const message = `Name : ${register.firstName}\nEmail : ${register.email}\nPassword : ${register.password}\n`;
 
@@ -71,7 +81,7 @@ export default function RegisterScreen({ navigation }) {
       </View>
       <View style={style.inputContainer}>
         <View style={style.inputView}>
-          <Icon name="envelope" size={15} color="blue" style={style.imgStyleLeft} />
+          <Icon name="user" size={20} color="blue" style={style.imgStyleLeft} />
           <TextInput
             style={style.inputText}
             value={register.firstName}
@@ -79,10 +89,16 @@ export default function RegisterScreen({ navigation }) {
             placeholder="Enter your name"
             placeholderTextColor="black"
           />
-          <Icon name="check" size={18} color="blue" style={[style.imgStyleRight, { marginRight: 2 }]} />
+          <Icon
+            name="check"
+            size={22}
+            color="blue"
+            style={(style.imgStyleRight, { marginRight: -2 })}
+          />
         </View>
         <View style={style.inputView}>
-          <Icon name="envelope" size={15} color="blue" style={style.imgStyleLeft} />
+          <Icon name="mail" size={20} color="blue" style={style.imgStyleLeft} />
+
           <TextInput
             style={style.inputText}
             value={register.email}
@@ -90,7 +106,12 @@ export default function RegisterScreen({ navigation }) {
             placeholder="Enter your email"
             placeholderTextColor="black"
           />
-          <Icon name="check" size={18} color="blue" style={[style.imgStyleRight, { marginRight: 2 }]} />
+          <Icon
+            name="check"
+            size={22}
+            color="blue"
+            style={(style.imgStyleRight, { marginRight: -2 })}
+          />
         </View>
         <View style={style.inputView}>
           <Icon name="lock" size={18} color="blue" style={style.imgStyleLeft} />
@@ -100,21 +121,41 @@ export default function RegisterScreen({ navigation }) {
             onChangeText={(value) => dispatch(setPassword(value))}
             placeholder="Enter your password"
             placeholderTextColor="black"
-            secureTextEntry
+            secureTextEntry={showPass}
           />
-          <Icon name="eye" size={15} color="#000" style={style.imgStyleLeft} />
+          <Icon
+            name={showPass === true ? "eye-off" : "eye"}
+            size={20}
+            color="#000"
+            style={style.imgStyleLeft}
+            onPress={() => handleShowPassword()}
+          />
         </View>
-        <View style={style.inputView}>
-          <Icon name="lock" size={18} color="blue" style={style.imgStyleLeft} />
+        <View
+          style={{
+            gap: 10,
+            width: "90%",
+            flexDirection: "row",
+            alignItems: "center",
+            marginBottom: 10,
+          }}
+        >
+          <Icon name="lock" size={20} color="blue" style={style.imgStyleLeft} />
           <TextInput
             style={style.inputText}
             value={confirmPassword}
             onChangeText={setConfirmPassword}
             placeholder="Enter your confirm password"
             placeholderTextColor="black"
-            secureTextEntry
+            secureTextEntry={showConfPass}
           />
-          <Icon name="eye" size={15} color="#000" style={style.imgStyleLeft} />
+          <Icon
+            name={showConfPass === true ? "eye-off" : "eye"}
+            size={20}
+            color="#000"
+            style={style.imgStyleLeft}
+            onPress={() => handleShowConfPassword()}
+          />
         </View>
       </View>
       <View style={style.buttonView}>
@@ -132,13 +173,19 @@ export default function RegisterScreen({ navigation }) {
       </View>
       <Text style={style.accountText}>
         Already have an account?{" "}
-        <Text style={style.linkRegister} onPress={() => navigation.navigate("Login")}>
+        <Text
+          style={style.linkRegister}
+          onPress={() => navigation.navigate("Login")}
+        >
           Login Now
         </Text>
       </Text>
       <Text style={style.accountText}>
         By signing up, you are agree with our{" "}
-        <Text style={style.linkRegister} onPress={() => navigation.navigate("Home")}>
+        <Text
+          style={style.linkRegister}
+          onPress={() => navigation.navigate("Home")}
+        >
           Terms & Conditions
         </Text>
       </Text>
@@ -150,8 +197,8 @@ const style = StyleSheet.create({
   container: {
     flexGrow: 1,
     alignItems: "center",
-    paddingTop: 80,
-    paddingBottom: 20,
+    paddingTop: 50,
+    paddingBottom: 35,
   },
   welcomeBack: {
     fontSize: 22,
@@ -162,8 +209,8 @@ const style = StyleSheet.create({
     marginBottom: 20,
   },
   brandStyle: {
-    marginTop: 50,
-    marginBottom: 70,
+    marginTop: 25,
+    marginBottom: 50,
     alignItems: "center",
   },
   inputContainer: {
