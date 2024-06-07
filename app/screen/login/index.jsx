@@ -60,7 +60,7 @@ export default function LoginScreen({navigation}){
                     </View>
                     <View style={style.buttonStyle}>
                     <Button
-                        onPress={() => navigation.navigate('Register')}
+                        onPress={() => navigation.navigate('Home')}
                          color='#0000FF'
                         title="Login"/>
                          <Text style={{textAlign:'center',marginTop:20}}>──────── Or Sign in with  ────────</Text>
