@@ -20,8 +20,9 @@ export default function RegisterInputFormScreen(){
             </View>
 
 <View style={style.containerInput}>
+<View style={style.container2}>
     <CustomeInput label="First Name"/>
-    <CustomeInput style={[{marginLeft:20}]} label="Last Name"/>
+    <CustomeInput label="Last Name"/></View>
     <CustomeInput label="E-mail"/>
     <CustomeInput label="Password"/> <Text style={style.note}>must contain 8 char.</Text>
     <CustomeInput label="Confirm Password"/>
@@ -48,6 +49,10 @@ const style = StyleSheet.create({
         marginTop: -200,
         marginBottom:20,
         padding:20
+    },
+    container2:{
+        flexDirection:'row',
+        justifyContent:'space-between'
     },
     note:{
         color:"#929694"

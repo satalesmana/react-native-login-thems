@@ -31,7 +31,7 @@ return(
 </View>
 </View>
 </ScrollView>
-);
+)
 }
 
 const style= StyleSheet.create({
