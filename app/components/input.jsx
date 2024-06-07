@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         padding: 10,
         borderColor:'#929694',
-        borderRadius:15
+        borderRadius:15,
     },
     inputActive:{
         height: 40,
