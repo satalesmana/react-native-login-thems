@@ -1,140 +1,156 @@
+
 import {
   View,
   Text,
-  TextInput,
   StyleSheet,
-  TouchableOpacity,
-  Dimensions,
   ScrollView,
   Alert,
-  ActivityIndicator
-} from 'react-native';
-import { MyButton } from '../../components'
+  TextInput,
+  TouchableOpacity,
+  Dimensions
+} from "react-native";
+import { useState } from 'react'
+import {
+  MyButton
+} from '../../components'
+import { useSelector, useDispatch } from 'react-redux'
+import { setEmail, setPassword, resetRegisterData } from '../../store/reducer/registerReducer'
 import { ICFacebook, ICGoogle, ICApple } from '../../../assets'
-import React, { useState } from 'react'
+import ApiLib from "../../lib/ApiLib"
 
 const windowWidth = Dimensions.get('window').width;
 
-export default function RegisterScreen({ navigation }) {
-  const [email, onChangeEmail] = React.useState('')
-  const [password, onChangePassword] = React.useState('')
-  const [confirmPassword, onConfirmPassword] = React.useState('')
-  const [loading, setLoading] = useState(false)
+export default function RegisterInputScreen({ navigation }) {
+  const [confirmPassword, setConfirmPassword] = useState(null)
+  const register = useSelector((state) => state.register.formInput)
+  const dispatch = useDispatch()
 
-  const onSubmitLogin = async () => {
-    try {
-      if (email.trim().length === 0) {
-        throw Error('Email is required')
-      }
-
-      if (password.trim().length === 0) {
-        throw Error('Password is required')
-      }
-
-      if (confirmPassword.trim().length === 0) {
-        throw Error('Confirm Password is required')
-      }
-
-      setLoading(true)
-      // Simulate a registration request
-      setTimeout(() => {
-        navigation.navigate('Login')
-        setLoading(false)
-      }, 2000)
-    } catch (err) {
-      Alert.alert('Error', err.message, [
-        {
-          text: 'OK', onPress: () => {
-            console.log('ERR')
+  const onNextInput = () => {
+      try {
+          if (register.email === null || register.email === "") {
+              throw Error('Email is required')
           }
-        },
-      ]);
-    }
-  }
+          if (register.password === null || register.password === "") {
+              throw Error('password is required')
+          }
 
-  const onSubmitAccount = () => {
-    navigation.navigate('Login')
+          if (confirmPassword === null || confirmPassword === "") {
+              throw Error('Confirm password is required')
+          }
+
+          let 
+          message = `Email : ${register.email} \n`
+
+          Alert.alert('Confirm', message, [
+              {
+                  text: 'Cancel',
+                  onPress: () => console.log('Cancel Pressed'),
+                  style: 'cancel',
+              }, {
+                  text: 'Submit', onPress: async () => {
+                      const res = await ApiLib.post('/action/insertOne',
+                          {
+                              "dataSource": "Cluster0",
+                              "database": "lp3i_app",
+                              "collection": "users",
+                              "document": register
+                          }
+                      )
+
+                      if (res.data?.insertedId) {
+                          dispatch(resetRegisterData())
+                          navigation.navigate("Login")
+                      }
+
+                  }
+              },
+          ]);
+
+      } catch (err) {
+          Alert.alert('Error', err.message, [
+              {
+                  text: 'OK', onPress: () => {
+                      console.log('ERR')
+                  }
+              },
+          ]);
+      }
+
+
   }
 
   return (
-    <ScrollView>
-      <View>
-        <View style={{ width: windowWidth, height: 200 }}>
-          <Text style={style.textLoginStyle}>Create Account</Text>
-          <Text style={style.textLoginStyle2}>Create an account so you can explore all the existing jobs</Text>
-        </View>
-
-        <View style={style.container}>
-          <Text style={style.textLabel}></Text>
-          <TextInput
-            style={style.textInputStyle}
-            onChangeText={onChangeEmail}
-            placeholder='Email'
-            placeholderTextColor='gray'
-            value={email} />
-
-          <Text style={[style.textLabel, { marginTop: 10 }]}></Text>
-          <TextInput
-            style={[style.textInputStyle]}
-            onChangeText={onChangePassword}
-            placeholder='Password'
-            secureTextEntry={true}
-            placeholderTextColor='gray'
-            value={password} />
-
-          <Text style={[style.textLabel, { marginTop: 10 }]}></Text>
-          <TextInput
-            style={[style.textInputStyle]}
-            onChangeText={onConfirmPassword}
-            placeholder='Confirm Password'
-            placeholderTextColor='gray'
-            secureTextEntry={true}
-            value={confirmPassword} />
-
-          <TouchableOpacity onPress={onSubmitLogin} style={style.buttonLogin}>
-            <Text style={style.textSignin}>Sign In</Text>
-          </TouchableOpacity>
-
-        </View>
-
-        <Text onPress={onSubmitAccount} style={style.textContinueStyle}>
-          Already have an account
-        </Text>
-        <Text style={style.textContinueStyle2}>
-          Or continue with
-        </Text>
-
-        <View style={style.btnContainer}>
+      <ScrollView>
           <View>
-            <MyButton style={style.btnContainer1}
-              imgUrl={ICGoogle} />
-          </View>
-          <View>
-            <MyButton style={style.btnContainer1}
-              imgUrl={ICFacebook} />
-          </View>
-          <View>
-            <MyButton style={style.btnContainer1}
-              imgUrl={ICApple} />
-          </View>
-        </View>
+              <View style={{ width: windowWidth, height: 200 }}>
+                  <Text style={style.textLoginStyle}>Create Account</Text>
+                  <Text style={style.textLoginStyle2}>Create an account so you can explore all the existing jobs</Text>
+              </View>
 
-        {loading && (
-          <View style={style.loadingContainer}>
-            <ActivityIndicator size="large" color="#0000ff" />
-            <Text style={style.loadingText}>Loading...</Text>
+              <View style={style.container}>
+                  <Text style={style.textLabel}></Text>
+                  <TextInput
+                      style={style.textInputStyle}
+                      onChangeText={(value) => dispatch(setEmail(value))}
+                      placeholder='Email'
+                      placeholderTextColor='gray'
+                      value={register.email} />
+
+                  <Text style={[style.textLabel, { marginTop: 10 }]}></Text>
+                  <TextInput
+                      style={[style.textInputStyle]}
+                      onChangeText={(value) => dispatch(setPassword(value))}
+                      placeholder='Password'
+                      secureTextEntry={true}
+                      placeholderTextColor='gray'
+                      value={register.password} />
+
+                  <Text style={[style.textLabel, { marginTop: 10 }]}></Text>
+                  <TextInput
+                      style={[style.textInputStyle]}
+                      onChangeText={(value) => setConfirmPassword(value)}
+                      placeholder='Confirm Password'
+                      placeholderTextColor='gray'
+                      secureTextEntry={true}
+                      value={confirmPassword} />
+
+                  <TouchableOpacity onPress={onNextInput} style={style.buttonLogin}>
+                      <Text style={style.textSignin}>Sign In</Text>
+                  </TouchableOpacity>
+
+              </View>
+
+              <Text style={style.textContinueStyle}>
+                  Already have an account
+              </Text>
+              <Text style={style.textContinueStyle2}>
+                  Or continue with
+              </Text>
+
+              <View style={style.btnContainer}>
+                  <View>
+                      <MyButton style={style.btnContainer1}
+                          imgUrl={ICGoogle} />
+                  </View>
+                  <View>
+                      <MyButton style={style.btnContainer1}
+                          imgUrl={ICFacebook} />
+                  </View>
+                  <View>
+                      <MyButton style={style.btnContainer1}
+                          imgUrl={ICApple} />
+                  </View>
+              </View>
           </View>
-        )}
-      </View>
-    </ScrollView>
+      </ScrollView>
   );
 }
-  
-  const style = StyleSheet.create({
-    container: {
+
+const style = StyleSheet.create({
+  container: {
       padding: 20
-    },
-    loadingContainer: {
+  },
+  loadingContainer: {
       position: 'absolute',
       top: 0,
       left: 0,
@@ -143,90 +159,90 @@ export default function RegisterScreen({ navigation }) {
       justifyContent: 'center',
       alignItems: 'center',
       backgroundColor: 'rgba(0,0,0,0.5)'
-    },
-    loadingText: {
+  },
+  loadingText: {
       fontSize: 18,
       color: '#fff',
       marginTop: 10
-    },
-    textInputStyle: {
+  },
+  textInputStyle: {
       height: 60,
       marginTop: 5,
       borderWidth: 1,
       padding: 10,
-      borderRadius:10,
-    },
-    textForgot: {
+      borderRadius: 10,
+  },
+  textForgot: {
       marginTop: 5,
       textAlign: 'right',
-      padding:15,
-      color:'#1F41BB',
-      fontWeight:'bold'
-    },
-    textLoginStyle: {
+      padding: 15,
+      color: '#1F41BB',
+      fontWeight: 'bold'
+  },
+  textLoginStyle: {
       fontSize: 32,
       marginTop: 50,
       fontWeight: 'bold',
       textAlign: 'center',
-      color:'#1F41BB',
-    
-    },
-    textSignin: {
+      color: '#1F41BB',
+
+  },
+  textSignin: {
       textAlign: "center",
       marginVertical: "auto",
       color: "white",
       flex: 1,
       fontSize: 18
-    },
-    buttonLogin: {
+  },
+  buttonLogin: {
       backgroundColor: '#1F41BB',
       height: 60,
       width: '100%',
       alignSelf: "center",
       borderRadius: 10,
       flexDirection: "row",
-      marginTop:40
-    },
-    textLoginStyle2: {
+      marginTop: 40
+  },
+  textLoginStyle2: {
       fontSize: 15,
       marginTop: 25,
       fontWeight: 'bold',
       textAlign: 'center',
-      width:240,
+      width: 240,
       alignSelf: 'center',
-    },
-    brandStyle: {
+  },
+  brandStyle: {
       marginTop: 100,
       alignItems: 'center',
       justifyContent: 'center'
-    },
-    textLabel: {
+  },
+  textLabel: {
       fontSize: 12,
       fontWeight: 'bold'
-    },
-    btnContainer: {
+  },
+  btnContainer: {
       flex: 1,
       flexDirection: 'row',
       justifyContent: 'center',
-      
-    },
-    btnContainer1:{
-      marginRight:15
-    },
-    textContinueStyle: {
+
+  },
+  btnContainer1: {
+      marginRight: 15
+  },
+  textContinueStyle: {
       textAlign: 'center',
       marginBottom: 50
-    },
-    textContinueStyle2: {
+  },
+  textContinueStyle2: {
       textAlign: 'center',
       color: '#1F41BB',
       fontWeight: 'bold',
-      marginBottom:5
-    },
-    containerBottom: {
+      marginBottom: 5
+  },
+  containerBottom: {
       flex: 1,
       flexDirection: 'row',
       justifyContent: 'center',
       padding: 30
-    }
-  })
+  }
+})

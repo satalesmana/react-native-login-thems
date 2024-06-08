@@ -12,6 +12,7 @@ import {
 import { MyButton } from '../../components'
 import { ICFacebook, ICGoogle, ICApple } from '../../../assets'
 import React, { useState } from 'react'
+import ApiLib from "../../lib/ApiLib"
 
 const windowWidth = Dimensions.get('window').width;
 
@@ -29,13 +30,32 @@ export default function LoginScreen({ navigation }) {
       if (password.trim().length === 0) {
         throw Error('Password is required')
       }
-
-      setLoading(true)
+      const res = await ApiLib.post('/action/findOne', {
+        "dataSource": "Cluster0",
+        "database": "lp3i_app",
+        "collection": "users",
+        "filter": {
+          "email": email,
+          "password": password
+        }
+      }
+      )
+      setLoading(false)
       // Simulate a login request
-      setTimeout(() => {
+      if(res.data.document != null){
         navigation.navigate('Home')
-        setLoading(false)
-      }, 2000)
+      }else{
+        Alert.alert('Error', "Username & password tidak sesuai", [
+          {text: 'OK', onPress: () => {
+            console.log('ERR')
+          }},
+        ]);
+      }
+      // setTimeout(() => {
+      //   navigation.navigate('Home')
+      //   setLoading(false)
+      // }, 1000)
+      
     } catch (err) {
       Alert.alert('Error', err.message, [
         {
@@ -140,22 +160,22 @@ const style = StyleSheet.create({
     marginTop: 12,
     borderWidth: 1,
     padding: 10,
-    borderRadius:10,
+    borderRadius: 10,
   },
   textForgot: {
     marginTop: 5,
     textAlign: 'right',
-    padding:15,
-    color:'#1F41BB',
-    fontWeight:'bold'
+    padding: 15,
+    color: '#1F41BB',
+    fontWeight: 'bold'
   },
   textLoginStyle: {
     fontSize: 32,
     marginTop: 50,
     fontWeight: 'bold',
     textAlign: 'center',
-    color:'#1F41BB',
-  
+    color: '#1F41BB',
+
   },
   textSignin: {
     textAlign: "center",
@@ -177,7 +197,7 @@ const style = StyleSheet.create({
     marginTop: 25,
     fontWeight: 'bold',
     textAlign: 'center',
-    width:240,
+    width: 240,
     alignSelf: 'center',
   },
   brandStyle: {
@@ -194,8 +214,8 @@ const style = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
   },
-  btnContainer1:{
-    marginRight:15
+  btnContainer1: {
+    marginRight: 15
   },
   textContinueStyle: {
     textAlign: 'center',
@@ -205,6 +225,6 @@ const style = StyleSheet.create({
     textAlign: 'center',
     color: '#1F41BB',
     fontWeight: 'bold',
-    marginBottom:5
+    marginBottom: 5
   },
 })
