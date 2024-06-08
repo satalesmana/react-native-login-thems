@@ -10,28 +10,71 @@ import {
     ImageBackground
   } from 'react-native';
   import React from 'react'
+  import { useSelector, useDispatch } from 'react-redux'
+import { setEmail } from '../../store/reducer/registerReducer'
+import { setPassword, resetRegisterData } from '../../store/reducer/registerReducer'
+import ApiLib from "../../lib/ApiLib"
+
   const windowWidth = Dimensions.get('window').width;
 
   export default function RegisterScreen({ navigation }) {
-    const [email, onChangeEmail] = React.useState('')
+    const [confirmPassword, setConfirmPassword] = useState(null)
+
+    const register = useSelector((state) => state.register.formInput)
+    const dispatch = useDispatch()
+
+
     const [pasword, onChangePassword] = React.useState('')
     const [confirm_pasword, onConfirmPassword] = React.useState('')
 
     const onSubmitLogin = () => {
       try {
-        if (email.trim().length === 0) {
+        if( register.email === null || register.email === ""){
           throw Error('Email is required')
+      }
+      if( register.password === null || register.password === ""){
+        throw Error('password is required')
+    }
+
+    if( confirmPassword === null ||  confirmPassword === ""){
+        throw Error('Confirm password is required')
+    }
+
+    if( confirmPassword !== register.password){
+        throw Error(`Confirm password doesn't match`)
+    }
+
+    let message  = `Name : ${register.firstName}  ${register.sureName}\n`
+    message += `Email : ${register.email} \n`
+    message += `Gender : ${register.gender} \n`
+    message += `Birth Date : ${register.birthDate} \n`
+
+Alert.alert('Confirm', message, [
+    {
+        text: 'Cancel',
+        onPress: () => console.log('Cancel Pressed'),
+        style: 'cancel',
+    },{
+        text: 'Submit', onPress: async () => {
+           const res =  await ApiLib.post('/action/insertOne',
+                {
+                    "dataSource": "Cluster0",
+                    "database": "app-lp3i-mobile",
+                    "collection": "users",
+                    "document": register
+                }
+            )
+
+            if(res.data?.insertedId){
+                dispatch(resetRegisterData())
+                navigation.navigate("Login")
+            }
+            
         }
+    },
+]);
 
-        if (pasword.trim().length === 0) {
-          throw Error('Password is required')
-        }
-
-        if (confirm_pasword.trim().length === 0) {
-            throw Error('Password')
-          }
-
-        navigation.navigate('Home')
+       
       } catch (err) {
         Alert.alert('Error', err.message, [
           {
@@ -68,7 +111,7 @@ import {
             <Text style={style.textLabel}></Text>
             <TextInput
               style={style.textInputStyle}
-              onChangeText={onChangeEmail}
+              onChangeText={(value)=>dispatch(setEmail(value))}
               placeholder='Email'
               placeholderTextColor='gray'
               value={email} />
@@ -76,7 +119,7 @@ import {
             <Text style={[style.textLabel, { marginTop: 10 }]}></Text>
             <TextInput
               style={[style.textInputStyle]}
-              onChangeText={onChangePassword}
+              onChangeText={(value)=>dispatch(setPassword(value))}
               placeholder='Password'
               placeholderTextColor='gray'
               value={pasword} />
@@ -84,7 +127,7 @@ import {
             <Text style={[style.textLabel, { marginTop: 10 }]}></Text>
             <TextInput
               style={[style.textInputStyle]}
-              onChangeText={onConfirmPassword}
+              onChangeText={(value)=>setConfirmPassword(value)}
               placeholder='Confirm Password'
               placeholderTextColor='gray'
               value={confirm_pasword} />
