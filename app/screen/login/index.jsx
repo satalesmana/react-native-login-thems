@@ -9,8 +9,8 @@ import {
   Alert,
   TouchableOpacity
 } from 'react-native';  
-import { MyButton, FbButton } from '../../components' 
-import { ICFacebook, ICGoogle } from '../../../assets'       
+import { LrsButton } from '../../components' 
+import { ICLrs, ICFb, ICGgl, ICLi} from '../../../assets'       
 import React from 'react'
 
 
@@ -51,13 +51,13 @@ export default function LoginScreen({navigation}){
         <View style={{ width: windowWidth}}>
               <View style={style.brandStyle}>
                 <Image 
-                  source={ require('../../../assets/images/logres.png') } 
+                  source={ICLrs} 
                 />
               </View>
-              
-            <Text style={style.textLoginStyle}>Welcome back!</Text>
-            <Text style={style.textLogin2Style}>Login to your account</Text>
         </View>
+        
+        <Text style={style.textLoginStyle}>Welcome back!</Text>
+        <Text style={style.textLogin2Style}>Login to your account</Text>
       
         <View style={style.container}>
           <TextInput
@@ -74,11 +74,9 @@ export default function LoginScreen({navigation}){
             placeholderTextColor='black'
             value={pasword}/>
 
-          <FbButton
+          <LrsButton
             onPress={onSubmitLogin}
             title="Login"/>
-
-            
         </View>
 
         <Text style={style.textContinueStyle}>
@@ -86,9 +84,9 @@ export default function LoginScreen({navigation}){
         </Text>
 
         <View style={style.sosmed}>
-          <Image source={ require('../../../assets/images/Fb.png') } />
-          <Image source={ require('../../../assets/images/Google.png') } />
-          <Image source={ require('../../../assets/images/LinkedIn.png') } />
+          <Image source={ ICFb } />
+          <Image source={ ICGgl } />
+          <Image source={ ICLi } />
         </View>
 
         <View style={style.containerBottom}>
@@ -113,19 +111,19 @@ const style = StyleSheet.create({
     borderWidth: 1,
     padding: 10,
     borderRadius : 6,
-    width :290
+    width :320
   },
   textLoginStyle:{
     fontSize:24,
     marginTop:50,
-    marginLeft: 45,
+    marginLeft: 50,
     fontWeight:'700',
     opacity : 0.8
     
   },
   textLogin2Style:{
     fontSize:13,
-    marginLeft: 46,
+    marginLeft: 51,
     fontWeight:'500',
     opacity : 0.3
     
@@ -135,16 +133,7 @@ const style = StyleSheet.create({
     alignItems:'center',
     justifyContent:'center'
   },
-  textLabel:{
-    fontSize:12,
-    fontWeight:'bold'
-  },
-  btnContainer:{
-    flex:1,
-    flexDirection:'row',
-    paddingLeft:20,
-    paddingRight:20
-  },
+
   textContinueStyle:{
     textAlign:'center',
     padding:30,
@@ -155,6 +144,7 @@ const style = StyleSheet.create({
     flex:1,
     flexDirection:'row',
     justifyContent:'center',
+    alignItems:'center',
     padding:10
   },
   sosmed:{
@@ -163,7 +153,7 @@ const style = StyleSheet.create({
     width: '45%' ,
     marginBottom: 20,
     marginTop:10,
-    marginLeft: 120,
+    marginLeft: 113,
     alignItems:'center'
   }
 }

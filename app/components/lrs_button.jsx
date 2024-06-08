@@ -3,11 +3,10 @@ import {
     TouchableOpacity,
     Text,
     StyleSheet,
-    ImageBackground
 } from 'react-native'
 
 
-export const FbButton=({title, onPress})=>{
+export const LrsButton=({title, onPress})=>{
 
     return(
         <TouchableOpacity  onPress={onPress}>
@@ -28,8 +27,8 @@ const styles = StyleSheet.create({
       marginTop : 30,
       paddingLeft: 15,
       paddingRight: 15,
-      borderRadius: 5,
-      width: 290
+      borderRadius: 10,
+      width: 320
     },
     buttonText: {
       fontSize: 14,

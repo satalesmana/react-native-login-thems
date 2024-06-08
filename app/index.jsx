@@ -5,11 +5,7 @@ import {
   LoginScreen,
   HomeScreen,
   SplashScreen,
-  RegisterInputNameScreen,
-  RegisterInputDateScreen,
-  RegisterInputEmailScreen,
-  RegisterInputGenderScreen,
-  RegisterInputPasswordScreen
+  Register,
 } from "./screen"
 const Stack = createNativeStackNavigator();
 
@@ -26,12 +22,7 @@ function App() {
           component={LoginScreen} />
         <Stack.Screen name="RegisterName" 
           options={{headerShown:false}}
-          component={RegisterInputNameScreen} />
-
-        {/* <Stack.Screen name="RegisterDate" component={RegisterInputDateScreen} />
-        <Stack.Screen name="RegisterGender" component={RegisterInputGenderScreen} />
-        <Stack.Screen name="RegisterEmail" component={RegisterInputEmailScreen} />
-        <Stack.Screen name="RegisterPassword" component={RegisterInputPasswordScreen} /> */}
+          component={Register} />
       </Stack.Navigator>
     </NavigationContainer>
   );
