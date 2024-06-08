@@ -8,19 +8,26 @@ import {
     ScrollView,
     Alert,
     TouchableOpacity
-  } from 'react-native';  
-  import { LrsButton } from '../../components' 
-  import { ICLrs, ICFb, ICGgl, ICLi } from '../../../assets'       
-  import React from 'react'
+  } from 'react-native';
+import {useState} from 'react'  
+import { LrsButton } from '../../components' 
+import { 
+    ICLrs,
+    ICFb, 
+    ICGgl, 
+    ICLi, 
+    ICLine } from '../../../assets'
+import { useSelector, useDispatch } from 'react-redux'
+import { setPassword, resetRegisterData } from '../../store/reducer/registerReducer'       
+import React from 'react'
   
+const windowWidth = Dimensions.get('window').width;
   
-  const windowWidth = Dimensions.get('window').width;
+export default function Register({navigation}){
+  const [email, onChangeEmail] = React.useState('')
+  const [pasword, onChangePassword] = React.useState('')
   
-  export default function Register({navigation}){
-    const [email, onChangeEmail] = React.useState('')
-    const [pasword, onChangePassword] = React.useState('')
-  
-    const onSubmitLogin =()=>{
+  const onSubmitLogin =()=>{
       try{
         if(email.trim().length === 0 ){
           throw Error('Email is required')
@@ -62,24 +69,24 @@ import {
           <View style={style.container}>
             <TextInput
               style={style.textInputStyle}
-              onChangeText={onChangeEmail}
+              onChangeText={(value)=>dispatch(setEmail(value))}
               placeholder='Email'
               placeholderTextColor='black'
               value={email}/>
   
             <TextInput
               style={[style.textInputStyle, {marginBottom:12}]}
-              onChangeText={onChangePassword}
+              onChangeText={(value)=>dispatch(setPassword(value))}
               placeholder='Password'
               placeholderTextColor='black'
-              value={pasword}/>
+              value={register.password}/>
 
             <TextInput
               style={[style.textInputStyle, {marginBottom:12}]}
-              onChangeText={onChangePassword}
+              onChangeText={(value)=>setConfirmPassword(value)}
               placeholder='Confirm Password'
               placeholderTextColor='black'
-              value={pasword}/>
+              value={confirmPassword}/>
   
             <LrsButton
               onPress={onSubmitLogin}
@@ -88,9 +95,9 @@ import {
               
           </View>
             <View style={style.orr}>
-                <Image source={ require('../../../assets/images/Line.png') } />
+                <Image source={ ICLine } />
                 <Text style={style.textContinueStyle}>or</Text>
-                <Image source={ require('../../../assets/images/Line.png') } />
+                <Image source={ ICLine } />
             </View>
   
           <View style={style.sosmed}>
