@@ -102,7 +102,7 @@ export default function LoginScreen({navigation}){
 
 const style = StyleSheet.create({
   container: { 
-    padding:6
+    padding:5
   },
   textInputStyle:{
     height: 50,
