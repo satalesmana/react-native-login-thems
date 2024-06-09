@@ -8,6 +8,7 @@ import {
   Image,
   ScrollView,
   Alert,
+  ActivityIndicator,
 } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
 import {
@@ -29,7 +30,9 @@ const windowWidth = Dimensions.get("window").width;
 export default function CreateScreen({ navigation }) {
   const register = useSelector((state) => state.register.formInput);
   const dispatch = useDispatch();
+  const [loading, setLoading] = React.useState(false);
   const onNextInput = () => {
+    setLoading(true);
     try {
       if (register.password === null || register.password === "") {
         throw Error("password is required");
@@ -54,6 +57,7 @@ export default function CreateScreen({ navigation }) {
             });
 
             if (res.data?.insertedId) {
+              setLoading(false);
               dispatch(resetRegisterData());
               navigation.navigate("Login");
             }
@@ -61,6 +65,7 @@ export default function CreateScreen({ navigation }) {
         },
       ]);
     } catch (err) {
+      setLoading(false);
       Alert.alert("Error", err.message, [
         {
           text: "OK",
@@ -71,6 +76,13 @@ export default function CreateScreen({ navigation }) {
       ]);
     }
   };
+  if (loading) {
+    return (
+      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+        <ActivityIndicator size="large" color="#000000" />
+      </View>
+    );
+  }
 
   return (
     <ScrollView style={{ backgroundColor: "black" }}>

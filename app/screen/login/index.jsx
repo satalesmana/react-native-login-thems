@@ -9,6 +9,7 @@ import {
   ScrollView,
   Alert,
   color,
+  ActivityIndicator,
 } from "react-native";
 import React, { useState } from "react";
 import { MyButton } from "../../component";
@@ -22,7 +23,7 @@ const windowWidth = Dimensions.get("window").width;
 
 export default function LoginScreen({ navigation }) {
   const [email, onChangeEmail] = React.useState("");
-
+  const [loading, setLoading] = React.useState(false);
   // State variable to hold the password
   const [password, setPassword] = useState("");
 
@@ -35,6 +36,7 @@ export default function LoginScreen({ navigation }) {
   };
 
   const onSubmitLogin = async () => {
+    setLoading(true);
     try {
       if (email.trim().length === 0) {
         throw Error("Email is required");
@@ -54,6 +56,7 @@ export default function LoginScreen({ navigation }) {
         },
       });
       if (res.data.document != null) {
+        setLoading(false);
         navigation.replace("Home");
       } else {
         Alert.alert("Error", "Username & password tidak sesuai", [
@@ -64,8 +67,10 @@ export default function LoginScreen({ navigation }) {
             },
           },
         ]);
+        setLoading(false);
       }
     } catch (err) {
+      setLoading(false);
       Alert.alert("Error", err.message, [
         {
           text: "OK",
@@ -76,6 +81,13 @@ export default function LoginScreen({ navigation }) {
       ]);
     }
   };
+  if (loading) {
+    return (
+      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+        <ActivityIndicator size="large" color="#000000" />
+      </View>
+    );
+  }
   return (
     <ScrollView style={{ backgroundColor: "black" }}>
       <View>
