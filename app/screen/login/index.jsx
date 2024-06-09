@@ -16,13 +16,12 @@ import { ICGoogle, ICFacebook, ICMacOs } from "../../../assets";
 import { LinearGradient } from "expo-linear-gradient";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { GB1, GB2, GB3, Person, Key } from "../../../assets";
+import ApiLib from "../../lib/ApiLib";
 
 const windowWidth = Dimensions.get("window").width;
 
 export default function LoginScreen({ navigation }) {
   const [email, onChangeEmail] = React.useState("");
-  const logEmail = "coba";
-  const logPass = 123;
 
   // State variable to hold the password
   const [password, setPassword] = useState("");
@@ -35,14 +34,48 @@ export default function LoginScreen({ navigation }) {
     setShowPassword(!showPassword);
   };
 
-  const onSubmitLogin = () => {
-    if (email == logEmail && password == logPass) {
-      navigation.navigate("Home");
-    } else {
-      alert("Email or Password is Wrong");
+  const onSubmitLogin = async () => {
+    try {
+      if (email.trim().length === 0) {
+        throw Error("Email is required");
+      }
+
+      if (password.trim().length === 0) {
+        throw Error("Password is required");
+      }
+
+      const res = await ApiLib.post("/action/findOne", {
+        dataSource: "Cluster0",
+        database: "kelompok1",
+        collection: "users",
+        filter: {
+          email: email,
+          pass: password,
+        },
+      });
+      if (res.data.document != null) {
+        navigation.replace("Home");
+      } else {
+        Alert.alert("Error", "Username & password tidak sesuai", [
+          {
+            text: "OK",
+            onPress: () => {
+              console.log("ERR");
+            },
+          },
+        ]);
+      }
+    } catch (err) {
+      Alert.alert("Error", err.message, [
+        {
+          text: "OK",
+          onPress: () => {
+            console.log("ERR");
+          },
+        },
+      ]);
     }
   };
-
   return (
     <ScrollView style={{ backgroundColor: "black" }}>
       <View>
@@ -125,11 +158,11 @@ export default function LoginScreen({ navigation }) {
                 />
               </View>
             </View>
-          <View style={style.btnContainer}>
-            <MyButton imgUrl={ICGoogle} />
-            <MyButton imgUrl={ICMacOs} style={{ marginLeft: 20 }} />
-            <MyButton imgUrl={ICFacebook} style={{ marginLeft: 20 }} />
-          </View>
+            <View style={style.btnContainer}>
+              <MyButton imgUrl={ICGoogle} />
+              <MyButton imgUrl={ICMacOs} style={{ marginLeft: 20 }} />
+              <MyButton imgUrl={ICFacebook} style={{ marginLeft: 20 }} />
+            </View>
           </ImageBackground>
         </View>
       </View>
