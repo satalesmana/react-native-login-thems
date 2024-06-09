@@ -9,10 +9,16 @@ import {
   ScrollView,
   Alert,
 } from "react-native";
-import { useSelector, useDispatch } from 'react-redux'
-import { setemail, setname, setpass } from '../../store/reducer/registerReducer'
+import { useSelector, useDispatch } from "react-redux";
+import {
+  setemail,
+  setname,
+  setpass,
+  resetRegisterData,
+} from "../../store/reducer/registerReducer";
 import React from "react";
-import { MyButton, CustomeInput} from "../../component";
+import ApiLib from "../../lib/ApiLib";
+import { MyButton, CustomeInput } from "../../component";
 import { ICGoogle, ICFacebook, ICMacOs } from "../../../assets";
 
 import { LinearGradient } from "expo-linear-gradient";
@@ -21,25 +27,48 @@ import { GB2, GB3, GB4, GB5, Key, Person, Email } from "../../../assets";
 const windowWidth = Dimensions.get("window").width;
 
 export default function CreateScreen({ navigation }) {
-  const register = useSelector((state) => state.register.formInput)
-    const dispatch = useDispatch()
-  const [email, onChangeEmail] = React.useState("");
-  const [name, onChangeName] = React.useState("");
-  const [pass, onChangePassword] = React.useState("");
-  const onCreate = () => {
-    if (email.length === 0) {
-      alert('Please Input Your Email')
-    }
-    
-    else if (name.length === 0) {
-      alert('Please Input Your Name')
-    }
-    
-    else if (pass.length === 0) {
-      alert('Please Input Your Password')
-    }
-    else {
-    navigation.navigate("Home");
+  const register = useSelector((state) => state.register.formInput);
+  const dispatch = useDispatch();
+  const onNextInput = () => {
+    try {
+      if (register.password === null || register.password === "") {
+        throw Error("password is required");
+      }
+      let message = `Name :  ${register.name}\n`;
+      message += `Email : ${register.email} \n`;
+
+      Alert.alert("Confirm", message, [
+        {
+          text: "Cancel",
+          onPress: () => console.log("Cancel Pressed"),
+          style: "cancel",
+        },
+        {
+          text: "Submit",
+          onPress: async () => {
+            const res = await ApiLib.post("/action/insertOne", {
+              dataSource: "Cluster0",
+              database: "kelompok1",
+              collection: "users",
+              document: register,
+            });
+
+            if (res.data?.insertedId) {
+              dispatch(resetRegisterData());
+              navigation.navigate("Login");
+            }
+          },
+        },
+      ]);
+    } catch (err) {
+      Alert.alert("Error", err.message, [
+        {
+          text: "OK",
+          onPress: () => {
+            console.log("ERR");
+          },
+        },
+      ]);
     }
   };
 
@@ -67,29 +96,30 @@ export default function CreateScreen({ navigation }) {
             <Text style={style.text2}>Free Forever. No Credit Card Needed</Text>
 
             <View style={style.container}>
-                <CustomeInput value={register.email} 
-                    onChangeText={(value)=>dispatch(setemail(value))}
-                    placeholder="Your Email"
-                    source={Email}
-                    label="Email"/>
-                    
-             
+              <CustomeInput
+                value={register.setemail}
+                onChangeText={(value) => dispatch(setemail(value))}
+                placeholder="Your Email"
+                source={Email}
+                label="Email"
+              />
 
-               
-                <CustomeInput value={register.name} 
-                    onChangeText={(value)=>dispatch(setname(value))}
-                    placeholder="Your name"
-                    source={Person}
-                    label="name"/>
-                   
-                <CustomeInput value={register.pass} 
-                    onChangeText={(value)=>dispatch(setpass(value))}
-                    placeholder="Your Password"
-                    source={Key}
-                    label="password"/>
-                    
-            
-              
+              <CustomeInput
+                value={register.setname}
+                onChangeText={(value) => dispatch(setname(value))}
+                placeholder="Your name"
+                source={Person}
+                label="name"
+              />
+
+              <CustomeInput
+                value={register.setpass}
+                onChangeText={(value) => dispatch(setpass(value))}
+                placeholder="Your Password"
+                source={Key}
+                label="password"
+              />
+
               <LinearGradient
                 style={style.view2}
                 colors={["#9C3FE4", "#C65647"]}
@@ -97,7 +127,7 @@ export default function CreateScreen({ navigation }) {
                 end={[1, 1]}
                 location={[0.25, 0.4, 1]}
               >
-                <Text onPress={onCreate} style={style.signUp}>
+                <Text onPress={onNextInput} style={style.signUp}>
                   Sign Up
                 </Text>
               </LinearGradient>
