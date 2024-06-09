@@ -98,6 +98,7 @@ export default function LoginScreen({navigation}){
             value={pasword}/>
 
           <LrsButton
+            loading={loading}
             onPress={onSubmitLogin}
             title="Login"/>
         </View>
