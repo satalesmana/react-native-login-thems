@@ -1,11 +1,19 @@
-import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Dimensions, Alert} from "react-native";  
+import { View, 
+        Text, 
+        StyleSheet, 
+        ScrollView, 
+        TouchableOpacity, 
+        Dimensions, 
+        Alert} from "react-native";  
 import { CustomeInput } from '../../components/input';
 import { MyButton2 } from '../../components/my_button';
 import React, {useState} from 'react'
 import { useSelector, useDispatch } from 'react-redux';
-import {setFirstName, setSureName} from '../../store/reducer/registerReducer'
-import {setEmail} from '../../store/reducer/registerReducer'
-import { setPassword, resetRegisterData } from '../../store/reducer/registerReducer'
+import {setFirstName, 
+        setSureName, 
+        setEmail, 
+        setPassword, 
+        resetRegisterData} from '../../store/reducer/registerReducer'
 import ApiLib from "../../lib/Apilib"
 
 const windowWidth = Dimensions.get('window').width;
@@ -29,13 +37,13 @@ export default function RegisterInputFormScreen(){
              if(typeof register.sureName === null || register.sureName === ""){
                  throw Error('Harap masukkan nama akhir anda')
              }
-             if(register.email === null || register.email === ""){
+             if(typeof register.email === null || register.email === ""){
                  throw Error('Harap masukkan email anda')
              }
-             if(register.password === null || register.password === ""){
+             if(typeof register.password === null || register.password === ""){
                  throw Error('Harap masukkan password anda')
              }
-             if(confirmPassword === null || confirmPassword === ""){
+             if(typeof confirmPassword === null || confirmPassword === ""){
                  throw Error('Harap masukkan password anda lagi')
              }
              if( confirmPassword !== register.password){
