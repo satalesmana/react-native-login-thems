@@ -18,8 +18,8 @@ import {
     ICLi, 
     ICLine } from '../../../assets'
 import { useSelector, useDispatch } from 'react-redux'
-import { setPassword, resetRegisterData } from '../../store/reducer/registerReducer'
-import { setEmail } from '../../store/reducer/registerReducer'
+import { setEmail, setPassword, resetRegisterData } from '../../store/reducer/registerReducer'
+import ApiLib from "../../lib/ApiLib"
 import React from 'react'
   
 const windowWidth = Dimensions.get('window').width;
@@ -29,7 +29,7 @@ export default function Register({navigation}){
   const register = useSelector((state) => state.register.formSignUp)
   const dispatch = useDispatch()
   
-  const onTest =()=>{
+  const onSignUp =()=>{
       try{
           if( register.email === null || register.email === ""){
               throw Error('email is required')
@@ -53,7 +53,24 @@ export default function Register({navigation}){
                   text: 'Cancel',
                   onPress: () => console.log('Cancel Pressed'),
                   style: 'cancel',
-              }
+              },{
+                text: 'Submit', onPress: async () => {
+                   const res =  await ApiLib.post('/action/insertOne',
+                        {
+                            "dataSource": "Cluster0",
+                            "database": "kelompok9",
+                            "collection": "users",
+                            "document": register
+                        }
+                    )
+
+                    if(res.data?.insertedId){
+                        dispatch(resetRegisterData())
+                        navigation.navigate("Login")
+                    }
+                    
+                }
+            },
           ]);
           
       }catch(err){
@@ -109,7 +126,7 @@ export default function Register({navigation}){
               value={register.confirmPassword}/>
   
             <LrsButton
-              onPress={onTest}
+              onPress={onSignUp}
               title="Sign up"/>
   
               

@@ -12,6 +12,7 @@ import {
 import { LrsButton } from '../../components' 
 import { ICLrs, ICFb, ICGgl, ICLi} from '../../../assets'       
 import React from 'react'
+import ApiLib from "../../lib/ApiLib"
 
 
 const windowWidth = Dimensions.get('window').width;
@@ -19,8 +20,10 @@ const windowWidth = Dimensions.get('window').width;
 export default function LoginScreen({navigation}){
   const [email, onChangeEmail] = React.useState('')
   const [pasword, onChangePassword] = React.useState('')
+  const [loading, setLoading] = React.useState(false)
 
-  const onSubmitLogin =()=>{
+  const onSubmitLogin = async()=>{
+    setLoading(true)
     try{
       if(email.trim().length === 0 ){
         throw Error('Email is required')
@@ -29,16 +32,35 @@ export default function LoginScreen({navigation}){
       if(pasword.trim().length === 0 ){
         throw Error('Password is required')
       }
-
-      navigation.replace("Home")
-    }catch(err){
-      Alert.alert('Error', err.message, [
-        {text: 'OK', onPress: () => {
-          console.log('ERR')
-        }},
-      ]);
-    }
-  }
+      const res =  await ApiLib.post('/action/findOne',{
+              "dataSource": "Cluster0",
+              "database": "kelompok9",
+              "collection": "users",
+              "filter": {
+                "email": email,
+                "password": pasword
+              }
+            }
+        )
+        setLoading(false)
+        if(res.data.document != null){
+          navigation.replace("Home")
+        }else{
+          Alert.alert('Error', "Username & password tidak sesuai", [
+            {text: 'OK', onPress: () => {
+              console.log('ERR')
+            }},
+          ]);
+        }
+      
+        }catch(err){
+          Alert.alert('Error', err.message, [
+            {text: 'OK', onPress: () => {
+              console.log('ERR')
+            }},
+          ]);
+        }
+      }
 
 
   const onRegister=()=>{
