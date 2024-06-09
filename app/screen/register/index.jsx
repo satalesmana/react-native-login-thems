@@ -8,35 +8,77 @@ import {
     ScrollView,
     Alert,
     TouchableOpacity
-  } from 'react-native';  
-  import { LrsButton } from '../../components' 
-  import { ICLrs, ICFb, ICGgl, ICLi } from '../../../assets'       
-  import React from 'react'
+  } from 'react-native';
+import {useState} from 'react'  
+import { LrsButton } from '../../components' 
+import { 
+    ICLrs,
+    ICFb, 
+    ICGgl, 
+    ICLi, 
+    ICLine } from '../../../assets'
+import { useSelector, useDispatch } from 'react-redux'
+import { setEmail, setPassword, resetRegisterData } from '../../store/reducer/registerReducer'
+import ApiLib from "../../lib/ApiLib"
+import React from 'react'
   
+const windowWidth = Dimensions.get('window').width;
   
-  const windowWidth = Dimensions.get('window').width;
+export default function Register({navigation}){
+  const [confirmPassword, setConfirmPassword] = useState(null)
+  const register = useSelector((state) => state.register.formSignUp)
+  const dispatch = useDispatch()
   
-  export default function Register({navigation}){
-    const [email, onChangeEmail] = React.useState('')
-    const [pasword, onChangePassword] = React.useState('')
-  
-    const onSubmitLogin =()=>{
+  const onSignUp =()=>{
       try{
-        if(email.trim().length === 0 ){
-          throw Error('Email is required')
-        }
-  
-        if(pasword.trim().length === 0 ){
-          throw Error('Password is required')
-        }
-  
-        navigation.replace("Home")
+          if( register.email === null || register.email === ""){
+              throw Error('email is required')
+          }
+          if( register.password === null || register.password === ""){
+              throw Error('password is required')
+          }
+
+          if( confirmPassword === null ||  confirmPassword === ""){
+              throw Error('Confirm password is required')
+          }
+
+          if( confirmPassword !== register.password){
+              throw Error(`Confirm password doesn't match`)
+          }
+          
+          let message = `Email : ${register.email} \n`
+
+          Alert.alert('Confirm', message, [
+              {
+                  text: 'Cancel',
+                  onPress: () => console.log('Cancel Pressed'),
+                  style: 'cancel',
+              },{
+                text: 'Submit', onPress: async () => {
+                   const res =  await ApiLib.post('/action/insertOne',
+                        {
+                            "dataSource": "Cluster0",
+                            "database": "kelompok9",
+                            "collection": "users",
+                            "document": register
+                        }
+                    )
+
+                    if(res.data?.insertedId){
+                        dispatch(resetRegisterData())
+                        navigation.navigate("Login")
+                    }
+                    
+                }
+            },
+          ]);
+          
       }catch(err){
-        Alert.alert('Error', err.message, [
-          {text: 'OK', onPress: () => {
-            console.log('ERR')
-          }},
-        ]);
+          Alert.alert('Error', err.message, [
+            {text: 'OK', onPress: () => {
+              console.log('ERR')
+            }},
+          ]);
       }
     }
   
@@ -62,35 +104,37 @@ import {
           <View style={style.container}>
             <TextInput
               style={style.textInputStyle}
-              onChangeText={onChangeEmail}
+              onChangeText={(value)=>dispatch(setEmail(value))}
               placeholder='Email'
               placeholderTextColor='black'
-              value={email}/>
+              value={register.email}/>
   
             <TextInput
               style={[style.textInputStyle, {marginBottom:12}]}
-              onChangeText={onChangePassword}
+              onChangeText={(value)=>dispatch(setPassword(value))}
               placeholder='Password'
+              secureTextEntry={true}
               placeholderTextColor='black'
-              value={pasword}/>
+              value={register.password}/>
 
             <TextInput
               style={[style.textInputStyle, {marginBottom:12}]}
-              onChangeText={onChangePassword}
+              onChangeText={(value)=>setConfirmPassword(value)}
               placeholder='Confirm Password'
+              secureTextEntry={true}
               placeholderTextColor='black'
-              value={pasword}/>
+              value={register.confirmPassword}/>
   
             <LrsButton
-              onPress={onSubmitLogin}
+              onPress={onSignUp}
               title="Sign up"/>
   
               
           </View>
             <View style={style.orr}>
-                <Image source={ require('../../../assets/images/Line.png') } />
+                <Image source={ ICLine } />
                 <Text style={style.textContinueStyle}>or</Text>
-                <Image source={ require('../../../assets/images/Line.png') } />
+                <Image source={ ICLine } />
             </View>
   
           <View style={style.sosmed}>

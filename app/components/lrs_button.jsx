@@ -3,20 +3,35 @@ import {
     TouchableOpacity,
     Text,
     StyleSheet,
+    ActivityIndicator,
+    View
 } from 'react-native'
 
+const ContentItem = ({loading, title})=>{
+    if(loading){
+        return(
+            <View style={{flex:1, flexDirection:'row', justifyContent:'center'}}>
+                <ActivityIndicator size='small' color="white" />
+                <Text style={styles.buttonText}> Loading...</Text>
+            </View>
+        )
+    }
 
-export const LrsButton=({title, onPress})=>{
+    if(!loading){
+        return(<Text style={styles.buttonText}> {title} </Text>)
+    }
+}
+
+
+export const LrsButton=({loading, title, onPress, style})=>{
 
     return(
-        <TouchableOpacity  onPress={onPress}>
+        <TouchableOpacity disabled={loading} style={style} onPress={onPress}>
             <LinearGradient colors={['#4c669f', '#3b5998', '#192f6a']} 
                 style={styles.linearGradient}>
-                <Text style={styles.buttonText}>
-                    {title}
-                </Text>
+                    <ContentItem loading={loading} title={title} />
             </LinearGradient>
-        </TouchableOpacity>
+        </TouchableOpacity>  
     );
 }
 
@@ -31,7 +46,7 @@ const styles = StyleSheet.create({
       width: 320
     },
     buttonText: {
-      fontSize: 14,
+      fontSize: 18,
       textAlign: 'center',
       margin: 10,
       color: '#ffffff',
