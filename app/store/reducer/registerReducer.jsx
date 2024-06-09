@@ -3,20 +3,20 @@ import { createSlice } from '@reduxjs/toolkit'
 export const registerSlice = createSlice({
   name:'register',
   initialState: {
-    formInput:{
+    formSignUp:{
         email: null,
         password: null,
     },
   },
   reducers: {
     setEmail:(state, action) => {
-        state.formInput.email = action.payload
+        state.formSignUp.email = action.payload
     },
     setPassword:(state, action) => {
-        state.formInput.password = action.payload
+        state.formSignUp.password = action.payload
     },
     resetRegisterData:(state) =>{
-        state.formInput = {
+        state.formSignUp = {
             email: null,
             password: null,
         }

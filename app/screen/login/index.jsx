@@ -71,6 +71,7 @@ export default function LoginScreen({navigation}){
             style={[style.textInputStyle, {marginBottom:12}]}
             onChangeText={onChangePassword}
             placeholder='Password'
+            secureTextEntry={true}
             placeholderTextColor='black'
             value={pasword}/>
 

@@ -18,32 +18,50 @@ import {
     ICLi, 
     ICLine } from '../../../assets'
 import { useSelector, useDispatch } from 'react-redux'
-import { setPassword, resetRegisterData } from '../../store/reducer/registerReducer'       
+import { setPassword, resetRegisterData } from '../../store/reducer/registerReducer'
+import { setEmail } from '../../store/reducer/registerReducer'
 import React from 'react'
   
 const windowWidth = Dimensions.get('window').width;
   
 export default function Register({navigation}){
-  const [email, onChangeEmail] = React.useState('')
-  const [pasword, onChangePassword] = React.useState('')
+  const [confirmPassword, setConfirmPassword] = useState(null)
+  const register = useSelector((state) => state.register.formSignUp)
+  const dispatch = useDispatch()
   
-  const onSubmitLogin =()=>{
+  const onTest =()=>{
       try{
-        if(email.trim().length === 0 ){
-          throw Error('Email is required')
-        }
-  
-        if(pasword.trim().length === 0 ){
-          throw Error('Password is required')
-        }
-  
-        navigation.replace("Home")
+          if( register.email === null || register.email === ""){
+              throw Error('email is required')
+          }
+          if( register.password === null || register.password === ""){
+              throw Error('password is required')
+          }
+
+          if( confirmPassword === null ||  confirmPassword === ""){
+              throw Error('Confirm password is required')
+          }
+
+          if( confirmPassword !== register.password){
+              throw Error(`Confirm password doesn't match`)
+          }
+          
+          let message = `Email : ${register.email} \n`
+
+          Alert.alert('Confirm', message, [
+              {
+                  text: 'Cancel',
+                  onPress: () => console.log('Cancel Pressed'),
+                  style: 'cancel',
+              }
+          ]);
+          
       }catch(err){
-        Alert.alert('Error', err.message, [
-          {text: 'OK', onPress: () => {
-            console.log('ERR')
-          }},
-        ]);
+          Alert.alert('Error', err.message, [
+            {text: 'OK', onPress: () => {
+              console.log('ERR')
+            }},
+          ]);
       }
     }
   
@@ -72,12 +90,13 @@ export default function Register({navigation}){
               onChangeText={(value)=>dispatch(setEmail(value))}
               placeholder='Email'
               placeholderTextColor='black'
-              value={email}/>
+              value={register.email}/>
   
             <TextInput
               style={[style.textInputStyle, {marginBottom:12}]}
               onChangeText={(value)=>dispatch(setPassword(value))}
               placeholder='Password'
+              secureTextEntry={true}
               placeholderTextColor='black'
               value={register.password}/>
 
@@ -85,11 +104,12 @@ export default function Register({navigation}){
               style={[style.textInputStyle, {marginBottom:12}]}
               onChangeText={(value)=>setConfirmPassword(value)}
               placeholder='Confirm Password'
+              secureTextEntry={true}
               placeholderTextColor='black'
-              value={confirmPassword}/>
+              value={register.confirmPassword}/>
   
             <LrsButton
-              onPress={onSubmitLogin}
+              onPress={onTest}
               title="Sign up"/>
   
               
