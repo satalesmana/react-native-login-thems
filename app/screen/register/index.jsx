@@ -1,16 +1,21 @@
 import {
-    View,
-    Text,
-    TextInput,
-    StyleSheet,
-    TouchableOpacity,
-    Dimensions,
-    ScrollView,
-    Alert,
-    ImageBackground
-  } from 'react-native';
-  import React from 'react'
-  const windowWidth = Dimensions.get('window').width;
+  View,
+  Text,
+  TextInput,
+  StyleSheet,
+  TouchableOpacity,
+  Dimensions,
+  ScrollView,
+  Alert,
+  ImageBackground
+} from 'react-native';
+import React, { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { setEmail, setPassword, resetRegisterData } from '../../store/reducer/registerReducer';
+import { Ionicons } from '@expo/vector-icons'; // Import Ionicons for eye icon
+import ApiLib from "../../lib/ApiLib"
+
+const windowWidth = Dimensions.get('window').width;
 
 export default function RegisterScreen({ navigation }) {
   const register = useSelector((state) => state.register.formInput);

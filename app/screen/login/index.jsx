@@ -127,11 +127,12 @@ export default function LoginScreen({ navigation }) {
           </View>
         </View>
         <View style={style.containerBottom}>
-        <Text  style={style.textContinueStyle}>
-        Don't have account?
-        </Text>
-
-          <Text style={{fontWeight:'semibold', textAlign:'center',textDecorationLine: 'underline'}} onPress={onSubmitLoginRegis} >Create now</Text>
+          <Text onPress={onSubmitLoginRegis} style={style.textContinueStyle}>
+            Don't have account?
+          </Text>
+          <Text style={{ fontWeight: 'semibold', textAlign: 'center' }} onPress={onSubmitLoginRegis}>
+            Create now
+          </Text>
         </View>
       </View>
     </ScrollView>
@@ -156,7 +157,6 @@ const style = StyleSheet.create({
     height: 40,
     marginTop: 5,
     padding: 10,
-    borderBottom: 'tomato',
     borderBottomWidth: StyleSheet.hairlineWidth
   },
   passwordContainer: {
