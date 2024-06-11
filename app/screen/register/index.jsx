@@ -9,6 +9,8 @@ import {
   Alert,
   Image
 } from 'react-native';
+import {bulat} from '../../../assets'
+
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { setEmail, setPassword, resetRegisterData,setUsername } from '../../store/reducer/registerReducer';
@@ -88,7 +90,7 @@ export default function RegisterScreen({ navigation }) {
           <Text style={style.textLoginStyle2}>Account :)</Text>
           </View>
           <Image
-              source={require('../../../assets/images/bulat.png')}
+              source={bulat}
             
               style={{ width:windowWidth,height:700,position:'absolute',marginTop:30}}
             />

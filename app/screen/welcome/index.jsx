@@ -8,6 +8,7 @@ import {
   TouchableOpacity,
 } from "react-native";
 import React from "react";
+import {welcome1} from '../../../assets'
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
@@ -21,7 +22,7 @@ export default function WelcomeScreen({ navigation }) {
     <ScrollView style={{windowWidth:windowWidth,windowHeight:windowHeight,backgroundColor:'#FFFFFF'}}>
         <View style={{width: windowWidth, height: 400}}>
           <Image
-            source={require("../../../assets/images/welcome1.png")}
+            source={welcome1}
             style={{marginLeft:100}}></Image>
         </View>
         {/* <View>
