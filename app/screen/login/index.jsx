@@ -4,7 +4,7 @@ import {
   TextInput,
   StyleSheet,
   TouchableOpacity,
-  ImageBackground,
+  Image,
   Dimensions,
   ScrollView,
   ActivityIndicator,
@@ -16,6 +16,7 @@ import { Ionicons } from '@expo/vector-icons'; // Import Ionicons for eye icon
 import ApiLib from "../../lib/ApiLib";
 
 const windowWidth = Dimensions.get('window').width;
+const windowHeight = Dimensions.get('window').height;
 
 export default function LoginScreen({ navigation }) {
   const [email, onChangeEmail] = useState('');
@@ -70,15 +71,15 @@ export default function LoginScreen({ navigation }) {
 
   return (
     <ScrollView>
-      <View>
-        <View style={{ width: windowWidth, height: 100 }}>
-          <ImageBackground
+      <View style={{ width: windowWidth, height: windowHeight }}>
+        <Image
+          
             source={require('../../../assets/images/union3.png')}
-            resizeMode="cover"
-            style={{ width: windowWidth, height: 700, marginTop: 250 }}
+           style={{width: windowWidth,position:'absolute',bottom:0,height:550}}
+           
           />
-        </View>
-        <View style={{ marginBottom: 100 }}>
+        
+        <View style={{ marginBottom: 80 ,marginTop:60}}>
           <Text style={style.textLoginStyle}>Welcome Back!</Text>
           <Text style={style.textLoginStyle1}>Enter Your Username & Password</Text>
         </View>
@@ -111,11 +112,11 @@ export default function LoginScreen({ navigation }) {
               onFocus={() => setIsPasswordFocused(true)}
               onBlur={() => setIsPasswordFocused(false)}
             />
-            <TouchableOpacity onPress={() => setHidePassword(!hidePassword)}>
-              <Ionicons name={hidePassword ? 'eye-off' : 'eye'} size={24} color="black" />
-            </TouchableOpacity>
+            
           </View>
-
+          <TouchableOpacity style={{marginTop:60}} onPress={() => setHidePassword(!hidePassword)}>
+              {/* <Ionicons name={hidePassword ? 'eye-off' : 'eye'} size={24} color="black" /> */}
+            </TouchableOpacity>
           <View style={style.signin}>
             <TouchableOpacity onPress={onSubmitAccount} style={style.buttonLogin} disabled={loading}>
               {loading ? (
@@ -133,7 +134,8 @@ export default function LoginScreen({ navigation }) {
           <Text style={{ fontWeight: 'semibold', textAlign: 'center' }} onPress={onSubmitLoginRegis}>
             Create now
           </Text>
-        </View>
+       </View>
+     
       </View>
     </ScrollView>
   );
@@ -227,8 +229,8 @@ const style = StyleSheet.create({
     justifyContent: 'center'
   },
   textLabel: {
-    fontSize: 12,
-    fontWeight: 'regular'
+    fontSize: 24,
+    fontWeight: 'light'
   },
   textContinueStyle2: {
     textAlign: 'center',
