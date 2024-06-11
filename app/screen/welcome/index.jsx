@@ -9,18 +9,16 @@ import {
 } from "react-native";
 import React from "react";
 const windowWidth = Dimensions.get('window').width;
+const windowHeight = Dimensions.get('window').height;
 
 export default function WelcomeScreen({ navigation }) {
   const onSubmitAccount = () => {
     navigation.navigate("Login");
   };
-  const onSubmitLoginRegis = () => {
-    navigation.navigate("Register");
-  };
+
 
   return (
-    <ScrollView>
-      <View>
+    <ScrollView style={{windowWidth:windowWidth,windowHeight:windowHeight,backgroundColor:'#FFFFFF'}}>
         <View style={{width: windowWidth, height: 400}}>
           <Image
             source={require("../../../assets/images/welcome1.png")}
@@ -47,7 +45,7 @@ export default function WelcomeScreen({ navigation }) {
             <Text style={[style.textSignin, { color: "white" }]}>Join Now</Text>
           </TouchableOpacity>
         </View>
-      </View>
+      
     </ScrollView>
   );
 }

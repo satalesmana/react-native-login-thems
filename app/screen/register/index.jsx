@@ -7,15 +7,16 @@ import {
   Dimensions,
   ScrollView,
   Alert,
-  ImageBackground
+  Image
 } from 'react-native';
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { setEmail, setPassword, resetRegisterData } from '../../store/reducer/registerReducer';
+import { setEmail, setPassword, resetRegisterData,setUsername } from '../../store/reducer/registerReducer';
 import { Ionicons } from '@expo/vector-icons'; // Import Ionicons for eye icon
 import ApiLib from "../../lib/ApiLib"
 
 const windowWidth = Dimensions.get('window').width;
+const windowHeight = Dimensions.get('window').height;
 
 export default function RegisterScreen({ navigation }) {
   const register = useSelector((state) => state.register.formInput);
@@ -24,6 +25,7 @@ export default function RegisterScreen({ navigation }) {
   const [hidePassword, setHidePassword] = useState(true); // Password visibility state
   const [hideConfirmPassword, setHideConfirmPassword] = useState(true); // Confirm password visibility state
   const [isEmailFocused, setIsEmailFocused] = useState(false); // Email focus state
+  const [isUsernameFocused, setIsUsernameFocused] = useState(false); // Username focus state
   const [isPasswordFocused, setIsPasswordFocused] = useState(false); // Password focus state
   const [isConfirmPasswordFocused, setIsConfirmPasswordFocused] = useState(false); // Confirm password focus state
 
@@ -31,6 +33,9 @@ export default function RegisterScreen({ navigation }) {
     try {
       if (register.email === null || register.email === "") {
         throw new Error('Email is required');
+      }
+      if (register.username === null || register.username === "") {
+        throw new Error('Username is required');
       }
       if (register.password === null || register.password === "") {
         throw new Error('Password is required');
@@ -76,21 +81,20 @@ export default function RegisterScreen({ navigation }) {
   };
 
   return (
-    <ScrollView>
-      <View>
-        <View style={{ width: windowWidth, height: 180 }}>
+    <ScrollView style={{windowWidth:windowWidth,windowHeight:windowHeight,backgroundColor:'#FFFFFF'}}>
+      <View style={{ width: windowWidth, height: windowHeight}}>
+        <View style={{marginTop:-70}}>
           <Text style={style.textLoginStyle}>Create</Text>
-          <Text style={style.textLoginStyle2}>Account :</Text>
-        </View>
-        <View>
-          <View style={{ width: windowWidth, height: 70 }}>
-            <ImageBackground
-              source={require('../../../assets/images/union2.png')}
-              resizeMode="cover"
-              style={{ width: windowWidth, height: 650 }}
-            />
+          <Text style={style.textLoginStyle2}>Account :)</Text>
           </View>
-        </View>
+          <Image
+              source={require('../../../assets/images/bulat.png')}
+            
+              style={{ width:windowWidth,height:700,position:'absolute',marginTop:30}}
+            />
+         
+       
+       
         <View style={style.container}>
           <Text style={style.textLabel}></Text>
           <TextInput
@@ -100,12 +104,24 @@ export default function RegisterScreen({ navigation }) {
             ]}
             value={register.email}
             onChangeText={(value) => dispatch(setEmail(value))}
-            placeholder="Email"
+            placeholder="Enter Email id"
             onFocus={() => setIsEmailFocused(true)}
             onBlur={() => setIsEmailFocused(false)}
           />
+          <Text style={style.textLabel}></Text>
+          <TextInput
+            style={[
+              style.textInputStyle,
+              { borderBottomColor: isUsernameFocused ? 'blue' : 'black' }
+            ]}
+            value={register.username}
+            onChangeText={(value) => dispatch(setUsername(value))}
+            placeholder="Create Username"
+            onFocus={() => setIsUsernameFocused(true)}
+            onBlur={() => setIsUsernameFocused(false)}
+          />
 
-          <Text style={[style.textLabel, { marginTop: 10 }]}></Text>
+          <Text style={[style.textLabel, { marginTop: 0 }]}></Text>
           <View style={style.passwordContainer}>
             <TextInput
               style={[
@@ -114,7 +130,7 @@ export default function RegisterScreen({ navigation }) {
               ]}
               value={register.password}
               onChangeText={(value) => dispatch(setPassword(value))}
-              placeholder="Password"
+              placeholder="Create Password"
               secureTextEntry={hidePassword}
               onFocus={() => setIsPasswordFocused(true)}
               onBlur={() => setIsPasswordFocused(false)}
@@ -178,7 +194,7 @@ const style = StyleSheet.create({
   textLoginStyle: {
     fontSize: 32,
     marginTop: 140,
-    fontWeight: 'bold',
+    fontWeight: '900',
     textAlign: 'left',
     marginLeft: 30,
     color: '#000000',
@@ -201,7 +217,7 @@ const style = StyleSheet.create({
   },
   textLoginStyle2: {
     fontSize: 32,
-    fontWeight: 'bold',
+    fontWeight: '900',
     textAlign: 'left',
     width: 240,
     marginLeft: 30,

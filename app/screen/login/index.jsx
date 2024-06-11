@@ -4,7 +4,7 @@ import {
   TextInput,
   StyleSheet,
   TouchableOpacity,
-  ImageBackground,
+  Image,
   Dimensions,
   ScrollView,
   ActivityIndicator,
@@ -12,25 +12,27 @@ import {
 } from 'react-native';
 import React, { useState } from 'react';
 import { Ionicons } from '@expo/vector-icons'; // Import Ionicons for eye icon
+import { Entypo } from '@expo/vector-icons';
 
 import ApiLib from "../../lib/ApiLib";
 
 const windowWidth = Dimensions.get('window').width;
+const windowHeight = Dimensions.get('window').height;
 
 export default function LoginScreen({ navigation }) {
-  const [email, onChangeEmail] = useState('');
+  const [username, onChangeUsername] = useState('');
   const [password, onChangePassword] = useState('');
   const [loading, setLoading] = useState(false); // Loading state
   const [hidePassword, setHidePassword] = useState(true); // Password visibility state
-  const [isEmailFocused, setIsEmailFocused] = useState(false); // Email focus state
+  const [isUsernameFocused, setIsUsernameFocused] = useState(false); // Username focus state
   const [isPasswordFocused, setIsPasswordFocused] = useState(false); // Password focus state
 
   const onSubmitAccount = async () => {
     try {
       setLoading(true); // Start loading
 
-      if (email.trim().length === 0) {
-        throw Error('Email is required');
+      if (username.trim().length === 0) {
+        throw Error('Username is required');
       }
 
       if (password.trim().length === 0) {
@@ -42,7 +44,7 @@ export default function LoginScreen({ navigation }) {
         "database": "UAS",
         "collection": "users",
         "filter": {
-          "email": email,
+          "username": username,
           "password": password
         }
       });
@@ -69,16 +71,16 @@ export default function LoginScreen({ navigation }) {
   };
 
   return (
-    <ScrollView>
-      <View>
-        <View style={{ width: windowWidth, height: 100 }}>
-          <ImageBackground
+    <ScrollView style={{windowWidth:windowWidth,windowHeight:windowHeight,backgroundColor:'#FFFFFF'}}>
+      <View style={{ width: windowWidth, height: windowHeight }}>
+        <Image
+          
             source={require('../../../assets/images/union3.png')}
-            resizeMode="cover"
-            style={{ width: windowWidth, height: 700, marginTop: 250 }}
+           style={{width: windowWidth,position:'absolute',bottom:0,height:550}}
+           
           />
-        </View>
-        <View style={{ marginBottom: 100 }}>
+        
+        <View style={{ marginBottom: 100 ,marginTop:20}}>
           <Text style={style.textLoginStyle}>Welcome Back!</Text>
           <Text style={style.textLoginStyle1}>Enter Your Username & Password</Text>
         </View>
@@ -88,14 +90,15 @@ export default function LoginScreen({ navigation }) {
           <TextInput
             style={[
               style.textInputStyle,
-              { borderBottomColor: isEmailFocused ? 'blue' : 'black' }
+              { borderBottomColor: isUsernameFocused ? 'blue' : 'black' }
             ]}
-            onChangeText={onChangeEmail}
+            onChangeText={onChangeUsername}
             placeholderTextColor='#c7c7c7'
-            value={email}
-            onFocus={() => setIsEmailFocused(true)}
-            onBlur={() => setIsEmailFocused(false)}
+            value={username}
+            onFocus={() => setIsUsernameFocused(true)}
+            onBlur={() => setIsUsernameFocused(false)}
           />
+              <Entypo name="users" size={24} color="black" style={{marginTop:-39,left:280}} />
 
           <Text style={[style.textLabel, { marginTop: 20 }]}>Password</Text>
           <View style={style.passwordContainer}>
@@ -110,12 +113,13 @@ export default function LoginScreen({ navigation }) {
               value={password}
               onFocus={() => setIsPasswordFocused(true)}
               onBlur={() => setIsPasswordFocused(false)}
+              
             />
-            <TouchableOpacity onPress={() => setHidePassword(!hidePassword)}>
-              <Ionicons name={hidePassword ? 'eye-off' : 'eye'} size={24} color="black" />
+            <TouchableOpacity style={{marginTop:20}} onPress={() => setHidePassword(!hidePassword)}>
+              <Ionicons style={{marginTop:-30,right:20}} name={hidePassword ? 'eye-off' : 'eye'} size={24} color="black" />
             </TouchableOpacity>
           </View>
-
+          
           <View style={style.signin}>
             <TouchableOpacity onPress={onSubmitAccount} style={style.buttonLogin} disabled={loading}>
               {loading ? (
@@ -128,12 +132,13 @@ export default function LoginScreen({ navigation }) {
         </View>
         <View style={style.containerBottom}>
           <Text onPress={onSubmitLoginRegis} style={style.textContinueStyle}>
-            Don't have account?
+           Fotgotten Password?
           </Text>
           <Text style={{ fontWeight: 'semibold', textAlign: 'center' }} onPress={onSubmitLoginRegis}>
-            Create now
+           Or Create a New Account
           </Text>
-        </View>
+       </View>
+     
       </View>
     </ScrollView>
   );
@@ -151,7 +156,8 @@ const style = StyleSheet.create({
     alignSelf: 'center',
     height: 50,
     fontWeight: 'bold',
-    marginBottom: 50
+    marginBottom: 50,
+    marginTop:55
   },
   textInputStyle: {
     height: 40,
@@ -176,7 +182,7 @@ const style = StyleSheet.create({
     fontSize: 32,
     marginRight: 90,
     marginTop: 50,
-    fontWeight: 'bold',
+    fontWeight: '900',
     textAlign: 'center',
     color: '#000000',
   },
@@ -227,8 +233,9 @@ const style = StyleSheet.create({
     justifyContent: 'center'
   },
   textLabel: {
-    fontSize: 12,
-    fontWeight: 'regular'
+    fontSize: 24,
+    fontWeight: 'light',
+    opacity:0.5
   },
   textContinueStyle2: {
     textAlign: 'center',
