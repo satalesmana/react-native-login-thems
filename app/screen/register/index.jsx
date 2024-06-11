@@ -11,7 +11,7 @@ import {
 } from "react-native";
 import { MyButton } from "../../components"
 import { GitHub ,GitLab } from "../../../assets"
-import { setEmail, setNumber, setPassword, resetRegisterData } from "../../store/reducer/registerReducer";
+import { setemail, setnumber, setpassword, resetRegisterData } from "../../store/reducer/registerReducer";
 import { useSelector, useDispatch } from 'react-redux'
 import ApiLib from "../../lib/ApiLib"
 import React from "react" 
@@ -19,15 +19,77 @@ import React from "react"
 const windowWidth = Dimensions.get("window").width;
 
 export default function CreateScreen({ navigation }) {
-  const [email, onChangeEmail] = React.useState("");
-  const [number, onChangeNumber] = React.useState("");
-  const [pass, onChangePassword] = React.useState("");
+  const register = useSelector((state) => state.register.formInput)
+  const dispatch = useDispatch()
 
-  
-  const gotologin = () => {
-    navigation.navigate('Login')
+  const onNextInput = () =>{
+    try{
+        
+        if( register.email === null || register.email === ""){
+            throw Error('password is required')
+        }
+        if( register.number === null || register.number === ""){
+            throw Error('password is required')
+        }
+        if( register.pass === null || register.pass === ""){
+            throw Error('password is required')
+        }
+        
+        // let message  = `Name : ${register.firstName}  ${register.sureName}\n`
+        //     message += `Email : ${register.email} \n`
+        //     message += `Gender : ${register.gender} \n`
+        //     message += `Birth Date : ${register.birthDate} \n`
+
+        Alert.alert('Confirm', message, [
+            {
+                text: 'Cancel',
+                onPress: () => console.log('Cancel Pressed'),
+                style: 'cancel',
+            },{
+                text: 'Submit', onPress: async () => {
+                    console.log(register)
+                   const res =  await ApiLib.post('/action/insertOne',
+                        {
+                            "dataSource":"AtlasCluster",
+                            "database": "ekireski",
+                            "collection": "ekireski",
+                            "document": register
+                        }
+                    )
+                    console.log(res)
+                    if(res.data?.insertedId){
+                        dispatch(resetRegisterData())
+                        navigation.navigate("Login")
+                    }else{
+                        
+                    }
+                    
+                }
+            },
+        ]);
+        
+    }catch(err){
+        Alert.alert('Error', err.message, [
+          {text: 'OK', onPress: () => {
+            console.log('ERR')
+          }},
+        ]);
+    }
+    
 
 }
+//   const res =  await ApiLib.post('/action/insertOne',
+//             {
+//             "dataSource":"AtlasCluster",
+//             "database": "kelompok_2",
+//             "collection": "kelompok_2",
+//             "document": create
+//             }
+//           )
+//   const gotologin = () => {
+//     navigation.navigate('Login')
+
+// }
   return (
     <ScrollView>
       <View>
@@ -68,7 +130,7 @@ export default function CreateScreen({ navigation }) {
           <Text style={{fontWeight:'bold', color:'black',marginRight: 70}}>Remember Me</Text>
           <Text style={{fontWeight:'bold', color:'red',marginLeft: 60}}>Forgot Password</Text>
         </View>
-          <Button color="#4E0189" title="Sign Up" />
+          <Button color="#4E0189" title="Sign Up" onPress={onNextInput}/>
         </View>
 
         <View style={{ flexDirection: 'row', alignItems: 'center' }}>

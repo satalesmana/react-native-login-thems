@@ -11,7 +11,8 @@ import {
 } from "react-native";
 import { MyButton } from "../../components"
 import { GitHub ,GitLab } from "../../../assets"
-import React from "react" 
+import React from "react"
+import ApiLib from "../../lib/ApiLib"
 
 const windowWidth = Dimensions.get("window").width;
 
@@ -20,14 +21,8 @@ export default function LoginScreen({ navigation }) {
   const [number, onChangeNumber] = React.useState("");
   const [pass, onChangePassword] = React.useState("");
   const [loading, setLoading] = React.useState(false); // Changed from "false" to false
-  const onSubmitLogin = () => {
-    // if (email == "gebby" && pass == 123) {
-    //   alert("Sudah Benar");
-    //   navigation.navigate("HomeScreen");
-    // } else {
-    //   alert("Salah");
-    // }
-
+  const onSubmitLogin =async ()=>{
+    setLoading(true)
     try {
       if(email.trim().length === 0){
         alert("Email tidak boleh kosong")
@@ -35,7 +30,17 @@ export default function LoginScreen({ navigation }) {
       if(pass.trim().length === 0){
         alert("Password tidak boleh kosong")
       }
-      
+      const res = await ApiLib.post('/action/findOne',{
+              "dataSource": "AtlasCluster",
+              "database": "kelompok_2",
+              "collection": "kelompok_2",
+              "filter": {
+                "email": email,
+                "password": pass,
+                "number": number
+              }
+          }
+      )
 
       setLoading(false);
       if (res.data.document != null) {

@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 export const registerSlice = createSlice({
-  name: "Login",
+  name: 'create',
   initialState: {
     formInput: {
       email: null,
@@ -10,13 +10,13 @@ export const registerSlice = createSlice({
     },
   },
   reducers: {
-    setEmail: (state, action) => {
+    setemail: (state, action) => {
       state.formInput.email = action.payload;
     },
-    setNumber: (state, action) => {
+    seteumber: (state, action) => {
         state.formInput.number = action.payload;
       },
-    setPassword: (state, action) => {
+    setepassword: (state, action) => {
       state.formInput.pass = action.payload;
     },
     resetRegisterData: (state) => {
