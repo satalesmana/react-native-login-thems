@@ -23,6 +23,7 @@ export default function CreateScreen({ navigation }) {
   const [number, onChangeNumber] = React.useState("");
   const [pass, onChangePassword] = React.useState("");
 
+  
   const gotologin = () => {
     navigation.navigate('Login')
 
