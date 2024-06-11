@@ -38,7 +38,8 @@ import {
   LoginScreen,
   HomeScreen,
   WelcomeScreen,
-  RegisterInputScreen
+  SplashScreen,
+  RegisterInputScreen,
 } from "./screen"
 import store from './store'
 import { Provider } from 'react-redux'
@@ -49,8 +50,11 @@ function App() {
   return (
     <Provider store={store}> 
       <NavigationContainer independent={true}>
-      <Stack.Navigator initialRouteName="Welcome">
+      <Stack.Navigator initialRouteName="Splash">
       <Stack.Screen name="Home" component={HomeScreen} />
+      <Stack.Screen name="Splash" 
+            options={{headerShown:false}}
+            component={SplashScreen} />
       <Stack.Screen name="Welcome" 
           options={{headerShown:false}}
           component={WelcomeScreen} />
