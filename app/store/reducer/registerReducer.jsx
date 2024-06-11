@@ -13,7 +13,7 @@ export const registerSlice = createSlice({
     setemail: (state, action) => {
       state.formInput.email = action.payload;
     },
-    seteumber: (state, action) => {
+    setenumber: (state, action) => {
         state.formInput.number = action.payload;
       },
     setepassword: (state, action) => {
