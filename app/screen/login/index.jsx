@@ -19,7 +19,7 @@ export default function LoginScreen({ navigation }) {
   const [email, onChangeEmail] = React.useState("");
   const [number, onChangeNumber] = React.useState("");
   const [pass, onChangePassword] = React.useState("");
-
+  const [loading, setLoading] = React.useState(false); // Changed from "false" to false
   const onSubmitLogin = () => {
     // if (email == "gebby" && pass == 123) {
     //   alert("Sudah Benar");
@@ -35,8 +35,21 @@ export default function LoginScreen({ navigation }) {
       if(pass.trim().length === 0){
         alert("Password tidak boleh kosong")
       }
-
-      navigation.navigate('Create')
+     
+      setLoading(false);
+      if (res.data.document != null) {
+        navigation.replace("Home");
+      } else {
+        Alert.alert("Error", "Username & Password tidak sesuai", [
+          {
+            text: "OK",
+            onPress: () => {
+              console.log("ERR");
+            },
+          },
+        ]);
+      }
+      navigation.navigate('Home')
     } catch (err) {
       Alert.alert('Error', err.message, [{
         text:'OK', onPress: () => {

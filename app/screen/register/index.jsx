@@ -11,6 +11,9 @@ import {
 } from "react-native";
 import { MyButton } from "../../components"
 import { GitHub ,GitLab } from "../../../assets"
+import { setEmail, setNumber, setPassword, resetRegisterData } from "../../store/reducer/registerReducer";
+import { useSelector, useDispatch } from 'react-redux'
+import ApiLib from "../../lib/ApiLib"
 import React from "react" 
 
 const windowWidth = Dimensions.get("window").width;
