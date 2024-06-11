@@ -142,6 +142,7 @@ const windowWidth = Dimensions.get('window').width;
 export default function LoginScreen({ navigation }) {
   const [email, onChangeEmail] = React.useState('');
   const [password, onChangePassword] = React.useState('');
+  const [showPassword, setShowPassword] = useState(false); // Add this state
   const [loading, setLoading] = useState(false);
 
   const onSubmitLogin = async () => {
@@ -155,7 +156,7 @@ export default function LoginScreen({ navigation }) {
       }
 
       
-      setLoading(true); // Show loading indicator
+      setLoading(true);
 
       const res = await ApiLib.post('/action/findOne', {
         dataSource: "Cluster0",
@@ -167,10 +168,9 @@ export default function LoginScreen({ navigation }) {
         },
       });
 
-      setLoading(false); // Hide
+      setLoading(false);
       
-      if (res.data.document != null) {
-        // Successful login
+      if (res.data.document!= null) {
         Alert.alert(
           'Selamat datang!', // Display "Selamat datang" message
           '',
@@ -183,9 +183,7 @@ export default function LoginScreen({ navigation }) {
                 { text: 'OK', onPress: () => console.log('ERR') },
                 ]);
                 }
-      // setTimeout(() => {
-      //   setLoading(false)
-      // }, 1000)
+
     } catch (err) {
       Alert.alert('Error', err.message, [
         { text: 'OK', onPress: () => console.log('ERR') },
@@ -218,14 +216,21 @@ export default function LoginScreen({ navigation }) {
           <Text style={[style.textLabel, { marginTop: 10 }]}>
             Password
           </Text>
-          <TextInput
-            style={[style.textInputStyle, { marginBottom: 12 }]}
-            onChangeText={onChangePassword}
-            placeholder='Enter Password'
-            placeholderTextColor='gray'
-            secureTextEntry={true}
-            value={password}
-          />
+          <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+            <TextInput
+              style={[style.textInputStyle, { flex: 1, marginRight: 10 }]}
+              onChangeText={onChangePassword}
+              placeholder='Enter Password'
+              placeholderTextColor='gray'
+              secureTextEntry={!showPassword}
+            />
+            <TouchableOpacity onPress={() => setShowPassword(!showPassword)}>
+              <Text style={{ fontSize: 16, color: 'gray' }}>
+                {showPassword? 'Hide' : 'Show'}
+              </Text>
+            </TouchableOpacity>
+          </View>
+
           <Text style={style.textForgot}>Forgot Your Password?</Text>
           <TouchableOpacity onPress={onSubmitLogin} style={style.buttonLogin}>
             <Text style={style.textSignin}>Sign In</Text>
@@ -284,7 +289,6 @@ const style = StyleSheet.create({
   textInputStyle: {
     height: 60,
     marginTop: 12,
-    borderWidth: 1,
     padding: 10,
     borderRadius: 10,
   },
