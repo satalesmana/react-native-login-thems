@@ -6,6 +6,7 @@ export const registerSlice = createSlice({
     formInput:{
         email: null,
         password: null,
+        username:null
     },
   },
   reducers: {
@@ -15,10 +16,14 @@ export const registerSlice = createSlice({
     setPassword:(state, action) => {
         state.formInput.password = action.payload
     },
+    setUsername:(state, action) => {
+        state.formInput.username = action.payload
+    },
     resetRegisterData:(state) =>{
         state.formInput = {
             email: null,
             password: null,
+            username:null
         }
     }
   },
@@ -28,7 +33,8 @@ export const registerSlice = createSlice({
 export const { 
     setEmail,
     setPassword,
-    resetRegisterData
+    resetRegisterData,
+    setUsername
  } = registerSlice.actions
 
 export default registerSlice.reducer
