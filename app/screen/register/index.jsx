@@ -22,113 +22,125 @@ import {
   
   export default function RegisterInputScreen({ navigation }) {
     const [confirmPassword, setConfirmPassword] = useState(null)
+    const [showPassword, setShowPassword] = useState(false)
+    const [showConfirmPassword, setShowConfirmPassword] = useState(false)
     const register = useSelector((state) => state.register.formInput)
     const dispatch = useDispatch()
   
     const onNextInput = () => {
-        try {
-            if (register.email === null || register.email === "") {
-                throw Error('Email is required')
-            }
-            if (register.password === null || register.password === "") {
-                throw Error('password is required')
-            }
-  
-            if (confirmPassword === null || confirmPassword === "") {
-                throw Error('Confirm password is required')
-            }
-  
-            let 
-            message = `Email : ${register.email} \n`
-            message += `Password : ${register.password} \n`
-  
-            Alert.alert('Confirm Your Account?', message, [
-                {
-                    text: 'Cancel',
-                    onPress: () => console.log('Cancel Pressed'),
-                    style: 'cancel',
-                }, {
-                    text: 'Submit', onPress: async () => {
-                        const res = await ApiLib.post('/action/insertOne',
-                            {
-                                "dataSource": "Cluster0",
-                                "database": "lp3i_app",
-                                "collection": "users",
-                                "document": register
-                            }
-                        )
-  
-                        if (res.data?.insertedId) {
-                            dispatch(resetRegisterData())
-                            navigation.navigate("Login")
-                        }
-  
-                    }
-                },
-            ]);
-  
-        } catch (err) {
-            Alert.alert('Error', err.message, [
-                {
-                    text: 'OK', onPress: () => {
-                        console.log('ERR')
-                    }
-                },
-            ]);
+      try {
+        if (register.email === null || register.email === "") {
+          throw Error('Email is required')
         }
+        if (register.password === null || register.password === "") {
+          throw Error('password is required')
+        }
+  
+        if (confirmPassword === null || confirmPassword === "") {
+          throw Error('Confirm password is required')
+        }
+  
+        let 
+        message = `Email : ${register.email} \n`
+        message += `Password : ${register.password} \n`
+  
+        Alert.alert('Confirm Your Account?', message, [
+          {
+            text: 'Cancel',
+            onPress: () => console.log('Cancel Pressed'),
+            style: 'cancel',
+          }, {
+            text: 'Submit', onPress: async () => {
+              const res = await ApiLib.post('/action/insertOne',
+                {
+                  "dataSource": "Cluster0",
+                  "database": "lp3i_app",
+                  "collection": "users",
+                  "document": register
+                }
+              )
+  
+              if (res.data?.insertedId) {
+                dispatch(resetRegisterData())
+                navigation.navigate("Login")
+              }
+  
+            }
+          },
+        ]);
+  
+      } catch (err) {
+        Alert.alert('Error', err.message, [
+          {
+            text: 'OK', onPress: () => {
+              console.log('ERR')
+            }
+          },
+        ]);
+      }
     }
     const onLoginAccount = () => {
       navigation.navigate('Login')
-  }
+    }
   
     return (
-        <ScrollView>
-            <View>
-                <View style={{ width: windowWidth, height: 200 }}>
-                    <Text style={style.textLoginStyle}>Create Account</Text>
-                    <Text style={style.textLoginStyle2}>Create an account so you can explore all the existing jobs</Text>
-                </View>
+      <ScrollView>
+        <View>
+          <View style={{ width: windowWidth, height: 200 }}>
+            <Text style={style.textLoginStyle}>Create Account</Text>
+            <Text style={style.textLoginStyle2}>Create an account so you can explore all the existing jobs</Text>
+          </View>
   
-                <View style={style.container}>
-                    <Text style={style.textLabel}></Text>
-                    <TextInput
-                        style={style.textInputStyle}
-                        onChangeText={(value) => dispatch(setEmail(value))}
-                        placeholder='Email'
-                        placeholderTextColor='gray'
-                        value={register.email} />
+          <View style={style.container}>
+            <Text style={style.textLabel}></Text>
+            <TextInput
+              style={style.textInputStyle}
+              onChangeText={(value) => dispatch(setEmail(value))}
+              placeholder='Email'
+              placeholderTextColor='gray'
+              value={register.email} />
   
-                    <Text style={[style.textLabel, { marginTop: 10 }]}></Text>
-                    <TextInput
-                        style={[style.textInputStyle]}
-                        onChangeText={(value) => dispatch(setPassword(value))}
-                        placeholder='Password'
-                        secureTextEntry={true}
-                        placeholderTextColor='gray'
-                        value={register.password} />
+            <Text style={[style.textLabel, { marginTop: 10 }]}></Text>
+            <View style={{ flexDirection: 'row', alignItems: 'center',}}>
+              <TextInput
+
+                style={[style.textInputStyle, { flex: 1 }]}
+                onChangeText={(value) => dispatch(setPassword(value))}
+                placeholder='Password'
+                secureTextEntry={!showPassword}
+                placeholderTextColor='gray'
+                value={register.password} />
+              <TouchableOpacity onPress={() => setShowPassword(!showPassword)}>
+                <Text style={{ fontSize: 16, marginRight: 10 }}>{showPassword ? 'Hide' : 'Show'}</Text>
+              </TouchableOpacity>
+            </View>
   
-                    <Text style={[style.textLabel, { marginTop: 10 }]}></Text>
-                    <TextInput
-                        style={[style.textInputStyle]}
-                        onChangeText={(value) => setConfirmPassword(value)}
-                        placeholder='Confirm Password'
-                        placeholderTextColor='gray'
-                        secureTextEntry={true}
-                        value={confirmPassword} />
+            <Text style={[style.textLabel, { marginTop: 10 }]}></Text>
+            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+              <TextInput
+                style={[style.textInputStyle, { flex: 1 }]}
+                onChangeText={(value) => setConfirmPassword(value)}
+                placeholder='Confirm Password'
+                secureTextEntry={!showConfirmPassword}
+                placeholderTextColor='gray'
+                value={confirmPassword} />
+              <TouchableOpacity onPress={() => setShowConfirmPassword(!showConfirmPassword)}>
+                <Text style={{ fontSize: 16, marginRight: 10 }}>{showConfirmPassword ? 'Hide' : 'Show'}</Text>
+              </TouchableOpacity>
+            </View>
   
-                    <TouchableOpacity onPress={onNextInput} style={style.buttonLogin}>
-                        <Text style={style.textSignin}>Sign In</Text>
-                    </TouchableOpacity>
+            <TouchableOpacity onPress={onNextInput} style={style.buttonLogin}>
+              <Text style={style.textSignin}>Sign In</Text>
+            </TouchableOpacity>
   
-                </View>
+          </View>
   
-                <Text onPress={onLoginAccount} style={style.textContinueStyle}>
-                    Already have an account
-                </Text>
-                <Text style={style.textContinueStyle2}>
-                    Or continue with
-                </Text>
-  
+          <Text onPress={onLoginAccount} style={style.textContinueStyle}>
+            Already have an account
+          </Text>
+          <Text style={style.textContinueStyle2}>
+            Or continue with
+          </Text>
                 <View style={style.btnContainer}>
                     <View>
                         <MyButton style={style.btnContainer1}
@@ -170,7 +182,6 @@ import {
     textInputStyle: {
         height: 50,
         marginTop: 5,
-        borderWidth: 1,
         padding: 10,
         borderRadius: 10,
     },
