@@ -1,3 +1,126 @@
+// import {
+//   View,
+//   Text,
+//   TextInput,
+//   StyleSheet,
+//   TouchableOpacity,
+//   Dimensions,
+//   ScrollView,
+//   Alert,
+//   ActivityIndicator
+// } from 'react-native';
+// import { MyButton } from '../../components'
+// import { ICFacebook, ICGoogle, ICApple } from '../../../assets'
+// import React, { useState } from 'react'
+// import ApiLib from "../../lib/ApiLib"
+
+// const windowWidth = Dimensions.get('window').width;
+
+// export default function LoginScreen({ navigation }) {
+//   const [email, onChangeEmail] = React.useState('')
+//   const [password, onChangePassword] = React.useState('')
+//   const [loading, setLoading] = useState(false)
+
+//   const onSubmitLogin = async () => {
+//     try {
+//       if (email.trim().length === 0) {
+//         throw Error('Email is required')
+//       }
+
+//       if (password.trim().length === 0) {
+//         throw Error('Password is required')
+//       }
+//       const res = await ApiLib.post('/action/findOne', {
+//         "dataSource": "Cluster0",
+//         "database": "lp3i_app",
+//         "collection": "users",
+//         "filter": {
+//           "email": email,
+//           "password": password
+//         }
+//       }
+//       )
+//       setLoading(false)
+//       // Simulate a login request
+//       if(res.data.document != null){
+//         navigation.navigate('Home')
+//       }else{
+//         Alert.alert('Error', "Username & password tidak sesuai", [
+//           {text: 'OK', onPress: () => {
+//             console.log('ERR')
+//           }},
+//         ]);
+//       }
+
+      
+//     } catch (err) {
+//       Alert.alert('Error', err.message, [
+//         {
+//           text: 'OK', onPress: () => {
+//             console.log('ERR')
+//           }
+//         },
+//       ]);
+//     }
+//   }
+
+//   const onSubmitLoginRegis = () => {
+//     navigation.navigate('Register')
+//   }
+
+//   return (
+//     <ScrollView>
+//       <View>
+//         <View style={{ width: windowWidth, height: 200 }}>
+//           <Text style={style.textLoginStyle}>Login Here</Text>
+//           <Text style={style.textLoginStyle2}>Welcome back you’ve been missed!</Text>
+//         </View>
+
+//         <View style={style.container}>
+//           <Text style={style.textLabel}></Text>
+//           <TextInput
+//             style={style.textInputStyle}
+//             onChangeText={onChangeEmail}
+//             placeholder='Email'
+//             placeholderTextColor='gray'
+//             value={email} />
+
+//           <Text style={[style.textLabel, { marginTop: 20 }]}></Text>
+//           <TextInput
+//             style={[style.textInputStyle, { marginBottom: 12 }]}
+//             onChangeText={onChangePassword}
+//             placeholder='Enter Password'
+//             placeholderTextColor='gray'
+//             secureTextEntry={true}
+//             value={password} />
+//           <Text style={style.textForgot}>Forgot Your Password?</Text>
+//           <TouchableOpacity onPress={onSubmitLogin} style={style.buttonLogin}>
+//             <Text style={style.textSignin}>Sign In</Text>
+//           </TouchableOpacity>
+
+//         </View>
+
+//         <Text onPress={onSubmitLoginRegis} style={style.textContinueStyle}>
+//           Create new Account
+//         </Text>
+//         <Text style={style.textContinueStyle2}>
+//           Or continue with
+//         </Text>
+
+//         <View style={style.btnContainer}>
+//           <View>
+//             <MyButton style={style.btnContainer1}
+//               imgUrl={ICGoogle} />
+//           </View>
+//           <View>
+//             <MyButton style={style.btnContainer1}
+//               imgUrl={ICFacebook} />
+//           </View>
+//           <View>
+//             <MyButton style={style.btnContainer1}
+//               imgUrl={ICApple} />
+//           </View>
+//         </View>
 import {
   View,
   Text,
@@ -7,69 +130,72 @@ import {
   Dimensions,
   ScrollView,
   Alert,
-  ActivityIndicator
+  ActivityIndicator,
 } from 'react-native';
-import { MyButton } from '../../components'
-import { ICFacebook, ICGoogle, ICApple } from '../../../assets'
-import React, { useState } from 'react'
-import ApiLib from "../../lib/ApiLib"
+import { MyButton } from '../../components';
+import { ICFacebook, ICGoogle, ICApple } from '../../../assets';
+import React, { useState } from 'react';
+import ApiLib from "../../lib/ApiLib";
 
 const windowWidth = Dimensions.get('window').width;
 
 export default function LoginScreen({ navigation }) {
-  const [email, onChangeEmail] = React.useState('')
-  const [password, onChangePassword] = React.useState('')
-  const [loading, setLoading] = useState(false)
+  const [email, onChangeEmail] = React.useState('');
+  const [password, onChangePassword] = React.useState('');
+  const [loading, setLoading] = useState(false);
 
   const onSubmitLogin = async () => {
     try {
       if (email.trim().length === 0) {
-        throw Error('Email is required')
+        throw Error('Email is required');
       }
 
       if (password.trim().length === 0) {
-        throw Error('Password is required')
+        throw Error('Password is required');
       }
+
+      
+      setLoading(true); // Show loading indicator
+
       const res = await ApiLib.post('/action/findOne', {
-        "dataSource": "Cluster0",
-        "database": "lp3i_app",
-        "collection": "users",
-        "filter": {
-          "email": email,
-          "password": password
-        }
-      }
-      )
-      setLoading(false)
-      // Simulate a login request
-      if(res.data.document != null){
-        navigation.navigate('Home')
-      }else{
-        Alert.alert('Error', "Username & password tidak sesuai", [
-          {text: 'OK', onPress: () => {
-            console.log('ERR')
-          }},
-        ]);
-      }
+        dataSource: "Cluster0",
+        database: "lp3i_app",
+        collection: "users",
+        filter: {
+          email,
+          password,
+        },
+      });
+
+      setLoading(false); // Hide
+      
+      if (res.data.document != null) {
+        // Successful login
+        Alert.alert(
+          'Selamat datang!', // Display "Selamat datang" message
+          '',
+          [
+            { text: 'OK', onPress: () => navigation.navigate('Home') },
+            ]
+            );
+            } else {
+              Alert.alert('Error', "Username & password tidak sesuai", [
+                { text: 'OK', onPress: () => console.log('ERR') },
+                ]);
+                }
       // setTimeout(() => {
-      //   navigation.navigate('Home')
       //   setLoading(false)
       // }, 1000)
-      
     } catch (err) {
       Alert.alert('Error', err.message, [
-        {
-          text: 'OK', onPress: () => {
-            console.log('ERR')
-          }
-        },
+        { text: 'OK', onPress: () => console.log('ERR') },
       ]);
     }
-  }
+  };
 
   const onSubmitLoginRegis = () => {
-    navigation.navigate('Register')
-  }
+    navigation.navigate('Register');
+  };
 
   return (
     <ScrollView>
@@ -80,27 +206,30 @@ export default function LoginScreen({ navigation }) {
         </View>
 
         <View style={style.container}>
-          <Text style={style.textLabel}></Text>
+          <Text style={style.textLabel}>Email</Text>
           <TextInput
             style={style.textInputStyle}
             onChangeText={onChangeEmail}
             placeholder='Email'
             placeholderTextColor='gray'
-            value={email} />
+            value={email}
+          />
 
-          <Text style={[style.textLabel, { marginTop: 20 }]}></Text>
+          <Text style={[style.textLabel, { marginTop: 10 }]}>
+            Password
+          </Text>
           <TextInput
             style={[style.textInputStyle, { marginBottom: 12 }]}
             onChangeText={onChangePassword}
             placeholder='Enter Password'
             placeholderTextColor='gray'
             secureTextEntry={true}
-            value={password} />
+            value={password}
+          />
           <Text style={style.textForgot}>Forgot Your Password?</Text>
           <TouchableOpacity onPress={onSubmitLogin} style={style.buttonLogin}>
             <Text style={style.textSignin}>Sign In</Text>
           </TouchableOpacity>
-
         </View>
 
         <Text onPress={onSubmitLoginRegis} style={style.textContinueStyle}>
@@ -112,16 +241,13 @@ export default function LoginScreen({ navigation }) {
 
         <View style={style.btnContainer}>
           <View>
-            <MyButton style={style.btnContainer1}
-              imgUrl={ICGoogle} />
+            <MyButton style={style.btnContainer1} imgUrl={ICGoogle} />
           </View>
           <View>
-            <MyButton style={style.btnContainer1}
-              imgUrl={ICFacebook} />
+            <MyButton style={style.btnContainer1} imgUrl={ICFacebook} />
           </View>
           <View>
-            <MyButton style={style.btnContainer1}
-              imgUrl={ICApple} />
+            <MyButton style={style.btnContainer1} imgUrl={ICApple} />
           </View>
         </View>
 
@@ -156,7 +282,7 @@ const style = StyleSheet.create({
     padding: 20
   },
   textInputStyle: {
-    height: 70,
+    height: 60,
     marginTop: 12,
     borderWidth: 1,
     padding: 10,
@@ -199,11 +325,6 @@ const style = StyleSheet.create({
     textAlign: 'center',
     width: 240,
     alignSelf: 'center',
-  },
-  brandStyle: {
-    marginTop: 100,
-    alignItems: 'center',
-    justifyContent: 'center'
   },
   textLabel: {
     fontSize: 12,
