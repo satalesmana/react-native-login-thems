@@ -58,6 +58,7 @@ function App() {
           options={{headerShown:false}}
           component={LoginScreen} />
           <Stack.Screen name="Register"
+          options={{headerShown:false}}
           component={RegisterInputScreen} />
         </Stack.Navigator>
       </NavigationContainer>
