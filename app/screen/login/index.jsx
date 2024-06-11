@@ -35,7 +35,8 @@ export default function LoginScreen({ navigation }) {
       if(pass.trim().length === 0){
         alert("Password tidak boleh kosong")
       }
-     
+      
+
       setLoading(false);
       if (res.data.document != null) {
         navigation.replace("Home");
@@ -62,7 +63,14 @@ export default function LoginScreen({ navigation }) {
   const gotosignup = () => {
     navigation.navigate('Create')
   }
-
+  if (loading) {
+    return (
+      <View style={{ flex:1, justifyContent: 'center', alignItems: 'center'}}>
+        <ActivityIndicator size="large" color="#0000ff" />
+      </View>
+    )
+  }
+  
   return (
     <ScrollView>
       <View>
