@@ -13,6 +13,8 @@ import {
 import React, { useState } from 'react';
 import { Ionicons } from '@expo/vector-icons'; // Import Ionicons for eye icon
 import { Entypo } from '@expo/vector-icons';
+import {union3} from '../../../assets'
+
 
 import ApiLib from "../../lib/ApiLib";
 
@@ -75,7 +77,7 @@ export default function LoginScreen({ navigation }) {
       <View style={{ width: windowWidth, height: windowHeight }}>
         <Image
           
-            source={require('../../../assets/images/union3.png')}
+            source={union3}
            style={{width: windowWidth,position:'absolute',bottom:0,height:550}}
            
           />
