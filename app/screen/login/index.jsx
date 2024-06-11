@@ -132,10 +132,10 @@ export default function LoginScreen({ navigation }) {
         </View>
         <View style={style.containerBottom}>
           <Text onPress={onSubmitLoginRegis} style={style.textContinueStyle}>
-            Don't have account?
+           Fotgotten Password?
           </Text>
           <Text style={{ fontWeight: 'semibold', textAlign: 'center' }} onPress={onSubmitLoginRegis}>
-            Create now
+           Or Create a New Account
           </Text>
        </View>
      
