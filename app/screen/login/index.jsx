@@ -9,6 +9,7 @@ import {
   Dimensions,
   Image,
   ScrollView,
+  Alert
 } from "react-native";
 import { MyButton } from "../components";
 import { ICGoogle } from "../../../assets";
@@ -22,7 +23,7 @@ export default function LoginScreen({ navigation }) {
   const [isEnabled, setIsEnabled] = useState(false);
   const toggleSwitch = () => setIsEnabled((previousState) => !previousState);
   const [loading, setLoading] = React.useState(false); // Changed from "false" to false
-  
+
 
   const onSubmitLogin = async () => {
     setLoading(true);
@@ -124,7 +125,7 @@ export default function LoginScreen({ navigation }) {
 
         <View style={style.buttonStyle}>
           <Button
-            onPress={() => navigation.navigate("Home")}
+            onPress={onSubmitLogin}
             color="#0000FF"
             title="Login"
             titleStyle={{ borderRadius: 10 }}
