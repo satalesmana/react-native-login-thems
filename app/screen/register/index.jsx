@@ -11,10 +11,9 @@ import {
 } from "react-native";
 import { MyButton } from "../../components"
 import { GitHub ,GitLab } from "../../../assets"
-import { setemail, setnumber, setpassword, resetRegisterData } from "../../store/reducer/registerReducer";
+import { setEmail, setNumber, setPassword, resetRegisterData } from '../../store/reducer/registerReducer'
 import { useSelector, useDispatch } from 'react-redux'
 import ApiLib from "../../lib/ApiLib"
-import React from "react" 
 
 const windowWidth = Dimensions.get("window").width;
 
@@ -25,13 +24,13 @@ export default function CreateScreen({ navigation }) {
   const onNextInput = () =>{
     try{
         
-        if( register.email === null || register.email === ""){
+        if(register.email === null || register.email === "") {
             throw Error('password is required')
         }
-        if( register.number === null || register.number === ""){
+        if(register.number === null || register.number === "") {
             throw Error('password is required')
         }
-        if( register.pass === null || register.pass === ""){
+        if(register.password === null || register.password === "")  {
             throw Error('password is required')
         }
         
@@ -103,7 +102,7 @@ export default function CreateScreen({ navigation }) {
           <Text style={style.textLabel}>Email Address</Text>
           <TextInput
             style={style.textInputStyle}
-            onChangeText={onChangeEmail}
+            onChangeText={(value) => dispatch(setEmail(value))}
             placeholder="Enter Your Email"
             placeholderTextColor="#c7c7c7"
             value={email}
@@ -111,7 +110,7 @@ export default function CreateScreen({ navigation }) {
           <Text style={[style.textLabel, { marginTop: 15 }]}>Phone Number</Text>
           <TextInput
             style={[style.textInputStyle,]}
-            onChangeText={onChangeNumber}
+            onChangeText={(value) => dispatch(setNumber(value))}
             placeholder="Enter Your PhoneNumber"
             placeholderTextColor="#c7c7c7"
             value={number}
@@ -121,7 +120,7 @@ export default function CreateScreen({ navigation }) {
 <Image source={require('../../../assets/images/mata.jpeg')} style={{marginBottom: -40,marginLeft:300,tintColor:"#c7c7c7"}}/>
           <TextInput
             style={[style.textInputStyle, { marginBottom: 5 }]}
-            onChangeText={onChangePassword}
+            onChangeText={(value) => dispatch(setPassword(value))}
             placeholder="Your Enter Your Password"
             placeholderTextColor="#c7c7c7"
             value={pass}
