@@ -51,8 +51,8 @@ export default function CreateScreen({ navigation }) {
                    const res =  await ApiLib.post('/action/insertOne',
                         {
                             "dataSource":"AtlasCluster",
-                            "database": "ekireski",
-                            "collection": "ekireski",
+                            "database": "kelompok_2",
+                            "collection": "kelompok_2",
                             "document": register
                         }
                     )
