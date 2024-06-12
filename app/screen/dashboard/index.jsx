@@ -11,7 +11,7 @@ import ApiLib from "../../lib/ApiLib";
 import { useSelector, useDispatch } from "react-redux"; 
   
   export default function DashboardScreen({ navigation }) {
-    const dispatch = useDispatch()
+  const dispatch = useDispatch()
   const data = useSelector((state) => state.users.data)
   const filter = useSelector((state) => state.users.formFilter)
 
@@ -19,7 +19,7 @@ import { useSelector, useDispatch } from "react-redux";
     try{
       const res = await ApiLib.post('/action/find',{
         "dataSource": "Cluster0",
-        "database": "react-native-login-thems",
+        "database": "uasghw",
         "collection": "users",
         "filter": filter
       })
@@ -34,14 +34,11 @@ import { useSelector, useDispatch } from "react-redux";
     }
   }
 
-  const getInitial=(firstName, lastName)=>{
+  const getInitial=(firstName)=>{
     let name = ''
 
     if(firstName.length > 0)
         name += firstName.substring(0,1);
-    
-    if(lastName.length > 0)
-      name += lastName.substring(0,1);
 
       return name.toLocaleUpperCase()
   }
@@ -51,14 +48,14 @@ import { useSelector, useDispatch } from "react-redux";
   },[])
 
 
-  const rederItem = ({item}) => (
+  const renderItem = ({item}) => (
     <TouchableOpacity 
         style={styles.containerItem}>
           <View style={styles.itemLeft}>
-            <Text style={styles.textItemLeft}>{getInitial(item.firstName, item?.sureName)}</Text>
+            <Text style={styles.textItemLeft}>{getInitial(item.firstName)}</Text>
           </View>
           <View style={styles.itemRight}>
-            <Text>{item?.firstName} {item?.sureName}</Text>
+            <Text>{item?.firstName}</Text>
             <Text>{item?.email}</Text>
           </View>
     </TouchableOpacity>
@@ -68,7 +65,7 @@ import { useSelector, useDispatch } from "react-redux";
     <View >
         <FlatList
           data={data}
-          renderItem={rederItem}
+          renderItem={renderItem}
       />
     </View>
   );
@@ -94,7 +91,7 @@ const styles = StyleSheet.create({
     borderColor:'#dedede',
     width:45,
     textAlign:'center',
-    backgroundColor:'red',
+    backgroundColor:'#1F59B6',
     fontWeight:'bold',
     color:'white',
     padding:10

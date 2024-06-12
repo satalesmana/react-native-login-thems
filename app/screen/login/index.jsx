@@ -52,7 +52,7 @@ export default function LoginScreen({ navigation }) {
 
       setLoading(false);
       if (res.data.document != null) {
-        navigation.replace("Dashboard");
+        navigation.replace("Main");
       } else {
         Alert.alert("Error", "Username & Password tidak sesuai", [
           {

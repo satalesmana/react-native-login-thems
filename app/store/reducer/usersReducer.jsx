@@ -6,7 +6,7 @@ export const usersSlice = createSlice({
         formFilter:{},
         data:[]
     },
-    reducers: {
+    reducers: { 
         setData:(state, action) => {
             state.data = action.payload
         },
