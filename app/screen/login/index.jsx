@@ -7,6 +7,7 @@ import {
   ImageBackground,
   Dimensions,
   Image,
+  Alert,
   ScrollView,
 } from "react-native";
 import { MyButton } from "../../components"
