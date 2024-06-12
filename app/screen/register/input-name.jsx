@@ -1,68 +1,58 @@
-import { View,Text,TextInput,StyleSheet,TouchableOpacity,Button,ImageBackground,Dimensions,Image,ScrollView } from "react-native";
+import { View,Text,TextInput,StyleSheet,TouchableOpacity,Button,ImageBackground,Dimensions,Image,Alert,ScrollView } from "react-native";
 import { CustomeInput } from "../../components";
 // import React from 'react'
 import { useDispatch, useSelector } from "react-redux";
-import { setUsername,setEmail,setPassword } from "../../store/reducer/registerReducer";
+import { setUsername,setEmail,setPassword, setFirstname, resetRegisterData } from "../../store/reducer/registerReducer";
+import ApiLib from "../../lib/ApiLib";
+import React, { useState } from "react";
 
 const windowWidth = Dimensions.get('window').width;
 
 export default function RegisterScreen({navigation}){
-    const register = useSelector((state)=>state.register.formInput)
-    const dispatch = useDispatch()
-    const onNextInput=()=>{
-        // const [username, onChangeUsername] = React.useState('')
-        // const [email, onChangeEmail] = React.useState('')
-        // const [password, onChangePassword] = React.useState('')
+    // const [nama, onChangeNama] = React.useState('')
+    // const [email, onChangeEmail] = React.useState('')
+    // const [password, onChangePassword] = React.useState('')
+
+    const [confirmPassword, setConfirmPassword] = useState("");
+    const register = useSelector((state) => state.register.formInput);
+        const dispatch = useDispatch();
+        const onNextInput=()=>{
         try{
-            if( register.username=== null ||  register.username === ""){
-                throw Error('Username is required')
-            }
-            if( register.email === null ||  register.sureName === ""){
-                throw Error('email is required')
-            }
-            if( register.password === null ||  register.sureName === ""){
-                throw Error('Password is required')
-            }
-            let message  = `Username: ${register.username}\n`
-                message += `Email : ${register.email} \n`
-                message += `Password : ${register.password}\n`
-                Alert.alert('Confirm', message, [
-                    {
-                        text: 'Cancel',
-                        onPress: () => console.log('Cancel Pressed'),
-                        style: 'cancel',
-                    },{
-                        text: 'Submit', onPress: async () => {
-                           const res =  await ApiLib.post('/action/insertOne',
-                                {
-                                    "dataSource": "Cluster0",
-                                    "database": "uas",
-                                    "collection": "users",
-                                    "document": register
-                                }
-                            )
-    
-                            if(res.data?.insertedId){
-                                dispatch(resetRegisterData())
-                                navigation.navigate("Login")
-                            }
-                            
-                        }
-                    },
-                ]);
-                
-            // navigation.navigate("Login")
-        }catch(err){
-            Alert.alert('Error', err.message, [
-              {text: 'OK', onPress: () => {
-                console.log('ERR')
-              }},
-            ]);
+        if (!register.firstname) throw Error("Name is required");
+        if (!register.email) throw Error("Email is required");
+        if (!register.password) throw Error("Password is required");
+        
+        const message = `Name : ${register.firstname}\n
+        Email : ${register.email}\n
+        Password : ${register.password}\n`;
+        Alert.alert("Confirm", message, [
+            {
+              text: "Cancel",
+              onPress: () => console.log("Cancel Pressed"),
+              style: "cancel",
+            },
+            {
+              text: "Submit",
+              onPress: async () => {
+                const res = await ApiLib.post("/action/insertOne", {
+                  dataSource: "Cluster0",
+                  database: "uas",
+                  collection: "users",
+                  document: register,
+                });
+                if (res.data?.insertedId) {
+                  dispatch(resetRegisterData());
+                  navigation.navigate("Login");
+                }
+              },
+            },
+          ]);
+        } catch (err) {
+          Alert.alert("Error", err.message, [{ text: "OK" }]);
         }
-    }
-    // const onSubmitRegister=()=>{
-    //     navigation.navigate('Login')
-    // }
+      };
+    
+          
     return(
         <ScrollView>
         <View>
@@ -85,7 +75,7 @@ export default function RegisterScreen({navigation}){
             </View>
             <View style={style.container}>
             <CustomeInput
-            onChangeText={(value=>dispatch(setUsername(value)))}placeholder='username' placeholderTextColor='#c7c7c7'/>
+            onChangeText={(value=>dispatch(setFirstname(value)))}placeholder='username' placeholderTextColor='#c7c7c7'/>
             <CustomeInput
             onChangeText={(value=>dispatch(setEmail(value)))}placeholder='Email' placeholderTextColor='#c7c7c7'/>
             <CustomeInput
@@ -94,7 +84,7 @@ export default function RegisterScreen({navigation}){
             </View>
             <View style={{width : "80%", alignContent : "center",  alignSelf : "center", color:"black"}}>
             <TouchableOpacity style={{backgroundColor :"#FFC600",padding:10}}
-            onPress={() => navigation.navigate('Login')} >
+            onPress={onNextInput} >
             <Text style={{color : "black", alignSelf : "center"}}>Login</Text>
             </TouchableOpacity>  
             </View>

@@ -14,33 +14,63 @@ import {
   import { MyButton } from '../../components'    
  import { ICGoogle, ICFacebook, ICVictor } from '../../../assets'; 
   import React from 'react'
+import ApiLib from '../../lib/ApiLib';
 const windowWidth =Dimensions.get('window').width;
 
 export default function LoginScreen({navigation}){
     const [email, onChangeEmail] = React.useState('')
     const [password, onChangePassword] = React.useState('')
-    
-    const onSubmitLogin=()=>{
-        try{
-            if(email.trim().length === 0 ){
-              throw Error('Email is required')
-            }
-      
-            if(pasword.trim().length === 0 ){
-              throw Error('Password is required')
-            }
-      
-            navigation.navigate('RegisterName')
-          }catch(err){
-            Alert.alert('Error', err.message, [
-              {text: 'OK', onPress: () => {
-                console.log('ERR')
-              }},
-            ]);
-          }
-      
-        }
-      
+    const [loading, setLoading] = React.useState(false); // Changed from "false" to false
+
+    const onSubmitLogin = async () => {
+    setLoading(true);
+    try {
+      if (email.trim().length === 0) {
+        throw Error("Email is required");
+      }
+
+      if (password.trim().length === 0) {
+        throw Error("Password is required");
+      }
+      const res = await ApiLib.post("/action/findOne", {
+        dataSource: "Cluster0",
+        database: "uas",
+        collection: "users",
+        filter: {
+          email: email,
+          password: password,
+        },
+      });
+      setLoading(false);
+      if (res.data.document != null) {
+        navigation.replace("Home");
+      } else {
+        Alert.alert("Error", "Username & Password tidak sesuai", [
+          {
+            text: "OK",
+            onPress: () => {
+              console.log("ERR");
+            },
+          },
+        ]);
+      }
+    } catch (err) {
+      setLoading(false);
+      Alert.alert("Error", err.message, [
+        {
+          text: "OK",
+          onPress: () => {
+            console.log("ERR");
+          },
+        },
+      ]);
+    }
+  };
+
+  const onRegister = () => {
+    navigation.navigate("Register");
+  };
+
     return(
         <ScrollView>
         <View>
