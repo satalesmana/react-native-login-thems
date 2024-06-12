@@ -4,16 +4,15 @@ import {
   TextInput,
   StyleSheet,
   Button,
-  ImageBackground,
   Dimensions,
   Image,
-  ScrollView,
+  ScrollView
 } from "react-native";
-import { MyButton } from "../../components"
+import { MyButton } from "../../components";
 import { GitHub ,GitLab } from "../../../assets"
-import { setEmail, setNumber, setPassword, resetRegisterData } from '../../store/reducer/registerReducer'
-import { useSelector, useDispatch } from 'react-redux'
-import ApiLib from "../../lib/ApiLib"
+import { setEmail, setNumber, setPassword, resetRegisterData } from '../../store/reducer/registerReducer';
+import { useSelector, useDispatch } from 'react-redux';
+import ApiLib from "../../lib/ApiLib";
 
 const windowWidth = Dimensions.get("window").width;
 
@@ -50,8 +49,8 @@ export default function CreateScreen({ navigation }) {
                    const res =  await ApiLib.post('/action/insertOne',
                         {
                             "dataSource":"AtlasCluster",
-                            "database": "kelompok_2",
-                            "collection": "kelompok_2",
+                            "database": "ekireski",
+                            "collection": "ekireski",
                             "document": register
                         }
                     )
@@ -85,10 +84,10 @@ export default function CreateScreen({ navigation }) {
 //             "document": create
 //             }
 //           )
-//   const gotologin = () => {
-//     navigation.navigate('Login')
+  const gotologin = () => {
+    navigation.navigate('Login')
 
-// }
+}
   return (
     <ScrollView>
       <View>
@@ -105,7 +104,7 @@ export default function CreateScreen({ navigation }) {
             onChangeText={(value) => dispatch(setEmail(value))}
             placeholder="Enter Your Email"
             placeholderTextColor="#c7c7c7"
-            value={email}
+            value={setEmail}
           />
           <Text style={[style.textLabel, { marginTop: 15 }]}>Phone Number</Text>
           <TextInput
@@ -113,7 +112,7 @@ export default function CreateScreen({ navigation }) {
             onChangeText={(value) => dispatch(setNumber(value))}
             placeholder="Enter Your PhoneNumber"
             placeholderTextColor="#c7c7c7"
-            value={number}
+            value={setNumber}
           />
 
 <Text style={[style.textLabel, { marginBottom:20,marginTop:15 }]}>Password</Text>
@@ -123,7 +122,7 @@ export default function CreateScreen({ navigation }) {
             onChangeText={(value) => dispatch(setPassword(value))}
             placeholder="Your Enter Your Password"
             placeholderTextColor="#c7c7c7"
-            value={pass}
+            value={setPassword}
           />
           <View style={style.textForgot}>
           <Text style={{fontWeight:'bold', color:'black',marginRight: 70}}>Remember Me</Text>
