@@ -14,7 +14,7 @@ function App() {
   return (
     <Provider store={store}> 
     <NavigationContainer independent={true}>
-      <Stack.Navigator initialRouteName="Welcome">
+      <Stack.Navigator initialRouteName="welcome">
       <Stack.Screen name="Welcome" options={{headerShown:false}} component={WelcomeScreen} />
         <Stack.Screen name="Create" options={{headerShown:false}} component={CreateScreen} />
         <Stack.Screen name="Login" options={{headerShown:false}} component={LoginScreen} />
