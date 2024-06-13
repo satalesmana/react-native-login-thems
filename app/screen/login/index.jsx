@@ -120,14 +120,15 @@ export default function LoginScreen({ navigation }) {
             ios_backgroundColor="#3e3e3e"
             onValueChange={toggleSwitch}
             value={isEnabled}
+            style={{borderRadius:10}}
           />
-          <Text style={{ marginVertical: "auto" }}>Keep me Signed in</Text>
+          <Text style={style.signText}>Keep me Signed in</Text>
         </View>
 
         <View style={style.buttonStyle}>
           <Button
             onPress={onSubmitLogin}
-            color="#0000FF"
+            color="white"
             title="Login"
             titleStyle={{ borderRadius: 10 }}
           />
@@ -161,7 +162,7 @@ export default function LoginScreen({ navigation }) {
               marginTop: 30,
             },
           ]}
-          onPress={() => navigation.navigate("Register")}
+          onPress={onRegister}
         >
           Create new account
         </Text>
@@ -175,8 +176,17 @@ const style = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
+  signText:{
+marginHorizontal:10,
+paddingVertical:8
+  },
   buttonStyle: {
-    borderRadius: 50,
+    borderRadius: 10,
+    backgroundColor:'#0000FF',
+    width:"90%",
+    alignContent:"center",
+    justifyContent:"center",
+    alignSelf:"center"
   },
   containter: {
     padding: 20,
@@ -191,6 +201,7 @@ const style = StyleSheet.create({
   containerdua: {
     flex: 1,
     flexDirection: "row",
+    marginLeft: 20,
     marginBottom: 35,
     alignItems: "baseline",
   },
