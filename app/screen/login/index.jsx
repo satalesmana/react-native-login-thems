@@ -8,6 +8,7 @@ import {
   Image,
   Alert,
   ScrollView,
+  ActivityIndicator
 } from "react-native";
 import { MyButton } from "../../components"
 import { GitHub ,GitLab } from "../../../assets"
@@ -108,7 +109,7 @@ export default function LoginScreen({ navigation }) {
           <Text style={{fontWeight:'bold', color:'black',marginRight: 70}}>Remember Me</Text>
           <Text style={{fontWeight:'bold', color:'red',marginLeft: 60}}>Forgot Password</Text>
         </View>
-          <Button color="#4E0189" title="Login"/>
+          <Button color="#4E0189" onPress={onSubmitLogin} title="Login"/>
         </View>
 
         <View style={{ flexDirection: 'row', alignItems: 'center' }}>
