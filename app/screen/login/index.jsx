@@ -13,13 +13,16 @@ import {
 } from "react-native";
 import ApiLib from "../../lib/ApiLib";
 import Icon from "react-native-vector-icons/Feather";
+import { useDispatch } from "react-redux";
 
 import { ICGoogle, ICFacebook, ICTwitter } from "../../../assets";
 import { MyButton } from "../../components";
+import { setAuthData } from "../../store/reducer/authReducer";
 
 const windowWidth = Dimensions.get("window").width;
 
 export default function LoginScreen({ navigation }) {
+  const dispatch = useDispatch();
   const [email, onChangeEmail] = React.useState("");
   const [password, onChangePassword] = React.useState("");
   const [loading, setLoading] = React.useState(false); // Changed from "false" to false
@@ -52,6 +55,7 @@ export default function LoginScreen({ navigation }) {
 
       setLoading(false);
       if (res.data.document != null) {
+        dispatch(setAuthData(res.data.document));
         navigation.replace("Main");
       } else {
         Alert.alert("Error", "Username & Password tidak sesuai", [
