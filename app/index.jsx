@@ -7,6 +7,7 @@ import {
   RegisterScreen,
   DashboardScreen,
   ProfileScreen,
+  LogoutScreen,
 } from "./screen";
 import store from "./store";
 import { Provider } from "react-redux";
@@ -19,16 +20,19 @@ const Tab = createBottomTabNavigator();
 function MainScreen({}) {
   return (
     <Tab.Navigator
-      initialRouteName="Dashboard"
-      screenOptions={{ tabBarActiveTintColor: "#e91e63" }}
+      initialRouteName="BottomBar"
+      screenOptions={{
+        tabBarActiveTintColor: "#1F59B6",
+        tabBarInactiveTintColor: "#BDBDBD",
+      }}
     >
       <Tab.Screen
-        name="Dashboard"
+        name="Home"
         component={DashboardScreen}
         options={{
           tabBarLabel: "Home",
           tabBarIcon: ({ color, size }) => (
-            <MaterialCommunityIcons name="home" color={"#1F59B6"} size={size} />
+            <MaterialCommunityIcons name="home" color={color} size={size} />
           ),
         }}
       />
@@ -38,14 +42,20 @@ function MainScreen({}) {
         options={{
           tabBarLabel: "Profile",
           tabBarIcon: ({ color, size }) => (
-            <MaterialCommunityIcons
-              name="account"
-              color={"#1F59B6"}
-              size={size}
-            />
+            <MaterialCommunityIcons name="account" color={color} size={size} />
           ),
         }}
       />
+      {/* <Tab.Screen
+        name="Logout"
+        component={LogoutScreen}
+        options={{
+          tabBarLabel: "Logout",
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons name="logout" color={color} size={size} />
+          ),
+        }}
+      /> */}
     </Tab.Navigator>
   );
 }

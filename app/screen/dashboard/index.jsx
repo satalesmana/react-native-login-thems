@@ -17,8 +17,6 @@ export default function DashboardScreen({ navigation }) {
   const dispatch = useDispatch();
   const data = useSelector((state) => state.users.data);
   const filter = useSelector((state) => state.users.formFilter);
-  const authData = useSelector((state) => state.auth.authData);
-  console.log("auth : ", authData);
 
   const [refreshing, setRefreshing] = useState(false);
 
@@ -30,7 +28,6 @@ export default function DashboardScreen({ navigation }) {
         collection: "users",
         filter: filter,
       });
-      console.log("data res : ", res.data.documents);
 
       if (res.data?.documents) {
         dispatch(setData(res.data.documents));
@@ -76,15 +73,13 @@ export default function DashboardScreen({ navigation }) {
 
   return (
     <SafeAreaView style={styles.container}>
-      <ScrollView
+      <FlatList
+        data={data}
+        renderItem={renderItem}
         refreshControl={
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
         }
-      >
-        <View>
-          <FlatList data={data} renderItem={renderItem} />
-        </View>
-      </ScrollView>
+      />
     </SafeAreaView>
   );
 }

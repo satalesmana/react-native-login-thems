@@ -14,7 +14,6 @@ import {
 import ApiLib from "../../lib/ApiLib";
 import Icon from "react-native-vector-icons/Feather";
 import { useDispatch } from "react-redux";
-
 import { ICGoogle, ICFacebook, ICTwitter } from "../../../assets";
 import { MyButton } from "../../components";
 import { setAuthData } from "../../store/reducer/authReducer";
@@ -27,6 +26,7 @@ export default function LoginScreen({ navigation }) {
   const [password, onChangePassword] = React.useState("");
   const [loading, setLoading] = React.useState(false); // Changed from "false" to false
   const [showPass, setShowPassword] = React.useState(true);
+  const dispath = useDispatch();
 
   const handleShowPassword = () => {
     setShowPassword(!showPass);
