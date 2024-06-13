@@ -49,7 +49,7 @@ export default function HomeScreen(){
         <Text style={styles.textItemLeft}>{getInitial(item.firstname)}</Text>
       </View>
       <View style={styles.itemRight}>
-        <Text>{item?.firstName}</Text>
+        <Text>{item?.firstname}</Text>
         <Text>{item?.email}</Text>
       </View>
 </TouchableOpacity>

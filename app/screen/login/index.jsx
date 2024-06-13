@@ -11,17 +11,22 @@ import {
     ScrollView,
     Alert
   } from 'react-native';  
-  import { MyButton } from '../../components'    
- import { ICGoogle, ICFacebook, ICVictor } from '../../../assets'; 
-  import React from 'react'
+import { MyButton } from '../../components'    
+import { ICGoogle, ICFacebook, ICVictor } from '../../../assets'; 
+import React from 'react'
 import ApiLib from '../../lib/ApiLib';
+import { useDispatch } from 'react-redux';
+import { setId,setFirstName,setEmail,setPassword} from '../../store/reducer/authReducer';
+import { setFirstname } from '../../store/reducer/registerReducer';
+
 const windowWidth =Dimensions.get('window').width;
 
 export default function LoginScreen({navigation}){
     const [email, onChangeEmail] = React.useState('')
     const [password, onChangePassword] = React.useState('')
     const [loading, setLoading] = React.useState(false); // Changed from "false" to false
-
+    const dispatch = useDispatch()
+    
     const onSubmitLogin = async () => {
     setLoading(true);
     try {
@@ -43,7 +48,12 @@ export default function LoginScreen({navigation}){
       });
       setLoading(false);
       if (res.data.document != null) {
-        navigation.replace("Home");
+        // navigation.replace("Home");
+        console.log('data', res.data.document._id)
+        dispatch(setId(res.data.document._id))
+        dispatch(setFirstname(res.data.document.firstname))
+
+        navigation.replace("Main")
       } else {
         Alert.alert("Error", "Username & Password tidak sesuai", [
           {
@@ -118,7 +128,7 @@ export default function LoginScreen({navigation}){
             title="Login"/> */}
             <View style={{width : "80%", alignContent : "center",  alignSelf : "center", color:"black"}}>
                   <TouchableOpacity style={{backgroundColor :"#FFC600",padding:10}}
-            onPress={() => navigation.navigate('Home')} >
+            onPress={(onSubmitLogin)} >
             <Text style={{color : "black", alignSelf : "center"}}>Login</Text>
                     </TouchableOpacity>  
                 </View>
