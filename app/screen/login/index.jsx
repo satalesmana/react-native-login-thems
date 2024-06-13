@@ -37,8 +37,7 @@ export default function LoginScreen({ navigation }) {
               "collection": "ekireski",
               "filter": {
                 "email": email,
-                "password": pass,
-                "number": number
+                "password": pass
               }
           }
       )
@@ -56,7 +55,6 @@ export default function LoginScreen({ navigation }) {
           },
         ]);
       }
-      navigation.navigate('Home')
     } catch (err) {
       Alert.alert('Error', err.message, [{
         text:'OK', onPress: () => {
