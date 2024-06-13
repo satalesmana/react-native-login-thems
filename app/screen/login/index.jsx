@@ -13,7 +13,8 @@ import {
 } from "react-native";
 import ApiLib from "../../lib/ApiLib";
 import Icon from "react-native-vector-icons/Feather";
-
+import { useDispatch } from "react-redux";
+import { setId, setFirstName} from '../../store/reducer/authReducer'
 import { ICGoogle, ICFacebook, ICTwitter } from "../../../assets";
 import { MyButton } from "../../components";
 
@@ -24,6 +25,7 @@ export default function LoginScreen({ navigation }) {
   const [password, onChangePassword] = React.useState("");
   const [loading, setLoading] = React.useState(false); // Changed from "false" to false
   const [showPass, setShowPassword] = React.useState(true);
+  const dispath = useDispatch()
 
   const handleShowPassword = () => {
     setShowPassword(!showPass);
@@ -52,7 +54,12 @@ export default function LoginScreen({ navigation }) {
 
       setLoading(false);
       if (res.data.document != null) {
-        navigation.replace("Main");
+        // navigation.replace("Main");
+        console.log('data',res.data.document._id)
+        dispath(setId(res.data.document._id))
+        dispath(setFirstName(res.data.document.firstName))
+        navigation.replace("Main")
+        
       } else {
         Alert.alert("Error", "Username & Password tidak sesuai", [
           {

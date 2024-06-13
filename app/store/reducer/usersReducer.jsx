@@ -7,7 +7,7 @@ export const usersSlice = createSlice({
         data:[]
     },
     reducers: { 
-        setData:(state, action) => {
+        setData:(state, action) => {   
             state.data = action.payload
         },
         clearData:(state) => {
