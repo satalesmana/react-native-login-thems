@@ -88,11 +88,11 @@ export default function LoginScreen({ navigation }) {
     <ScrollView contentContainerStyle={style.container}>
       <Text style={style.welcomeBack}>Welcome Back!</Text>
       <View style={style.brandStyle}>
-        <Image source={require("../../../assets/images/home.png")} />
+        <Image source={require("../../../assets/images/first.png")} style={{width:200, height:200}} />
       </View>
       <View style={style.inputContainer}>
         <View style={style.inputView}>
-          <Icon name="mail" size={20} color="blue" style={style.imgStyleLeft} />
+          <Icon name="mail" size={20} color="purple" style={style.imgStyleLeft} />
           <TextInput
             style={style.inputText}
             onChangeText={onChangeEmail}
@@ -103,20 +103,20 @@ export default function LoginScreen({ navigation }) {
           <Icon
             name="check"
             size={22}
-            color="blue"
+            color="purple"
             style={(style.imgStyleRight, { marginRight: -2 })}
           />
         </View>
         <View
           style={{
             gap: 10,
-            width: "90%",
+            width: "150%",
             flexDirection: "row",
             alignItems: "center",
             marginBottom: 10,
           }}
         >
-          <Icon name="lock" size={20} color="blue" style={style.imgStyleLeft} />
+          <Icon name="lock" size={20} color="purple" style={style.imgStyleLeft} />
           <TextInput
             style={style.inputText}
             onChangeText={onChangePassword}
@@ -128,7 +128,7 @@ export default function LoginScreen({ navigation }) {
           <Icon
             name={showPass === true ? "eye-off" : "eye"}
             size={20}
-            color="#000"
+            color="purple"
             style={style.imgStyleLeft}
             onPress={() => handleShowPassword()}
           />
@@ -166,15 +166,6 @@ export default function LoginScreen({ navigation }) {
           Register Now
         </Text>
       </Text>
-      {/* <Text style={style.accountText}>
-        By signing up, you are agree with our{" "}
-        <Text
-          style={style.linkRegister}
-          onPress={() => navigation.navigate("Home")}
-        >
-          Terms & Conditions
-        </Text>
-      </Text> */}
     </ScrollView>
   );
 }
@@ -204,7 +195,7 @@ const style = StyleSheet.create({
   },
   inputView: {
     gap: 10,
-    width: "90%",
+    width: "150%",
     flexDirection: "row",
     alignItems: "center",
     marginBottom: 35,
@@ -218,7 +209,7 @@ const style = StyleSheet.create({
     marginLeft: 10,
     marginRight: 10,
     borderBottomWidth: 1,
-    borderBottomColor: "blue",
+    borderBottomColor: "purple",
   },
   imgStyleRight: {
     width: 16,
@@ -243,7 +234,7 @@ const style = StyleSheet.create({
   },
   buttonLogin: {
     borderRadius: 50,
-    backgroundColor: "#1F59B6",
+    backgroundColor: "#9322C8",
     paddingVertical: 8,
     paddingHorizontal: 32,
     elevation: 3,
@@ -284,7 +275,7 @@ const style = StyleSheet.create({
   },
   linkRegister: {
     fontSize: 14,
-    color: "blue",
+    color: "purple",
     textDecorationLine: "underline",
   },
 });

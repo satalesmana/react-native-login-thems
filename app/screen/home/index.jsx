@@ -20,7 +20,7 @@ export default function HomeScreen({ navigation }) {
         <View style={{ width: windowWidth, height: 500 }}>
           <Text style={style.welcomeToOurApps}>Welcome To Our Apps</Text>
           <View style={style.brandStyle}>
-            <Image source={require("../../../assets/images/home.png")} />
+            <Image source={require("../../../assets/images/first.png")} style={{width:200, height:200}} />
           </View>
 
           <View style={style.buttonView}>
@@ -60,7 +60,6 @@ const style = StyleSheet.create({
     color: "rgba(29,34,38,1)",
   },
   brandStyle: {
-    width: 400,
     marginTop: 100,
     marginBottom: 100,
     alignItems: "center",
@@ -75,7 +74,7 @@ const style = StyleSheet.create({
     justifyContent: "center",
     alignSelf: "center",
     borderRadius: 50,
-    backgroundColor: "#1F59B6",
+    backgroundColor: "#9322C8",
     paddingVertical: 12,
     paddingHorizontal: 32,
     elevation: 3,

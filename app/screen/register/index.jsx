@@ -37,6 +37,7 @@ export default function RegisterScreen({ navigation }) {
 
   const onNextInput = () => {
     try {
+      if (!register.nim) throw Error("NIM is required");
       if (!register.firstName) throw Error("Name is required");
       if (!register.email) throw Error("Email is required");
       if (!register.password) throw Error("Password is required");
@@ -77,27 +78,44 @@ export default function RegisterScreen({ navigation }) {
     <ScrollView contentContainerStyle={style.container}>
       <Text style={style.welcomeBack}>Register</Text>
       <View style={style.brandStyle}>
-        <Image source={require("../../../assets/images/home.png")} />
+        <Image source={require("../../../assets/images/first.png")} style={{width:200, height:200}} />
       </View>
       <View style={style.inputContainer}>
         <View style={style.inputView}>
-          <Icon name="user" size={20} color="blue" style={style.imgStyleLeft} />
+          <Icon name="user" size={20} color="purple" style={style.imgStyleLeft} />
           <TextInput
             style={style.inputText}
-            value={register.firstName}
-            onChangeText={(value) => dispatch(setFirstName(value))}
-            placeholder="Enter your name"
+            value={register.nim}
+            onChangeText={(value) => dispatch(setNim(value))}
+            placeholder="Enter your NIM number"
             placeholderTextColor="black"
           />
           <Icon
             name="check"
             size={22}
-            color="blue"
+            color="purple"
             style={(style.imgStyleRight, { marginRight: -2 })}
           />
         </View>
         <View style={style.inputView}>
-          <Icon name="mail" size={20} color="blue" style={style.imgStyleLeft} />
+          <Icon name="mail" size={20} color="purple" style={style.imgStyleLeft} />
+
+          <TextInput
+            style={style.inputText}
+            value={register.firstName}
+            onChangeText={(value) => dispatch(setFirstName(value))}
+            placeholder="Enter your full name"
+            placeholderTextColor="black"
+          />
+          <Icon
+            name="check"
+            size={22}
+            color="purple"
+            style={(style.imgStyleRight, { marginRight: -2 })}
+          />
+        </View>
+        <View style={style.inputView}>
+          <Icon name="mail" size={20} color="purple" style={style.imgStyleLeft} />
 
           <TextInput
             style={style.inputText}
@@ -109,12 +127,12 @@ export default function RegisterScreen({ navigation }) {
           <Icon
             name="check"
             size={22}
-            color="blue"
+            color="purple"
             style={(style.imgStyleRight, { marginRight: -2 })}
           />
         </View>
         <View style={style.inputView}>
-          <Icon name="lock" size={18} color="blue" style={style.imgStyleLeft} />
+          <Icon name="lock" size={18} color="purple" style={style.imgStyleLeft} />
           <TextInput
             style={style.inputText}
             value={register.password}
@@ -126,21 +144,15 @@ export default function RegisterScreen({ navigation }) {
           <Icon
             name={showPass === true ? "eye-off" : "eye"}
             size={20}
-            color="#000"
+            color="purple"
             style={style.imgStyleLeft}
             onPress={() => handleShowPassword()}
           />
         </View>
         <View
-          style={{
-            gap: 10,
-            width: "90%",
-            flexDirection: "row",
-            alignItems: "center",
-            marginBottom: 10,
-          }}
+          style={style.inputView}
         >
-          <Icon name="lock" size={20} color="blue" style={style.imgStyleLeft} />
+          <Icon name="lock" size={20} color="purple" style={style.imgStyleLeft} />
           <TextInput
             style={style.inputText}
             value={confirmPassword}
@@ -152,14 +164,14 @@ export default function RegisterScreen({ navigation }) {
           <Icon
             name={showConfPass === true ? "eye-off" : "eye"}
             size={20}
-            color="#000"
+            color="purple"
             style={style.imgStyleLeft}
             onPress={() => handleShowConfPassword()}
           />
         </View>
       </View>
       <View style={style.buttonView}>
-        <Pressable style={style.buttonLogin} onPress={onNextInput}>
+        <Pressable style={style.buttonRegist} onPress={onNextInput}>
           <Text style={style.text}>Register</Text>
         </Pressable>
         <View style={style.viewVia}>
@@ -220,7 +232,7 @@ const style = StyleSheet.create({
   },
   inputView: {
     gap: 10,
-    width: "90%",
+    width: "150%",
     flexDirection: "row",
     alignItems: "center",
     marginBottom: 20,
@@ -234,7 +246,7 @@ const style = StyleSheet.create({
     marginLeft: 10,
     marginRight: 10,
     borderBottomWidth: 1,
-    borderBottomColor: "blue",
+    borderBottomColor: "purple",
   },
   imgStyleRight: {
     width: 16,
@@ -245,9 +257,9 @@ const style = StyleSheet.create({
     alignItems: "center",
     marginBottom: 10,
   },
-  buttonLogin: {
+  buttonRegist: {
     borderRadius: 50,
-    backgroundColor: "#1F59B6",
+    backgroundColor: "#9322C8",
     paddingVertical: 8,
     paddingHorizontal: 32,
     elevation: 3,
@@ -288,7 +300,7 @@ const style = StyleSheet.create({
   },
   linkRegister: {
     fontSize: 14,
-    color: "blue",
+    color: "purple",
     textDecorationLine: "underline",
   },
 });
