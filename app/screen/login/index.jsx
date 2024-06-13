@@ -32,8 +32,8 @@ export default function LoginScreen({ navigation }) {
       }
       const res = await ApiLib.post('/action/findOne',{
               "dataSource": "AtlasCluster",
-              "database": "kelompok_2",
-              "collection": "kelompok_2",
+              "database": "ekireski",
+              "collection": "ekireski",
               "filter": {
                 "email": email,
                 "password": pass,

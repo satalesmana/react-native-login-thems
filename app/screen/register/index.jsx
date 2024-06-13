@@ -34,10 +34,8 @@ export default function CreateScreen({ navigation }) {
             throw Error('password is required')
         }
         
-        // let message  = `Name : ${register.firstName}  ${register.sureName}\n`
-        //     message += `Email : ${register.email} \n`
-        //     message += `Gender : ${register.gender} \n`
-        //     message += `Birth Date : ${register.birthDate} \n`
+        let message  = `Name : ${register.email} \n`
+            message += `Number : ${register.number} \n`
 
         Alert.alert('Confirm', message, [
             {
@@ -74,17 +72,7 @@ export default function CreateScreen({ navigation }) {
           }},
         ]);
     }
-    
-
 }
-//   const res =  await ApiLib.post('/action/insertOne',
-//             {
-//             "dataSource":"AtlasCluster",
-//             "database": "kelompok_2",
-//             "collection": "kelompok_2",
-//             "document": create
-//             }
-//           )
   const gotologin = () => {
     navigation.navigate('Login')
 
