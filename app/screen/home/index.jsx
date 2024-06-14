@@ -14,17 +14,15 @@ export default function HomeScreen(){
   const dispatch = useDispatch()
   const data = useSelector((state) => state.users.data)
   const filter = useSelector((state) => state.users.formFilter)
-
-  const fetchData = async ()=>{
+  const fetchData = async()=>{
     try{
       const res = await ApiLib.post('/action/find',{
-        "dataSource": "AtlasCluster",
-        "database": "ekireski",
-        "collection": "ekireski",
-        "filter": filter
+      "dataSource": "AtlasCluster",
+      "database" : "ekireski",
+      "collection" : "ekireski",
+      "filter" : filter
       })
-
-      if(res.data?.documents){
+      if (res.data?.documents) {
         dispatch(setData(res.data.documents))
       }else{
         dispatch(clearData())
@@ -33,41 +31,30 @@ export default function HomeScreen(){
       console.log(err)
     }
   }
-
-  const getInitial=(email, number, password)=>{
+  const getInitial=(firstname)=>{
     let name = ''
 
-    if(email.length > 0)
-        nama += email.substring(0,1);
+    if(firstname.length > 0)
+        name += firstname.substring(0,1);
     
-    if(number.length > 0)
-      nim += number.substring(0,1);
-
-      if(password.length > 0)
-      programstudi += password.substring(0,1);
-
     return name.toLocaleUpperCase()
   }
-
-  useEffect(()=>{
+   useEffect(()=>{
     fetchData()
-  },[])
-
-
-  const rederItem = ({item}) => (
+   },[])
+   const rederItem = ({item})=>(
     <TouchableOpacity 
-        style={styles.containerItem}>
-          <View style={styles.itemLeft}>
-            <Text style={styles.textItemLeft}>{getInitial(item.email, item?.number, item?.password)}</Text>
-          </View>
-          <View style={styles.itemRight}>
-            <Text>{item?.email} {item?.number}</Text>
-            <Text>{item?.password}</Text>
-          </View>
-    </TouchableOpacity>
-  );
-
-  return (
+    style={styles.containerItem}>
+      <View style={styles.itemLeft}>
+        <Text style={styles.textItemLeft}>{getInitial(item.firstname)}</Text>
+      </View>
+      <View style={styles.itemRight}>
+        <Text>{item?.firstname}</Text>
+        <Text>{item?.email}</Text>
+      </View>
+</TouchableOpacity>
+   );
+   return (
     <View >
         <FlatList
           data={data}
