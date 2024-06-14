@@ -44,7 +44,9 @@ export default function CreateScreen({ navigation }) {
         }
         
         
-        let message  = `Email : ${register.email} \n`
+        let message  = `Firstname : ${register.firstname} \n`
+            message += `Surename : ${register.surename} \n`
+            message += `Email : ${register.email} \n`
             message += `Number : ${register.number} \n`
             message += `kode : ${register.kode}\n`
             message += `jurusan : ${register.jurusan}\n`
@@ -101,6 +103,22 @@ export default function CreateScreen({ navigation }) {
         </View>
 
         <View style={style.container}>
+        <Text style={style.textLabel}>firstname Address</Text>
+          <TextInput
+            style={style.textInputStyle}
+            onChangeText={(value) => dispatch(setFirstname(value))}
+            placeholder="Enter Your Firstname"
+            placeholderTextColor="#c7c7c7"
+            value={setEmail}
+          />
+           <Text style={style.textLabel}>surename Address</Text>
+          <TextInput
+            style={style.textInputStyle}
+            onChangeText={(value) => dispatch(setSurename(value))}
+            placeholder="Enter Your Surename"
+            placeholderTextColor="#c7c7c7"
+            value={setEmail}
+          />
           <Text style={style.textLabel}>Email Address</Text>
           <TextInput
             style={style.textInputStyle}

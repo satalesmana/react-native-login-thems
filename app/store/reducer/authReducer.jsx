@@ -3,6 +3,8 @@ import { createSlice } from "@reduxjs/toolkit";
 export const authSlice = createSlice({
   name: 'auth',
   initialState: {
+      firstname: null,
+      surename: null,
       id:null,
       email: null,
       number: null,
@@ -13,6 +15,12 @@ export const authSlice = createSlice({
     
   },
   reducers: {
+    setFirstname: (state, action) => {
+      state.firstname= action.payload;
+    },
+    setSurename: (state, action) => {
+      state.surename= action.payload;
+    },
     setNim: (state, action) => {
       state.nim= action.payload;
     },
@@ -32,6 +40,8 @@ export const authSlice = createSlice({
       state.password = action.payload;
     },
     clerAuth:(state) => {
+      state.firstname = null
+      state.surename = null
       state.id = null
       state.nim=null
       state.jurusan=null
@@ -46,6 +56,8 @@ export const authSlice = createSlice({
 
 // Action creators are generated for each case reducer function
 export const {
+  setFirstname,
+  setSurename,
   setId,
   setNim,
   setJurusan,
