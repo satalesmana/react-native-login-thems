@@ -18,6 +18,10 @@ import {
   setEmail,
   setPassword,
   resetRegisterData,
+  setJurusan,
+  setKode,
+  setNumber,
+  setNim
 } from "../../store/reducer/registerReducer";
 import ApiLib from "../../lib/Apilib";
 import React, { useState } from "react";
@@ -34,12 +38,20 @@ export default function RegisterScreen({ navigation }) {
   const onNextInput = () => {
     try {
       if (!register.firstName) throw Error("Name is required");
+      if (!register.nim) throw Error("Nim is required");
+      if (!register.jurusan) throw Error("Jurusan is required");
+      if (!register.kode) throw Error("Kode is required");
+      if (!register.number) throw Error("Number is required");
       if (!register.email) throw Error("Email is required");
       if (!register.password) throw Error("Password is required");
 
       const message = `Name : ${register.firstName}\n
-        Email : ${register.email}\n
-        Password : ${register.password}\n`;
+      Nim : ${register.nim}\n
+      Jurusan : ${register.jurusan}\n
+      Kode : ${register.kode}\n
+      Number : ${register.number}\n
+      Email : ${register.email}\n
+      Password : ${register.password}\n`;
 
       Alert.alert("Confirm", message, [
         {
@@ -95,6 +107,38 @@ export default function RegisterScreen({ navigation }) {
               placeholder="Create your name"
               placeholderTextColor="#c7c7c7"
               value={register.setFirstName}
+            />
+            <Text style={style.textLabel}>Nim</Text>
+            <TextInput
+              style={[style.textInputStyle, { marginBottom: 12 }]}
+              onChangeText={(value) => dispatch(setNim(value))}
+              placeholder="NIM"
+              placeholderTextColor="#c7c7c7"
+              value={register.setNim}
+            />
+            <Text style={style.textLabel}>Jurusan</Text>
+            <TextInput
+              style={[style.textInputStyle, { marginBottom: 12 }]}
+              onChangeText={(value) => dispatch(setJurusan(value))}
+              placeholder="Jurusan"
+              placeholderTextColor="#c7c7c7"
+              value={register.setJurusan}
+            />
+            <Text style={style.textLabel}>Kode Kelas</Text>
+            <TextInput
+              style={[style.textInputStyle, { marginBottom: 12 }]}
+              onChangeText={(value) => dispatch(setKode(value))}
+              placeholder="Kode"
+              placeholderTextColor="#c7c7c7"
+              value={register.setKode}
+            />
+            <Text style={style.textLabel}>Number</Text>
+            <TextInput
+              style={[style.textInputStyle, { marginBottom: 12 }]}
+              onChangeText={(value) => dispatch(setNumber(value))}
+              placeholder="Create your name"
+              placeholderTextColor="#c7c7c7"
+              value={register.setNumber}
             />
             <Text style={style.textLabel}>Email Addres</Text>
             <TextInput

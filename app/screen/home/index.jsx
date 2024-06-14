@@ -6,14 +6,14 @@ import {
   TouchableOpacity 
 } from 'react-native';
 import { useEffect } from 'react';
-import { setData, clearData } from '../../store/reducer/usersReducer'
+import { setData,clearData } from '../../store/reducer/usersReducer';
 import ApiLib from "../../lib/Apilib";
 import { useSelector, useDispatch } from 'react-redux'
 export default function HomeScreen(){
   const dispatch = useDispatch()
   const data = useSelector((state) => state.users.data)
   const filter = useSelector((state) => state.users.formFilter)
-
+  
   const fetchData = async ()=>{
     try{
       const res = await ApiLib.post('/action/find',{
@@ -45,10 +45,10 @@ export default function HomeScreen(){
             
           </View>
           <View style={styles.itemRight}>
-            <Text>{item?.firstName} {item?.sureName}</Text>
+            <Text>{item?.firstName}</Text>
             <Text>{item?.email}</Text>
           </View>
-    </TouchableOpacity>
+    </TouchableOpacity >
   );
 
   return (

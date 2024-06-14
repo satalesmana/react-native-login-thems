@@ -4,6 +4,8 @@ import RegisterScreen from "./register";
 import HomeScreen from "./home";
 import SplashScreen from "./splash"
 import ProfileScreen from "./profile"
+import FileScreen from "./file";
+import SettingsScreen from "./settings";
 
 
 export{
@@ -12,5 +14,7 @@ export{
     RegisterScreen,
     HomeScreen,
     SplashScreen,
-    ProfileScreen
+    ProfileScreen,
+    FileScreen,
+    SettingsScreen
 }

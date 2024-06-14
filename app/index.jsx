@@ -7,7 +7,9 @@ import{
  RegisterScreen,
  HomeScreen,
  SplashScreen,
- ProfileScreen
+ ProfileScreen,
+ FileScreen,
+ SettingsScreen
 }from "./screen"
 import store from './store';
 import { Provider } from 'react-redux';
@@ -34,7 +36,16 @@ function MainScreen() {
             ),
           }} 
         />
-
+        <Tab.Screen
+          name="My Files"
+          component={FileScreen}
+          options={{
+            tabBarLabel: 'My Files',
+            tabBarIcon: ({ color, size }) => (
+              <MaterialCommunityIcons name="file" color={color} size={size} />
+            ),
+          }} 
+        />
         <Tab.Screen
           name="Profile"
           component={ProfileScreen}
@@ -42,6 +53,16 @@ function MainScreen() {
             tabBarLabel: 'Profile',
             tabBarIcon: ({ color, size }) => (
               <MaterialCommunityIcons name="account" color={color} size={size} />
+            ),
+          }}
+        />
+        <Tab.Screen
+          name="Settings"
+          component={SettingsScreen}
+          options={{
+            tabBarLabel: 'Settings',
+            tabBarIcon: ({ color, size }) => (
+              <MaterialCommunityIcons name="Settings" color={color} size={size} />
             ),
           }}
         />
@@ -60,7 +81,6 @@ function App() {
       <Stack.Screen name="Welcome" component={WelcomeScreen}options={{headerShown:false}}/>
       <Stack.Screen name="Login" component={LoginScreen}options={{headerShown:false}} />
       <Stack.Screen name="Register" component={RegisterScreen} options={{headerShown:false}}/>
-      <Stack.Screen name="Home" component={HomeScreen} options={{headerShown:false}}/>
       </Stack.Navigator>
     </NavigationContainer>
     </Provider>

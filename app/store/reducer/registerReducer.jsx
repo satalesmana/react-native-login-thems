@@ -6,12 +6,28 @@ export const registerSlice = createSlice({
     formInput: {
       firstName: null,
       email: null,
+      nim:null,
+      jurusan:null,
+      kode:null,
+      number:null,
       password: null,
     },
   },
   reducers: {
     setFirstName: (state, action) => {
       state.formInput.firstName = action.payload;
+    },
+    setNim: (state, action) => {
+      state.formInput.nim = action.payload;
+    },
+    setJurusan: (state, action) => {
+      state.formInput.jurusan = action.payload;
+    },
+    setKode: (state, action) => {
+      state.formInput.kode = action.payload;
+    },
+    setNumber: (state, action) => {
+      state.formInput.number = action.payload;
     },
     setEmail: (state, action) => {
       state.formInput.email = action.payload;
@@ -23,6 +39,10 @@ export const registerSlice = createSlice({
       state.formInput = {
         firstName: null,
         email: null,
+        nim:null,
+        jurusan:null,
+        kode:null,
+        number:null,
         password: null,
       };
     },
@@ -30,7 +50,7 @@ export const registerSlice = createSlice({
 });
 
 // Action creators are generated for each case reducer function
-export const { setFirstName, setEmail, setPassword, resetRegisterData } =
+export const { setFirstName, setEmail, setPassword, setJurusan,setKode,setNim,setNumber,resetRegisterData } =
   registerSlice.actions;
 
 export default registerSlice.reducer;
