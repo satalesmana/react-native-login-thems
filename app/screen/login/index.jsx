@@ -15,7 +15,7 @@ import { GitHub ,GitLab } from "../../../assets"
 import React from "react"
 import ApiLib from "../../lib/ApiLib"
 import { useDispatch } from 'react-redux'
-import { setFirstname,setSurename,setId,setNim,setJurusan,setKode,setEmail,setNumber,setPassword, } from '../../store/reducer/authReducer'
+import { setFirstname,setSurename,setNim,setJurusan,setKode,setEmail,setNumber,setPassword, clerAuth } from '../../store/reducer/authReducer'
 
 const windowWidth = Dimensions.get("window").width;
 
@@ -48,7 +48,6 @@ export default function LoginScreen({ navigation }) {
 
       setLoading(false);
       if (res.data.document != null) {
-        dispatch(setId(res.data.document._id))
         dispatch(setFirstName(res.data.document.firstName))
         dispatch(setSureName(res.data.document.sureName))
         dispatch(setId(res.data.document.id))
