@@ -25,6 +25,9 @@ export default function SignUpScreen({ navigation }) {
     // alert("Daftar Bermasalah")
   };
   const goSignUp = () => {
+    if (register.email === null || register.email === '') {
+      alert('Please Insert Email');
+    }
     if (register.password === confirmPassword) {
       let message = `Email : ${register.email} \n`
 
@@ -111,7 +114,7 @@ const style = StyleSheet.create({
     flex: 8,
     textAlign: "center",
     marginVertical: "auto",
-    fontSize: 20,
+    fontSize: 17,
     marginRight: "3%",
   },
   btnFb: {
