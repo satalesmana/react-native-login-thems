@@ -13,7 +13,7 @@ import {bulat} from '../../../assets'
 
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { setEmail, setPassword, resetRegisterData,setUsername } from '../../store/reducer/registerReducer';
+import { setUserNim, setPassword, resetRegisterData,setUserProdi,setUserkelasCode,setUserTelp} from '../../store/reducer/registerReducer';
 import { Ionicons } from '@expo/vector-icons'; // Import Ionicons for eye icon
 import ApiLib from "../../lib/ApiLib"
 
@@ -26,21 +26,30 @@ export default function RegisterScreen({ navigation }) {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [hidePassword, setHidePassword] = useState(true); // Password visibility state
   const [hideConfirmPassword, setHideConfirmPassword] = useState(true); // Confirm password visibility state
-  const [isEmailFocused, setIsEmailFocused] = useState(false); // Email focus state
-  const [isUsernameFocused, setIsUsernameFocused] = useState(false); // Username focus state
+  const [isNimFocused, setIsNimFocused] = useState(false); // Email focus state
+  const [isProdiFocused, setIsProdiFocused] = useState(false); // Username focus state
+  const [isClassCodeFocused, setIsClassCodeFocused] = useState(false); // Username focus state
+  const [isTelpFocused, setIsTelpFocused] = useState(false); // Username focus state
   const [isPasswordFocused, setIsPasswordFocused] = useState(false); // Password focus state
   const [isConfirmPasswordFocused, setIsConfirmPasswordFocused] = useState(false); // Confirm password focus state
 
   const onSubmitLogin = async () => {
     try {
-      if (register.email === null || register.email === "") {
-        throw new Error('Email is required');
-      }
-      if (register.username === null || register.username === "") {
-        throw new Error('Username is required');
-      }
+   
       if (register.password === null || register.password === "") {
         throw new Error('Password is required');
+      }
+      if (register.nim === null || register.nim === "") {
+        throw new Error('nim is required');
+      }
+      if (register.prodi === null || register.prodi === "") {
+        throw new Error('prodi is required');
+      }
+      if (register.kelasCode === null || register.kelasCode === "") {
+        throw new Error('Class Code is required');
+      }
+      if (register.telp === null || register.telp === "") {
+        throw new Error('No telp is required');
       }
       if (confirmPassword === null || confirmPassword === "") {
         throw new Error('Confirm password is required');
@@ -85,45 +94,73 @@ export default function RegisterScreen({ navigation }) {
   return (
     <ScrollView style={{windowWidth:windowWidth,windowHeight:windowHeight,backgroundColor:'#FFFFFF'}}>
       <View style={{ width: windowWidth, height: windowHeight}}>
-        <View style={{marginTop:-70}}>
+        <View style={{marginTop:-100}}>
           <Text style={style.textLoginStyle}>Create</Text>
           <Text style={style.textLoginStyle2}>Account :)</Text>
           </View>
           <Image
               source={bulat}
             
-              style={{ width:windowWidth,height:700,position:'absolute',marginTop:30}}
+              style={{ width:windowWidth,height:700,position:'absolute',marginTop:20}}
             />
          
        
        
         <View style={style.container}>
-          <Text style={style.textLabel}></Text>
+         
           <TextInput
             style={[
               style.textInputStyle,
-              { borderBottomColor: isEmailFocused ? 'blue' : 'black' }
+              { borderBottomColor: isNimFocused ? 'blue' : 'black' }
             ]}
-            value={register.email}
-            onChangeText={(value) => dispatch(setEmail(value))}
-            placeholder="Enter Email id"
-            onFocus={() => setIsEmailFocused(true)}
-            onBlur={() => setIsEmailFocused(false)}
+            value={register.nim}
+            onChangeText={(value) => dispatch(setUserNim(value))}
+            placeholder=" Nim"
+            onFocus={() => setIsNimFocused(true)}
+            onBlur={() => setIsNimFocused(false)}
           />
-          <Text style={style.textLabel}></Text>
+          
+        
+
+          
           <TextInput
             style={[
               style.textInputStyle,
-              { borderBottomColor: isUsernameFocused ? 'blue' : 'black' }
+              { borderBottomColor: isProdiFocused ? 'blue' : 'black' }
             ]}
-            value={register.username}
-            onChangeText={(value) => dispatch(setUsername(value))}
-            placeholder="Create Username"
-            onFocus={() => setIsUsernameFocused(true)}
-            onBlur={() => setIsUsernameFocused(false)}
+            value={register.prodi}
+            onChangeText={(value) => dispatch(setUserProdi(value))}
+            placeholder=" Program Study"
+            onFocus={() => setIsProdiFocused(true)}
+            onBlur={() => setIsProdiFocused(false)}
           />
 
-          <Text style={[style.textLabel, { marginTop: 0 }]}></Text>
+          <TextInput
+            style={[
+              style.textInputStyle,
+              { borderBottomColor: isClassCodeFocused ? 'blue' : 'black' }
+            ]}
+            value={register.kelasCode}
+            onChangeText={(value) => dispatch(setUserkelasCode(value))}
+            placeholder=" Class Code"
+            onFocus={() => setIsClassCodeFocused(true)}
+            onBlur={() => setIsClassCodeFocused(false)}
+          />
+
+         
+          <TextInput
+            style={[
+              style.textInputStyle,
+              { borderBottomColor: isTelpFocused ? 'blue' : 'black' }
+            ]}
+            value={register.telp}
+            onChangeText={(value) => dispatch(setUserTelp(value))}
+            placeholder=" NoTelp"
+            onFocus={() => setIsTelpFocused(true)}
+            onBlur={() => setIsTelpFocused(false)}
+          />
+
+          
           <View style={style.passwordContainer}>
             <TextInput
               style={[
@@ -142,7 +179,7 @@ export default function RegisterScreen({ navigation }) {
             </TouchableOpacity>
           </View>
 
-          <Text style={[style.textLabel, { marginTop: 10 }]}></Text>
+          
           <View style={style.passwordContainer}>
             <TextInput
               style={[

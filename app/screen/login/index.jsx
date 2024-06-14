@@ -22,19 +22,19 @@ const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
 export default function LoginScreen({ navigation }) {
-  const [username, onChangeUsername] = useState('');
+  const [nim, onChangeUserNim] = useState('');
   const [password, onChangePassword] = useState('');
   const [loading, setLoading] = useState(false); // Loading state
   const [hidePassword, setHidePassword] = useState(true); // Password visibility state
-  const [isUsernameFocused, setIsUsernameFocused] = useState(false); // Username focus state
+  const [isUserNimFocused, setIsUserNimFocused] = useState(false); // Username focus state
   const [isPasswordFocused, setIsPasswordFocused] = useState(false); // Password focus state
 
   const onSubmitAccount = async () => {
     try {
       setLoading(true); // Start loading
 
-      if (username.trim().length === 0) {
-        throw Error('Username is required');
+      if (nim.trim().length === 0) {
+        throw Error('nim is required');
       }
 
       if (password.trim().length === 0) {
@@ -46,7 +46,7 @@ export default function LoginScreen({ navigation }) {
         "database": "UAS",
         "collection": "users",
         "filter": {
-          "username": username,
+          "nim": nim,
           "password": password
         }
       });
@@ -54,7 +54,7 @@ export default function LoginScreen({ navigation }) {
       if (res.data.document != null) {
         navigation.navigate('Home');
       } else {
-        Alert.alert('Error', "Username & password tidak sesuai", [
+        Alert.alert('Error', "Nim & password tidak sesuai", [
           { text: 'OK', onPress: () => console.log('ERR') },
         ]);
       }
@@ -88,17 +88,17 @@ export default function LoginScreen({ navigation }) {
         </View>
 
         <View style={style.container}>
-          <Text style={style.textLabel}>Username</Text>
+          <Text style={style.textLabel}>Nim</Text>
           <TextInput
             style={[
               style.textInputStyle,
-              { borderBottomColor: isUsernameFocused ? 'blue' : 'black' }
+              { borderBottomColor: isUserNimFocused ? 'blue' : 'black' }
             ]}
-            onChangeText={onChangeUsername}
+            onChangeText={onChangeUserNim}
             placeholderTextColor='#c7c7c7'
-            value={username}
-            onFocus={() => setIsUsernameFocused(true)}
-            onBlur={() => setIsUsernameFocused(false)}
+            value={nim}
+            onFocus={() => setIsUserNimFocused(true)}
+            onBlur={() => setIsUserNimFocused(false)}
           />
               <Entypo name="users" size={24} color="black" style={{marginTop:-39,left:280}} />
 
