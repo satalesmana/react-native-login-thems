@@ -11,7 +11,7 @@ import {
 } from "react-native";
 import { MyButton } from "../../components";
 import { GitHub ,GitLab } from "../../../assets"
-import { setEmail, setNumber, setPassword, resetRegisterData } from '../../store/reducer/registerReducer';
+import { setEmail, setNumber, setNim,setJurusan,setKode,setPassword, resetRegisterData } from '../../store/reducer/registerReducer';
 import { useSelector, useDispatch } from 'react-redux';
 import ApiLib from "../../lib/ApiLib";
 
@@ -25,7 +25,16 @@ export default function CreateScreen({ navigation }) {
     try{
         
         if(register.email === null || register.email === "") {
-            throw Error('password is required')
+            throw Error('Email is required')
+        }
+        if(register.jurusan === null || register.jurusan === "") {
+          throw Error('jurusan is required')
+        }
+      if(register.nim === null || register.nim === "") {
+        throw Error('nim is required')
+        }
+      if(register.kode === null || register.kode === "") {
+      throw Error('kode is required')
         }
         if(register.number === null || register.number === "") {
             throw Error('password is required')
@@ -34,8 +43,13 @@ export default function CreateScreen({ navigation }) {
             throw Error('password is required')
         }
         
-        let message  = `Name : ${register.email} \n`
+        
+        let message  = `Email : ${register.email} \n`
             message += `Number : ${register.number} \n`
+            message += `kode : ${register.kode}\n`
+            message += `jurusan : ${register.jurusan}\n`
+            message += `nim : ${register.nim}\n`
+            message += `password : ${register.password}\n` 
 
         Alert.alert('Confirm', message, [
             {
@@ -94,6 +108,30 @@ export default function CreateScreen({ navigation }) {
             placeholder="Enter Your Email"
             placeholderTextColor="#c7c7c7"
             value={setEmail}
+          />
+           <Text style={style.textLabel}>Nim </Text>
+          <TextInput
+            style={style.textInputStyle}
+            onChangeText={(value) => dispatch(setNim(value))}
+            placeholder="Enter Your Nim"
+            placeholderTextColor="#c7c7c7"
+            value={setNim}
+          />
+          <Text style={style.textLabel}>Jurusan </Text>
+          <TextInput
+            style={style.textInputStyle}
+            onChangeText={(value) => dispatch(setJurusan(value))}
+            placeholder="Enter Your Jurusan"
+            placeholderTextColor="#c7c7c7"
+            value={setJurusan}
+          />
+              <Text style={style.textLabel}>Kode </Text>
+          <TextInput
+            style={style.textInputStyle}
+            onChangeText={(value) => dispatch(setKode(value))}
+            placeholder="Enter Your Kode"
+            placeholderTextColor="#c7c7c7"
+            value={setKode}
           />
           <Text style={[style.textLabel, { marginTop: 15 }]}>Phone Number</Text>
           <TextInput
