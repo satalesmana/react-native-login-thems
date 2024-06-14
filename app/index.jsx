@@ -21,7 +21,7 @@ function MainScreen() {
   return (
     <Tab.Navigator 
       initialRouteName="home"
-      screenOptions={{ tabBarActiveTintColor: '#e91e63' }}>
+      screenOptions={{ tabBarActiveTintColor: '#418060' }}>
         <Tab.Screen
           name="home"
           component={HomeScreen}
@@ -39,7 +39,7 @@ function MainScreen() {
           options={{
             tabBarLabel: 'MyFile',
             tabBarIcon: ({ color, size }) => (
-              <MaterialCommunityIcons name="account" color={color} size={size} />
+              <MaterialCommunityIcons name="file" color={color} size={size} />
             ),
           }}
         />
@@ -61,10 +61,10 @@ function MainScreen() {
           options={{
             tabBarLabel: 'Settings',
             tabBarIcon: ({ color, size }) => (
-              <MaterialCommunityIcons name="account" color={color} size={size} />
+              <MaterialCommunityIcons name="shield" color={color} size={size} />
             ),
           }}
-        />
+        />                      
     </Tab.Navigator>
   )
 }
@@ -74,14 +74,10 @@ function App() {
     <Provider store={store}>
     <NavigationContainer independent={true}>
       <Stack.Navigator initialRouteName="menu">
-      <Stack.Screen name="main" component={MainScreen} options={{headerShown:false}} />
-        <Stack.Screen name="menu" options={{headerShown:false}} component={MenuScreen} />
-        <Stack.Screen name="home" options={{headerShown:false}} component={HomeScreen} />
-        <Stack.Screen name="login" options={{headerShown:false}} component={LoginScreen}/>
-        <Stack.Screen name="myfile" options={{headerShown:false}} component={MyFileScreen}/>
-        <Stack.Screen name="user" options={{headerShown:false}} component={UserScreen}/>
-        <Stack.Screen name="setting" options={{headerShown:false}} component={SettingsScreen}/>
-        <Stack.Screen name="register" options={{headerShown:false}} component={RegisterInputFormScreen} />
+      <Stack.Screen name="main" options={{headerShown:false}} component={MainScreen}/>
+      <Stack.Screen name="menu" options={{headerShown:false}} component={MenuScreen} />
+      <Stack.Screen name="login" options={{headerShown:false}} component={LoginScreen}/>
+      <Stack.Screen name="register" options={{headerShown:false}} component={RegisterInputFormScreen} />
       </Stack.Navigator>
     </NavigationContainer>
     </Provider>
