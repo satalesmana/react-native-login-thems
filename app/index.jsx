@@ -141,10 +141,9 @@ function MainScreen({}) {
         }}
       />
       <Tab.Screen
-        name="Setting"
+        name="Account Setting"
         component={SettingScreen}
         options={{
-          headerShown: false,
           tabBarLabel: "Settings",
           tabBarIcon: ({ color, size }) => (
             <Icon name="settings" color={color} size={size} />

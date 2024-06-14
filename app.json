@@ -19,8 +19,7 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      },
-      "package": "com.gbbysynt.reactnativeloginthems"
+      }
     },
     "web": {
       "bundler": "metro",
@@ -32,15 +31,6 @@
     ],
     "experiments": {
       "typedRoutes": true
-    },
-    "extra": {
-      "router": {
-        "origin": false
-      },
-      "eas": {
-        "projectId": "fd698cb2-9a12-4ef7-8cce-16fddddd0aa5"
-      }
-    },
-    "owner": "gbbysynt"
+    }
   }
 }

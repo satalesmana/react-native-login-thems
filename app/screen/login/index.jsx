@@ -17,6 +17,8 @@ import { useDispatch } from "react-redux";
 import { ICGoogle, ICFacebook, ICTwitter } from "../../../assets";
 import { MyButton } from "../../components";
 import { setAuthData } from "../../store/reducer/authReducer";
+import { setFirstName,setEmail} from "../../store/reducer/registerReducer";
+// import { setEmail,setPassword} from "../../store/reducer/settingReducer";
 
 const windowWidth = Dimensions.get("window").width;
 
@@ -56,6 +58,10 @@ export default function LoginScreen({ navigation }) {
       setLoading(false);
       if (res.data.document != null) {
         dispatch(setAuthData(res.data.document));
+        dispatch(setFirstName(res.data.document.firstName))
+        dispatch(setEmail(res.data.document.email))
+        // dispatch(setFirstName(res.data.document.firstName))
+        // dispatch(setEmail(res.data.document.email))
         navigation.replace("Main");
       } else {
         Alert.alert("Error", "Username & Password tidak sesuai", [
