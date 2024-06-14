@@ -1,14 +1,8 @@
 import { configureStore } from '@reduxjs/toolkit'
-import registerReducer from '../store/reducer/registerReducer'
-import usersReducer from "./reducer/usersReducer"
-import authReducer from "./reducer/authReducer"
-import settingsReducer from './reducer/settingsReducer'
+import registerReducer from './reducer/registerReducer'
 
 export default configureStore({
   reducer: {
-    register: registerReducer,
-    users: usersReducer,
-    auth: authReducer,
-    settings : settingsReducer
+    register: registerReducer
   },
 })

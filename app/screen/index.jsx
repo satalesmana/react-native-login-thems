@@ -1,16 +1,21 @@
-import MenuScreen from "./menu"
 import HomeScreen from "./home"
 import LoginScreen from "./login"
-import MyFileScreen from "./myfile"
-import UserScreen from "./user"
-import SettingsScreen from "./settings"
-import RegisterInputFormScreen from "./register"
+import SplashScreen from "./splash"
+import { 
+    RegisterInputNameScreen,
+    RegisterInputDateScreen,
+    RegisterInputEmailScreen,
+    RegisterInputGenderScreen,
+    RegisterInputPasswordScreen
+} from "./register"
+
 export {
-    MenuScreen,
     HomeScreen,
     LoginScreen,
-    MyFileScreen,
-    UserScreen,
-    SettingsScreen,
-    RegisterInputFormScreen
+    SplashScreen,
+    RegisterInputNameScreen,
+    RegisterInputDateScreen,
+    RegisterInputEmailScreen,
+    RegisterInputGenderScreen,
+    RegisterInputPasswordScreen
 }

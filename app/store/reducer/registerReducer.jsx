@@ -6,9 +6,15 @@ export const registerSlice = createSlice({
     formInput:{
         firstName: null,
         sureName: null,
+        gender: null,
         email: null,
-        password: null
+        password: null,
+        birthDate: null
     },
+    optGender:[
+        {label:"Laki-laki", value:"L"},
+        {label:"Perempuan", value:"P"}
+    ]
   },
   reducers: {
     setFirstName:(state, action) => {
@@ -17,19 +23,17 @@ export const registerSlice = createSlice({
     setSureName:(state, action) => {
         state.formInput.sureName = action.payload
     },
+    setGender:(state, action) => {
+        state.formInput.gender = action.payload
+    },
     setEmail:(state, action) => {
         state.formInput.email = action.payload
     },
     setPassword:(state, action) => {
         state.formInput.password = action.payload
     },
-    resetRegisterData:(state) =>{
-        state.formInput = {
-            firstName: null,
-            sureName: null,
-            email: null,
-            password: null
-        }
+    setBirthDate:(state, action) => {
+        state.formInput.birthDate = action.payload
     }
   },
 })
@@ -38,9 +42,10 @@ export const registerSlice = createSlice({
 export const { 
     setFirstName,
     setSureName,
+    setGender,
     setEmail,
     setPassword,
-    resetRegisterData
+    setBirthDate
  } = registerSlice.actions
 
 export default registerSlice.reducer

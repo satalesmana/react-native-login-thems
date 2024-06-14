@@ -31,12 +31,12 @@ const styles = StyleSheet.create({
         marginTop:20
     },
     input:{
-        height: 50,
+        height: 40,
         marginTop: 12,
         borderWidth: 1,
         padding: 10,
-        borderColor:'#929694',
-        borderRadius:15,
+        borderColor:'#dedede',
+        borderRadius:15
     },
     inputActive:{
         height: 40,
