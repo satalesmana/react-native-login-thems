@@ -5,15 +5,15 @@ import { useEffect } from 'react';
 export default function SplashScreen({navigation}){
     useEffect(()=>{
         setTimeout(()=>{
-            navigation.replace('Login')
+            navigation.replace('Welcome')
         }, 5000);
     },[navigation])
 
     return (
-        <LinearGradient colors={['#4c669f', '#3b5998', '#192f6a']} 
+        <LinearGradient colors={['#4c669f', '#3b5998', '#f4f3f4']} 
             style={styles.linearGradient}>
             <View style={styles.textContainer}>
-                <Text style={styles.textSpalash}>Facebook</Text>
+                <Text style={styles.textSpalash}>Kelompok 8</Text>
             </View>
         </LinearGradient>
     );
