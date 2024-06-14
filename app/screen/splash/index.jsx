@@ -10,7 +10,7 @@ export default function SplashScreen({navigation}){
     },[navigation])
 
     return (
-        <LinearGradient colors={['#4c669f', '#3b5998', '#f4f3f4']} 
+        <LinearGradient colors={['#0000FF', '#0000FF', '#0000FF']} 
             style={styles.linearGradient}>
             <View style={styles.textContainer}>
                 <Text style={styles.textSpalash}>Kelompok 8</Text>

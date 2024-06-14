@@ -128,7 +128,7 @@ export default function LoginScreen({ navigation }) {
         <View style={style.buttonStyle}>
           <Button
             onPress={onSubmitLogin}
-            color="white"
+            color="blue"
             title="Login"
             titleStyle={{ borderRadius: 10 }}
           />
