@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 export const registerSlice = createSlice({
-  name: 'settings',
+  name: 'auth',
   initialState: {
     formInput: {
       firstname : null,
@@ -19,7 +19,7 @@ export const registerSlice = createSlice({
       state.formInput.firstname = action.payload;
     },
     setSurename: (state, action) => {
-      state.formInput.firstname = action.payload;
+      state.formInput.surename = action.payload;
     },
     setNim: (state, action) => {
       state.formInput.nim = action.payload;
@@ -43,7 +43,7 @@ export const registerSlice = createSlice({
     resetRegisterData: (state) => {
       state.formInput = {
         firstname: null,
-        surename : null,
+        surename: null,
         email: null,
         number: null,
         password: null,
@@ -65,7 +65,7 @@ export const {
   setJurusan,
   setKode,
   setNim,
-  resetSettngsData
+  resetresetData
 } = registerSlice.actions;
 
 export default registerSlice.reducer;

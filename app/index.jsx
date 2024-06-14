@@ -5,7 +5,9 @@ import{
     WelcomeScreen,
     LoginScreen,
     CreateScreen,
-    HomeScreen
+    HomeScreen,
+    ProfileScreen,
+    SettingsScreen
 }from "./screen"
 import store from './store'
 import { Provider } from 'react-redux'

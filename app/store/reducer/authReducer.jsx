@@ -57,7 +57,7 @@ export const authSlice = createSlice({
 // Action creators are generated for each case reducer function
 export const {
   setFirstname,
-  setSurename,
+  setsu,
   setId,
   setNim,
   setJurusan,

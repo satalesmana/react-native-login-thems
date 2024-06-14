@@ -14,6 +14,8 @@ import { MyButton } from "../../components"
 import { GitHub ,GitLab } from "../../../assets"
 import React from "react"
 import ApiLib from "../../lib/ApiLib"
+import { useDispatch } from 'react-redux'
+import { setFirstname,setSurename,setId,setNim,setJurusan,setKode,setEmail,setNumber,setPassword, } from '../../store/reducer/authReducer'
 
 const windowWidth = Dimensions.get("window").width;
 
@@ -22,6 +24,8 @@ export default function LoginScreen({ navigation }) {
   const [number, onChangeNumber] = React.useState("");
   const [pass, onChangePassword] = React.useState("");
   const [loading, setLoading] = React.useState(false); // Changed from "false" to false
+  const dispatch = useDispatch()
+
   const onSubmitLogin =async ()=>{
     setLoading(true)
     try {
@@ -44,7 +48,17 @@ export default function LoginScreen({ navigation }) {
 
       setLoading(false);
       if (res.data.document != null) {
-        navigation.replace("Home");
+        dispatch(setId(res.data.document._id))
+        dispatch(setFirstName(res.data.document.firstName))
+        dispatch(setSureName(res.data.document.sureName))
+        dispatch(setId(res.data.document.id))
+        dispatch(SetNim(res.data.document.nim))
+        dispatch(setJurusan(res.data.document.jurusan))
+        dispatch(setKode(res.data.document.kode))
+        dispatch(setEmail(res.data.document.email))
+        dispatch(setPassword(res.data.document.password))
+        dispatch(setNumber(res.data.document.number))
+        navigation.replace("Main");
       } else {
         Alert.alert("Error", "Username & Password tidak sesuai", [
           {
