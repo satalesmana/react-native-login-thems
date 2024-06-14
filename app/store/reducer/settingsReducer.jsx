@@ -65,7 +65,7 @@ export const {
   setJurusan,
   setKode,
   setNim,
-  resetRegisterData
+  resetSettngsData
 } = registerSlice.actions;
 
 export default registerSlice.reducer;

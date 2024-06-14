@@ -2,7 +2,7 @@ import { View, Text, TextInput, StyleSheet, TouchableOpacity, Button, ImageBackg
 import { CustomeInput } from "../../components";
 // import React from 'react'
 import { useDispatch, useSelector } from "react-redux";
-import { setFirstname,setSurename,setEmail,setNumber,setPassword,setJurusan,setKode,setNim,resetRegisterData } from "../../store/reducer/settingsReducer";
+import { setFirstname,setSurename,setEmail,setNumber,setPassword,setJurusan,setKode,setNim, resetSettngsData } from "../../store/reducer/settingsReducer";
 import { clerAuth } from '../../store/reducer/authReducer'
 import ApiLib from "../../lib/ApiLib";
 import React, { useState } from "react";
