@@ -11,7 +11,7 @@ import {
 } from "react-native";
 import { MyButton } from "../../components";
 import { GitHub ,GitLab } from "../../../assets"
-import { setEmail, setNumber, setNim,setJurusan,setKode,setPassword, resetRegisterData } from '../../store/reducer/registerReducer';
+import { setFirstname,setSurename,setEmail, setNumber, setNim,setJurusan,setKode,setPassword, resetRegisterData } from '../../store/reducer/registerReducer';
 import { useSelector, useDispatch } from 'react-redux';
 import ApiLib from "../../lib/ApiLib";
 

@@ -46,7 +46,7 @@ export default function HomeScreen(){
     <TouchableOpacity 
     style={styles.containerItem}>
       <View style={styles.itemLeft}>
-        <Text style={styles.textItemLeft}>{getInitial(item.firstname)}</Text>
+        <Text style={styles.textItemLeft}>{getInitial(item.nim)}</Text>
       </View>
       <View style={styles.itemRight}>
         <Text>{item?.firstname}</Text>

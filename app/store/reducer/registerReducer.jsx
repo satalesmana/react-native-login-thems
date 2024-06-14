@@ -18,7 +18,7 @@ export const registerSlice = createSlice({
     setFirstname: (state, action) => {
       state.formInput.firstname = action.payload;
     },
-    setsurename: (state, action) => {
+    setSurename: (state, action) => {
       state.formInput.surename = action.payload;
     },
     setNim: (state, action) => {
