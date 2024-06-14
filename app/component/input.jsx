@@ -19,6 +19,24 @@ export const CustomeInput = ({ value, label, onChangeText, placeholder }) => {
         </View>
     );
 };
+export const CustomeInput2 = ({ value, label, onChangeText, placeholder }) => {
+    const [isActive, setIsActive] = useState(false);
+
+    return (
+        <View style={styles.containerInput2}>
+            <Text style={styles.text}>{label}</Text>
+            <View style={styles.containerInput}>
+                <TextInput
+                    style={isActive ? styles.inputActive : styles.input}
+                    onFocus={() => setIsActive(true)}
+                    onBlur={() => setIsActive(false)}
+                    onChangeText={onChangeText}
+                    placeholder={placeholder}
+                    value={value}
+                /></View>
+        </View>
+    );
+};
 
 export const CustomePassword = ({ value, label, onChangeText, placeholder }) => {
     const [isActive, setIsActive] = useState(false);
@@ -52,6 +70,41 @@ export const CustomePassword = ({ value, label, onChangeText, placeholder }) => 
         </View>
     );
 };
+export const CustomePassword2 = ({ value, label, onChangeText, placeholder }) => {
+    const [isActive, setIsActive] = useState(false);
+
+    // State variable to track password visibility
+    const [showPassword, setShowPassword] = useState(false);
+
+    // Function to toggle the password visibility state
+    const toggleShowPassword = () => {
+        setShowPassword(!showPassword);
+    };
+    return (
+        <View style={styles.containerInput2}>
+            <Text style={styles.text}>{label}</Text>
+            <View style={styles.containerInput}>
+                <TextInput
+                    style={isActive ? styles.inputActive : styles.input}
+                    onFocus={() => setIsActive(true)}
+                    onBlur={() => setIsActive(false)}
+                    secureTextEntry={!showPassword}
+                    onChangeText={onChangeText}
+                    placeholder={placeholder}
+                    value={value}
+                />
+                <MaterialCommunityIcons
+                    name={showPassword ? "eye-off" : "eye"}
+                    size={20}
+                    color="#aaa"
+                    style={styles.iconEye}
+                    onPress={toggleShowPassword}
+                />
+            </View>
+        </View>
+
+    );
+};
 
 const styles = StyleSheet.create({
     containerInput: {
@@ -63,8 +116,15 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
         borderRadius: 10
     },
+    containerInput2: {
+        // marginBottom: '3%',
+        // width: '90%',
+        // alignSelf: 'center',
+        // borderWidth: 1
+    },
     text: {
-        marginLeft: '10%'
+        marginLeft: '10%',
+        color: 'black'
     },
     inputActive: {
         height: 52,
