@@ -5,9 +5,8 @@ import { View,
         TouchableOpacity, 
         Dimensions, 
         Alert} from "react-native";  
-import { CustomeInput } from '../../components/input';
-import { MyButton2 } from '../../components/my_button';
-import React, {useState} from 'react'
+import { CustomeInput, MyButton2 } from '../../components';
+import {useState} from 'react'
 import { useSelector, useDispatch } from 'react-redux';
 import {setFirstName, 
         setSureName, 
@@ -17,7 +16,7 @@ import {setFirstName,
 import ApiLib from "../../lib/Apilib"
 
 const windowWidth = Dimensions.get('window').width;
-export default function RegisterInputFormScreen(){
+export default function RegisterInputFormScreen(navigation){
     const [confirmPassword, setConfirmPassword] = useState(null)
     const register = useSelector((state) => state.register.formInput)
     const dispatch = useDispatch()
@@ -31,19 +30,19 @@ export default function RegisterInputFormScreen(){
 
     const onNextInput = ()=>{
         try{
-             if(typeof register.firstName === null || register.firstName === ""){
+             if(register.firstName === null || register.firstName === ""){
                  throw Error('Harap masukkan nama awalan anda')
              }
-             if(typeof register.sureName === null || register.sureName === ""){
+             if(register.sureName === null || register.sureName === ""){
                  throw Error('Harap masukkan nama akhir anda')
              }
-             if(typeof register.email === null || register.email === ""){
+             if(register.email === null || register.email === ""){
                  throw Error('Harap masukkan email anda')
              }
-             if(typeof register.password === null || register.password === ""){
+             if(register.password === null || register.password === ""){
                  throw Error('Harap masukkan password anda')
              }
-             if(typeof confirmPassword === null || confirmPassword === ""){
+             if(confirmPassword === null || confirmPassword === ""){
                  throw Error('Harap masukkan password anda lagi')
              }
              if( confirmPassword !== register.password){
