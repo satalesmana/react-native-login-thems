@@ -26,10 +26,10 @@ export default function RegisterScreen({ navigation }) {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [hidePassword, setHidePassword] = useState(true); // Password visibility state
   const [hideConfirmPassword, setHideConfirmPassword] = useState(true); // Confirm password visibility state
-  const [isNimFocused, setIsNimFocused] = useState(false); // Email focus state
-  const [isProdiFocused, setIsProdiFocused] = useState(false); // Username focus state
-  const [isClassCodeFocused, setIsClassCodeFocused] = useState(false); // Username focus state
-  const [isTelpFocused, setIsTelpFocused] = useState(false); // Username focus state
+  const [isNimFocused, setIsNimFocused] = useState(false); // Nim focus state
+  const [isProdiFocused, setIsProdiFocused] = useState(false); // Prodi focus state
+  const [isClassCodeFocused, setIsClassCodeFocused] = useState(false); // ClassKode focus state
+  const [isTelpFocused, setIsTelpFocused] = useState(false); // Telp focus state
   const [isPasswordFocused, setIsPasswordFocused] = useState(false); // Password focus state
   const [isConfirmPasswordFocused, setIsConfirmPasswordFocused] = useState(false); // Confirm password focus state
 
