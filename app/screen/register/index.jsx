@@ -12,6 +12,7 @@ import {
 import Icon from "react-native-vector-icons/Feather";
 import { useSelector, useDispatch } from "react-redux";
 import {
+  setNim,
   setFirstName,
   setEmail,
   setPassword,
@@ -45,7 +46,7 @@ export default function RegisterScreen({ navigation }) {
       if (confirmPassword !== register.password)
         throw Error("Confirm password doesn't match");
 
-      const message = `Name : ${register.firstName}\nEmail : ${register.email}\nPassword : ${register.password}\n`;
+      const message = `NIM : ${register.nim}\nName : ${register.firstName}\nEmail : ${register.email}\nPassword : ${register.password}\n`;
 
       Alert.alert("Confirm", message, [
         {
@@ -78,11 +79,19 @@ export default function RegisterScreen({ navigation }) {
     <ScrollView contentContainerStyle={style.container}>
       <Text style={style.welcomeBack}>Register</Text>
       <View style={style.brandStyle}>
-        <Image source={require("../../../assets/images/first.png")} style={{width:200, height:200}} />
+        <Image
+          source={require("../../../assets/images/first.png")}
+          style={{ width: 200, height: 200 }}
+        />
       </View>
       <View style={style.inputContainer}>
         <View style={style.inputView}>
-          <Icon name="user" size={20} color="purple" style={style.imgStyleLeft} />
+          <Icon
+            name="user"
+            size={20}
+            color="purple"
+            style={style.imgStyleLeft}
+          />
           <TextInput
             style={style.inputText}
             value={register.nim}
@@ -98,7 +107,12 @@ export default function RegisterScreen({ navigation }) {
           />
         </View>
         <View style={style.inputView}>
-          <Icon name="mail" size={20} color="purple" style={style.imgStyleLeft} />
+          <Icon
+            name="mail"
+            size={20}
+            color="purple"
+            style={style.imgStyleLeft}
+          />
 
           <TextInput
             style={style.inputText}
@@ -115,7 +129,12 @@ export default function RegisterScreen({ navigation }) {
           />
         </View>
         <View style={style.inputView}>
-          <Icon name="mail" size={20} color="purple" style={style.imgStyleLeft} />
+          <Icon
+            name="mail"
+            size={20}
+            color="purple"
+            style={style.imgStyleLeft}
+          />
 
           <TextInput
             style={style.inputText}
@@ -132,7 +151,12 @@ export default function RegisterScreen({ navigation }) {
           />
         </View>
         <View style={style.inputView}>
-          <Icon name="lock" size={18} color="purple" style={style.imgStyleLeft} />
+          <Icon
+            name="lock"
+            size={18}
+            color="purple"
+            style={style.imgStyleLeft}
+          />
           <TextInput
             style={style.inputText}
             value={register.password}
@@ -149,10 +173,13 @@ export default function RegisterScreen({ navigation }) {
             onPress={() => handleShowPassword()}
           />
         </View>
-        <View
-          style={style.inputView}
-        >
-          <Icon name="lock" size={20} color="purple" style={style.imgStyleLeft} />
+        <View style={style.inputView}>
+          <Icon
+            name="lock"
+            size={20}
+            color="purple"
+            style={style.imgStyleLeft}
+          />
           <TextInput
             style={style.inputText}
             value={confirmPassword}
@@ -232,7 +259,7 @@ const style = StyleSheet.create({
   },
   inputView: {
     gap: 10,
-    width: "150%",
+    width: "90%",
     flexDirection: "row",
     alignItems: "center",
     marginBottom: 20,

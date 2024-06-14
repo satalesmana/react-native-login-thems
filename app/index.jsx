@@ -7,12 +7,14 @@ import {
   RegisterScreen,
   DashboardScreen,
   ProfileScreen,
-  LogoutScreen,
+  FilesScreen,
+  SettingScreen,
+  DownloadScreen,
 } from "./screen";
 import store from "./store";
 import { Provider } from "react-redux";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
+import Icon from "react-native-vector-icons/Feather";
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -22,7 +24,7 @@ function MainScreen({}) {
     <Tab.Navigator
       initialRouteName="BottomBar"
       screenOptions={{
-        tabBarActiveTintColor: "#1F59B6",
+        tabBarActiveTintColor: "purple",
         tabBarInactiveTintColor: "#BDBDBD",
       }}
     >
@@ -32,17 +34,54 @@ function MainScreen({}) {
         options={{
           tabBarLabel: "Home",
           tabBarIcon: ({ color, size }) => (
-            <MaterialCommunityIcons name="home" color={color} size={size} />
+            <Icon name="home" color={color} size={size} />
           ),
         }}
       />
       <Tab.Screen
+        name="Files"
+        component={FilesScreen}
+        options={{
+          tabBarLabel: "My Files",
+          tabBarIcon: ({ color, size }) => (
+            <Icon name="folder" color={color} size={size} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Download"
+        component={DownloadScreen}
+        options={{
+          tabBarIcon: ({ color, size }) => (
+            <Icon name="download-cloud" color={color} size={30} />
+          ),
+        }}
+        style={{
+          backgroundColor: "purple",
+          width: 50,
+          height: 50,
+        }}
+      />
+
+      <Tab.Screen
         name="Profile"
         component={ProfileScreen}
         options={{
-          tabBarLabel: "Profile",
+          headerShown: false,
+          tabBarLabel: "User",
           tabBarIcon: ({ color, size }) => (
-            <MaterialCommunityIcons name="account" color={color} size={size} />
+            <Icon name="user" color={color} size={size} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Setting"
+        component={SettingScreen}
+        options={{
+          headerShown: false,
+          tabBarLabel: "Settings",
+          tabBarIcon: ({ color, size }) => (
+            <Icon name="settings" color={color} size={size} />
           ),
         }}
       />
@@ -52,7 +91,7 @@ function MainScreen({}) {
         options={{
           tabBarLabel: "Logout",
           tabBarIcon: ({ color, size }) => (
-            <MaterialCommunityIcons name="logout" color={color} size={size} />
+            <Icon name="logout" color={color} size={size} />
           ),
         }}
       /> */}

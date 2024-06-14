@@ -3,7 +3,9 @@ import LoginScreen from "./login";
 import RegisterScreen from "./register";
 import DashboardScreen from "./dashboard";
 import ProfileScreen from "./profile";
-import LogoutScreen from "./logout";
+import SettingScreen from "./setting";
+import FilesScreen from "./files";
+import DownloadScreen from "./download";
 
 export {
   HomeScreen,
@@ -11,5 +13,7 @@ export {
   RegisterScreen,
   DashboardScreen,
   ProfileScreen,
-  LogoutScreen,
+  FilesScreen,
+  SettingScreen,
+  DownloadScreen,
 };

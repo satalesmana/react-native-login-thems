@@ -88,11 +88,19 @@ export default function LoginScreen({ navigation }) {
     <ScrollView contentContainerStyle={style.container}>
       <Text style={style.welcomeBack}>Welcome Back!</Text>
       <View style={style.brandStyle}>
-        <Image source={require("../../../assets/images/first.png")} style={{width:200, height:200}} />
+        <Image
+          source={require("../../../assets/images/first.png")}
+          style={{ width: 200, height: 200 }}
+        />
       </View>
       <View style={style.inputContainer}>
         <View style={style.inputView}>
-          <Icon name="mail" size={20} color="purple" style={style.imgStyleLeft} />
+          <Icon
+            name="mail"
+            size={20}
+            color="purple"
+            style={style.imgStyleLeft}
+          />
           <TextInput
             style={style.inputText}
             onChangeText={onChangeEmail}
@@ -110,13 +118,18 @@ export default function LoginScreen({ navigation }) {
         <View
           style={{
             gap: 10,
-            width: "150%",
+            width: "90%",
             flexDirection: "row",
             alignItems: "center",
             marginBottom: 10,
           }}
         >
-          <Icon name="lock" size={20} color="purple" style={style.imgStyleLeft} />
+          <Icon
+            name="lock"
+            size={20}
+            color="purple"
+            style={style.imgStyleLeft}
+          />
           <TextInput
             style={style.inputText}
             onChangeText={onChangePassword}
@@ -195,7 +208,7 @@ const style = StyleSheet.create({
   },
   inputView: {
     gap: 10,
-    width: "150%",
+    width: "90%",
     flexDirection: "row",
     alignItems: "center",
     marginBottom: 35,
