@@ -1,9 +1,9 @@
-import { MyButton } from "./my_button"
-import { FbButton } from "./fb_button"
+import { MyButton, MyButton2, MyButton3 } from "./my_button"
 import { CustomeInput } from "./input"
 
 export {
     MyButton,
-    FbButton,
+    MyButton2,
+    MyButton3,
     CustomeInput
 }
