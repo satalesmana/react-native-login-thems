@@ -106,7 +106,7 @@ export default function RegisterInputFormScreen(navigation){
         label="Password"/>
         <Text style={style.note}>must contain 8 char.</Text>
 
-        <CustomeInput value={confirmPassword} onChangeText={(value)=> dispatch (setConfirmPassword (value))}
+        <CustomeInput value={confirmPassword} onChangeText={(value)=>setConfirmPassword (value)}
         label="Confirm Password"/>
 </View>
 

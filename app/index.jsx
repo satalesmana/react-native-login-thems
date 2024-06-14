@@ -21,7 +21,7 @@ function MainScreen() {
   return (
     <Tab.Navigator 
       initialRouteName="home"
-      screenOptions={{ tabBarActiveTintColor: '#e91e63' }}>
+      screenOptions={{ tabBarActiveTintColor: '#40b83b' }}>
         <Tab.Screen
           name="home"
           component={HomeScreen}
@@ -50,7 +50,7 @@ function MainScreen() {
           options={{
             tabBarLabel: 'User',
             tabBarIcon: ({ color, size }) => (
-              <MaterialCommunityIcons name="user" color={color} size={size} />
+              <MaterialCommunityIcons name="account" color={color} size={size} />
             ),
           }}
         />

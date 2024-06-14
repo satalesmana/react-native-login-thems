@@ -90,7 +90,7 @@ import {
       borderColor:'#dedede',
       width:45,
       textAlign:'center',
-      backgroundColor:'red',
+      backgroundColor:'#40b83b',
       fontWeight:'bold',
       color:'white',
       padding:10
