@@ -15,11 +15,14 @@ import { ICGoogle, ICFacebook } from "../../../assets";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { ButtonRed } from "../../component";
 import ApiLib from "../../lib/ApiLib"
+import { useDispatch } from "react-redux";
+import { setId, setEmail } from "../../store/reducer/authReducer";
 
 const windowWidth = Dimensions.get("window").width;
 
 export default function LoginScreen({ navigation }) {
   const [email, onChangeEmail] = React.useState('')
+  const dispatch = useDispatch()
 
   // State variable to hold the password
   const [password, setPassword] = useState("");
@@ -64,7 +67,11 @@ export default function LoginScreen({ navigation }) {
       )
       setLoading(false)
       if (res.data.document != null) {
-        navigation.replace("Home")
+        console.log(('data', res.data.document._id));
+        dispatch(setId(res.data.document._id))
+        dispatch(setEmail(res.data.document.email))
+
+        navigation.replace("Main")
       } else {
         Alert.alert('Error', "Username & password tidak sesuai", [
           {
@@ -214,7 +221,7 @@ const style = StyleSheet.create({
     flex: 8,
     textAlign: "center",
     marginVertical: "auto",
-    fontSize: 20,
+    fontSize: 17,
     marginRight: "10%",
   },
   btnFG: {
