@@ -31,11 +31,11 @@ export default function HomeScreen(){
       console.log(err)
     }
   }
-  const getInitial=(firstname)=>{
+  const getInitial=(nim)=>{
     let name = ''
 
-    if(firstname.length > 0)
-        name += firstname.substring(0,1);
+    if(nim.length > 0)
+        name += nim.substring(0,1);
     
     return name.toLocaleUpperCase()
   }
