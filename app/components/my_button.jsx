@@ -17,14 +17,14 @@ const MyButton=(props)=>{
 }
 const MyButton2=(props)=> {
     return (
-        <TouchableOpacity style={[styles.container2, props.style]}>
+        <TouchableOpacity style={[styles.container2, props.style]} onPress={props.onPress}>
                 <Text style={styles.title}>{props.text}</Text>
             </TouchableOpacity>
     )
 }
 const MyButton3=(props)=> {
     return (
-        <TouchableOpacity style={[styles.container3, props.style]}>
+        <TouchableOpacity style={[styles.container3, props.style]} onPress={props.onPress}>
                 <Text style={styles.title2}>{props.text}</Text>
             </TouchableOpacity>
     )
