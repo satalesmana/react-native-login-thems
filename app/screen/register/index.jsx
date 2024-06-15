@@ -10,7 +10,11 @@ import {useState} from 'react'
 import { useSelector, useDispatch } from 'react-redux';
 import {setFirstName, 
         setSureName, 
-        setEmail, 
+        setEmail,
+        setNim,
+        setKode,
+        setJurusan,
+        setNum, 
         setPassword, 
         resetRegisterData} from '../../store/reducer/registerReducer'
 import ApiLib from "../../lib/Apilib"
@@ -39,6 +43,18 @@ export default function RegisterInputFormScreen(navigation){
              if(register.email === null || register.email === ""){
                  throw Error('Harap masukkan email anda')
              }
+             if(register.nim === null || register.nim === ""){
+                 throw Error('Harap masukkan nomor induk mahasiswa anda')
+             }
+             if(register.kode === null || register.kode === ""){
+                 throw Error('Harap masukkan kode kelas anda')
+             }
+             if(register.jurusan === null || register.jurusan === ""){
+                 throw Error('Harap masukkan jurusan anda')
+             }
+             if(register.num === null || register.num === ""){
+                 throw Error('Harap masukkan nomor telepon anda')
+             }
              if(register.password === null || register.password === ""){
                  throw Error('Harap masukkan password anda')
              }
@@ -50,6 +66,10 @@ export default function RegisterInputFormScreen(navigation){
             }
             let message  = `Name : ${register.firstName}  ${register.sureName}\n`
                 message += `Email : ${register.email} \n`
+                message += `NIM : ${register.nim} \n`
+                message += `Kode kelas : ${register.kode} \n`
+                message += `Jurusan : ${register.jurusan} \n`
+                message += `No. HP : ${register.num} \n`
 
         Alert.alert('Confirm', message, [
             {
@@ -101,6 +121,18 @@ export default function RegisterInputFormScreen(navigation){
 
         <CustomeInput value={register.email} onChangeText={(value)=> dispatch (setEmail (value))}
         label="E-mail"/>
+
+        <CustomeInput value={register.nim} onChangeText={(value)=> dispatch (setNim (value))}
+        label="NIM"/>
+
+        <CustomeInput value={register.kode} onChangeText={(value)=> dispatch (setKode (value))}
+        label="Kode kelas"/>
+
+        <CustomeInput value={register.jurusan} onChangeText={(value)=> dispatch (setJurusan (value))}
+        label="Jurusan"/>
+
+        <CustomeInput value={register.num} onChangeText={(value)=> dispatch (setNum (value))}
+        label="No. HP"/>
     
         <CustomeInput value={register.password} onChangeText={(value)=> dispatch (setPassword (value))}
         label="Password"/>
@@ -114,9 +146,9 @@ export default function RegisterInputFormScreen(navigation){
 
 
     <Text style={style.terms}>By continuing, you agree to our&nbsp;
-        <TouchableOpacity style={[style.textLabel2]} onPress={onTOS}><Text>Term of Service</Text></TouchableOpacity>
+        <TouchableOpacity onPress={onTOS}><Text style={[style.textLabel2]}>Term of Service</Text></TouchableOpacity>
         &nbsp;And&nbsp; 
-        <TouchableOpacity style={[style.textLabel2]} onPress={onPolicy}><Text>Privacy Policy</Text></TouchableOpacity>
+        <TouchableOpacity onPress={onPolicy}><Text style={[style.textLabel2]}>Privacy Policy</Text></TouchableOpacity>
     </Text>
 </ScrollView>
     )
