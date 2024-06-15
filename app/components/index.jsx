@@ -1,6 +1,7 @@
 import { MyButton, MySigin } from "./my_button"
-
+import { CustomeInput } from "./input";
 export {
     MyButton,
-    MySigin
+    MySigin,
+    CustomeInput
 }

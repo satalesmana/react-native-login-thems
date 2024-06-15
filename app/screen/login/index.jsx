@@ -1,126 +1,4 @@
-// import {
-//   View,
-//   Text,
-//   TextInput,
-//   StyleSheet,
-//   TouchableOpacity,
-//   Dimensions,
-//   ScrollView,
-//   Alert,
-//   ActivityIndicator
-// } from 'react-native';
-// import { MyButton } from '../../components'
-// import { ICFacebook, ICGoogle, ICApple } from '../../../assets'
-// import React, { useState } from 'react'
-// import ApiLib from "../../lib/ApiLib"
 
-// const windowWidth = Dimensions.get('window').width;
-
-// export default function LoginScreen({ navigation }) {
-//   const [email, onChangeEmail] = React.useState('')
-//   const [password, onChangePassword] = React.useState('')
-//   const [loading, setLoading] = useState(false)
-
-//   const onSubmitLogin = async () => {
-//     try {
-//       if (email.trim().length === 0) {
-//         throw Error('Email is required')
-//       }
-
-//       if (password.trim().length === 0) {
-//         throw Error('Password is required')
-//       }
-//       const res = await ApiLib.post('/action/findOne', {
-//         "dataSource": "Cluster0",
-//         "database": "lp3i_app",
-//         "collection": "users",
-//         "filter": {
-//           "email": email,
-//           "password": password
-//         }
-//       }
-//       )
-//       setLoading(false)
-//       // Simulate a login request
-//       if(res.data.document != null){
-//         navigation.navigate('Home')
-//       }else{
-//         Alert.alert('Error', "Username & password tidak sesuai", [
-//           {text: 'OK', onPress: () => {
-//             console.log('ERR')
-//           }},
-//         ]);
-//       }
-
-      
-//     } catch (err) {
-//       Alert.alert('Error', err.message, [
-//         {
-//           text: 'OK', onPress: () => {
-//             console.log('ERR')
-//           }
-//         },
-//       ]);
-//     }
-//   }
-
-//   const onSubmitLoginRegis = () => {
-//     navigation.navigate('Register')
-//   }
-
-//   return (
-//     <ScrollView>
-//       <View>
-//         <View style={{ width: windowWidth, height: 200 }}>
-//           <Text style={style.textLoginStyle}>Login Here</Text>
-//           <Text style={style.textLoginStyle2}>Welcome back you’ve been missed!</Text>
-//         </View>
-
-//         <View style={style.container}>
-//           <Text style={style.textLabel}></Text>
-//           <TextInput
-//             style={style.textInputStyle}
-//             onChangeText={onChangeEmail}
-//             placeholder='Email'
-//             placeholderTextColor='gray'
-//             value={email} />
-
-//           <Text style={[style.textLabel, { marginTop: 20 }]}></Text>
-//           <TextInput
-//             style={[style.textInputStyle, { marginBottom: 12 }]}
-//             onChangeText={onChangePassword}
-//             placeholder='Enter Password'
-//             placeholderTextColor='gray'
-//             secureTextEntry={true}
-//             value={password} />
-//           <Text style={style.textForgot}>Forgot Your Password?</Text>
-//           <TouchableOpacity onPress={onSubmitLogin} style={style.buttonLogin}>
-//             <Text style={style.textSignin}>Sign In</Text>
-//           </TouchableOpacity>
-
-//         </View>
-
-//         <Text onPress={onSubmitLoginRegis} style={style.textContinueStyle}>
-//           Create new Account
-//         </Text>
-//         <Text style={style.textContinueStyle2}>
-//           Or continue with
-//         </Text>
-
-//         <View style={style.btnContainer}>
-//           <View>
-//             <MyButton style={style.btnContainer1}
-//               imgUrl={ICGoogle} />
-//           </View>
-//           <View>
-//             <MyButton style={style.btnContainer1}
-//               imgUrl={ICFacebook} />
-//           </View>
-//           <View>
-//             <MyButton style={style.btnContainer1}
-//               imgUrl={ICApple} />
-//           </View>
-//         </View>
 import {
   View,
   Text,
@@ -134,18 +12,21 @@ import {
 } from 'react-native';
 import { MyButton } from '../../components';
 import { ICFacebook, ICGoogle, ICApple } from '../../../assets';
-import React, { useState } from 'react';
+import React from 'react';
 import ApiLib from "../../lib/ApiLib";
+import { useDispatch } from 'react-redux'
+import { setId, setFirstName, setEmail} from '../../store/reducer/authReducer'
 
 const windowWidth = Dimensions.get('window').width;
 
 export default function LoginScreen({ navigation }) {
   const [email, onChangeEmail] = React.useState('');
   const [password, onChangePassword] = React.useState('');
-  const [showPassword, setShowPassword] = useState(false); // Add this state
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = React.useState(false);
+  const dispatch = useDispatch()
 
   const onSubmitLogin = async () => {
+    setLoading(true); // Show loading indicator
     try {
       if (email.trim().length === 0) {
         throw Error('Email is required');
@@ -155,35 +36,31 @@ export default function LoginScreen({ navigation }) {
         throw Error('Password is required');
       }
 
-      
-      setLoading(true);
-
       const res = await ApiLib.post('/action/findOne', {
-        dataSource: "Cluster0",
-        database: "lp3i_app",
-        collection: "users",
-        filter: {
-          email,
-          password,
+        "dataSource": "Cluster0",
+        "database": "lp3i_app",
+        "collection": "users",
+        "filter": {
+          "email":email,
+          "password":password,
         },
       });
 
-      setLoading(false);
+      setLoading(false); // Hide
       
-      if (res.data.document!= null) {
-        Alert.alert(
-          'Selamat datang!', // Display "Selamat datang" message
-          '',
-          [
-            { text: 'OK', onPress: () => navigation.navigate('Home') },
-            ]
-            );
+      if (res.data.document != null) {
+        // Successful login
+        console.log('data', res.data.document._id)
+        dispatch(setId(res.data.document._id))
+        dispatch(setFirstName(res.data.document.firstName))
+        dispatch(setEmail(res.data.document.email))
+
+        navigation.replace("Main")
             } else {
               Alert.alert('Error', "Username & password tidak sesuai", [
                 { text: 'OK', onPress: () => console.log('ERR') },
                 ]);
                 }
-
     } catch (err) {
       Alert.alert('Error', err.message, [
         { text: 'OK', onPress: () => console.log('ERR') },
@@ -216,21 +93,14 @@ export default function LoginScreen({ navigation }) {
           <Text style={[style.textLabel, { marginTop: 10 }]}>
             Password
           </Text>
-          <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-            <TextInput
-              style={[style.textInputStyle, { flex: 1, marginRight: 10 }]}
-              onChangeText={onChangePassword}
-              placeholder='Enter Password'
-              placeholderTextColor='gray'
-              secureTextEntry={!showPassword}
-            />
-            <TouchableOpacity onPress={() => setShowPassword(!showPassword)}>
-              <Text style={{ fontSize: 16, color: 'gray' }}>
-                {showPassword? 'Hide' : 'Show'}
-              </Text>
-            </TouchableOpacity>
-          </View>
-
+          <TextInput
+            style={[style.textInputStyle, { marginBottom: 12 }]}
+            onChangeText={onChangePassword}
+            placeholder='Enter Password'
+            placeholderTextColor='gray'
+            secureTextEntry={true}
+            value={password}
+          />
           <Text style={style.textForgot}>Forgot Your Password?</Text>
           <TouchableOpacity onPress={onSubmitLogin} style={style.buttonLogin}>
             <Text style={style.textSignin}>Sign In</Text>
@@ -289,6 +159,7 @@ const style = StyleSheet.create({
   textInputStyle: {
     height: 60,
     marginTop: 12,
+    borderWidth: 1,
     padding: 10,
     borderRadius: 10,
   },

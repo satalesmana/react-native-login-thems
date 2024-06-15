@@ -4,11 +4,15 @@ export const registerSlice = createSlice({
   name:'register',
   initialState: {
     formInput:{
+        firstName: null,
         email: null,
         password: null,
     },
   },
   reducers: {
+    setFirstName:(state, action) => {
+      state.formInput.firstName = action.payload
+    },
     setEmail:(state, action) => {
         state.formInput.email = action.payload
     },
@@ -17,6 +21,7 @@ export const registerSlice = createSlice({
     },
     resetRegisterData:(state) =>{
         state.formInput = {
+            firstName: null,
             email: null,
             password: null
         }
@@ -25,7 +30,8 @@ export const registerSlice = createSlice({
 })
 
 // Action creators are generated for each case reducer function
-export const { 
+export const {
+    setFirstName,
     setEmail,
     setPassword,
     resetRegisterData
