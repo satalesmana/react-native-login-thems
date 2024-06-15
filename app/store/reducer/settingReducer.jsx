@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-export const settingSlice = createSlice({
+export const settingsSlice = createSlice({
   name: "settings",
   initialState: {
     formInput: {
@@ -15,20 +15,17 @@ export const settingSlice = createSlice({
     setPassword: (state, action) => {
       state.formInput.password = action.payload;
     },
-    resetSettingData:(state)=>{
-        state.formInput={
-            email:null,
-            password:null,
-        }
-    }
+    resetSettingData: (state) => {
+      state.formInput = { 
+        email: null,
+        password: null,
+      };
+    },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const {
-  setEmail,
-  setPassword,
-  resetSettingData,
-} = settingSlice.actions;
+export const { setFirstName, setEmail, setPassword, setJurusan,setKode,setNim,setNumber,resetRegisterData } =
+  settingsSlice.actions;
 
-export default settingSlice.reducer;
+export default settingsSlice.reducer;
