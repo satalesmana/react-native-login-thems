@@ -102,14 +102,14 @@ export default function RegisterScreen({ navigation }) {
   return (
     <ScrollView style={{windowWidth:windowWidth,windowHeight:windowHeight,backgroundColor:'#FFFFFF'}}>
       <View style={{ width: windowWidth, height: windowHeight}}>
-        <View style={{marginTop:-100}}>
+        <View style={{marginTop:-120}}>
           <Text style={style.textLoginStyle}>Create</Text>
           <Text style={style.textLoginStyle2}>Account :)</Text>
           </View>
           <Image
               source={bulat}
             
-              style={{ width:windowWidth,height:700,position:'absolute',marginTop:20}}
+              style={{ width:windowWidth,height:700,position:'absolute',marginTop:0}}
             />
          
        
@@ -117,9 +117,7 @@ export default function RegisterScreen({ navigation }) {
         <View style={style.container}>
          
           <TextInput
-            style={[
-              style.textInputStyle,
-              { borderBottomColor: isEmailFocused ? 'blue' : 'black' }
+            style={[style.textInputStyle,{marginTop:-15,paddingTop:40, borderBottomColor: isEmailFocused ? 'blue' : 'black' }
             ]}
             value={register.email}
             onChangeText={(value) => dispatch(setEmail(value))}
@@ -130,7 +128,7 @@ export default function RegisterScreen({ navigation }) {
           <TextInput
             style={[
               style.textInputStyle,
-              { borderBottomColor: isNamaFocused ? 'blue' : 'black' }
+              {marginTop:-15,paddingTop:40, borderBottomColor: isNamaFocused ? 'blue' : 'black' }
             ]}
             value={register.nama}
             onChangeText={(value) => dispatch(setNama(value))}
@@ -142,7 +140,7 @@ export default function RegisterScreen({ navigation }) {
           <TextInput
             style={[
               style.textInputStyle,
-              { borderBottomColor: isNimFocused ? 'blue' : 'black' }
+              {marginTop:-15,paddingTop:40, borderBottomColor: isNimFocused ? 'blue' : 'black' }
             ]}
             value={register.nim}
             onChangeText={(value) => dispatch(setUserNim(value))}
@@ -157,7 +155,7 @@ export default function RegisterScreen({ navigation }) {
           <TextInput
             style={[
               style.textInputStyle,
-              { borderBottomColor: isProdiFocused ? 'blue' : 'black' }
+              {marginTop:-15,paddingTop:40, borderBottomColor: isProdiFocused ? 'blue' : 'black' }
             ]}
             value={register.prodi}
             onChangeText={(value) => dispatch(setUserProdi(value))}
@@ -169,7 +167,7 @@ export default function RegisterScreen({ navigation }) {
           <TextInput
             style={[
               style.textInputStyle,
-              { borderBottomColor: isClassCodeFocused ? 'blue' : 'black' }
+              {marginTop:-15,paddingTop:40, borderBottomColor: isClassCodeFocused ? 'blue' : 'black' }
             ]}
             value={register.kelasCode}
             onChangeText={(value) => dispatch(setUserkelasCode(value))}
@@ -182,7 +180,7 @@ export default function RegisterScreen({ navigation }) {
           <TextInput
             style={[
               style.textInputStyle,
-              { borderBottomColor: isTelpFocused ? 'blue' : 'black' }
+              {marginTop:-15,paddingTop:40, borderBottomColor: isTelpFocused ? 'blue' : 'black' }
             ]}
             value={register.telp}
             onChangeText={(value) => dispatch(setUserTelp(value))}
@@ -196,7 +194,7 @@ export default function RegisterScreen({ navigation }) {
             <TextInput
               style={[
                 style.textInputStyle,
-                { flex: 1, borderBottomColor: isPasswordFocused ? 'blue' : 'black' }
+                {marginTop:-15,paddingTop:40, flex: 1, borderBottomColor: isPasswordFocused ? 'blue' : 'black' }
               ]}
               value={register.password}
               onChangeText={(value) => dispatch(setPassword(value))}
@@ -206,7 +204,7 @@ export default function RegisterScreen({ navigation }) {
               onBlur={() => setIsPasswordFocused(false)}
             />
             <TouchableOpacity onPress={() => setHidePassword(!hidePassword)}>
-              <Ionicons name={hidePassword ? 'eye-off' : 'eye'} size={24} color="black" />
+              <Ionicons name={hidePassword ? 'eye-off' : 'eye'} size={18} color="black" style={{right:15}}/>
             </TouchableOpacity>
           </View>
 
@@ -215,7 +213,7 @@ export default function RegisterScreen({ navigation }) {
             <TextInput
               style={[
                 style.textInputStyle,
-                { flex: 1, borderBottomColor: isConfirmPasswordFocused ? 'blue' : 'black' }
+                {marginTop:-15,paddingTop:40, flex: 1, borderBottomColor: isConfirmPasswordFocused ? 'blue' : 'black' }
               ]}
               value={confirmPassword}
               onChangeText={(value) => setConfirmPassword(value)}
@@ -225,7 +223,7 @@ export default function RegisterScreen({ navigation }) {
               onBlur={() => setIsConfirmPasswordFocused(false)}
             />
             <TouchableOpacity onPress={() => setHideConfirmPassword(!hideConfirmPassword)}>
-              <Ionicons name={hideConfirmPassword ? 'eye-off' : 'eye'} size={24} color="black" />
+              <Ionicons name={hideConfirmPassword ? 'eye-off' : 'eye'} size={18} color="black" style={{right:15}} />
             </TouchableOpacity>
           </View>
 
