@@ -7,6 +7,4 @@ const ApiLib = axios.create({
     },
 })
 
-export default ApiLib; 
-
-dhbjbjn
+export default ApiLib;
