@@ -1,3 +1,10 @@
+import {
+  View,
+  Image,
+  TouchableOpacity
+} from "react-native";
+
+
 import * as React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -30,12 +37,24 @@ function MainScreen() {
           name="Home"
           component={HomeScreen}
           options={{
-            tabBarLabel: 'Home',
-            tabBarIcon: ({ color, size }) => (
-              <MaterialCommunityIcons name="home" color={color} size={size} />
+            tabBarLabel: 'Home',           
+            headerRight: () => (
+              <View style={{flexDirection:'row'}}>
+                <TouchableOpacity style={{flexDirection: "row", padding:'40' }}>
+                  <Image style={{
+                    width: 35, height:35
+                  }} source={require('../assets/images/Notification.png')}/>
+
+                  <Image style={{
+                    width: 35, height:35
+                  }} 
+                  source={require('../assets/images/AI Avatars.png')}/>
+                </TouchableOpacity>
+              </View>
             ),
           }} 
         />
+
         <Tab.Screen
           name="My Files"
           component={FileScreen}
@@ -46,6 +65,7 @@ function MainScreen() {
             ),
           }} 
         />
+
         <Tab.Screen
           name="Profile"
           component={ProfileScreen}
@@ -56,6 +76,7 @@ function MainScreen() {
             ),
           }}
         />
+
         <Tab.Screen
           name="Settings"
           component={SettingsScreen}

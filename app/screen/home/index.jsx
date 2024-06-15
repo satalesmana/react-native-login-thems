@@ -4,7 +4,8 @@ import {
   FlatList,
   TouchableOpacity,
   StyleSheet,
-  TextInput
+  TextInput,
+  ScrollView
 } from 'react-native';
 import { useState, useEffect } from "react";
 import { setData, clearData, countData } from '../../store/reducer/usersReducer';
@@ -69,8 +70,9 @@ export default function HomeScreen() {
   )
 
   return (
+    <ScrollView>
     <View style={{ backgroundColor: 'white' }}>
-      <View style={{ borderWidth: 1, flexDirection: 'row', margin: 10, borderRadius: 25, height: 45, width: '85%', alignSelf: 'center' }}>
+      <View style={{borderColor:'grey' ,borderWidth: 1, flexDirection: 'row', margin: 10, borderRadius: 25, height: 45, width: '85%', alignSelf: 'center' }}>
         <Octicons name='search' size={20} marginVertical={'auto'} marginLeft={'5%'} flex={1} />
         <TextInput
           style={{ marginLeft: '3%', flex: 11 }}
@@ -84,10 +86,10 @@ export default function HomeScreen() {
         <View style={{ width: '25%', height: '60%', marginVertical: 'auto', marginLeft: '5%' }}>
           {/* Gambar */}
           {/* <Progress.Pie progress={0.4} size={50} /> */}
-          <Progress.Circle size={50} unfilledColor='white' thickness={7} strokeCap='round' indeterminate={false} progress={0.65} marginVertical={'auto'} alignSelf={'center'} borderWidth={0} color='red' />
+          <Progress.Circle size={50} unfilledColor='white' thickness={7} strokeCap='round' indeterminate={false} progress={0.65} marginVertical={'auto'} alignSelf={'center'} borderWidth={0} color='#9322C8' />
         </View>
         <View style={{ marginVertical: 'auto', marginLeft: '5%' }}>
-          <Text style={{ fontSize: 20 }}>Student Active</Text>
+          <Text style={{ fontSize: 20 }}>3 Student Active</Text>
           <Text style={{ color: 'grey', fontSize: 13 }}>Total of student</Text>
         </View>
       </View>
@@ -95,7 +97,7 @@ export default function HomeScreen() {
       <View>
         <View style={{ marginLeft: '8%', flexDirection: 'row' }}>
           <Text style={{ fontSize: 22, flex: 4 }}>List of Mahasiswa</Text>
-          <Text style={{ marginVertical: 'auto', flex: 1 }}>See all</Text>
+          <Text style={{ marginVertical: 'auto', flex: 1 ,color:'#9322C8'}}>See all</Text>
         </View>
 
         <View style={{ flexDirection: 'row', marginLeft: '8%', marginTop: '5%' }}>
@@ -122,7 +124,7 @@ export default function HomeScreen() {
         </View>
       </View>
     </View>
-
+    </ScrollView>
   );
 }
 
