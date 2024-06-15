@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useCallback, useState } from "react";
 import {
   View,
   Text,
@@ -12,18 +12,58 @@ import {
   ViewBase,
 } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
-import { clearAuth } from "../../store/reducer/authReducer";
+import { setData, clearData } from '../../store/reducer/usersReducer';
+import ApiLib from "../../lib/ApiLib";
 import * as Progress from "react-native-progress";
 
 import Icon from "react-native-vector-icons/Feather";
 
 export default function ProfileScreen({ navigation }) {
-  const auth = useSelector((state) => state.auth);
-  const dispath = useDispatch();
+  const dispatch = useDispatch();
+  const auth = useSelector((state) => state.register.formInput);
+  const data = useSelector((state) => state.users.data);
+  const filter = useSelector((state) => state.users.formFilter);
   const onLogout = () => {
-    dispath(clearAuth());
+    dispatch(clearAuth());
     navigation.replace("Login");
   };
+
+  const fetchData = async (nim) => {
+    try {
+      const res = await ApiLib.get('/users/${nim}', {
+        dataSource: 'Cluster0',
+        database: 'uasghw',
+        collection: 'users',
+        filter: filter,
+      });
+
+      if (res.data?.documents) {
+        dispatch(setData(res.data.documents));
+        setFilteredData(res.data.documents); // Update filteredData initially
+      } else {
+        dispatch(clearData());
+        setFilteredData([]); // Clear filteredData if no documents
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  const renderItem = ({ item }) => (
+    <TouchableOpacity>
+      {/* <View style={styles.itemLeft}>
+        <Text style={styles.textItemLeft}>{getInitial(item.firstName)}</Text>
+      </View> */}
+      <View>
+        <Text>{item.firstName}</Text>
+        <Text>{item.email}</Text>
+      </View>
+    </TouchableOpacity>
+  );
 
   return (
     <View
@@ -62,7 +102,7 @@ export default function ProfileScreen({ navigation }) {
         </View>
         <View style={{ padding: 5, marginLeft: 25, marginBottom: 20 }}>
           <Text style={{ color: "white", fontSize: 25, fontFamily: "Roboto" }}>
-            GHW Team
+          {auth.firstName}
           </Text>
         </View>
         <View
@@ -93,7 +133,7 @@ export default function ProfileScreen({ navigation }) {
             style={{ marginLeft: 30, marginTop: 10, fontWeight: 100 }}
           />
           <Text style={{ fontWeight: 100, color: "white", marginTop: 10 }}>
-            biesyntia@gmail.com
+          {auth.email}
           </Text>
         </View>
       </View>
@@ -117,8 +157,8 @@ export default function ProfileScreen({ navigation }) {
                 style={{ marginLeft: "0%" }}
               />
               <View style={{ flexDirection: "column" }}>
-                <Text style={{ fontWeight: "bold", fontSize: 17 }}>
-                  220444020028
+                <Text style={{ fontWeight: "bold", fontSize: 17, color:"black" }}>
+                {fetchData.nim}
                 </Text>
                 <Text style={{ fontWeight: "200" }}>NIM</Text>
               </View>
@@ -140,7 +180,7 @@ export default function ProfileScreen({ navigation }) {
               />
               <View style={{ flexDirection: "column" }}>
                 <Text style={{ fontWeight: "bold", fontSize: 17 }}>
-                  Manajement Informatika
+                {fetchData.programStudy}
                 </Text>
                 <Text style={{ fontWeight: "200" }}>Program Study</Text>
               </View>
@@ -162,7 +202,7 @@ export default function ProfileScreen({ navigation }) {
               />
               <View style={{ flexDirection: "column" }}>
                 <Text style={{ fontWeight: "bold", fontSize: 17 }}>
-                  MI-22-21
+                {auth.kodeKelas}
                 </Text>
                 <Text style={{ fontWeight: "200" }}>Class Code</Text>
               </View>
@@ -184,7 +224,7 @@ export default function ProfileScreen({ navigation }) {
               />
               <View style={{ flexDirection: "column" }}>
                 <Text style={{ fontWeight: "bold", fontSize: 17 }}>
-                  0812-9101-4737
+                {auth.telp}
                 </Text>
                 <Text style={{ fontWeight: "200" }}>Phone Number</Text>
               </View>

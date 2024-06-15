@@ -89,6 +89,7 @@ function MainScreen({}) {
         component={DashboardScreen}
         options={{
           tabBarLabel: "Home",
+          headerShown: false,
           tabBarIcon: ({ color, size }) => (
             <Icon name="home" color={color} size={size} />
           ),

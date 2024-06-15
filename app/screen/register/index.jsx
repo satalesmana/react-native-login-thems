@@ -16,6 +16,9 @@ import {
   setFirstName,
   setEmail,
   setPassword,
+  setProgramStudy,
+  setKodeKelas,
+  setTelp,
   resetRegisterData,
 } from "../../store/reducer/registerReducer";
 import { ICGoogle, ICFacebook, ICTwitter } from "../../../assets";
@@ -42,11 +45,20 @@ export default function RegisterScreen({ navigation }) {
       if (!register.firstName) throw Error("Name is required");
       if (!register.email) throw Error("Email is required");
       if (!register.password) throw Error("Password is required");
+      if (!register.programStudy) throw Error("Program Study is required");
+      if (!register.kodeKelas) throw Error("Class Code is required");
+      if (!register.telp) throw Error("Phone Number is required");
       if (!confirmPassword) throw Error("Confirm Password is required");
       if (confirmPassword !== register.password)
         throw Error("Confirm password doesn't match");
 
-      const message = `NIM : ${register.nim}\nName : ${register.firstName}\nEmail : ${register.email}\nPassword : ${register.password}\n`;
+      const message = `NIM : ${register.nim}\n
+      Name : ${register.firstName}\n
+      Email : ${register.email}\n
+      Password : ${register.password}\n
+      Program Study : ${register.programStudy}\n
+      Class Code : ${register.kodeKelas}\n
+      Phone Number : ${register.telp}\n`;
 
       Alert.alert("Confirm", message, [
         {
@@ -141,6 +153,72 @@ export default function RegisterScreen({ navigation }) {
             value={register.email}
             onChangeText={(value) => dispatch(setEmail(value))}
             placeholder="Enter your email"
+            placeholderTextColor="black"
+          />
+          <Icon
+            name="check"
+            size={22}
+            color="purple"
+            style={(style.imgStyleRight, { marginRight: -2 })}
+          />
+        </View>
+        <View style={style.inputView}>
+          <Icon
+            name="book"
+            size={20}
+            color="purple"
+            style={style.imgStyleLeft}
+          />
+
+          <TextInput
+            style={style.inputText}
+            value={register.programStudy}
+            onChangeText={(value) => dispatch(setProgramStudy(value))}
+            placeholder="Enter your Program Study"
+            placeholderTextColor="black"
+          />
+          <Icon
+            name="check"
+            size={22}
+            color="purple"
+            style={(style.imgStyleRight, { marginRight: -2 })}
+          />
+        </View>
+        <View style={style.inputView}>
+          <Icon
+            name="book-open"
+            size={20}
+            color="purple"
+            style={style.imgStyleLeft}
+          />
+
+          <TextInput
+            style={style.inputText}
+            value={register.kodeKelas}
+            onChangeText={(value) => dispatch(setKodeKelas(value))}
+            placeholder="Enter your Class Code"
+            placeholderTextColor="black"
+          />
+          <Icon
+            name="check"
+            size={22}
+            color="purple"
+            style={(style.imgStyleRight, { marginRight: -2 })}
+          />
+        </View>
+        <View style={style.inputView}>
+          <Icon
+            name="phone"
+            size={20}
+            color="purple"
+            style={style.imgStyleLeft}
+          />
+
+          <TextInput
+            style={style.inputText}
+            value={register.telp}
+            onChangeText={(value) => dispatch(setTelp(value))}
+            placeholder="Enter your Phone Number"
             placeholderTextColor="black"
           />
           <Icon

@@ -8,6 +8,9 @@ export const registerSlice = createSlice({
       firstName: null,
       email: null,
       password: null,
+      programStudy:null,
+      kodeKelas:null,
+      telp: null
     },
   },
   reducers: {
@@ -23,12 +26,24 @@ export const registerSlice = createSlice({
     setPassword: (state, action) => {
       state.formInput.password = action.payload;
     },
+    setProgramStudy: (state, action) => {
+      state.formInput.programStudy = action.payload;
+    },
+    setKodeKelas: (state, action) => {
+      state.formInput.kodeKelas = action.payload;
+    },
+    setTelp: (state, action) => {
+      state.formInput.telp = action.payload;
+    },
     resetRegisterData: (state) => {
       state.formInput = {
         setNim: null,
         firstName: null,
         email: null,
         password: null,
+        programStudy:null,
+        kodeKelas:null,
+        telp:null
       };
     },
   },
@@ -40,6 +55,9 @@ export const {
   setFirstName,
   setEmail,
   setPassword,
+  setProgramStudy,
+  setKodeKelas,
+  setTelp,
   resetRegisterData,
 } = registerSlice.actions;
 
