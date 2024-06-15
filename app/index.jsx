@@ -26,7 +26,7 @@ function MainScreen() {
           name="home"
           component={HomeScreen}
           options={{
-            tabBarLabel: 'Home',
+            tabBarLabel: 'Home',headerShown:false, 
             tabBarIcon: ({ color, size }) => (
               <MaterialCommunityIcons name="home" color={color} size={size} />
             ),
