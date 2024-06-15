@@ -146,7 +146,7 @@ export default function SettingScreen({ navigation }) {
           },
         ]}
       >
-        <Text>Email Address</Text>
+        <Text style={{marginLeft:5,marginRight:200,marginBottom:10,fontWeight:'bold'}}>Email Address</Text>
         <View style={style.inputView}>
           <TextInput
             style={style.inputText}
@@ -156,6 +156,7 @@ export default function SettingScreen({ navigation }) {
             placeholderTextColor="black"
           />
         </View>
+        <Text style={{marginLeft:5,marginRight:200,marginBottom:10,fontWeight:'bold'}}>New Password</Text>
         <View style={style.inputView}>
           <TextInput
             style={style.inputText}
@@ -165,6 +166,7 @@ export default function SettingScreen({ navigation }) {
             placeholderTextColor="black"
           />
         </View>
+        <Text style={{marginLeft:5,marginRight:179,marginBottom:10,fontWeight:'bold'}}>Confirm Password</Text>
         <View style={style.inputView}>
           <TextInput
             style={style.inputText}
