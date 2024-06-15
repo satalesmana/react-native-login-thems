@@ -79,6 +79,9 @@ export default function SettingsScreen({ navigation }) {
     </View>
      </View>
           <View style={[style.containtertiga,{borderWidth:1,backgroundColor:"white",margin:1,marginLeft:5,marginRight:5,marginBottom:10,marginTop:20}]}>
+          <Text style={{ color: "black", fontWeight: "bold", fontSize: 18}}>
+                        Change Password
+                    </Text>
             <Text style={style.textLabel}>Email Addres</Text>
             <TextInput
               style={[style.textInputStyle, { marginBottom: 12 }]}
