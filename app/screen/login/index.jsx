@@ -15,7 +15,7 @@ import { GitHub ,GitLab } from "../../../assets"
 import React from "react"
 import ApiLib from "../../lib/ApiLib"
 import { useDispatch } from 'react-redux'
-import { setFirstname,setSurename,setNim,setJurusan,setKode,setEmail,setNumber,setPassword, clerAuth } from '../../store/reducer/authReducer'
+import { setId,setFirstname,setSurename,setNim,setJurusan,setEmail,setKode,setNumber,setPassword,clerAuth} from "../../store/reducer/authReducer";
 
 const windowWidth = Dimensions.get("window").width;
 
@@ -37,8 +37,8 @@ export default function LoginScreen({ navigation }) {
       }
       const res = await ApiLib.post('/action/findOne',{
               "dataSource": "AtlasCluster",
-              "database": "ekireski",
-              "collection": "ekireski",
+              "database": "uas",
+              "collection": "users",
               "filter": {
                 "email": email,
                 "password": pass
@@ -48,10 +48,11 @@ export default function LoginScreen({ navigation }) {
 
       setLoading(false);
       if (res.data.document != null) {
-        dispatch(setFirstName(res.data.document.firstName))
-        dispatch(setSureName(res.data.document.sureName))
+        dispatch(setId(res.data.document._id))
+        dispatch(setFirstname(res.data.document.firstname))
+        dispatch(setSurename(res.data.document.sureName))
         dispatch(setId(res.data.document.id))
-        dispatch(SetNim(res.data.document.nim))
+        dispatch(setNim(res.data.document.nim))
         dispatch(setJurusan(res.data.document.jurusan))
         dispatch(setKode(res.data.document.kode))
         dispatch(setEmail(res.data.document.email))

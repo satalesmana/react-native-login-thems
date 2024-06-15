@@ -3,11 +3,13 @@ import {
   Text, 
   FlatList, 
   StyleSheet, 
-  TouchableOpacity 
+  TouchableOpacity,
+  TextInput
 } from 'react-native';
 import { useEffect } from 'react';
 import { setData, clearData } from '../../store/reducer/usersReducer'
 import ApiLib from "../../lib/ApiLib"
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { useSelector, useDispatch } from 'react-redux'
 
 export default function HomeScreen(){
@@ -18,8 +20,8 @@ export default function HomeScreen(){
     try{
       const res = await ApiLib.post('/action/find',{
       "dataSource": "AtlasCluster",
-      "database" : "ekireski",
-      "collection" : "ekireski",
+      "database" : "uas",
+      "collection" : "users",
       "filter" : filter
       })
       if (res.data?.documents) {
@@ -31,35 +33,63 @@ export default function HomeScreen(){
       console.log(err)
     }
   }
-  const getInitial=(nim)=>{
+  const getInitial=(firstname,lastName)=>{
     let name = ''
 
-    if(nim.length > 0)
-        name += nim.substring(0,1);
+    if(firstname.length > 0)
+        name += firstname.substring(0,1);
     
+    if(lastName.length > 0)
+      name += lastName.substring(0,1);
+
     return name.toLocaleUpperCase()
   }
-   useEffect(()=>{
+
+  useEffect(()=>{
     fetchData()
-   },[])
-   const rederItem = ({item})=>(
+  },[])
+  const renderSearch = () => {
+    return (
+      <View style={styles.searchContainer}>
+        <MaterialCommunityIcons name="magnify" size={24} color="black" />
+        <TextInput
+          style={styles.searchInput}
+          placeholder="Search"
+          value={filter}
+          onChangeText={(text) => dispatch(setFilter(text))}
+        />
+        <TouchableOpacity
+          style={styles.searchButton}
+          onPress={() => fetchData()}
+        >
+        </TouchableOpacity>
+      </View>
+    );
+  };
+
+  const rederItem = ({item}) => (
     <TouchableOpacity 
-    style={styles.containerItem}>
-      <View style={styles.itemLeft}>
-        <Text style={styles.textItemLeft}>{getInitial(item.firstname)}</Text>
-      </View>
-      <View style={styles.itemRight}>
-        <Text>{item?.firstname}</Text>
-        <Text>{item?.email}</Text>
-      </View>
-</TouchableOpacity>
-   );
-   return (
+        style={styles.containerItem}>
+          <View style={styles.itemLeft}>
+            <Text style={styles.textItemLeft}>{getInitial(item.firstname, item?.surename)}</Text>
+          </View>
+          <View style={styles.itemRight}>
+            <Text>{item?.firstname} {item?.surename}</Text>
+            <Text>{item?.email}</Text>
+          </View>
+    </TouchableOpacity>
+  );
+
+  return (
     <View >
+      <View >
+      {renderSearch()}
+      <Text style={styles.textList}>List Mahasiswa</Text>
         <FlatList
           data={data}
           renderItem={rederItem}
-      />
+          />
+    </View>
     </View>
   );
 }
@@ -88,6 +118,28 @@ const styles = StyleSheet.create({
     fontWeight:'bold',
     color:'white',
     padding:10
+  },
+  textList:{
+    fontSize:25
+  },
+  searchContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    padding: 10,
+    backgroundColor: 'white',
+    borderBottomWidth: 1,
+    borderColor: '#dedede'
+  },
+  searchInput: {
+    flex: 1,
+    padding: 10,
+    fontSize: 16
+  },
+  searchButton: {
+    padding: 10,
+    justifyContent: 'center',
+    alignItems: 'center'
   },
   itemRight:{
     flex:4

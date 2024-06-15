@@ -46,10 +46,10 @@ export default function SettingsScreen({ navigation }) {
                 {
                     text: "Submit",
                     onPress: async () => {
-                        const res = await ApiLib.post("/action/insertOne", {
+                        const res = await ApiLib.post("/action/UpdateOne", {
                             dataSource: "AtlasCluster",
-                            database: "ekireski",
-                            collection: "ekireski",
+                            database: "uas",
+                            collection: "users",
                             document: settings,
                         });
                         if (res.data?.insertedId) {
@@ -75,7 +75,7 @@ export default function SettingsScreen({ navigation }) {
                             style={{ width: 100, height: 100, marginLeft: -0.2 }}
                         />
                         <View style={{alignItems:"center",width:240, marginLeft:-20}}>
-                            <Text style={{}}>{auth.firstname}</Text>
+                            <Text style={{fontWeight:"bold"}}>{auth.firstname}</Text>
                             <Text style={{}}>{auth.email}</Text>
                             <TouchableOpacity style={{ backgroundColor: "#8a2be2", padding: 10, width:100 }}
                             onPress={onLogout} title='Log Out' >
@@ -86,26 +86,15 @@ export default function SettingsScreen({ navigation }) {
                     </View>
                     <View style={[style.container, { borderWidth: 1, margin: 10, backgroundColor: "white" }]}>
                         <CustomeInput
-                            onChangeText={(value => dispatch(setFirstname(value)))} placeholder='Firstname' placeholderTextColor='#c7c7c7' label="Surename Addres" />
-                        <CustomeInput
-                            onChangeText={(value => dispatch(setSurename(value)))} placeholder='Surename' placeholderTextColor='#c7c7c7' label="Surename Addres" />
-                        <CustomeInput
                             onChangeText={(value => dispatch(setEmail(value)))} placeholder='Email' placeholderTextColor='#c7c7c7' label="Email Addres" />
-                        <CustomeInput
-                            onChangeText={(value => dispatch(setNumber(value)))} placeholder='Number' placeholderTextColor='#c7c7c7' label="Number Addres" />
-                        <CustomeInput
-                            onChangeText={(value => dispatch(setNim(value)))} placeholder='Nim' placeholderTextColor='#c7c7c7' label="Nim Addres" />
-                        <CustomeInput
-                            onChangeText={(value => dispatch(setJurusan(value)))} placeholder='Nim' placeholderTextColor='#c7c7c7' label="Jurusan Addres" />
-                        <CustomeInput
-                            onChangeText={(value => dispatch(setKode(value)))} placeholder='Kode' placeholderTextColor='#c7c7c7' label="Kode Addres" />
+                     
                         <CustomeInput
                             onChangeText={(value => dispatch(setPassword(value)))} placeholder='New Password' placeholderTextColor='#c7c7c7' label="New Password" />
                         <CustomeInput
                             onChangeText={setConfirmPassword}value={confirmPassword} placeholder='Confirm Password' placeholderTextColor='#c7c7c7' label="Confirm Password" />
-                   <TouchableOpacity style={{ backgroundColor: "#FFC600", padding: 10 }}
+                   <TouchableOpacity style={{ backgroundColor: "blue", padding: 10,borderRadius:20}}
                            onPress={onLogout} title='Log Out'>
-                            <Text style={{ color: "black", alignSelf: "center" }}>Submit</Text>
+                            <Text style={{ color: "black", alignSelf: "center" ,color:"white"}}>Submit</Text>
                         </TouchableOpacity>
                     </View>
             

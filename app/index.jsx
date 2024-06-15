@@ -7,7 +7,10 @@ import{
     CreateScreen,
     HomeScreen,
     ProfileScreen,
-    SettingsScreen
+    SettingsScreen,
+    FileScreen,
+    SplashScreen,
+
 }from "./screen"
 import store from './store'
 import { Provider } from 'react-redux'
@@ -56,11 +59,13 @@ function App() {
   return (
     <Provider store={store}> 
     <NavigationContainer independent={true}>
-      <Stack.Navigator initialRouteName="Welcome">
+      <Stack.Navigator initialRouteName="Splash">
+      <Stack.Screen name="Splash" options={{headerShown:false}} component={SplashScreen} />
       <Stack.Screen name="Home" options={{headerShown:false}} component={HomeScreen} />
       <Stack.Screen name="Welcome" options={{headerShown:false}} component={WelcomeScreen} />
         <Stack.Screen name="Create" options={{headerShown:false}} component={CreateScreen} />
         <Stack.Screen name="Login" options={{headerShown:false}} component={LoginScreen} />
+        <Stack.Screen name="file" options={{headerShown:false}} component={FileScreen} />
         <Stack.Screen name="Main" component={MainScreen} options={{headerShown:false}} />
       </Stack.Navigator>
     </NavigationContainer>
