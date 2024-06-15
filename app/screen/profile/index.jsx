@@ -1,82 +1,146 @@
-import React, { useState } from "react";
-import {
-  View,
-  Text,
-  TextInput,
-  StyleSheet,
-  Pressable,
-  Image,
-  ScrollView,
-  Alert,
-  Button,
-} from "react-native";
-import { useDispatch, useSelector } from "react-redux";
-import { clearAuth } from "../../store/reducer/authReducer";
+import React from 'react';
+import { View, Text, StyleSheet, Image } from 'react-native';
+import { useSelector } from 'react-redux';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
+import * as Progress from 'react-native-progress';
 
-import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
-
-export default function ProfileScreen({ navigation }) {
+export default function UserScreen() {
   const auth = useSelector((state) => state.auth);
-  const dispath = useDispatch();
-  const onLogout = () => {
-    dispath(clearAuth());
-    navigation.replace("Login");
-  };
+
   return (
-    <ScrollView>
-      <View style={style.container}>
-        <Text style={style.profileText}>Detail Profile</Text>
+    <View style={styles.container}>
+      <View style={styles.header}>
+        <View style={styles.headerTop}>
+          <Image source={{ uri: 'https://via.placeholder.com/80' }} style={styles.profileImage} />
+          <View style={styles.iconGroup}>
+            <MaterialCommunityIcons name="magnify" size={24} color="#fff" style={styles.headerIcon} />
+            <MaterialCommunityIcons name="bell-outline" size={24} color="#fff" style={styles.headerIcon} />
+          </View>
+        </View>
+        <Text style={styles.name}>{auth.nama}</Text>
+        <Progress.Bar progress={0.7} width={400} height={8} borderRadius={20} color="#9747FF" style={styles.progressBar} />
+        <View style={styles.emailContainer}>
+          <MaterialCommunityIcons name="cloud-outline" size={20} color="#ccc" style={styles.emailIcon} />
+          <Text style={styles.email}>{auth.email}</Text>
+        </View>
       </View>
-      <View>
-        <Text style={style.title}>
-          Here's your profile and make sure to always check your identity,
-          change your password if it's needed, thank you.
-        </Text>
+      <View style={styles.details}>
+        <View style={styles.detailItem}>
+          <MaterialCommunityIcons name="file-document-outline" size={20} color="#a6a6a6" />
+          <View style={styles.detailTextContainer}>
+            <Text style={styles.detailValue}>{auth.nim}</Text>
+            <Text style={styles.detailLabel}>NIM</Text>
+          </View>
+        </View>
+        <View style={styles.detailItem}>
+          <MaterialCommunityIcons name="school-outline" size={20} color="#a6a6a6" />
+          <View style={styles.detailTextContainer}>
+            <Text style={styles.detailValue}>{auth.jurusan}</Text>
+            <Text style={styles.detailLabel}>Program Study</Text>
+          </View>
+        </View>
+        <View style={styles.detailItem}>
+          <MaterialCommunityIcons name="account-box-outline" size={20} color="#a6a6a6" />
+          <View style={styles.detailTextContainer}>
+            <Text style={styles.detailValue}>{auth.kode}</Text>
+            <Text style={styles.detailLabel}>Class Code</Text>
+          </View>
+        </View>
+        <View style={styles.detailItem}>
+          <MaterialCommunityIcons name="phone-outline" size={20} color="#a6a6a6" />
+          <View style={styles.detailTextContainer}>
+            <Text style={styles.detailValue}>{auth.number}</Text>
+            <Text style={styles.detailLabel}>Phone Number</Text>
+          </View>
+        </View>
       </View>
-      <View style={style.viewButton}>
-        <Text>{auth.id}</Text>
-        <Text>{auth.firstName}</Text>
-        <Pressable style={style.buttonLogOut} onPress={onLogout}>
-          <Text style={style.text}>Log Out</Text>
-        </Pressable>
-      </View>
-    </ScrollView>
+    </View>
   );
 }
 
-const style = StyleSheet.create({
+const styles = StyleSheet.create({
   container: {
-    paddingTop: "50%",
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    padding: 10,
+    backgroundColor: '#fff'
   },
-  profileText: {
-    color: "#1F59B6",
+  header: {
+    backgroundColor: '#2B2E4A',
+    paddingBottom: 20,
+    borderBottomLeftRadius: 0,
+    borderBottomRightRadius: 0,
+    paddingHorizontal: 40,
+    paddingTop: 50,
+    height:350
   },
-  title: {
-    textAlign: "left",
-    paddingLeft: 25,
-    paddingRight: 25,
+  headerTop: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
   },
-  viewButton: {
-    alignItems: "center",
-    paddingTop: "50%",
+  profileImage: {
+    width: 60,
+    height: 60,
+    borderRadius: 30,
   },
-  buttonLogOut: {
+  iconGroup: {
+    flexDirection: 'row',
+  },
+  headerIcon: {
+    marginLeft: 15,
+  },
+  name: {
+    fontSize: 24,
+    color: '#fff',
+    fontWeight: 'bold',
+    marginTop: 10,
+  },
+  progressBar: {
+    marginTop: 10,
+    alignSelf: 'flex-start',
+  },
+  emailContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginTop: 5,
+  },
+  emailIcon: {
+    marginRight: 8,
+  },
+  email: {
+    color: '#ccc',
+    fontSize: 12,
+  },
+  details: {
+    flex: 1,
+    backgroundColor: '#fff',
+    borderTopLeftRadius: 30,
+    borderTopRightRadius: 30,
+    paddingTop: 30,
+    paddingHorizontal: 20,
+    paddingVertical:400,
+    marginTop: -20, 
+    bottom:100
+  },
+  detailItem: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: '#f7f8fa',
     borderRadius: 10,
-    backgroundColor: "#1F59B6",
-    paddingVertical: 5,
-    paddingHorizontal: 25,
-    elevation: 3,
-    marginBottom: 5,
+    padding: 15,
+    marginBottom: 15,
+    width:500,
+    height:100
   },
-  text: {
+  detailTextContainer: {
+    marginLeft: 10,
+  },
+  detailLabel: {
+    fontSize: 12,
+    color: '#a6a6a6',
+  },
+  detailValue: {
     fontSize: 14,
-    lineHeight: 21,
-    fontWeight: "bold",
-    letterSpacing: 0.25,
-    color: "white",
+    color: '#333',
+    fontWeight: 'bold',
   },
 });
