@@ -11,7 +11,8 @@ export default function UserScreen() {
     <View style={styles.container}>
       <View style={styles.header}>
         <View style={styles.headerTop}>
-          <Image source={{ uri: 'https://via.placeholder.com/80' }} style={styles.profileImage} />
+          <Image source={require('../../../assets/images/AI_Avatars.png')} style={styles.profileImage} />
+          <Text style={styles.email}>{auth.firstname}</Text>
           <View style={styles.iconGroup}>
             <MaterialCommunityIcons name="magnify" size={24} color="#fff" style={styles.headerIcon} />
             <MaterialCommunityIcons name="bell-outline" size={24} color="#fff" style={styles.headerIcon} />
