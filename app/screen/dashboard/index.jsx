@@ -14,6 +14,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import Icon from 'react-native-vector-icons/Feather';
 import { setData, clearData } from '../../store/reducer/usersReducer';
 import ApiLib from '../../lib/ApiLib';
+import { Button } from 'react-native-paper'; // Hanya satu kali impor untuk Button dari react-native-paper
 
 export default function DashboardScreen({ navigation }) {
   const dispatch = useDispatch();
@@ -96,7 +97,7 @@ export default function DashboardScreen({ navigation }) {
         }}
       >
         <Text style={{ fontWeight: 'bold', fontSize: 20, padding: 5 }}>
-          HOME
+          Home
         </Text>
         <Icon
           name="bell"
@@ -110,8 +111,8 @@ export default function DashboardScreen({ navigation }) {
             width: 55,
             height: 55,
             borderRadius: 50,
-            borderColor: 'black', // corrected prop name
-            borderWidth: 1, // corrected prop name
+            borderColor: 'black',
+            borderWidth: 1,
           }}
         />
       </View>
@@ -131,6 +132,23 @@ export default function DashboardScreen({ navigation }) {
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
         }
       />
+      
+      <Text style={{ fontWeight: 'bold', fontSize: 20, padding: 5 }}>
+        List of Mahasiswa
+      </Text>
+
+      <Text style={{ fontWeight: 'bold', color: "#dedede", fontSize: 17, padding: 20 }}>
+        See all
+      </Text>
+
+      <Button icon="arrow-down" mode="contained" onPress={() => console.log('Pressed')}>
+        Last modified
+      </Button>
+
+      <Button icon="grid" mode="contained" onPress={() => console.log('Pressed')}>
+        Grid
+      </Button>
+
     </SafeAreaView>
   );
 }
