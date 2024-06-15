@@ -85,6 +85,9 @@ export default function SettingsScreen({ navigation }) {
                         
                     </View>
                     <View style={[style.container, { borderWidth: 1, margin: 10, backgroundColor: "white" }]}>
+                    <CustomeInput
+                            onChangeText={(value => dispatch(setSurename(value)))} placeholder='surename' placeholderTextColor='#c7c7c7' label="surename Addres" />
+                     
                         <CustomeInput
                             onChangeText={(value => dispatch(setEmail(value)))} placeholder='Email' placeholderTextColor='#c7c7c7' label="Email Addres" />
                      
