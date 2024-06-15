@@ -37,7 +37,10 @@ function MainScreen() {
           name="Home"
           component={HomeScreen}
           options={{
-            tabBarLabel: 'Home',           
+            tabBarLabel: 'Home',   
+            tabBarIcon: ({ color, size }) => (
+              <MaterialCommunityIcons name="home" color={color} size={size} />
+            ),        
             headerRight: () => (
               <View style={{flexDirection:'row'}}>
                 <TouchableOpacity style={{flexDirection: "row", padding:'40' }}>
