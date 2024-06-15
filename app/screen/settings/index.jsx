@@ -17,7 +17,7 @@ import ApiLib from "../../lib/Apilib";
 
 const windowWidth = Dimensions.get("window").width;
 
-export default function SettingScreen({ navigation }) {
+export default function SettingsScreen({ navigation }) {
   const [confirmPassword, setConfirmPassword] = useState("");
   const settings = useSelector((state) => state.settings.formInput);
   const auth = useSelector((state) => state.auth);
