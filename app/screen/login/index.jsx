@@ -14,21 +14,25 @@ import {
 import ApiLib from "../../lib/ApiLib";
 import Icon from "react-native-vector-icons/Feather";
 import { useDispatch } from "react-redux";
-import { ICGoogle, ICFacebook, ICTwitter } from "../../../assets";
 import { MyButton } from "../../components";
-import { setAuthData } from "../../store/reducer/authReducer";
-import { setFirstName,setEmail} from "../../store/reducer/registerReducer";
-// import { setEmail,setPassword} from "../../store/reducer/settingReducer";
+import {
+  setAuthData,
+  setNim,
+  setEmail,
+  setFirstName,
+  setProgramStudy,
+  setKodeKelas,
+  setTelp,
+} from "../../store/reducer/authReducer";
 
 const windowWidth = Dimensions.get("window").width;
 
 export default function LoginScreen({ navigation }) {
   const dispatch = useDispatch();
-  const [email, onChangeEmail] = React.useState("");
-  const [password, onChangePassword] = React.useState("");
-  const [loading, setLoading] = React.useState(false); // Changed from "false" to false
-  const [showPass, setShowPassword] = React.useState(true);
-  const dispath = useDispatch();
+  const [email, setEmailState] = useState("");
+  const [password, setPasswordState] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [showPass, setShowPassword] = useState(true);
 
   const handleShowPassword = () => {
     setShowPassword(!showPass);
@@ -38,11 +42,11 @@ export default function LoginScreen({ navigation }) {
     setLoading(true);
     try {
       if (email.trim().length === 0) {
-        throw Error("Email is required");
+        throw new Error("Email is required");
       }
 
       if (password.trim().length === 0) {
-        throw Error("Password is required");
+        throw new Error("Password is required");
       }
 
       const res = await ApiLib.post("/action/findOne", {
@@ -56,33 +60,22 @@ export default function LoginScreen({ navigation }) {
       });
 
       setLoading(false);
-      if (res.data.document != null) {
-        dispatch(setAuthData(res.data.document));
-        dispatch(setFirstName(res.data.document.firstName))
-        dispatch(setEmail(res.data.document.email))
-        // dispatch(setFirstName(res.data.document.firstName))
-        // dispatch(setEmail(res.data.document.email))
+      if (res.data?.document) {
+        const userData = res.data.document;
+        dispatch(setAuthData(userData));
+        dispatch(setFirstName(userData.firstName));
+        dispatch(setEmail(userData.email));
+        dispatch(setNim(userData.nim));
+        dispatch(setProgramStudy(userData.programStudy));
+        dispatch(setKodeKelas(userData.kodeKelas));
+        dispatch(setTelp(userData.telp));
         navigation.replace("Main");
       } else {
-        Alert.alert("Error", "Username & Password tidak sesuai", [
-          {
-            text: "OK",
-            onPress: () => {
-              console.log("ERR");
-            },
-          },
-        ]);
+        Alert.alert("Error", "Username & Password tidak sesuai");
       }
     } catch (err) {
       setLoading(false);
-      Alert.alert("Error", err.message, [
-        {
-          text: "OK",
-          onPress: () => {
-            console.log("ERR");
-          },
-        },
-      ]);
+      Alert.alert("Error", err.message);
     }
   };
 
@@ -91,104 +84,84 @@ export default function LoginScreen({ navigation }) {
   };
 
   return (
-    <ScrollView contentContainerStyle={style.container}>
-      <Text style={style.welcomeBack}>Welcome Back!</Text>
-      <View style={style.brandStyle}>
+    <ScrollView contentContainerStyle={styles.container}>
+      <Text style={styles.welcomeBack}>Welcome Back!</Text>
+      <View style={styles.brandStyle}>
         <Image
           source={require("../../../assets/images/first.png")}
           style={{ width: 200, height: 200 }}
         />
       </View>
-      <View style={style.inputContainer}>
-        <View style={style.inputView}>
+      <View style={styles.inputContainer}>
+        <View style={styles.inputView}>
           <Icon
             name="mail"
             size={20}
             color="purple"
-            style={style.imgStyleLeft}
+            style={styles.imgStyleLeft}
           />
           <TextInput
-            style={style.inputText}
-            onChangeText={onChangeEmail}
+            style={styles.inputText}
+            onChangeText={setEmailState}
             value={email}
             placeholder="Enter your email"
             placeholderTextColor="black"
           />
-          <Icon
-            name="check"
-            size={22}
-            color="purple"
-            style={(style.imgStyleRight, { marginRight: -2 })}
-          />
         </View>
-        <View
-          style={{
-            gap: 10,
-            width: "90%",
-            flexDirection: "row",
-            alignItems: "center",
-            marginBottom: 10,
-          }}
-        >
+        <View style={styles.inputView}>
           <Icon
             name="lock"
             size={20}
             color="purple"
-            style={style.imgStyleLeft}
+            style={styles.imgStyleLeft}
           />
           <TextInput
-            style={style.inputText}
-            onChangeText={onChangePassword}
+            style={styles.inputText}
+            onChangeText={setPasswordState}
             value={password}
             placeholder="Enter your password"
             placeholderTextColor="black"
             secureTextEntry={showPass}
           />
           <Icon
-            name={showPass === true ? "eye-off" : "eye"}
+            name={showPass ? "eye-off" : "eye"}
             size={20}
             color="purple"
-            style={style.imgStyleLeft}
-            onPress={() => handleShowPassword()}
+            onPress={handleShowPassword}
           />
         </View>
       </View>
-      <View style={style.forgotView}>
-        <Text style={style.forgotPassword}>Forgot Password?</Text>
+      <Pressable
+        disabled={loading}
+        style={styles.buttonLogin}
+        onPress={onSubmitLogin}
+      >
+        {loading ? (
+          <ActivityIndicator size="small" color="white" />
+        ) : (
+          <Text style={styles.text}>Login</Text>
+        )}
+      </Pressable>
+      <View style={styles.viewVia}>
+        <Text style={styles.orVia}>Or Via Social Media</Text>
       </View>
-      <View style={style.buttonView}>
-        <Pressable
-          disabled={loading}
-          style={style.buttonLogin}
-          onPress={onSubmitLogin}
-        >
-          {/* Use conditional rendering to show either button or activity indicator */}
-          {loading ? (
-            <ActivityIndicator size="small" color="white" />
-          ) : (
-            <Text style={style.text}>Login</Text>
-          )}
-        </Pressable>
-        <View style={style.viewVia}>
-          <Text style={style.orVia}> Or Via Social Media </Text>
-        </View>
-        <View style={style.btnContainer}>
-          <MyButton imgUrl={ICGoogle} />
-          <MyButton imgUrl={ICFacebook} />
-          <MyButton imgUrl={ICTwitter} />
-        </View>
+      <View style={styles.btnContainer}>
+        {/* Replace MyButton with your actual component */}
+        <MyButton imgUrl={require("../../../assets/images/google.png")} />
+        <MyButton imgUrl={require("../../../assets/images/facebook.png")} />
+        <MyButton imgUrl={require("../../../assets/images/twitter.png")} />
       </View>
-
-      <Text style={style.accountText}>
+      <Text style={styles.accountText}>
         Don't have an account?{" "}
-        <Text style={style.linkRegister} onPress={onRegister}>
+        <Text style={styles.linkRegister} onPress={onRegister}>
           Register Now
         </Text>
       </Text>
     </ScrollView>
   );
 }
-const style = StyleSheet.create({
+
+const styles = StyleSheet.create({
   container: {
     flexGrow: 1,
     alignItems: "center",
@@ -211,13 +184,15 @@ const style = StyleSheet.create({
   inputContainer: {
     alignItems: "center",
     justifyContent: "center",
+    marginBottom: 35,
   },
   inputView: {
-    gap: 10,
-    width: "90%",
     flexDirection: "row",
     alignItems: "center",
-    marginBottom: 35,
+    width: "90%",
+    marginBottom: 20,
+    borderBottomWidth: 1,
+    borderBottomColor: "purple",
   },
   imgStyleLeft: {
     width: 20,
@@ -227,29 +202,8 @@ const style = StyleSheet.create({
     flex: 1,
     marginLeft: 10,
     marginRight: 10,
-    borderBottomWidth: 1,
-    borderBottomColor: "purple",
-  },
-  imgStyleRight: {
-    width: 16,
-    height: 18,
-    marginRight: 10,
-  },
-  forgotView: {
-    alignSelf: "flex-end",
-    marginRight: 55,
-    marginTop: 2,
-    marginBottom: 50,
-  },
-  forgotPassword: {
+    fontSize: 16,
     color: "black",
-    fontSize: 12,
-    fontFamily: "Roboto",
-    fontWeight: "300",
-  },
-  buttonView: {
-    alignItems: "center",
-    marginBottom: 10,
   },
   buttonLogin: {
     borderRadius: 50,
@@ -257,38 +211,36 @@ const style = StyleSheet.create({
     paddingVertical: 8,
     paddingHorizontal: 32,
     elevation: 3,
-    marginBottom: 5,
+    marginBottom: 10,
   },
   text: {
     fontSize: 16,
-    lineHeight: 21,
     fontWeight: "bold",
-    letterSpacing: 0.25,
     color: "white",
+    textAlign: "center",
   },
   viewVia: {
-    alignContent: "center",
     marginTop: 50,
-    marginBottom: 2,
-    textAlign: "center",
-    justifyContent: "center",
+    marginBottom: 10,
+    alignItems: "center",
   },
   orVia: {
-    color: "black",
-    fontSize: "15",
-    fontFamily: "Roboto",
+    fontSize: 15,
     fontWeight: "100",
+    color: "black",
+    fontFamily: "Roboto",
   },
   btnContainer: {
     flexDirection: "row",
-    paddingHorizontal: 125,
-    paddingBottom: 50,
+    justifyContent: "space-evenly",
+    paddingHorizontal: 60,
+    marginBottom: 50,
   },
   accountText: {
-    color: "black",
     fontSize: 15,
-    fontFamily: "Roboto",
     fontWeight: "300",
+    color: "black",
+    fontFamily: "Roboto",
     textAlign: "center",
     marginBottom: 20,
   },

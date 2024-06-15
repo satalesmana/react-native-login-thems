@@ -15,20 +15,16 @@ export const settingSlice = createSlice({
     setPassword: (state, action) => {
       state.formInput.password = action.payload;
     },
-    resetSettingData:(state)=>{
-        state.formInput={
-            email:null,
-            password:null,
-        }
-    }
+    resetSettingData: (state) => {
+      state.formInput = {
+        email: null,
+        password: null,
+      };
+    },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const {
-  setEmail,
-  setPassword,
-  resetSettingData,
-} = settingSlice.actions;
+export const { setEmail, setPassword, resetSettingData } = settingSlice.actions;
 
 export default settingSlice.reducer;

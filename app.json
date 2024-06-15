@@ -3,6 +3,11 @@
     "name": "react-native-login-thems",
     "slug": "react-native-login-thems",
     "version": "1.0.0",
+    "platforms":[
+      "ios",
+      "android"
+    ],
+    "sdkVersion":"51.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "scheme": "myapp",

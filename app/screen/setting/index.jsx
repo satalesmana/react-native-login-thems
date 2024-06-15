@@ -9,32 +9,32 @@ import {
   ScrollView,
   Alert,
   TouchableOpacity,
-  Dimensions
+  Dimensions,
 } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
-import { setEmail,setPassword } from "../../store/reducer/settingReducer";
+import { setEmail, setPassword } from "../../store/reducer/settingReducer";
 import { clearAuth } from "../../store/reducer/authReducer";
 import ApiLib from "../../lib/ApiLib";
 
-
-const windowWidth = Dimensions.get('window').width;
+const windowWidth = Dimensions.get("window").width;
 
 export default function SettingScreen({ navigation }) {
   const [confirmPassword, setConfirmPassword] = useState("");
-  const setting  = useSelector((state) => state.setting.formInput);
-  const auth = useSelector((state) => state.register.formInput);
+  const setting = useSelector((state) => state.setting.formInput);
+  const auth = useSelector((state) => state.auth);
   const dispatch = useDispatch();
-  const onLogout=()=>{
-    dispatch(clearAuth())
-    navigation.replace("Login")
-  
+  const onLogout = () => {
+    dispatch(clearAuth());
+    navigation.replace("Login");
+
     try {
       if (!setting.email) throw Error("Email is required");
       if (!setting.password) throw Error("Password is required");
-      if (!setting.password === confirmPassword) throw Error("Password is required");
-        throw Error("Confirm password doesn't match");
+      if (!setting.password === confirmPassword)
+        throw Error("Password is required");
+      throw Error("Confirm password doesn't match");
 
-        const message = `Email : ${setting.email}\n
+      const message = `Email : ${setting.email}\n
         Password : ${setting.password}\n`;
 
       Alert.alert("Confirm", message, [
@@ -46,13 +46,13 @@ export default function SettingScreen({ navigation }) {
         {
           text: "Submit",
           onPress: async () => {
-            const res = await ApiLib.post("/action/insertOne", {
+            const res = await ApiLib.updateUser("/action/insertOne", {
               dataSource: "Cluster0",
               database: "uasghw",
               collection: "users",
               document: register,
             });
-            if (res.data?.insertedId) {
+            if (res.data?.updateUser) {
               dispatch(resetSettingData());
               navigation.navigate("Login");
             }
@@ -65,21 +65,88 @@ export default function SettingScreen({ navigation }) {
   };
 
   return (
-    <ScrollView contentContainerStyle={style.container}>
-      <View>
-      <View style={{ width: windowWidth }}>
-      <View style={[style.container, { borderWidth: 1, margin: 10, marginTop:-0.20,backgroundColor: "white", flexDirection: "row" }]}>
-      <Image source={require('../../../assets/images/AI.png')}style={{ width: 100, height: 100, marginLeft: -0.100 }} />
-      <View style={{alignItems:"center",width:240, marginLeft:-20}}>
-      <Text style={{}}>{auth.firstName}</Text>
-      <Text style={{}}>{auth.email}</Text>
-       <TouchableOpacity style={{ backgroundColor: "#E4E7EB", padding: 10, width:100 }}
-       onPress={onLogout} title='Log Out' >
-       <Text style={{ color: "black", alignSelf: "center"  }}>LogOut</Text>
-      </TouchableOpacity>
+    <View>
+      <View
+        style={[
+          style.container,
+          {
+            margin: 10,
+            backgroundColor: "white",
+            flexDirection: "row",
+          },
+        ]}
+      >
+        <View
+          style={{
+            gap: 10,
+            width: "90%",
+            flexDirection: "row",
+            alignItems: "center",
+            padding: 20,
+            marginTop: 25,
+          }}
+        >
+          <Image
+            source={require("../../../assets/images/AI.png")}
+            style={{ width: 90, height: 90, borderRadius: 50 }}
+          />
+
+          <View
+            style={{
+              flexDirection: "column",
+              alignItems: "flex-start",
+              marginLeft: 20,
+            }}
+          >
+            <Text
+              style={{
+                color: "black",
+                fontSize: 25,
+                fontFamily: "Roboto",
+                textAlign: "left",
+              }}
+            >
+              {auth.firstName}
+            </Text>
+            <Text
+              style={{
+                color: "black",
+                fontWeight: "100",
+                fontSize: 15,
+                textAlign: "left",
+                marginBottom: 20,
+              }}
+            >
+              {auth.email}
+            </Text>
+            <TouchableOpacity
+              style={{
+                backgroundColor: "#E4E7EB",
+                width: 200,
+                height: 30,
+                justifyContent: "center",
+              }}
+              onPress={onLogout}
+              title="Log Out"
+            >
+              <Text style={{ color: "black", alignSelf: "center" }}>
+                Log Out
+              </Text>
+            </TouchableOpacity>
+          </View>
+        </View>
       </View>
-       </View>
-      <View style={[style.inputContainer,{borderWidth:1,margin:10,backgroundColor:"white",height:300}]}>
+      <View
+        style={[
+          style.inputContainer,
+          {
+            margin: 10,
+            backgroundColor: "white",
+            height: "70%",
+          },
+        ]}
+      >
+        <Text>Email Address</Text>
         <View style={style.inputView}>
           <TextInput
             style={style.inputText}
@@ -88,12 +155,8 @@ export default function SettingScreen({ navigation }) {
             placeholder="Email"
             placeholderTextColor="black"
           />
-         
         </View>
-  
         <View style={style.inputView}>
-          
-
           <TextInput
             style={style.inputText}
             value={setting.password}
@@ -101,10 +164,8 @@ export default function SettingScreen({ navigation }) {
             placeholder="Password"
             placeholderTextColor="black"
           />
-          
         </View>
         <View style={style.inputView}>
-         
           <TextInput
             style={style.inputText}
             value={confirmPassword}
@@ -113,24 +174,27 @@ export default function SettingScreen({ navigation }) {
             placeholderTextColor="black"
           />
         </View>
-        <TouchableOpacity style={{ backgroundColor: "#2F4EFF", padding: 10, width:100,borderRadius:10,width:200 }}
-       onPress={onLogout} title='Log Out' >
-       <Text style={{ color: "black", alignSelf: "center"  }}>Submit</Text>
-      </TouchableOpacity>
+        <TouchableOpacity
+          style={{
+            backgroundColor: "#2F4EFF",
+            padding: 10,
+            width: 100,
+            borderRadius: 10,
+            width: 200,
+          }}
+          onPress={onLogout}
+          title="Log Out"
+        >
+          <Text style={{ color: "white", alignSelf: "center" }}>Submit</Text>
+        </TouchableOpacity>
       </View>
-      </View>
-      
-      </View>
-    </ScrollView>
+    </View>
   );
 }
 
 const style = StyleSheet.create({
   container: {
-    flexGrow: 1,
     alignItems: "center",
-    paddingTop: 50,
-    paddingBottom: 35,
   },
   welcomeBack: {
     fontSize: 22,
@@ -140,34 +204,23 @@ const style = StyleSheet.create({
     color: "rgba(29,34,38,1)",
     marginBottom: 20,
   },
-  brandStyle: {
-    marginTop: 25,
-    marginBottom: 50,
-    alignItems: "center",
-  },
   inputContainer: {
+    padding: 35,
     alignItems: "center",
-    justifyContent: "center",
-    marginBottom: 10,
   },
   inputView: {
-    gap: 10,
     width: "90%",
     flexDirection: "row",
     alignItems: "center",
     marginBottom: 20,
-    borderWidth:1
-  },
-  imgStyleLeft: {
-    width: 20,
-    height: 20,
+    borderWidth: 1,
+    borderRadius: 8,
   },
   inputText: {
     flex: 1,
     marginLeft: 10,
-    marginRight: 10,  
-    padding:10
-
+    marginRight: 10,
+    padding: 10,
   },
   imgStyleRight: {
     width: 16,

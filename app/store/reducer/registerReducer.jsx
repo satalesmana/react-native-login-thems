@@ -8,9 +8,9 @@ export const registerSlice = createSlice({
       firstName: null,
       email: null,
       password: null,
-      programStudy:null,
-      kodeKelas:null,
-      telp: null
+      programStudy: null,
+      kodeKelas: null,
+      telp: null,
     },
   },
   reducers: {
@@ -41,9 +41,9 @@ export const registerSlice = createSlice({
         firstName: null,
         email: null,
         password: null,
-        programStudy:null,
-        kodeKelas:null,
-        telp:null
+        programStudy: null,
+        kodeKelas: null,
+        telp: null,
       };
     },
   },
