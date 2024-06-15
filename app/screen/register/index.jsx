@@ -13,7 +13,7 @@ import {bulat} from '../../../assets'
 
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import {setEmail, setUserNim, setPassword, resetRegisterData,setUserProdi,setUserkelasCode,setUserTelp} from '../../store/reducer/registerReducer';
+import {setEmail,setNama, setUserNim, setPassword, resetRegisterData,setUserProdi,setUserkelasCode,setUserTelp} from '../../store/reducer/registerReducer';
 import { Ionicons } from '@expo/vector-icons'; // Import Ionicons for eye icon
 import ApiLib from "../../lib/ApiLib"
 
@@ -27,6 +27,7 @@ export default function RegisterScreen({ navigation }) {
   const [hidePassword, setHidePassword] = useState(true); // Password visibility state
   const [hideConfirmPassword, setHideConfirmPassword] = useState(true); // Confirm password visibility state
   const [isEmailFocused, setIsEmailFocused] = useState(false); // Nim focus state
+  const [isNamaFocused, setIsNamaFocused] = useState(false); // Nama focus state
   const [isNimFocused, setIsNimFocused] = useState(false); // Nim focus state
   const [isProdiFocused, setIsProdiFocused] = useState(false); // Prodi focus state
   const [isClassCodeFocused, setIsClassCodeFocused] = useState(false); // ClassKode focus state
@@ -39,6 +40,9 @@ export default function RegisterScreen({ navigation }) {
    
       if (register.email === null || register.email === "") {
         throw new Error('email is required');
+      }
+      if (register.nama === null || register.nama === "") {
+        throw new Error('Nama is required');
       }
       if (register.password === null || register.password === "") {
         throw new Error('Password is required');
@@ -122,6 +126,17 @@ export default function RegisterScreen({ navigation }) {
             placeholder=" Email"
             onFocus={() => setIsEmailFocused(true)}
             onBlur={() => setIsEmailFocused(false)}
+          />
+          <TextInput
+            style={[
+              style.textInputStyle,
+              { borderBottomColor: isNamaFocused ? 'blue' : 'black' }
+            ]}
+            value={register.nama}
+            onChangeText={(value) => dispatch(setNama(value))}
+            placeholder="Nama"
+            onFocus={() => setIsNamaFocused(true)}
+            onBlur={() => setIsNamaFocused(false)}
           />
           
           <TextInput
