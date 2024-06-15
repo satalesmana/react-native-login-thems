@@ -25,6 +25,7 @@ export default function SettingsScreen({ navigation }) {
   const settings = useSelector((state) => state.settings.formInput);
   const auth = useSelector((state) => state.register.formInput);
   const dispatch = useDispatch();
+
   const onLogout = () => {
       dispatch(clerAuth())
       navigation.replace("Login")

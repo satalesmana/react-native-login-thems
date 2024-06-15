@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import { useEffect } from 'react';
 import { setData, clearData } from '../../store/reducer/usersReducer'
-import { clerAuth } from '../../store/reducer/authReducer';
+import { clerAuth } from '../../store/reducer/authReducer'
 import ApiLib from "../../lib/Apilib";
 import { useSelector, useDispatch } from 'react-redux'
 
