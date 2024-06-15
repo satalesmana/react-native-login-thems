@@ -18,7 +18,16 @@ import {
     ICLi, 
     ICLine } from '../../../assets'
 import { useSelector, useDispatch } from 'react-redux'
-import { setEmail, setPassword, resetRegisterData } from '../../store/reducer/registerReducer'
+import { 
+    setEmail, 
+    setPassword, 
+    resetRegisterData, 
+    setFirstName, 
+    setLastName, 
+    setNim, 
+    setProdi, 
+    setClassCode, 
+    setNoTlp } from '../../store/reducer/registerReducer'
 import ApiLib from "../../lib/ApiLib"
 import React from 'react'
   
@@ -31,9 +40,29 @@ export default function Register({navigation}){
   
   const onSignUp =()=>{
       try{
+          if( register.firstName === null || register.firstName === ""){
+              throw Error('first name is required')
+          }
+          if( register.lastName === null || register.lastName === ""){
+            throw Error('last name is required')
+          }
+          if( register.nim === null || register.nim === ""){
+            throw Error('NIM is required')
+          }
+          if( register.prodi === null || register.prodi === ""){
+            throw Error('program study is required')
+          }
+          if( register.classCode === null || register.classCode === ""){
+            throw Error('class code is required')
+          }
+          if( register.noTelp === null || register.noTelp === ""){
+            throw Error('phone number is required')
+          }
+
           if( register.email === null || register.email === ""){
               throw Error('email is required')
           }
+          
           if( register.password === null || register.password === ""){
               throw Error('password is required')
           }
@@ -46,7 +75,12 @@ export default function Register({navigation}){
               throw Error(`Confirm password doesn't match`)
           }
           
-          let message = `Email : ${register.email} \n`
+          let message  = `Name                   : ${register.firstName}  ${register.lastName}\n`
+              message += `NIM                      : ${register.nim} \n`
+              message += `Program Study  : ${register.prodi} \n`
+              message += `Class Code         : ${register.classCode} \n`
+              message += `Phone Number  : ${register.noTelp} \n`
+              message += `Email                   : ${register.email} \n`
 
           Alert.alert('Confirm', message, [
               {
@@ -102,6 +136,48 @@ export default function Register({navigation}){
           <Text style={style.textLogin2Style}>Create your account</Text>
         
           <View style={style.container}>
+            <TextInput
+              style={style.textInputStyle}
+              onChangeText={(value)=>dispatch(setFirstName(value))}
+              placeholder='First Name'
+              placeholderTextColor='black'
+              value={register.firstName}/>
+            
+            <TextInput
+              style={style.textInputStyle}
+              onChangeText={(value)=>dispatch(setLastName(value))}
+              placeholder='Last Name'
+              placeholderTextColor='black'
+              value={register.lastName}/>
+            
+            <TextInput
+              style={style.textInputStyle}
+              onChangeText={(value)=>dispatch(setNim(value))}
+              placeholder='NIM'
+              placeholderTextColor='black'
+              value={register.nim}/>
+
+            <TextInput
+              style={style.textInputStyle}
+              onChangeText={(value)=>dispatch(setProdi(value))}
+              placeholder='Program Study'
+              placeholderTextColor='black'
+              value={register.prodi}/>
+
+            <TextInput
+              style={style.textInputStyle}
+              onChangeText={(value)=>dispatch(setClassCode(value))}
+              placeholder='Class Code'
+              placeholderTextColor='black'
+              value={register.classCode}/>
+
+            <TextInput
+              style={style.textInputStyle}
+              onChangeText={(value)=>dispatch(setNoTlp(value))}
+              placeholder='Phone Number'
+              placeholderTextColor='black'
+              value={register.noTelp}/>
+            
             <TextInput
               style={style.textInputStyle}
               onChangeText={(value)=>dispatch(setEmail(value))}
@@ -197,7 +273,8 @@ export default function Register({navigation}){
       flex:1,
       flexDirection:'row',
       justifyContent:'center',
-      padding:10
+      paddingTop : 10,
+      padding:100
     },
     sosmed:{
       flexDirection: 'row',
