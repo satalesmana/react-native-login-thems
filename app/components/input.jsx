@@ -8,7 +8,8 @@ import {
 
 export const CustomeInput=({
     value,
-    label
+    label,
+    onChangeText
 })=>{
     const [isActive, setIsActive] = useState(false);
 
@@ -19,6 +20,7 @@ export const CustomeInput=({
                 style={ isActive ? styles.inputActive : styles.input }
                 onFocus={()=>setIsActive(true)}
                 onBlur={()=>setIsActive(false)}
+                onChangeText={onChangeText}
                 value={value}/>
         </View>
     )

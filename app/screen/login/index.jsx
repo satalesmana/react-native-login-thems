@@ -1,7 +1,7 @@
 import { View, Text, TextInput, StyleSheet, ScrollView, Alert, Dimensions, TouchableOpacity,  ActivityIndicator } from 'react-native';
 import { MyButton, MyButton2 } from '../../components/my_button'
 import { ICGoogle } from '../../../assets'
-import React, { useState } from 'react'
+import React from 'react'
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import ApiLib from "../../lib/Apilib"
 
@@ -9,8 +9,8 @@ const windowWidth = Dimensions.get('window').width;
 
 export default function LoginScreen({ navigation }) {
     const [email, onChangeEmail] = React.useState('')
-    const [password, setPassword] = useState("");
-    const [showPassword, setShowPassword] = useState(false);
+    const [password, setPassword] = React.useState("");
+    const [showPassword, setShowPassword] = React.useState(false);
     const [loading, setLoading] = React.useState(false);
     const toogleShowPassword = () => {
         setShowPassword(!showPassword);
@@ -38,7 +38,7 @@ export default function LoginScreen({ navigation }) {
         )
         setLoading(false)
       if(res.data.document != null){
-        navigation.replace("Home")
+        navigation.navigate("main")
       }else{
         Alert.alert('Error', "Username & password tidak sesuai", [
           {text: 'OK', onPress: () => {
@@ -46,11 +46,9 @@ export default function LoginScreen({ navigation }) {
           }},
         ]);
       }
-
-            navigation.navigate('home')
         } catch (err) {
             setLoading(false)
-            alert('Sallah')
+            alert('Salah')
             // Alert.alert('Error', err.message, [
             //     {
             //         text: 'OK', onPress: () => {
