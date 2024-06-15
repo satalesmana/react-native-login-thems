@@ -4,6 +4,7 @@ import ICApple from './images/Apple.png'
 import welcome1 from './images/welcome1.png'
 import bulat from './images/bulat.png'
 import union3 from './images/union3.png'
+import AI from './images/AI.png'
 
 export {
     ICGoogle,
@@ -11,5 +12,6 @@ export {
     ICApple,
     welcome1,
     bulat,
-    union3
+    union3,
+    AI
 }

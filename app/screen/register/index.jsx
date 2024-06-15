@@ -13,7 +13,7 @@ import {bulat} from '../../../assets'
 
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { setUserNim, setPassword, resetRegisterData,setUserProdi,setUserkelasCode,setUserTelp} from '../../store/reducer/registerReducer';
+import {setEmail, setUserNim, setPassword, resetRegisterData,setUserProdi,setUserkelasCode,setUserTelp} from '../../store/reducer/registerReducer';
 import { Ionicons } from '@expo/vector-icons'; // Import Ionicons for eye icon
 import ApiLib from "../../lib/ApiLib"
 
@@ -26,6 +26,7 @@ export default function RegisterScreen({ navigation }) {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [hidePassword, setHidePassword] = useState(true); // Password visibility state
   const [hideConfirmPassword, setHideConfirmPassword] = useState(true); // Confirm password visibility state
+  const [isEmailFocused, setIsEmailFocused] = useState(false); // Nim focus state
   const [isNimFocused, setIsNimFocused] = useState(false); // Nim focus state
   const [isProdiFocused, setIsProdiFocused] = useState(false); // Prodi focus state
   const [isClassCodeFocused, setIsClassCodeFocused] = useState(false); // ClassKode focus state
@@ -36,6 +37,9 @@ export default function RegisterScreen({ navigation }) {
   const onSubmitLogin = async () => {
     try {
    
+      if (register.email === null || register.email === "") {
+        throw new Error('email is required');
+      }
       if (register.password === null || register.password === "") {
         throw new Error('Password is required');
       }
@@ -108,6 +112,18 @@ export default function RegisterScreen({ navigation }) {
        
         <View style={style.container}>
          
+          <TextInput
+            style={[
+              style.textInputStyle,
+              { borderBottomColor: isEmailFocused ? 'blue' : 'black' }
+            ]}
+            value={register.email}
+            onChangeText={(value) => dispatch(setEmail(value))}
+            placeholder=" Email"
+            onFocus={() => setIsEmailFocused(true)}
+            onBlur={() => setIsEmailFocused(false)}
+          />
+          
           <TextInput
             style={[
               style.textInputStyle,

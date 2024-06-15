@@ -15,6 +15,9 @@ export const registerSlice = createSlice({
   },
   reducers: {
    
+    setEmail:(state, action) => {
+        state.formInput.email = action.payload
+    },
     setPassword:(state, action) => {
         state.formInput.password = action.payload
     },
@@ -47,6 +50,7 @@ export const registerSlice = createSlice({
 
 // Action creators are generated for each case reducer function
 export const { 
+    setEmail,
     setUserNim,
     setPassword,
     resetRegisterData,

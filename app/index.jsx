@@ -49,6 +49,7 @@ function MainScreen() {
           name="Setting"
           component={SettingScreen}
           options={{
+            headerShown:false,
             tabBarLabel: 'Settings',
             tabBarIcon: ({ color, size }) => (
               <MaterialCommunityIcons name="cog" color={color} size={size} />
@@ -67,9 +68,8 @@ function App() {
       <Stack.Navigator initialRouteName="Welcome">
       <Stack.Screen name="Main" component={MainScreen} options={{headerShown:false}} />
       <Stack.Screen name="Welcome" options={{headerShown:false}} component={WelcomeScreen} />
-         <Stack.Screen name="Login" options={{headerShown:false}}component={LoginScreen} />
-         <Stack.Screen name="Register" 
-          options={{headerShown:false}}
+      <Stack.Screen name="Login" options={{headerShown:false}}component={LoginScreen} />
+      <Stack.Screen name="Register" options={{headerShown:false}}
           component={RegisterScreen} />
       </Stack.Navigator>
     </NavigationContainer>
