@@ -52,7 +52,7 @@ export default function LoginScreen({ navigation }) {
       });
 
       if (res.data.document != null) {
-        navigation.navigate('Home');
+        navigation.navigate('Main');
       } else {
         Alert.alert('Error', "Nim & password tidak sesuai", [
           { text: 'OK', onPress: () => console.log('ERR') },
