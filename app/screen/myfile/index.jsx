@@ -8,7 +8,7 @@ import {
 export default function MyProfileScreen(){
     return (
         <View style={StyleSheet.container}>
-            <Text>Profile</Text>
+            <Text>My File</Text>
         </View>
     );
 }
