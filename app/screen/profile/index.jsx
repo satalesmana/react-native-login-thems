@@ -37,7 +37,7 @@ export default function UserScreen() {
           <MaterialCommunityIcons name="school-outline" size={20} color="#a6a6a6" />
           <View style={styles.detailTextContainer}>
             <Text style={styles.detailValue}>{auth.jurusan}</Text>
-            <Text style={styles.detailLabel}>Program Study</Text>
+            <Text style={styles.detailLabel}>Program Studi</Text>
           </View>
         </View>
         <View style={styles.detailItem}>
