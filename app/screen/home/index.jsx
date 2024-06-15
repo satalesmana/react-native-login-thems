@@ -1,101 +1,286 @@
-import { 
-  View, 
-  Text, 
-  FlatList, 
-  StyleSheet, 
-  TouchableOpacity 
-} from 'react-native';
-import { useEffect } from 'react';
-import { setData, clearData } from '../../store/reducer/usersReducer'
-import Apilib from "../../lib/Apilib";
-import { useSelector, useDispatch } from 'react-redux'
+import React, { useEffect, useCallback, useState } from "react";
+import {
+  View,
+  Text,
+  FlatList,
+  StyleSheet,
+  TouchableOpacity,
+  RefreshControl,
+  Image,
+  SafeAreaView,
+  TextInput,
+} from "react-native";
+import { useSelector, useDispatch } from "react-redux";
+import Icon from "react-native-vector-icons/Feather";
+import { setData, clearData } from "../../store/reducer/usersReducer";
+import ApiLib from "../../lib/Apilib";
+import PieChart from "react-native-pie-chart";
+import { Button } from "react-native-paper";
 
-export default function HomeScreen(){
-  const dispatch = useDispatch()
-  const data = useSelector((state) => state.users.data)
-  const filter = useSelector((state) => state.users.formFilter)
+export default function DashboardScreen({ navigation }) {
+  const dispatch = useDispatch();
+  const data = useSelector((state) => state.users.data);
+  const filter = useSelector((state) => state.users.formFilter);
+  const [refreshing, setRefreshing] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [filteredData, setFilteredData] = useState([]);
+  const widthAndHeight = 60;
+  const series = [321, 123];
+  const sliceColor = ["green", "white"];
 
-  const fetchData = async ()=>{
-    const res = await Apilib.post('/action/find',{
-      "dataSource": "Cluster0",
-      "database": "lp3i-mobile",
-      "collection": "users",
-      "filter": filter
-    })
+  const fetchData = async () => {
+    try {
+      const res = await ApiLib.post("/action/find", {
+        dataSource: "Cluster0",
+        database: "lp3i-mobile",
+        collection: "users",
+        filter: filter,
+      });
 
-    if(res.data?.documents){
-      dispatch(setData(res.data.documents))
-    }else{
-      dispatch(clearData())
+      if (res.data?.documents) {
+        dispatch(setData(res.data.documents));
+        setFilteredData(res.data.documents); // Update filteredData initially
+      } else {
+        dispatch(clearData());
+        setFilteredData([]); // Clear filteredData if no documents
+      }
+    } catch (err) {
+      console.log(err);
     }
-  }
+  };
 
-  const getInitial=(firstName, lastName)=>{
-    let name = ''
+  useEffect(() => {
+    fetchData();
+  }, []);
 
-    if(firstName.length > 0)
-        name += firstName.substring(0,1);
-    
-    if(lastName.length > 0)
-      name += lastName.substring(0,1);
+  const onRefresh = useCallback(() => {
+    setRefreshing(true);
+    fetchData();
+    setTimeout(() => {
+      setRefreshing(false);
+    }, 1000);
+  }, []);
 
-    return name.toLocaleUpperCase()
-  }
+  const handleSearch = (text) => {
+    setSearchQuery(text);
+    const newData = data.filter((item) =>
+      item.firstName.toLowerCase().includes(text.toLowerCase())
+    );
+    setFilteredData(newData);
+  };
 
-  useEffect(()=>{
-    fetchData()
-  },[])
-
-
-  const rederItem = ({item}) => (
-    <TouchableOpacity 
-        style={styles.containerItem}>
-          <View style={styles.itemLeft}>
-            <Text style={styles.textItemLeft}>{getInitial(item.firstName, item?.sureName)}</Text>
-          </View>
-          <View style={styles.itemRight}>
-            <Text>{item?.firstName} {item?.sureName}</Text>
-            <Text>{item?.email}</Text>
-          </View>
-    </TouchableOpacity>
+  const renderItem = ({ item }) => (
+    <View style={styles.itemContainer}>
+      <Icon name="file" size={25} color="purple" style={styles.icon} />
+      <View style={styles.itemRight}>
+        <Text style={(styles.text, { fontWeight: "bold", fontSize: 16 })}>
+          {item.firstName} {item.sureName}
+        </Text>
+        <Text style={styles.text}>{item.email}</Text>
+      </View>
+      <TouchableOpacity style={styles.moreIconContainer}>
+        <Icon name="more-vertical" size={25} color="black" />
+      </TouchableOpacity>
+    </View>
   );
 
   return (
-    <View >
-        <FlatList
-          data={data}
-          renderItem={rederItem}
+    <SafeAreaView style={styles.container}>
+      <View style={styles.header}>
+        <Text style={styles.headerText}>Home</Text>
+        <Icon name="bell" size={22} color="black" />
+        <Image
+          source={require("../../../assets/images/person.png")}
+          style={styles.avatar}
+        />
+      </View>
+
+      <View style={styles.searchContainer}>
+        <Icon name="search" size={22} color="black" style={styles.searchIcon} />
+        <TextInput
+          style={styles.searchInput}
+          placeholder="Search..."
+          placeholderTextColor={"black"}
+          onChangeText={handleSearch}
+          value={searchQuery}
+        />
+      </View>
+
+      <View style={styles.chartContainer}>
+        <PieChart
+          widthAndHeight={widthAndHeight}
+          series={series}
+          sliceColor={sliceColor}
+          coverRadius={0.75}
+        />
+        <View style={styles.chartTextContainer}>
+          <Text style={styles.chartText}>20 Student Active</Text>
+          <Text style={styles.chartText}>Total of Student</Text>
+        </View>
+      </View>
+
+      <View style={styles.sectionHeader}>
+        <Text style={styles.sectionHeaderText}>List of Mahasiswa</Text>
+        <Text style={styles.seeAllText}>See all</Text>
+      </View>
+
+      <View style={styles.buttonContainer}>
+        <View
+          style={{
+            borderWidth: 1,
+            borderRadius: 50,
+          }}
+        >
+          <Button
+            style={styles.button}
+            onPress={() => console.log("Pressed")}
+            icon="arrow-down"
+          >
+            Last modified
+          </Button>
+        </View>
+        <View
+          style={{
+            borderWidth: 1,
+            borderRadius: 50,
+            width: 50,
+            height: 35,
+            justifyContent: "center", // Mengatur posisi ikon ke tengah secara vertikal
+            alignItems: "center",
+          }}
+        >
+          <Icon name="grid" size={20} color="black" />
+        </View>
+      </View>
+
+      <FlatList
+        data={filteredData}
+        renderItem={renderItem}
+        keyExtractor={(item, index) => index.toString()}
+        refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+        }
+        style={styles.flatList}
       />
-    </View>
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
-  containerItem:{
-    flex:1,
-    padding:10, 
-    flexDirection:'row',
+  container: {
+    flex: 1,
+    backgroundColor: "#ffffff",
+  },
+  header: {
+    flexDirection: "row",
+    alignItems: "center",
+    padding: 20,
+  },
+  headerText: {
+    fontWeight: "bold",
+    fontSize: 20,
+    flex: 1,
+  },
+  avatar: {
+    width: 55,
+    height: 55,
+    borderRadius: 50,
+    borderColor: "black",
+    borderWidth: 1,
+    marginLeft: 10,
+  },
+  searchContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    backgroundColor: "white",
+    borderWidth: 1,
+    borderRadius: 50,
+    marginHorizontal: 15,
+    marginBottom: 25,
+    paddingHorizontal: 15,
+  },
+  searchIcon: {
+    marginRight: 10,
+  },
+  searchInput: {
+    flex: 1,
+    height: 40,
+    fontSize: 16,
+    paddingVertical: 0,
+  },
+  chartContainer: {
+    backgroundColor: "#E8E5EF",
+    flexDirection: "row",
+    alignItems: "center",
+    borderRadius: 20,
+    marginHorizontal: 15,
+    marginBottom: 25,
+    paddingHorizontal: 25,
+    paddingVertical: 30,
+  },
+  chartTextContainer: {
+    marginLeft: 20,
+  },
+  chartText: {
+    color: "black",
+    fontSize: 20,
+    fontFamily: "Roboto",
+    textAlign: "left",
+    marginBottom: 5,
+  },
+  sectionHeader: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    marginHorizontal: 15,
+    marginBottom: 10,
+  },
+  sectionHeaderText: {
+    fontWeight: "bold",
+    fontSize: 20,
+  },
+  seeAllText: {
+    fontWeight: "400",
+    fontSize: 15,
+    color: "green",
+  },
+  buttonContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    marginHorizontal: 15,
+    marginLeft: 15,
+    marginBottom: 10,
+  },
+  button: {
+    borderColor: "purple",
+    color: "purple",
+    width: 150,
+  },
+  itemContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    paddingVertical: 15,
+    paddingHorizontal: 20,
     borderBottomWidth: 1,
-    borderColor:'#dedede',
-    backgroundColor:'white'
+    borderBottomColor: "#cccccc",
   },
-  itemLeft:{
-    flex:1,
-    paddingLeft:20,
-    textAlign:'center'
+  icon: {
+    marginRight: 10,
   },
-  textItemLeft:{
-    borderRadius:50,
-    borderWidth:1,
-    borderColor:'#dedede',
-    width:45,
-    textAlign:'center',
-    backgroundColor:'red',
-    fontWeight:'bold',
-    color:'white',
-    padding:10
+  itemRight: {
+    flex: 1,
+    marginLeft: 10,
   },
-  itemRight:{
-    flex:4
-  }
-})
+  text: {
+    fontSize: 16,
+    color: "black",
+  },
+  moreIconContainer: {
+    flex: 1,
+    alignItems: "flex-end",
+  },
+  flatList: {
+    marginTop: 10,
+    paddingHorizontal: 10,
+  },
+});
