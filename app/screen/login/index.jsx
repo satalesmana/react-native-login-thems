@@ -38,7 +38,7 @@ export default function LoginScreen({ navigation }) {
         )
         setLoading(false)
       if(res.data.document != null){
-        navigation.replace("Home")
+        navigation.navigate("main")
       }else{
         Alert.alert('Error', "Username & password tidak sesuai", [
           {text: 'OK', onPress: () => {
@@ -46,8 +46,6 @@ export default function LoginScreen({ navigation }) {
           }},
         ]);
       }
-
-            navigation.navigate('home')
         } catch (err) {
             setLoading(false)
             alert('Salah')
