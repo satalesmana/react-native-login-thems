@@ -7,7 +7,12 @@ export const registerSlice = createSlice({
         firstName: null,
         sureName: null,
         email: null,
-        password: null,
+        nim:null,
+        jurusan:null,
+        kode:null,
+        num:null,
+        password: null
+
     }
   },
   reducers: {
@@ -20,6 +25,18 @@ export const registerSlice = createSlice({
     setEmail:(state, action) => {
         state.formInput.email = action.payload
     },
+    setNim:(state, action) => {
+        state.formInput.nim = action.payload
+    },
+    setKode:(state, action) => {
+        state.formInput.kode = action.payload
+    },
+    setJurusan:(state, action) => {
+        state.formInput.jurusan = action.payload
+    },
+    setNum:(state, action) => {
+        state.formInput.num = action.payload
+    },
     setPassword:(state, action) => {
         state.formInput.password = action.payload
     },
@@ -28,6 +45,10 @@ export const registerSlice = createSlice({
             firstName: null,
             sureName: null,
             email: null,
+            nim: null,
+            kode: null,
+            jurusan: null,
+            num: null,
             password: null
         }
     }
@@ -39,8 +60,12 @@ export const {
     setFirstName,
     setSureName,
     setEmail,
+    setNim,
+    setKode,
+    setJurusan,
+    setNum,
     setPassword,
     resetRegisterData
- } = registerSlice.actions
+ } = registerSlice.actions;
 
-export default registerSlice.reducer
+export default registerSlice.reducer;
