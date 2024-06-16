@@ -12,8 +12,8 @@ import {
   HomeScreen,
   SplashScreen,
   Register,
-  SettingsScreen,
   ProfileScreen
+
 } from "./screen"
 import store from './store'
 import { Provider } from 'react-redux'
@@ -123,7 +123,7 @@ function MainScreen({}) {
 
       <Tab.Screen
         name="Profile"
-        component={HomeScreen}
+        component={ProfileScreen}
         options={{
           headerShown: false,
           tabBarLabel: "User",
