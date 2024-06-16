@@ -79,7 +79,7 @@ export default function SettingsScreen({ navigation }) {
                             <Text style={{}}>{auth.email}</Text>
                             <TouchableOpacity style={{ backgroundColor: "#8a2be2", padding: 10, width:100 }}
                             onPress={onLogout} title='Log Out' >
-                            <Text style={{ color: "black", alignSelf: "center"  }}>LogOut</Text>
+                            <Text style={{ color: "white", alignSelf: "center"  }}>LogOut</Text>
                         </TouchableOpacity>
                         </View>
                         
