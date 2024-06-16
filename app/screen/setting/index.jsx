@@ -49,7 +49,7 @@ export default function SettingScreen({ navigation }) {
                 "database": "uasghw",
                 "collection": "users",
                 // document: register,
-                "filter" : {"email" : setting.email} ,
+                "filter" : {"_id" : setting.id} ,
                 "update" : {"$set" : {"password" : setting.password}}
               });
               if (res.data?.modifiedCount>0) {

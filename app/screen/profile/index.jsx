@@ -100,14 +100,14 @@ export default function ProfileScreen({ navigation }) {
       <View style={{ height: "100%", paddingTop: 10 }}>
         {/* <Text>halo</Text> */}
         <View style={style.container}>
-          <View style={{ height: 700 }}>
+          <View style={{ height: 700 ,padding:25}}>
             <View
               style={{
                 gap: 10,
                 width: "90%",
                 flexDirection: "row",
                 alignItems: "center",
-                padding: 20,
+                padding: 24,
               }}
             >
               <Icon

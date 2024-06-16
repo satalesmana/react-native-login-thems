@@ -23,6 +23,7 @@ import {
   setProgramStudy,
   setKodeKelas,
   setTelp,
+  setId,
 } from "../../store/reducer/authReducer";
 
 const windowWidth = Dimensions.get("window").width;
@@ -63,6 +64,7 @@ export default function LoginScreen({ navigation }) {
       if (res.data?.document) {
         const userData = res.data.document;
         dispatch(setAuthData(userData));
+        dispatch(setId(userData._id));
         dispatch(setFirstName(userData.firstName));
         dispatch(setEmail(userData.email));
         dispatch(setNim(userData.nim));
