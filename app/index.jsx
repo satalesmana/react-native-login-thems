@@ -32,6 +32,16 @@ function MainScreen(){
         ),
       }}
       />
+       <Tab.Screen 
+      name="File"
+      component={FileScreen}
+      options={{
+        tabBarLabel:'File',
+        tabBarIcon:({color,size})=>(
+          <MaterialCommunityIcons name="file" color={color} size={size}/>
+        ),
+      }}
+      />
         <Tab.Screen 
       name="Profile"
       component={ProfileScreen}
