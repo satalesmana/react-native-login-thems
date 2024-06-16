@@ -74,7 +74,7 @@ export default function HomeScreen(){
   const renderItem = ({ item }) => (
       <TouchableOpacity>
     <View style={styles.itemContainer}>
-      <Icon name="file" size={25} color="purple" style={styles.icon} />
+      <Icon name="file" size={25} color="gray" style={styles.icon} />
       <View style={styles.itemRight}>
         <Text style={(styles.text, { fontWeight: "bold", fontSize: 16 })}>
           {item.firstName}
@@ -124,7 +124,6 @@ const styles = StyleSheet.create({
     padding:10, 
     flexDirection:'row',
     borderBottomWidth: 1,
-    borderColor:'#dedede',
     backgroundColor:'white'
   },
   itemLeft:{
@@ -156,7 +155,7 @@ const styles = StyleSheet.create({
     padding: 10,
     backgroundColor: 'white',
     borderBottomWidth: 1,
-    borderColor: '#dedede'
+    // borderColor: '#dedede'
   },
   searchInput: {
     flex: 1,

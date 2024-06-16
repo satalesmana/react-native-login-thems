@@ -81,7 +81,7 @@ export default function SettingsScreen({ navigation }) {
         <ScrollView>
             <View>
                 <View style={{ width: windowWidth }}>
-                    <View style={[style.container, { marginVertical: 10, backgroundColor: "white", flexDirection: "row" }]}>
+                    <View style={[style.container, { marginVertical: 10, gap:20,backgroundColor: "white", flexDirection: "row" }]}>
                         <Image
                             source={require('../../../assets/images/AI Avatars.png')}
                             style={{ width: 100, height: 100, marginLeft: -0.2 }}
@@ -89,7 +89,7 @@ export default function SettingsScreen({ navigation }) {
                         <View style={{width:250,}}>
                             <Text style={{fontSize: 22, fontWeight:'bold' }}>{auth.firstName}</Text>
                             <Text style={{}}>{auth.email}</Text>
-                            <TouchableOpacity style={{ backgroundColor: "#E4E7EB", padding: 5, marginTop:10, width:180 }}
+                            <TouchableOpacity style={{ backgroundColor: "#E4E7EB", padding: 5, marginTop:15, width:180 }}
                             onPress={onLogout} title='Log Out' >
                             <Text style={{ color: "black", alignSelf: "center"}}>LogOut</Text>
                         </TouchableOpacity>
