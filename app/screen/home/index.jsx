@@ -22,7 +22,7 @@ export default function HomeScreen() {
   const dispatch = useDispatch()
   const data = useSelector((state) => state.users.data)
   const filter = useSelector((state) => state.users.formFilter)
-  const [searchQuery, setSearchQuery] = React.useState('');
+  const [searchQuery, setSearchQuery] = useState("");
 
 
   const fetchData = async () => {
