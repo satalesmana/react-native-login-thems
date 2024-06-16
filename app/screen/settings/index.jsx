@@ -106,7 +106,7 @@ export default function SettingsScreen({ navigation }) {
                 fontSize: 25,
                 fontFamily: "Roboto",
                 textAlign: "left",
-                marginLeft:-20
+                marginRight:30
               }]}
             >
              {auth.firstName} {auth.sureName}
@@ -119,7 +119,6 @@ export default function SettingsScreen({ navigation }) {
                 fontSize: 15,
                 textAlign: "left",
                 marginBottom: 20,
-                marginLeft:-20
               }}
             >
               {auth.email}

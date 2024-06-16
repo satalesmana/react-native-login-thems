@@ -14,6 +14,7 @@ import {
     setJurusan,
     setKode,
     setNum,
+    setId,
   } from "../../store/reducer/authReducer";
 
 const windowWidth = Dimensions.get('window').width;
@@ -52,6 +53,7 @@ export default function LoginScreen({ navigation }) {
       if(res.data?.document){
         const userData = res.data.document;
         dispatch(setAuthData(userData));
+        dispatch(setId(userData.id));
         dispatch(setFirstName(userData.firstName));
         dispatch(setSureName(userData.sureName));
         dispatch(setEmail(userData.email));
