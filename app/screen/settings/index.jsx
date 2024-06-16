@@ -11,7 +11,7 @@ import {
 } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
 import { MyButton2, MyButton3 } from "../../components/my_button";
-import { setEmail, setPassword } from "../../store/reducer/settingsReducer";
+import { setEmail, setPassword, resetSettingData } from "../../store/reducer/settingsReducer";
 import { clearAuth } from "../../store/reducer/authReducer";
 import ApiLib from "../../lib/Apilib";
 
@@ -106,6 +106,7 @@ export default function SettingsScreen({ navigation }) {
                 fontSize: 25,
                 fontFamily: "Roboto",
                 textAlign: "left",
+                marginLeft:-20
               }]}
             >
              {auth.firstName} {auth.sureName}
@@ -118,12 +119,13 @@ export default function SettingsScreen({ navigation }) {
                 fontSize: 15,
                 textAlign: "left",
                 marginBottom: 20,
+                marginLeft:-20
               }}
             >
               {auth.email}
             </Text>
 
-              <MyButton3 style={[{ height:50, width:200, marginLeft:-25}]} onPress={onLogout} text="Logout"/>
+        <MyButton3 style={[{ height:50, width:200, marginLeft:-25}]} onPress={onLogout} text="Logout"/>
           </View>
         </View>
       </View>

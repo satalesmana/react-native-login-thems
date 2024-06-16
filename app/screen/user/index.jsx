@@ -80,8 +80,8 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   profileImage: {
-    width: 60,
-    height: 60,
+    width: 70,
+    height: 70,
     borderRadius: 30,
   },
   iconGroup: {
@@ -119,7 +119,6 @@ const styles = StyleSheet.create({
     borderTopRightRadius: 30,
     paddingTop: 30,
     paddingHorizontal: 20,
-    paddingVertical:400,
     marginTop: -20, 
     bottom:100
   },
