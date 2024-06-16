@@ -15,6 +15,10 @@ import {
   setemail,
   setname,
   setpass,
+  setnim,
+  setprodi,
+  setphone,
+  setkelas,
   resetRegisterData,
 } from "../../store/reducer/registerReducer";
 import React from "react";
@@ -39,6 +43,10 @@ export default function CreateScreen({ navigation }) {
       }
       let message = `Name :  ${register.name}\n`;
       message += `Email : ${register.email} \n`;
+      message += `NIM : ${register.nim} \n`;
+      message += `Phone : ${register.phone} \n`;
+      message += `Prodi : ${register.prodi} \n`;
+      message += `Kelas : ${register.kelas} \n`;
 
       Alert.alert("Confirm", message, [
         {
@@ -122,6 +130,34 @@ export default function CreateScreen({ navigation }) {
                 placeholder="Your name"
                 source={Person}
                 label="name"
+              />
+              <CustomeInput
+                value={register.setnim}
+                onChangeText={(value) => dispatch(setnim(value))}
+                placeholder="Your nim"
+                source={Person}
+                label="NIM"
+              />
+              <CustomeInput
+                value={register.setprodi}
+                onChangeText={(value) => dispatch(setprodi(value))}
+                placeholder="Your Prodi"
+                source={Person}
+                label="Prodi"
+              />
+              <CustomeInput
+                value={register.setkelas}
+                onChangeText={(value) => dispatch(setkelas(value))}
+                placeholder="Your Class"
+                source={Person}
+                label="Kelas"
+              />
+              <CustomeInput
+                value={register.setphone}
+                onChangeText={(value) => dispatch(setphone(value))}
+                placeholder="Your No phone"
+                source={Person}
+                label="No Phone"
               />
 
               <CustomeInput
@@ -278,7 +314,7 @@ const style = StyleSheet.create({
   },
   img3: {
     width: windowWidth,
-    height: 798,
+    height: 1200,
     marginTop: -105,
   },
   img1: {
