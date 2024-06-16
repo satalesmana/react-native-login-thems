@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet, Image } from 'react-native';
+import { View, Text, StyleSheet, Image, ScrollView} from 'react-native';
 import { useSelector } from 'react-redux';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import * as Progress from 'react-native-progress';
@@ -8,19 +8,18 @@ export default function UserScreen() {
   const auth = useSelector((state) => state.auth);
 
   return (
+    <ScrollView>
     <View style={styles.container}>
       <View style={styles.header}>
         <View style={styles.headerTop}>
-        <Text style={styles.surename}>{styles.firstname}</Text>
-          <Image source={require('../../../assets/images/AI_Avatars.png')} style={styles.profileImage} />
-          <Text style={styles.email}>{auth.email}</Text>
+          <Image source={require("../../../assets/images/AI Avatars (1).png")} style={styles.profileImage} />
           <View style={styles.iconGroup}>
             <MaterialCommunityIcons name="magnify" size={24} color="#fff" style={styles.headerIcon} />
             <MaterialCommunityIcons name="bell-outline" size={24} color="#fff" style={styles.headerIcon} />
           </View>
         </View>
-        <Text style={styles.name}>{auth.nama}</Text>
-        <Progress.Bar progress={0.7} width={400} height={8} borderRadius={20} color="#9747FF" style={styles.progressBar} />
+        <Text style={styles.name}>{auth.firstname} {auth.surename}</Text>
+        <Progress.Bar progress={0.3} width={300} height={8} borderRadius={20} color="#9747FF" style={styles.progressBar} />
         <View style={styles.emailContainer}>
           <MaterialCommunityIcons name="cloud-outline" size={20} color="#ccc" style={styles.emailIcon} />
           <Text style={styles.email}>{auth.email}</Text>
@@ -38,7 +37,7 @@ export default function UserScreen() {
           <MaterialCommunityIcons name="school-outline" size={20} color="#a6a6a6" />
           <View style={styles.detailTextContainer}>
             <Text style={styles.detailValue}>{auth.jurusan}</Text>
-            <Text style={styles.detailLabel}>Program Studi</Text>
+            <Text style={styles.detailLabel}>Program Study</Text>
           </View>
         </View>
         <View style={styles.detailItem}>
@@ -57,6 +56,7 @@ export default function UserScreen() {
         </View>
       </View>
     </View>
+    </ScrollView>
   );
 }
 
@@ -80,8 +80,8 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   profileImage: {
-    width: 60,
-    height: 60,
+    width: 70,
+    height: 70,
     borderRadius: 30,
   },
   iconGroup: {
@@ -119,7 +119,6 @@ const styles = StyleSheet.create({
     borderTopRightRadius: 30,
     paddingTop: 30,
     paddingHorizontal: 20,
-    paddingVertical:400,
     marginTop: -20, 
     bottom:100
   },
