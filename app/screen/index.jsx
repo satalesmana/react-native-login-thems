@@ -3,6 +3,8 @@ import LoginScreen from "./login"
 import SplashScreen from "./splash"
 import ProfileScreen from "./profile/profile"
 import Register from "./register"
+import SettingScreen  from "./settings/settings"
+
 
 
 
@@ -11,6 +13,7 @@ import Register from "./register"
 export {
     HomeScreen,
     ProfileScreen,
+    SettingScreen,
     LoginScreen,
     SplashScreen,
     Register
