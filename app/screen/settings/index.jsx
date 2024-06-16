@@ -95,7 +95,7 @@ export default function SettingsScreen({ navigation }) {
                             onChangeText={(value => dispatch(setPassword(value)))} placeholder='New Password' placeholderTextColor='#c7c7c7' label="New Password" />
                         <CustomeInput
                             onChangeText={setConfirmPassword}value={confirmPassword} placeholder='Confirm Password' placeholderTextColor='#c7c7c7' label="Confirm Password" />
-                   <TouchableOpacity style={{ backgroundColor: "blue", padding: 10,borderRadius:20}}
+                   <TouchableOpacity style={{ backgroundColor: "purple", padding: 10,borderRadius:20}}
                            onPress={onLogout} title='Log Out'>
                             <Text style={{ color: "black", alignSelf: "center" ,color:"white"}}>Submit</Text>
                         </TouchableOpacity>
