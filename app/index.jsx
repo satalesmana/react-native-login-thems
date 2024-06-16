@@ -12,7 +12,8 @@ import {
   HomeScreen,
   SplashScreen,
   Register,
-  ProfileScreen
+  ProfileScreen,
+  SettingScreen
 
 } from "./screen"
 import store from './store'
@@ -134,7 +135,7 @@ function MainScreen({}) {
       />
       <Tab.Screen
         name="Account Setting"
-        component={HomeScreen}
+        component={SettingScreen}
         options={{
           tabBarLabel: "Settings",
           tabBarIcon: ({ color, size }) => (
