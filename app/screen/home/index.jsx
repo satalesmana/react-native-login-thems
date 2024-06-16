@@ -48,25 +48,7 @@ export default function HomeScreen(){
   useEffect(()=>{
     fetchData()
   },[])
-  const renderSearch = () => {
-    return (
-      <View style={styles.searchContainer}>
-        <MaterialCommunityIcons name="magnify" size={24} color="black" />
-        <TextInput
-          style={styles.searchInput}
-          placeholder="Search"
-          value={filter}
-          onChangeText={(text) => dispatch(setFilter(text))}
-        />
-        <TouchableOpacity
-          style={styles.searchButton}
-          onPress={() => fetchData()}
-        >
-        </TouchableOpacity>
-      </View>
-    );
-  };
-
+  
   const rederItem = ({item}) => (
     <TouchableOpacity 
         style={styles.containerItem}>
@@ -83,7 +65,6 @@ export default function HomeScreen(){
   return (
     <View >
       <View >
-      {renderSearch()}
       <Text style={styles.textList}>List Mahasiswa</Text>
         <FlatList
           data={data}
@@ -121,25 +102,6 @@ const styles = StyleSheet.create({
   },
   textList:{
     fontSize:25
-  },
-  searchContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    padding: 10,
-    backgroundColor: 'white',
-    borderBottomWidth: 1,
-    borderColor: '#dedede'
-  },
-  searchInput: {
-    flex: 1,
-    padding: 10,
-    fontSize: 16
-  },
-  searchButton: {
-    padding: 10,
-    justifyContent: 'center',
-    alignItems: 'center'
   },
   itemRight:{
     flex:4
