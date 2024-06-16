@@ -24,20 +24,20 @@ const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
 export default function LoginScreen({ navigation }) {
-  const [nim, onChangeUserNim] = useState('');
+  const [email, onChangeEmail] = useState('');
   const [password, onChangePassword] = useState('');
   const [loading, setLoading] = useState(false); // Loading state
   const dispatch = useDispatch()
   const [hidePassword, setHidePassword] = useState(true); // Password visibility state
-  const [isUserNimFocused, setIsUserNimFocused] = useState(false); // Username focus state
+  const [isEmailFocused, setIsEmailFocused] = useState(false); // Username focus state
   const [isPasswordFocused, setIsPasswordFocused] = useState(false); // Password focus state
 
   const onSubmitAccount = async () => {
     try {
       setLoading(true); // Start loading
 
-      if (nim.trim().length === 0) {
-        throw Error('nim is required');
+      if (email.trim().length === 0) {
+        throw Error('email is required');
       }
 
       if (password.trim().length === 0) {
@@ -49,7 +49,7 @@ export default function LoginScreen({ navigation }) {
         "database": "UAS",
         "collection": "users",
         "filter": {
-          "nim": nim,
+          "email": email,
           "password": password
         }
       });
@@ -64,7 +64,7 @@ export default function LoginScreen({ navigation }) {
         dispatch(setTelp(res.data.document.telp))
         navigation.navigate('Main');
       } else {
-        Alert.alert('Error', "Nim & password tidak sesuai", [
+        Alert.alert('Error', "email & password tidak sesuai", [
           { text: 'OK', onPress: () => console.log('ERR') },
         ]);
       }
@@ -98,17 +98,17 @@ export default function LoginScreen({ navigation }) {
         </View>
 
         <View style={style.container}>
-          <Text style={style.textLabel}>Nim</Text>
+          <Text style={style.textLabel}>Email</Text>
           <TextInput
             style={[
               style.textInputStyle,
-              { borderBottomColor: isUserNimFocused ? 'blue' : 'black' }
+              { borderBottomColor: isEmailFocused ? 'blue' : 'black' }
             ]}
-            onChangeText={onChangeUserNim}
+            onChangeText={onChangeEmail}
             placeholderTextColor='#c7c7c7'
-            value={nim}
-            onFocus={() => setIsUserNimFocused(true)}
-            onBlur={() => setIsUserNimFocused(false)}
+            value={email}
+            onFocus={() => setIsEmailFocused(true)}
+            onBlur={() => setIsEmailFocused(false)}
           />
               <Entypo name="users" size={24} color="black" style={{marginTop:-39,left:280}} />
 

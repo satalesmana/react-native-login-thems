@@ -19,7 +19,7 @@ export default function UserScreen() {
           </View>
         </View>
         <Text style={styles.name}>{auth.nama}</Text>
-        <Progress.Bar progress={0.7} width={400} height={8} borderRadius={20} color="#9747FF" style={styles.progressBar} />
+        <Progress.Bar progress={0.6} width={400} height={8} borderRadius={20} color="#9747FF" style={styles.progressBar} />
         <View style={styles.emailContainer}>
           <MaterialCommunityIcons name="cloud-outline" size={20} color="#ccc" style={styles.emailIcon} />
           <Text style={styles.email}>{auth.email}</Text>
