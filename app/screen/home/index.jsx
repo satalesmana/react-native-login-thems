@@ -63,7 +63,6 @@ export default function HomeScreen(){
   );
 
   return (
-    
     <View >
       <View >
       <Text style={styles.textList}>List Mahasiswa</Text>
