@@ -1,109 +1,190 @@
-import { 
-  View, 
-  Text, 
-  FlatList, 
-  StyleSheet, 
+import {
+  View,
+  Text,
+  FlatList,
+  StyleSheet,
   TouchableOpacity,
   TextInput
 } from 'react-native';
-import { useEffect } from 'react';
-import { setData, clearData } from '../../store/reducer/usersReducer'
-import ApiLib from "../../lib/ApiLib"
-import { MaterialCommunityIcons } from '@expo/vector-icons';
-import { useSelector, useDispatch } from 'react-redux'
+import { useEffect, useState, useMemo } from 'react';
+import { setData, clearData } from '../../store/reducer/usersReducer';
+import ApiLib from "../../lib/ApiLib";
+import { useSelector, useDispatch } from 'react-redux';
+import * as Progress from 'react-native-progress';
 
-export default function HomeScreen(){
-  const dispatch = useDispatch()
-  const data = useSelector((state) => state.users.data)
-  const filter = useSelector((state) => state.users.formFilter)
-  const fetchData = async()=>{
-    try{
-      const res = await ApiLib.post('/action/find',{
-      "dataSource": "AtlasCluster",
-      "database" : "uas",
-      "collection" : "users",
-      "filter" : filter
-      })
+export default function HomeScreen() {
+  const dispatch = useDispatch();
+  const data = useSelector((state) => state.users.data || []);
+  const filter = useSelector((state) => state.users.formFilter);
+  const [value, onChangeText] = useState('');
+
+  const fetchData = async () => {
+    try {
+      const res = await ApiLib.post('/action/find', {
+        "dataSource": "AtlasClusters",
+        "database": "uas",
+        "collection": "users",
+        "filter": filter,
+      });
+
       if (res.data?.documents) {
-        dispatch(setData(res.data.documents))
-      }else{
-        dispatch(clearData())
+        dispatch(setData(res.data.documents));
+      } else {
+        dispatch(clearData());
       }
-    }catch(err){
-      console.log(err)
+    } catch (err) {
+      console.log(err);
     }
-  }
-  const getInitial=(firstname,lastName)=>{
-    let name = ''
+  };
 
-    if(firstname.length > 0)
-        name += firstname.substring(0,1);
-    
-    if(lastName.length > 0)
-      name += lastName.substring(0,1);
+  const getInitial = (email) => {
+    if (!email) return '';
+    return email.charAt(0).toUpperCase();
+  };
 
-    return name.toLocaleUpperCase()
-  }
+  useEffect(() => {
+    fetchData();
+  }, [filter]);
 
-  useEffect(()=>{
-    fetchData()
-  },[])
-  
-  const rederItem = ({item}) => (
-    <TouchableOpacity 
-        style={styles.containerItem}>
-          <View style={styles.itemLeft}>
-            <Text style={styles.textItemLeft}>{getInitial(item.firstname, item?.surename)}</Text>
-          </View>
-          <View style={styles.itemRight}>
-            <Text>{item?.firstname} {item?.surename}</Text>
-            <Text>{item?.email}</Text>
-          </View>
+  const filteredData = useMemo(() => {
+    if (!value) return data;
+    const lowercasedValue = value.toLowerCase();
+    return data.filter(item => {
+      const nama = item.firstname ? item.firstname.toLowerCase() : '';
+      const email = item.email ? item.email.toLowerCase() : '';
+      return nama.includes(lowercasedValue) || email.includes(lowercasedValue);
+    });
+  }, [value, data]);
+
+  const renderItem = ({ item }) => (
+    <TouchableOpacity style={styles.containerItem}>
+      <View style={styles.itemLeft}>
+        <Text style={styles.textItemLeft}>{getInitial(item?.email,item?.firstname)}</Text>
+      </View>
+      <View style={styles.itemRight}>
+        <Text>{item?.firstname}</Text>
+        <Text>{item?.email}</Text>
+      </View>
     </TouchableOpacity>
   );
 
   return (
-    <View >
-      <View >
-      <Text style={styles.textList}>List Mahasiswa</Text>
-        <FlatList
-          data={data}
-          renderItem={rederItem}
+    <View style={styles.mainContainer}>
+      <View style={styles.searchContainer}>
+        <TextInput
+          onChangeText={onChangeText}
+          value={value}
+          placeholder='Search users'
+          style={styles.searchInput}
+        />
+      </View>
+      <View style={styles.progressContainer}>
+        <View style={styles.progressCircle}>
+          <Progress.Circle
+            size={50}
+            unfilledColor='white'
+            thickness={7}
+            strokeCap='round'
+            indeterminate={false}
+            progress={0.65}
+            alignSelf={'center'}
+            borderWidth={0}
+            color='#9322C8'
           />
-    </View>
+        </View>
+        <View style={styles.progressText}>
+          <Text style={{ fontSize: 20 }}>Student Active</Text>
+          <Text style={{ color: 'grey', fontSize: 13 }}>Total of student</Text>
+        </View>
+      </View>
+      <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
+        <Text style={{ fontSize: 22, marginLeft: 30, fontWeight: 'bold' }}>List Of Mahasiswa</Text>
+        <Text style={{ fontSize: 15, textAlign: 'right', marginRight: 30, color: '#9322C8' }}>see all</Text>
+      </View>
+      <View style={styles.container}>
+        <FlatList
+          data={filteredData}
+          renderItem={renderItem}
+          keyExtractor={(item, index) => index.toString()}
+          ListEmptyComponent={() => <Text>No users found.</Text>}
+        />
+      </View>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  containerItem:{
-    flex:1,
-    padding:10, 
-    flexDirection:'row',
+  mainContainer: {
+    flex: 1,
+    backgroundColor: '#f8f8f8'
+  },
+  searchContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    padding: 10,
+    borderColor: '#dedede',
+    margin: 10,
+    borderRadius: 5,
+  },
+  searchInput: {
+    flex: 1,
+    height: 50,
+    borderColor: '#dedede',
+    borderWidth: 2,
+    paddingLeft: 10,
+    borderRadius: 20
+  },
+  containerItem: {
+    flex: 1,
+    padding: 10,
+    flexDirection: 'row',
     borderBottomWidth: 1,
-    borderColor:'#dedede',
-    backgroundColor:'white'
+    borderColor: '#dedede',
+    backgroundColor: 'white',
+    marginHorizontal: 10,
+    borderRadius: 5
   },
-  itemLeft:{
-    flex:1,
-    paddingLeft:20,
-    textAlign:'center'
+  itemLeft: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginRight: 10
   },
-  textItemLeft:{
-    borderRadius:50,
-    borderWidth:1,
-    borderColor:'#dedede',
-    width:45,
-    textAlign:'center',
-    backgroundColor:'red',
-    fontWeight:'bold',
-    color:'white',
-    padding:10
+  textItemLeft: {
+    borderRadius: 50,
+    borderWidth: 1,
+    borderColor: '#dedede',
+    width: 45,
+    textAlign: 'center',
+    backgroundColor: '#9322C8',
+    fontWeight: 'bold',
+    color: '#e7e7e7',
+    padding: 10
   },
-  textList:{
-    fontSize:25
+  itemRight: {
+    justifyContent: 'center',
   },
-  itemRight:{
-    flex:4
+  progressContainer: {
+    height: 100,
+    width: '85%',
+    alignSelf: 'center',
+    borderRadius: 10,
+    flexDirection: 'row',
+    marginBottom: 20,
+    backgroundColor: '#E8E5EF',
+    alignItems: 'center',
+    padding: 10
+  },
+  progressCircle: {
+    width: '25%',
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  progressText: {
+    flex: 1,
+    marginLeft: 20
+  },
+  container: {
+    flex: 1,
+    backgroundColor: '#f8f8f8'
   }
-})
+});
