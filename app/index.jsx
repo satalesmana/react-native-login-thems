@@ -7,7 +7,7 @@ import {
   WelcomeScreen,
   SignUpScreen,
   ProfileScreen,
-  SettingScreen
+  SettingScreen,
   FilesScreen
 } from "./screen"
 import store from './store'
@@ -25,8 +25,6 @@ function MainScreen() {
   return (
     <Tab.Navigator initialRouteName='Home' screenOptions={{ tabBarActiveTintColor: '#e91e63' }}>
       <Tab.Screen name='Home' component={HomeScreen} options={{
-        tabBarLabel: 'Home', tabBarIcon: ({ color, size }) => (
-          <MaterialCommunityIcons name='home' color={color} size={size} />
         tabBarLabel: 'Home',
         headerRight: () => (
           <View style={{ flexDirection: 'row', justifyContent: 'space-between', width: '40%', marginRight: '10%' }}>
