@@ -77,7 +77,7 @@ export default function HomeScreen(){
   const renderItem = ({ item }) => (
       <TouchableOpacity>
     <View style={styles.itemContainer}>
-      <Icon name="file" size={25} color="gray" style={styles.icon} />
+      <Icon name="file" size={25} color="red" style={styles.icon} />
       <View style={styles.itemRight}>
         <Text style={(styles.text, { fontWeight: "bold", fontSize: 16 })}>
           {item.firstname}
@@ -85,7 +85,7 @@ export default function HomeScreen(){
         <Text style={styles.text}>{item.email}</Text>
       </View>
       <TouchableOpacity style={styles.moreIconContainer}>
-        <Icon name="more-vertical" size={20} color="black" />
+        <Icon name="more-vertical" size={20} color="red" />
       </TouchableOpacity>
     </View>
       </TouchableOpacity>
