@@ -7,10 +7,10 @@ import {
   TouchableOpacity,
   Alert,
 } from "react-native";
-import {useState} from 'react'
+import { useState } from 'react'
 import { ICGoogle, ICFacebook } from "../../../assets";
 import { CustomeInput, CustomePassword, ButtonRed } from "../../component";
-import { setEmail, setPassword, resetRegisterData } from "../../store/reducer/registerReducer";
+import { setEmail, setPassword, setClass, setNim, setPhone, setProdi, setUsername, resetRegisterData } from "../../store/reducer/registerReducer";
 import { useSelector, useDispatch } from 'react-redux'
 import ApiLib from "../../lib/ApiLib"
 
@@ -25,11 +25,42 @@ export default function SignUpScreen({ navigation }) {
     // alert("Daftar Bermasalah")
   };
   const goSignUp = () => {
-    if (register.email === null || register.email === '') {
-      alert('Please Insert Email');
+    if (register.username === null || register.username === "") {
+      alert('Username is required')
     }
-    if (register.password === confirmPassword) {
-      let message = `Email : ${register.email} \n`
+    else if (register.email === null || register.email === "") {
+      alert('Email is required')
+    }
+    else if (register.nim === null || register.nim === "") {
+      alert('NIM is required')
+    }
+    else if (register.prodi === null || register.prodi === "") {
+      alert('Program Studi is required')
+    }
+    else if (register.class === null || register.class === "") {
+      alert('Kelas is required')
+    }
+    else if (register.phone === null || register.phone === "") {
+      alert('Nomor HP is required')
+    }
+    else if (register.password === null || register.password === "") {
+      alert('password is required')
+    }
+
+    else if (confirmPassword === null || confirmPassword === "") {
+      alert('Confirm password is required')
+    }
+
+    else if (confirmPassword !== register.password) {
+      alert(`Confirm password doesn't match`)
+    }
+    else if (register.password === confirmPassword) {
+      let message = `Username : ${register.username} \n`
+      message += `Email : ${register.email} \n`
+      message += `NIM : ${register.nim} \n`
+      message += `Program Studi : ${register.prodi} \n`
+      message += `Kelas : ${register.class} \n`
+      message += `Nomor HP : ${register.phone} \n`
 
       // Alert.alert('Confirm', message)
       Alert.alert('Confirm', message, [
@@ -47,7 +78,6 @@ export default function SignUpScreen({ navigation }) {
                 "document": register
               }
             )
-
             if (res.data?.insertedId) {
               dispatch(resetRegisterData())
               navigation.navigate("Login")
@@ -69,9 +99,58 @@ export default function SignUpScreen({ navigation }) {
     <ScrollView backgroundColor='white'>
       <Text style={style.header}>Sign Up</Text>
 
-      <CustomeInput label='Email' placeholder="Email Address" value={register.setEmail} onChangeText={(value) => dispatch(setEmail(value))} />
-      <CustomePassword placeholder="Password" value={register.setPassword} onChangeText={(value) => dispatch(setPassword(value))} />
-      <CustomePassword placeholder="Confirm Password" value={confirmPassword} onChangeText={(value)=>setConfirmPassword(value)} />
+      <CustomeInput
+        label='Username'
+        placeholder="Username"
+        value={register.setUsername}
+        onChangeText={(value) => dispatch(setUsername(value))} />
+
+      <CustomeInput
+        label='Email'
+        placeholder="Email"
+        value={register.setEmail}
+        onChangeText={(value) => dispatch(setEmail(value))}
+      />
+
+      <CustomeInput
+        label='NIM'
+        placeholder="NIM"
+        value={register.setNim}
+        onChangeText={(value) => dispatch(setNim(value))}
+      />
+
+      <CustomeInput
+        label='Program Studi'
+        placeholder="Program Studi"
+        value={register.setProdi}
+        onChangeText={(value) => dispatch(setProdi(value))}
+      />
+
+      <CustomeInput
+        label='Class'
+        placeholder="Class"
+        value={register.setClass}
+        onChangeText={(value) => dispatch(setClass(value))}
+      />
+
+      <CustomeInput
+        label='Phone Number'
+        placeholder="Nomor HP"
+        value={register.setPhone}
+        onChangeText={(value) => dispatch(setPhone(value))}
+      />
+
+      <CustomePassword
+        placeholder="Password"
+        value={register.setPassword}
+        onChangeText={(value) => dispatch(setPassword(value))}
+      />
+      
+      <CustomePassword
+        placeholder="Confirm Password"
+        value={confirmPassword}
+        onChangeText={(value) => setConfirmPassword(value)}
+      />
 
       <ButtonRed onPress={goSignUp} label='Sign Up'></ButtonRed>
 

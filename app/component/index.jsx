@@ -7,5 +7,5 @@ export {
     ButtonRed,
     CustomePassword,
     CustomeInput2,
-    CustomePassword2
+    CustomePassword2,
 }

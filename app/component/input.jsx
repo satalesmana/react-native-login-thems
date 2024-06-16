@@ -19,11 +19,12 @@ export const CustomeInput = ({ value, label, onChangeText, placeholder }) => {
         </View>
     );
 };
+
 export const CustomeInput2 = ({ value, label, onChangeText, placeholder }) => {
     const [isActive, setIsActive] = useState(false);
 
     return (
-        <View style={styles.containerInput2}>
+        <View>
             <Text style={styles.text}>{label}</Text>
             <View style={styles.containerInput}>
                 <TextInput
@@ -70,6 +71,7 @@ export const CustomePassword = ({ value, label, onChangeText, placeholder }) => 
         </View>
     );
 };
+
 export const CustomePassword2 = ({ value, label, onChangeText, placeholder }) => {
     const [isActive, setIsActive] = useState(false);
 
@@ -81,7 +83,7 @@ export const CustomePassword2 = ({ value, label, onChangeText, placeholder }) =>
         setShowPassword(!showPassword);
     };
     return (
-        <View style={styles.containerInput2}>
+        <View>
             <Text style={styles.text}>{label}</Text>
             <View style={styles.containerInput}>
                 <TextInput
