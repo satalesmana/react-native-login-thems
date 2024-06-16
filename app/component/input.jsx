@@ -2,6 +2,7 @@ import { useState } from "react";
 import { View, Text, TextInput, StyleSheet, Image } from "react-native";
 import { Email } from "../../assets";
 import { Person } from "../../assets";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 export const CustomeInput = ({
   value,
@@ -34,7 +35,84 @@ export const CustomeInput = ({
     </View>
   );
 };
+export const CustomeInput2 = ({ value, label, onChangeText, placeholder }) => {
+  const [isActive, setIsActive] = useState(false);
 
+  return (
+    <View>
+      <Text style={styles.text}>{label}</Text>
+      <View
+        style={{
+          marginTop: "5%",
+          marginBottom: "3%",
+          flexDirection: "row",
+          backgroundColor: "#fff6f5",
+          width: "85%",
+          alignSelf: "center",
+          borderRadius: 10,
+        }}
+      >
+        <TextInput
+          style={isActive ? styles.inputActive2 : styles.input2}
+          onFocus={() => setIsActive(true)}
+          onBlur={() => setIsActive(false)}
+          onChangeText={onChangeText}
+          placeholder={placeholder}
+          value={value}
+        />
+      </View>
+    </View>
+  );
+};
+export const CustomePassword2 = ({
+  value,
+  label,
+  onChangeText,
+  placeholder,
+}) => {
+  const [isActive, setIsActive] = useState(false);
+
+  // State variable to track password visibility
+  const [showPassword, setShowPassword] = useState(false);
+
+  // Function to toggle the password visibility state
+  const toggleShowPassword = () => {
+    setShowPassword(!showPassword);
+  };
+  return (
+    <View>
+      <Text style={styles.text}>{label}</Text>
+      <View
+        style={{
+          marginTop: "5%",
+          marginBottom: "3%",
+          flexDirection: "row",
+          backgroundColor: "#fff6f5",
+          width: "85%",
+          alignSelf: "center",
+          borderRadius: 10,
+        }}
+      >
+        <TextInput
+          style={isActive ? styles.inputActive2 : styles.input2}
+          onFocus={() => setIsActive(true)}
+          onBlur={() => setIsActive(false)}
+          secureTextEntry={!showPassword}
+          onChangeText={onChangeText}
+          placeholder={placeholder}
+          value={value}
+        />
+        <MaterialCommunityIcons
+          name={showPassword ? "eye-off" : "eye"}
+          size={20}
+          color="#aaa"
+          style={styles.iconEye}
+          onPress={toggleShowPassword}
+        />
+      </View>
+    </View>
+  );
+};
 const styles = StyleSheet.create({
   containerInput: {
     marginTop: 20,
@@ -73,5 +151,67 @@ const styles = StyleSheet.create({
     padding: 10,
     borderRadius: 0,
     backgroundColor: "#64575766",
+  },
+
+  input2: {
+    height: 52,
+    borderRadius: 10,
+    padding: 15,
+    width: "85%",
+    alignSelf: "center",
+    backgroundColor: "#FFF6F5",
+    flex: 8,
+  },
+
+  inputActive2: {
+    height: 52,
+    padding: 15,
+    // marginTop: 12,
+    borderWidth: 1,
+    borderColor: "#c7d3ff",
+    borderRadius: 10,
+    backgroundColor: "#FFF6F5",
+    width: "85%",
+    alignSelf: "center",
+    flex: 8,
+  },
+  // containerInput: {
+  //   marginTop: "5%",
+  //   marginBottom: "3%",
+  //   flexDirection: "row",
+  //   backgroundColor: "#fff6f5",
+  //   width: "85%",
+  //   alignSelf: "center",
+  //   borderRadius: 10,
+  // },
+  text: {
+    marginLeft: "10%",
+    color: "black",
+  },
+  inputActive: {
+    height: 52,
+    padding: 15,
+    // marginTop: 12,
+    borderWidth: 1,
+    borderColor: "#c7d3ff",
+    borderRadius: 10,
+    backgroundColor: "#FFF6F5",
+    width: "85%",
+    alignSelf: "center",
+    flex: 8,
+  },
+  input: {
+    height: 52,
+    borderRadius: 10,
+    padding: 15,
+    width: "85%",
+    alignSelf: "center",
+    backgroundColor: "#FFF6F5",
+    flex: 8,
+  },
+  iconEye: {
+    marginVertical: "auto",
+    flex: 1,
+    marginLeft: "5%",
   },
 });

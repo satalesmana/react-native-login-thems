@@ -18,14 +18,25 @@ import { LinearGradient } from "expo-linear-gradient";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { GB1, GB2, GB3, Person, Key } from "../../../assets";
 import ApiLib from "../../lib/ApiLib";
-
+import authreducer from "../../store/reducer/authreducer";
+import {
+  setId,
+  setemail,
+  setkelas,
+  setname,
+  setnim,
+  setphone,
+  setprodi,
+} from "../../store/reducer/authreducer";
+import { useDispatch } from "react-redux";
 const windowWidth = Dimensions.get("window").width;
 
 export default function LoginScreen({ navigation }) {
-  const [email, onChangeEmail] = React.useState("");
+  const [email, onChangeemail] = React.useState("");
   const [loading, setLoading] = React.useState(false);
   // State variable to hold the password
   const [password, setPassword] = useState("");
+  const dispatch = useDispatch();
 
   // State variable to track password visibility
   const [showPassword, setShowPassword] = useState(false);
@@ -57,7 +68,16 @@ export default function LoginScreen({ navigation }) {
       });
       if (res.data.document != null) {
         setLoading(false);
-        navigation.replace("Home");
+        console.log(res.data.document);
+        dispatch(setId(res.data.document._id));
+        dispatch(setemail(res.data.document.email));
+        dispatch(setname(res.data.document.name));
+        dispatch(setnim(res.data.document.nim));
+        dispatch(setkelas(res.data.document.kelas));
+        dispatch(setprodi(res.data.document.prodi));
+        dispatch(setphone(res.data.document.phone));
+
+        navigation.replace("Main");
       } else {
         Alert.alert("Error", "Username & password tidak sesuai", [
           {
@@ -112,7 +132,7 @@ export default function LoginScreen({ navigation }) {
                 </View>
                 <TextInput
                   style={style.textInputStyle}
-                  onChangeText={onChangeEmail}
+                  onChangeText={onChangeemail}
                   placeholder={"Username or Email"}
                   placeholderTextColor="#c7c7c7"
                   value={email}
