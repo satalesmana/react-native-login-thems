@@ -20,10 +20,10 @@ export const authSlice = createSlice({
         },
         setNim:(state, action) => {
             state.nim = action.payload
-        }, 
+        },
         setProdi:(state, action) => {
             state.prodi = action.payload
-        }, 
+        },
         setkelasCode:(state, action) => {
             state.kelasCode = action.payload
         },
@@ -41,7 +41,7 @@ export const authSlice = createSlice({
     }
 })
 
-export const { 
+export const {
     setNama,
     setEmail,
     setNim,
