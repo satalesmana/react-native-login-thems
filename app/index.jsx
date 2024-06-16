@@ -38,6 +38,7 @@ function MainScreen() {
           name="User"
           component={UserScreen}
           options={{
+            headerShown:false, 
             tabBarLabel: 'User',
             tabBarIcon: ({ color, size }) => (
               <MaterialCommunityIcons name="account" color={color} size={size} />
@@ -65,7 +66,7 @@ function App() {
 
     <Provider store={store}>
     <NavigationContainer independent={true}>
-      <Stack.Navigator initialRouteName="Main">
+      <Stack.Navigator initialRouteName="Welcome">
       <Stack.Screen name="Main" component={MainScreen} options={{headerShown:false}} />
       <Stack.Screen name="Welcome" options={{headerShown:false}} component={WelcomeScreen} />
       <Stack.Screen name="Login" options={{headerShown:false}}component={LoginScreen} />
