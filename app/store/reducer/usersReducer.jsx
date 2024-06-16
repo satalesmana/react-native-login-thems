@@ -4,7 +4,7 @@ export const usersSlice = createSlice({
   name: "users",
   initialState: {
     formFilter: {},
-    data: []
+    data: [],
   },
   reducers: {
     setData: (state, action) => {
