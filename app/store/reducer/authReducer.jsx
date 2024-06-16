@@ -4,28 +4,48 @@ export const authSlice = createSlice({
     name:'auth',
     initialState: {
         id: null,
+        nim: null,
         firstName: null,
         email: null,
         password: null,
+        programStudy: null,
+        kodeKelas: null,
+        telp: null,
     },
     reducers: {
         setId:(state, action) => {
             state.id = action.payload
         },
-        setFirstName:(state, action) => {
-            state.firstName = action.payload
-        },
-        setEmail:(state, action) => {
-            state.email = action.payload
-        },
-        setPassword:(state, action) => {
-            state.password = action.payload
-        },
+        setNim: (state, action) => {
+            state.nim = action.payload;
+          },
+          setFirstName: (state, action) => {
+            state.firstName = action.payload;
+          },
+          setEmail: (state, action) => {
+            state.email = action.payload;
+          },
+          setPassword: (state, action) => {
+            state.password = action.payload;
+          },
+          setProgramStudy: (state, action) => {
+            state.programStudy = action.payload;
+          },
+          setKodeKelas: (state, action) => {
+            state.kodeKelas = action.payload;
+          },
+          setTelp: (state, action) => {
+            state.telp = action.payload;
+          },
         clearAuth:(state) => {
-            state.id = null
-            state.firstName = null
-            state.email = null
-            state.password = null
+            state.id = null;
+            state.nim = null;
+            state.firstName = null;
+            state.email = null;
+            state.password = null;
+            state.programStudy = null;
+            state.kodeKelas = null;
+            state.telp = null;
 
         }
     }
@@ -33,9 +53,13 @@ export const authSlice = createSlice({
 
 export const { 
     setId,
-    setFirstName,
+    setNim,
     setEmail,
+    setFirstName,
     setPassword,
+    setProgramStudy,
+    setKodeKelas,
+    setTelp,
     clearAuth
  } = authSlice.actions
 

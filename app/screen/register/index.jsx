@@ -9,12 +9,21 @@ import {
     TouchableOpacity,
     Dimensions
 } from "react-native";
-import { useState } from 'react'
+import React, { useState } from 'react'
+import Icon from "react-native-vector-icons/Feather";
 import {
     MyButton
 } from '../../components'
 import { useSelector, useDispatch } from 'react-redux'
-import { setFirstName, setEmail, setPassword, resetRegisterData } from '../../store/reducer/registerReducer'
+import {
+        setNim,
+        setFirstName, 
+        setEmail,
+        setPassword,
+        setProgramStudy,
+        setKodeKelas,
+        setTelp,
+        resetRegisterData } from '../../store/reducer/registerReducer'
 import { ICFacebook, ICGoogle, ICApple } from '../../../assets'
 import ApiLib from "../../lib/ApiLib"
 
@@ -27,6 +36,9 @@ export default function RegisterInputScreen({ navigation }) {
 
     const onNextInput = () => {
         try {
+            if (register.nim === null || register.nim === "") {
+                throw Error('NIM is required')
+            }
             if (register.firstName === null || register.firstName === "") {
                 throw Error('First name is required')
             }
@@ -36,6 +48,15 @@ export default function RegisterInputScreen({ navigation }) {
             if (register.password === null || register.password === "") {
                 throw Error('password is required')
             }
+            if (register.programStudy === null || register.programStudy === "") {
+                throw Error('Program Studi is required')
+            }
+            if (register.kodeKelas === null || register.kodeKelas === "") {
+                throw Error('Kode Kelas is required')
+            }
+            if (register.telp === null || register.telp === "") {
+                throw Error('Nomor Telp is required')
+            }
 
             if (confirmPassword === null || confirmPassword === "") {
                 throw Error('Confirm password is required')
@@ -44,7 +65,11 @@ export default function RegisterInputScreen({ navigation }) {
             let
                 message = `Email : ${register.email} \n`
             message += `Nama : ${register.firstName} \n`
+            message += `NIM : ${register.nim} \n`
             message += `Password : ${register.password} \n`
+            message += `Program Study : ${register.programStudy} \n`
+            message += `Kode Kelas : ${register.kodeKelas} \n`
+            message += `Nomor Telp : ${register.telp} \n`
 
             Alert.alert('Confirm Your Account?', message, [
                 {
@@ -97,19 +122,51 @@ export default function RegisterInputScreen({ navigation }) {
                     <Text style={style.textLabel}></Text>
                     <TextInput
                         style={style.textInputStyle}
+                        onChangeText={(value) => dispatch(setEmail(value))}
+                        placeholder='Email'
+                        placeholderTextColor='gray'
+                        value={register.email} />
+                    <Text style={style.textLabel}></Text>
+                    <TextInput
+                        style={style.textInputStyle}
+                        onChangeText={(value) => dispatch(setNim(value))}
+                        placeholder='Masukkan NIM'
+                        placeholderTextColor='gray'
+                        value={register.nim} />
+
+                    <Text style={style.textLabel}></Text>
+                    <TextInput
+                        style={style.textInputStyle}
                         onChangeText={(value) => dispatch(setFirstName(value))}
                         placeholder='Masukkan Nama'
                         placeholderTextColor='gray'
                         value={register.firstName} />
 
+
                     <Text style={style.textLabel}></Text>
                     <TextInput
                         style={style.textInputStyle}
-                        onChangeText={(value) => dispatch(setEmail(value))}
-                        placeholder='Email'
+                        onChangeText={(value) => dispatch(setProgramStudy(value))}
+                        placeholder='Program Study'
                         placeholderTextColor='gray'
-                        value={register.email} />
+                        value={register.programStudy} />
 
+                    <Text style={style.textLabel}></Text>
+                    <TextInput
+                        style={style.textInputStyle}
+                        onChangeText={(value) => dispatch(setKodeKelas(value))}
+                        placeholder='Kode Kelas'
+                        placeholderTextColor='gray'
+                        value={register.kodeKelas} />
+
+                    <Text style={style.textLabel}></Text>
+                    <TextInput
+                        style={style.textInputStyle}
+                        onChangeText={(value) => dispatch(setTelp(value))}
+                        placeholder='Nomor Telp'
+                        placeholderTextColor='gray'
+                        value={register.telp} />
+                        
                     <Text style={[style.textLabel]}></Text>
                     <TextInput
                         style={[style.textInputStyle]}

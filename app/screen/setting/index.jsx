@@ -3,7 +3,7 @@ import { CustomeInput } from "../../components";
 // import React from 'react'
 import { useDispatch, useSelector } from "react-redux";
 import { setEmail, setPassword, resetSettingsData } from "../../store/reducer/settingsReducer";
-import { clerAuth } from '../../store/reducer/authReducer'
+import { clearAuth } from '../../store/reducer/authReducer'
 import ApiLib from "../../lib/ApiLib";
 import React, { useState } from "react";
 
@@ -38,7 +38,8 @@ export default function SettingsScreen({ navigation }) {
                 text: 'Cancel',
                 onPress: () => console.log('Cancel Pressed'),
                 style: 'cancel',
-            }, {
+            }, 
+            {
                 text: 'Submit', onPress: async () => {
                     const res = await ApiLib.post('/action/updateOne',
                         {
@@ -53,10 +54,11 @@ export default function SettingsScreen({ navigation }) {
                             }
                         }
                     )
+                    //if (res.data?.updatedCount > 0) {
+                        dispatch(clearAuth());
+                        navigation.replace("Login");
+                    //}
 
-                    if (res.data?.updatedCount > 0) {
-                        navigation.replace('Login')
-                    }
 
                 }
             },

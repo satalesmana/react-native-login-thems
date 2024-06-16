@@ -15,7 +15,14 @@ import { ICFacebook, ICGoogle, ICApple } from '../../../assets';
 import React from 'react';
 import ApiLib from "../../lib/ApiLib";
 import { useDispatch } from 'react-redux'
-import { setId, setFirstName, setEmail} from '../../store/reducer/authReducer'
+import {
+  setNim,
+  setEmail,
+  setFirstName,
+  setProgramStudy,
+  setKodeKelas,
+  setTelp,
+} from '../../store/reducer/authReducer'
 
 const windowWidth = Dimensions.get('window').width;
 
@@ -37,12 +44,12 @@ export default function LoginScreen({ navigation }) {
       }
 
       const res = await ApiLib.post('/action/findOne', {
-        "dataSource": "Cluster0",
-        "database": "lp3i_app",
-        "collection": "users",
-        "filter": {
-          "email":email,
-          "password":password,
+        dataSource: "Cluster0",
+        database: "lp3i_app",
+        collection: "users",
+        filter: {
+          email:email,
+          password:password,
         },
       });
 
@@ -50,10 +57,13 @@ export default function LoginScreen({ navigation }) {
       
       if (res.data.document != null) {
         // Successful login
-        console.log('data', res.data.document._id)
-        dispatch(setId(res.data.document._id))
-        dispatch(setFirstName(res.data.document.firstName))
-        dispatch(setEmail(res.data.document.email))
+        const userData = res.data.document;
+        dispatch(setFirstName(userData.firstName));
+        dispatch(setEmail(userData.email));
+        dispatch(setNim(userData.nim));
+        dispatch(setProgramStudy(userData.programStudy));
+        dispatch(setKodeKelas(userData.kodeKelas));
+        dispatch(setTelp(userData.telp));
 
         navigation.replace("Main")
             } else {
