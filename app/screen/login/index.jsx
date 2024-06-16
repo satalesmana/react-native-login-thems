@@ -13,11 +13,21 @@ import {
 } from "react-native";
 import { MyButton } from "../components";
 import { ICGoogle } from "../../../assets";
+import { useDispatch } from "react-redux";
 import React, { useState } from "react";
 import ApiLib from "../../lib/Apilib";
+import {
+  setNim,
+  setEmail,
+  setFirstName,
+  setJurusan,
+  setKode,
+  setNumber,
+} from "../../store/reducer/authReducer";
 
 const windowWidth = Dimensions.get("window").width;
 export default function LoginScreen({ navigation }) {
+  const dispatch = useDispatch();
   const [nama, onChangeNama] = React.useState("");
   const [email, onChangeEmail] = React.useState("");
   const [password, onChangePassword] = React.useState("");
@@ -48,8 +58,15 @@ export default function LoginScreen({ navigation }) {
       });
 
       setLoading(false);
-      if (res.data.document != null) {
-        navigation.replace("Main");
+        if (res.data?.document) {
+          const userData = res.data.document;
+          dispatch(setFirstName(userData.firstName));
+          dispatch(setEmail(userData.email));
+          dispatch(setNim(userData.nim));
+          dispatch(setJurusan(userData.jurusan));
+          dispatch(setKode(userData.kode));
+          dispatch(setNumber(userData.number));
+          navigation.replace("Main");
       } else {
         Alert.alert("Error", "Username & Password tidak sesuai", [
           {
