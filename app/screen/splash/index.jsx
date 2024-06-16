@@ -14,9 +14,6 @@ export default function SplashScreen({navigation}){
             style={styles.linearGradient}>
             <View style={styles.textContainer}>
                 <Text style={styles.textSpalash}>Kelompok 2</Text>
-                <Text style={styles.textSpalash}>Rezky jayadi saputra</Text>
-                <Text style={styles.textSpalash}>Zaky wisnu Prabowo</Text>
-                <Text style={styles.textSpalash}>Muhammad fadilah faza</Text>
             </View>
         </LinearGradient>
     );
