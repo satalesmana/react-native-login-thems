@@ -111,7 +111,6 @@ export default function HomeScreen(){
           onChangeText={handleSearch}
           value={searchQuery}
         />
-        
       </View>
       </View>
       <FlatList
