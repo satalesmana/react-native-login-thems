@@ -14,9 +14,11 @@ import React, { useState } from 'react';
 import { Ionicons } from '@expo/vector-icons'; // Import Ionicons for eye icon
 import { Entypo } from '@expo/vector-icons';
 import {union3} from '../../../assets'
+import { useDispatch } from "react-redux";
 
 
 import ApiLib from "../../lib/ApiLib";
+import { setEmail, setNama, setNim, setProdi, setTelp, setkelasCode } from '../../store/reducer/authReducer';
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
@@ -25,6 +27,7 @@ export default function LoginScreen({ navigation }) {
   const [nim, onChangeUserNim] = useState('');
   const [password, onChangePassword] = useState('');
   const [loading, setLoading] = useState(false); // Loading state
+  const dispatch = useDispatch()
   const [hidePassword, setHidePassword] = useState(true); // Password visibility state
   const [isUserNimFocused, setIsUserNimFocused] = useState(false); // Username focus state
   const [isPasswordFocused, setIsPasswordFocused] = useState(false); // Password focus state
@@ -52,6 +55,13 @@ export default function LoginScreen({ navigation }) {
       });
 
       if (res.data.document != null) {
+        console.log(('data', res.data.document._id));
+        dispatch(setEmail(res.data.document.email))
+        dispatch(setNim(res.data.document.nim))
+        dispatch(setNama(res.data.document.nama))
+        dispatch(setProdi(res.data.document.prodi))
+        dispatch(setkelasCode(res.data.document.kelasCode))
+        dispatch(setTelp(res.data.document.telp))
         navigation.navigate('Main');
       } else {
         Alert.alert('Error', "Nim & password tidak sesuai", [
@@ -246,6 +256,6 @@ const style = StyleSheet.create({
     marginBottom: 5
   },
   containerBottom: {
-    marginTop: 20
-  }
+    marginTop: 20
+  }
 });
