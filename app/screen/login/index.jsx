@@ -13,6 +13,17 @@ import { LrsButton } from '../../components'
 import { ICLrs, ICFb, ICGgl, ICLi} from '../../../assets'       
 import React from 'react'
 import ApiLib from "../../lib/ApiLib"
+import { useDispatch } from 'react-redux'
+import { 
+  setFirstName,
+  setLastName,
+  setNim,
+  setProdi,
+  setClassCode,
+  setNoTlp,
+  setEmail,
+ } from '../../store/reducer/authReducer'
+
 
 
 const windowWidth = Dimensions.get('window').width;
@@ -21,6 +32,7 @@ export default function LoginScreen({navigation}){
   const [email, onChangeEmail] = React.useState('')
   const [pasword, onChangePassword] = React.useState('')
   const [loading, setLoading] = React.useState(false)
+  const dispatch = useDispatch()
 
   const onSubmitLogin = async()=>{
     setLoading(true)
@@ -37,14 +49,22 @@ export default function LoginScreen({navigation}){
               "database": "kelompok9",
               "collection": "users",
               "filter": {
-                "email": email,
-                "password": pasword
+              "email": email,
+              "password": pasword
               }
             }
         )
         setLoading(false)
-        if(res.data.document != null){
-          navigation.replace("Home")
+        if(res.data.document){
+          const userData = res.data.document;
+          dispatch(setFirstName(userData.firstName));
+          dispatch(setLastName(userData.lastName));
+          dispatch(setNim(userData.nim));
+          dispatch(setProdi(userData.prodi));
+          dispatch(setClassCode(userData.classCode));
+          dispatch(setNoTlp(userData.noTelp));
+          dispatch(setEmail(userData.email));
+          navigation.replace("Main")
         }else{
           Alert.alert('Error', "Username & password tidak sesuai", [
             {text: 'OK', onPress: () => {
