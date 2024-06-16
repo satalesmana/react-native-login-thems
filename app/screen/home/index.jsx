@@ -11,15 +11,18 @@ import { useState, useEffect } from "react";
 import { setData, clearData, countData } from '../../store/reducer/usersReducer';
 import ApiLib from '../../lib/Apilib'
 import { useSelector, useDispatch } from 'react-redux';
+import { Searchbar } from 'react-native-paper';
 import { Octicons, MaterialCommunityIcons, Ionicons } from '@expo/vector-icons';
 import * as Progress from 'react-native-progress';
 import * as React from 'react';
+
+
 
 export default function HomeScreen() {
   const dispatch = useDispatch()
   const data = useSelector((state) => state.users.data)
   const filter = useSelector((state) => state.users.formFilter)
-  const [search, onChangeSearch] = React.useState('')
+  const [searchQuery, setSearchQuery] = React.useState('');
 
 
   const fetchData = async () => {
@@ -32,7 +35,6 @@ export default function HomeScreen() {
       })
 
       if (res.data?.documents) {
-        // console.log(res.data.documents.length);
         dispatch(setData(res.data.documents))
       } else {
         dispatch(clearData())
@@ -42,13 +44,21 @@ export default function HomeScreen() {
       console.log(err);
     }
   }
-  // const count = coba1;
-
 
 
   useEffect(() => {
     fetchData()
   }, [])
+
+
+  const handleSearch = (text) => {
+    setSearchQuery(text);
+    const newData = data.filter((item) =>
+      item.firstName.toLowerCase().includes(text.toLowerCase())
+    );
+    setFilteredData(newData);
+  };
+
 
   const rederItem = ({ item }) => (
     <TouchableOpacity style={style.containerItem}>
@@ -76,10 +86,10 @@ export default function HomeScreen() {
         <Octicons name='search' size={20} marginVertical={'auto'} marginLeft={'5%'} flex={1} />
         <TextInput
           style={{ marginLeft: '3%', flex: 11 }}
-          onChangeText={onChangeSearch}
+          onChangeText={setSearchQuery}
           placeholder="Search Files ..."
           // placeholderTextColor="black"
-          value={search}
+          value={searchQuery}
         />
       </View>
       <View style={{ height: 100, width: '85%', alignSelf: 'center', borderRadius: 10, flexDirection: 'row', marginBottom: '10%', backgroundColor: '#E8E5EF' }}>
