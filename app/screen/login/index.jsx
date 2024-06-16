@@ -16,7 +16,7 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { ButtonRed } from "../../component";
 import ApiLib from "../../lib/ApiLib"
 import { useDispatch } from "react-redux";
-import { setId, setEmail } from "../../store/reducer/authReducer";
+import { setId, setEmail,setClass, setNim, setPassword, setPhone, setProdi, setUsername } from "../../store/reducer/authReducer";
 
 const windowWidth = Dimensions.get("window").width;
 
@@ -70,6 +70,11 @@ export default function LoginScreen({ navigation }) {
         console.log(('data', res.data.document._id));
         dispatch(setId(res.data.document._id))
         dispatch(setEmail(res.data.document.email))
+        dispatch(setUsername(res.data.document.username))
+        dispatch(setNim(res.data.document.nim))
+        dispatch(setProdi(res.data.document.prodi))
+        dispatch(setClass(res.data.document.class))
+        dispatch(setPhone(res.data.document.phone))
 
         navigation.replace("Main")
       } else {
