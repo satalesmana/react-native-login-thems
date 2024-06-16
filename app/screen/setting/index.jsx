@@ -12,7 +12,7 @@ import {
   Dimensions,
 } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
-import { setEmail, setPassword } from "../../store/reducer/settingReducer";
+import { setEmail, setPassword,resetSettingData } from "../../store/reducer/settingReducer";
 import { clearAuth } from "../../store/reducer/authReducer";
 import ApiLib from "../../lib/ApiLib";
 
@@ -23,45 +23,120 @@ export default function SettingScreen({ navigation }) {
   const setting = useSelector((state) => state.setting.formInput);
   const auth = useSelector((state) => state.auth);
   const dispatch = useDispatch();
+  const changepass = () => {
+    
+    try {
+      if (!setting.email) throw Error("Email is required");
+      if (!setting.password) throw Error("Password is required");
+      // if (setting.password !== confirmPassword)
+      // throw Error("Confirm password doesn't match");
+      if (setting.password === confirmPassword)
+        // throw Error("Confirm password doesn't match");
+      {
+        const message = `Email : ${setting.email}\n
+        Password : ${setting.password}\n`;
+        Alert.alert("Confirm", message, [
+          {
+            text: "Cancel",
+            onPress: () => console.log("Cancel Pressed"),
+            style: "cancel",
+          },
+          {
+            text: "Submit",
+            onPress: async () => {
+              const res = await ApiLib.post("/action/updateOne", {
+                "dataSource": "Cluster0",
+                "database": "uasghw",
+                "collection": "users",
+                // document: register,
+                "filter" : {"email" : setting.email} ,
+                "update" : {"$set" : {"password" : setting.password}}
+              });
+              if (res.data?.modifiedCount>0) {
+                dispatch(resetSettingData());
+                navigation.navigate("Login");
+              }
+            },
+          },
+        ]);
+
+      }else{
+        alert("Password is required")
+      }
+    } catch (err) {
+      Alert.alert("Error", err.message, [{ text: "OK" }]);
+    }
+ 
+  }
+      // const message = `Email : ${setting.email}\n
+      //   Password : ${setting.password}\n`;
+
+      // Alert.alert("Confirm", message, [
+      //   {
+      //     text: "Cancel",
+      //     onPress: () => console.log("Cancel Pressed"),
+      //     style: "cancel",
+      //   },
+      //   {
+      //     text: "Submit",
+      //     onPress: async () => {
+      //       const res = await ApiLib.updateUser("/action/insertOne", {
+      //         dataSource: "Cluster0",
+      //         database: "uasghw",
+      //         collection: "users",
+      //         document: register,
+      //       });
+      //       if (res.data?.updateUser) {
+      //         dispatch(resetSettingData());
+      //         navigation.navigate("Login");
+      //       }
+      //     },
+      //   },
+      // ]);
+  //   } catch (err) {
+  //     Alert.alert("Error", err.message, [{ text: "OK" }]);
+  //   }
+ 
+  // }
   const onLogout = () => {
     dispatch(clearAuth());
     navigation.replace("Login");
 
-    try {
-      if (!setting.email) throw Error("Email is required");
-      if (!setting.password) throw Error("Password is required");
-      if (!setting.password === confirmPassword)
-        throw Error("Password is required");
-      throw Error("Confirm password doesn't match");
+    // try {
+    //   if (!setting.email) throw Error("Email is required");
+    //   if (!setting.password) throw Error("Password is required");
+    //   if (!setting.password === confirmPassword)
+    //     throw Error("Password is required");
+    //   throw Error("Confirm password doesn't match");
 
-      const message = `Email : ${setting.email}\n
-        Password : ${setting.password}\n`;
+    //   const message = `Email : ${setting.email}\n
+    //     Password : ${setting.password}\n`;
 
-      Alert.alert("Confirm", message, [
-        {
-          text: "Cancel",
-          onPress: () => console.log("Cancel Pressed"),
-          style: "cancel",
-        },
-        {
-          text: "Submit",
-          onPress: async () => {
-            const res = await ApiLib.updateUser("/action/insertOne", {
-              dataSource: "Cluster0",
-              database: "uasghw",
-              collection: "users",
-              document: register,
-            });
-            if (res.data?.updateUser) {
-              dispatch(resetSettingData());
-              navigation.navigate("Login");
-            }
-          },
-        },
-      ]);
-    } catch (err) {
-      Alert.alert("Error", err.message, [{ text: "OK" }]);
-    }
+    //   Alert.alert("Confirm", message, [
+    //     {
+    //       text: "Cancel",
+    //       onPress: () => console.log("Cancel Pressed"),
+    //       style: "cancel",
+    //     },
+    //     {
+    //       text: "Submit",
+    //       onPress: async () => {
+    //         const res = await ApiLib.updateUser("/action/insertOne", {
+    //           dataSource: "Cluster0",
+    //           database: "uasghw",
+    //           collection: "users",
+    //           document: register,
+    //         });
+    //         if (res.data?.updateUser) {
+    //           dispatch(resetSettingData());
+    //           navigation.navigate("Login");
+    //         }
+    //       },
+    //     },
+    //   ]);
+    // } catch (err) {
+    //   Alert.alert("Error", err.message, [{ text: "OK" }]);
+    // }
   };
 
   return (
@@ -171,7 +246,8 @@ export default function SettingScreen({ navigation }) {
           <TextInput
             style={style.inputText}
             value={confirmPassword}
-            onChangeText={setConfirmPassword}
+            // onChangeText={setConfirmPassword}
+            onChangeText={(value) =>setConfirmPassword(value)}
             placeholder="Enter your confirm password"
             placeholderTextColor="black"
           />
@@ -184,7 +260,7 @@ export default function SettingScreen({ navigation }) {
             borderRadius: 10,
             width: 200,
           }}
-          onPress={onLogout}
+          onPress={changepass}
           title="Log Out"
         >
           <Text style={{ color: "white", alignSelf: "center" }}>Submit</Text>
