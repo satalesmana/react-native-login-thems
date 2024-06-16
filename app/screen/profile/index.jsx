@@ -11,7 +11,7 @@ export default function UserScreen() {
     <View style={styles.container}>
       <View style={styles.header}>
         <View style={styles.headerTop}>
-        <Text style={styles.firstname}>{styles.surename}</Text>
+        <Text style={styles.surename}>{styles.firstname}</Text>
           <Image source={require('../../../assets/images/AI_Avatars.png')} style={styles.profileImage} />
           <Text style={styles.email}>{auth.email}</Text>
           <View style={styles.iconGroup}>
