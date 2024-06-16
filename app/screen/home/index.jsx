@@ -1,190 +1,193 @@
-import {
-  View,
-  Text,
-  FlatList,
+
+import { 
+  View, 
+  Text, 
+  FlatList, 
   StyleSheet,
+  RefreshControl,
   TouchableOpacity,
-  TextInput
+  TextInput,
+  SafeAreaView
 } from 'react-native';
-import { useEffect, useState, useMemo } from 'react';
-import { setData, clearData } from '../../store/reducer/usersReducer';
-import ApiLib from "../../lib/ApiLib";
-import { useSelector, useDispatch } from 'react-redux';
-import * as Progress from 'react-native-progress';
+import { useEffect,useState, useCallback } from 'react';
+import { setData, clearData } from '../../store/reducer/usersReducer'
+import ApiLib from "../../lib/ApiLib"
+import Icon from "react-native-vector-icons/Feather";
+import { useSelector, useDispatch } from 'react-redux'
 
-export default function HomeScreen() {
-  const dispatch = useDispatch();
-  const data = useSelector((state) => state.users.data || []);
-  const filter = useSelector((state) => state.users.formFilter);
-  const [value, onChangeText] = useState('');
+export default function HomeScreen(){
+  const dispatch = useDispatch()
+  const [refreshing, setRefreshing] = useState(false);
+  const data = useSelector((state) => state.users.data)
+  const filter = useSelector((state) => state.users.formFilter)
+  const [searchQuery, setSearchQuery] = useState("");
+  const [filteredData, setFilteredData] = useState([]);
 
-  const fetchData = async () => {
-    try {
-      const res = await ApiLib.post('/action/find', {
-        "dataSource": "AtlasClusters",
+  const fetchData = async ()=>{
+    try{
+      const res = await ApiLib.post('/action/find',{
+        "dataSource": "AtlasCluster",
         "database": "uas",
         "collection": "users",
-        "filter": filter,
-      });
+        "filter": filter
+      })
 
       if (res.data?.documents) {
         dispatch(setData(res.data.documents));
+        setFilteredData(res.data.documents); // Update filteredData initially
       } else {
         dispatch(clearData());
+        setFilteredData([]); // Clear filteredData if no documents
       }
     } catch (err) {
       console.log(err);
     }
   };
 
-  const getInitial = (email) => {
-    if (!email) return '';
-    return email.charAt(0).toUpperCase();
-  };
 
-  useEffect(() => {
+  useEffect(()=>{
+    fetchData()
+  },[])
+
+  const onRefresh = useCallback(() => {
+    setRefreshing(true);
     fetchData();
-  }, [filter]);
+    setTimeout(() => {
+      setRefreshing(false);
+    }, 1000);
+  }, []);
 
-  const filteredData = useMemo(() => {
-    if (!value) return data;
-    const lowercasedValue = value.toLowerCase();
-    return data.filter(item => {
-      const nama = item.firstname ? item.firstname.toLowerCase() : '';
-      const email = item.email ? item.email.toLowerCase() : '';
-      return nama.includes(lowercasedValue) || email.includes(lowercasedValue);
-    });
-  }, [value, data]);
 
+  // 
+  const handleSearch = (text) => {
+    setSearchQuery(text);
+    if (data) {
+      const newData = data.filter((item) => {
+        if (item.firstname) {
+          return item.firstname.toLowerCase().includes(text.toLowerCase());
+        }
+        return false;
+      });
+      setFilteredData(newData);
+    }
+  };
   const renderItem = ({ item }) => (
-    <TouchableOpacity style={styles.containerItem}>
-      <View style={styles.itemLeft}>
-        <Text style={styles.textItemLeft}>{getInitial(item?.email,item?.firstname)}</Text>
-      </View>
+      <TouchableOpacity>
+    <View style={styles.itemContainer}>
+      <Icon name="file" size={25} color="gray" style={styles.icon} />
       <View style={styles.itemRight}>
-        <Text>{item?.firstname}</Text>
-        <Text>{item?.email}</Text>
+        <Text style={(styles.text, { fontWeight: "bold", fontSize: 16 })}>
+          {item.firstname}
+        </Text>
+        <Text style={styles.text}>{item.email}</Text>
       </View>
-    </TouchableOpacity>
+      <TouchableOpacity style={styles.moreIconContainer}>
+        <Icon name="more-vertical" size={20} color="black" />
+      </TouchableOpacity>
+    </View>
+      </TouchableOpacity>
   );
 
+  
   return (
-    <View style={styles.mainContainer}>
-      <View style={styles.searchContainer}>
+    <SafeAreaView style={styles.container}>
+    <View style={styles.searchContainer}>
+        <Icon name="search" size={22} color="black" />
         <TextInput
-          onChangeText={onChangeText}
-          value={value}
-          placeholder='Search users'
           style={styles.searchInput}
-        />
+          placeholder="Search..."
+          placeholderTextColor={"black"}
+          onChangeText={handleSearch}
+          value={searchQuery}/>
       </View>
-      <View style={styles.progressContainer}>
-        <View style={styles.progressCircle}>
-          <Progress.Circle
-            size={50}
-            unfilledColor='white'
-            thickness={7}
-            strokeCap='round'
-            indeterminate={false}
-            progress={0.65}
-            alignSelf={'center'}
-            borderWidth={0}
-            color='#9322C8'
-          />
-        </View>
-        <View style={styles.progressText}>
-          <Text style={{ fontSize: 20 }}>Student Active</Text>
-          <Text style={{ color: 'grey', fontSize: 13 }}>Total of student</Text>
-        </View>
-      </View>
-      <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
-        <Text style={{ fontSize: 22, marginLeft: 30, fontWeight: 'bold' }}>List Of Mahasiswa</Text>
-        <Text style={{ fontSize: 15, textAlign: 'right', marginRight: 30, color: '#9322C8' }}>see all</Text>
-      </View>
-      <View style={styles.container}>
-        <FlatList
+      <FlatList
           data={filteredData}
           renderItem={renderItem}
           keyExtractor={(item, index) => index.toString()}
-          ListEmptyComponent={() => <Text>No users found.</Text>}
-        />
-      </View>
-    </View>
-  );
+          refreshControl={
+            <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+            }
+            style={styles.flatList}
+            />
+    </SafeAreaView>
+      
+      
+      )
 }
 
 const styles = StyleSheet.create({
-  mainContainer: {
+  container:{
     flex: 1,
-    backgroundColor: '#f8f8f8'
+  },
+  containerItem:{
+    flex:1,
+    padding:10, 
+    flexDirection:'row',
+    borderBottomWidth: 1,
+    backgroundColor:'white'
+  },
+  itemLeft:{
+    flex:1,
+    paddingLeft:20,
+    textAlign:'center'
+  },
+  textItemLeft:{
+    borderRadius:50,
+    borderWidth:1,
+    borderColor:'#dedede',
+    width:45,
+    textAlign:'center',
+    backgroundColor:'red',
+    fontWeight:'bold',
+    color:'white',
+    padding:10
+  },
+  itemRight:{
+    flex:4
+  },
+  textList:{
+    fontSize:25
   },
   searchContainer: {
     flexDirection: 'row',
+    justifyContent: 'space-between',
     alignItems: 'center',
     padding: 10,
-    borderColor: '#dedede',
-    margin: 10,
-    borderRadius: 5,
+    backgroundColor: 'white',
+    borderBottomWidth: 1,
+    // borderColor: '#dedede'
   },
   searchInput: {
     flex: 1,
-    height: 50,
-    borderColor: '#dedede',
-    borderWidth: 2,
-    paddingLeft: 10,
-    borderRadius: 20
-  },
-  containerItem: {
-    flex: 1,
     padding: 10,
-    flexDirection: 'row',
-    borderBottomWidth: 1,
-    borderColor: '#dedede',
-    backgroundColor: 'white',
-    marginHorizontal: 10,
-    borderRadius: 5
+    fontSize: 16
   },
-  itemLeft: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginRight: 10
-  },
-  textItemLeft: {
-    borderRadius: 50,
-    borderWidth: 1,
-    borderColor: '#dedede',
-    width: 45,
-    textAlign: 'center',
-    backgroundColor: '#9322C8',
-    fontWeight: 'bold',
-    color: '#e7e7e7',
-    padding: 10
-  },
-  itemRight: {
-    justifyContent: 'center',
-  },
-  progressContainer: {
-    height: 100,
-    width: '85%',
-    alignSelf: 'center',
-    borderRadius: 10,
-    flexDirection: 'row',
-    marginBottom: 20,
-    backgroundColor: '#E8E5EF',
-    alignItems: 'center',
-    padding: 10
-  },
-  progressCircle: {
-    width: '25%',
+  searchButton: {
+    padding: 10,
     justifyContent: 'center',
     alignItems: 'center'
   },
-  progressText: {
-    flex: 1,
-    marginLeft: 20
+  itemContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    paddingVertical: 15,
+    paddingHorizontal: 20,
+    borderBottomWidth: 1,
+    borderBottomColor: "#cccccc",
   },
-  container: {
+  icon: {
+    marginRight: 10,
+  },
+  itemRight: {
     flex: 1,
-    backgroundColor: '#f8f8f8'
-  }
-});
+    marginLeft: 10,
+  },
+  text: {
+    fontSize: 16,
+    color: "black",
+  },
+  moreIconContainer: {
+    flex: 1,
+    alignItems: "flex-end",
+  },
+})
