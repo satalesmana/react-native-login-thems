@@ -17,11 +17,17 @@ export const authSlice = createSlice({
         setId:(state, action) => {
             state.id = action.payload
         },
+        setAuthData: (state, action) => {
+            state.authData = action.payload
+          },
         setFirstName:(state, action) => {
             state.firstName = action.payload
         },
         setSureName:(state, action) => {
             state.sureName = action.payload
+        },
+        setEmail:(state, action) => {
+            state.email = action.payload
         },
         setNim:(state, action) => {
             state.nim = action.payload
@@ -42,6 +48,7 @@ export const authSlice = createSlice({
             state.id = null
             state.firstName = null
             state.sureName = null
+            state.email = null
             state.nim = null
             state.kode = null
             state.jurusan = null
@@ -53,8 +60,10 @@ export const authSlice = createSlice({
 
 export const { 
     setId,
+    setAuthData,
     setFirstName,
     setSureName,
+    setEmail,
     setNim,
     setKode,
     setJurusan,

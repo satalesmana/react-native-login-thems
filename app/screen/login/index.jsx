@@ -1,17 +1,29 @@
 import { View, Text, TextInput, StyleSheet, ScrollView, Alert, Dimensions, TouchableOpacity,  ActivityIndicator } from 'react-native';
 import { MyButton, MyButton2 } from '../../components/my_button'
 import { ICGoogle } from '../../../assets'
-import React from 'react'
+import React ,{useState}from 'react'
+import { useDispatch } from "react-redux";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import ApiLib from "../../lib/Apilib"
+import {
+    setAuthData,
+    setNim,
+    setEmail,
+    setFirstName,
+    setSureName,
+    setJurusan,
+    setKode,
+    setNum,
+  } from "../../store/reducer/authReducer";
 
 const windowWidth = Dimensions.get('window').width;
 
 export default function LoginScreen({ navigation }) {
-    const [email, onChangeEmail] = React.useState('')
-    const [password, setPassword] = React.useState("");
-    const [showPassword, setShowPassword] = React.useState(false);
-    const [loading, setLoading] = React.useState(false);
+    const dispatch = useDispatch();
+    const [email, onChangeEmail] = useState('')
+    const [password, setPassword] = useState("");
+    const [showPassword, setShowPassword] = useState(false);
+    const [loading, setLoading] = useState(false);
     const toogleShowPassword = () => {
         setShowPassword(!showPassword);
     };
@@ -37,7 +49,16 @@ export default function LoginScreen({ navigation }) {
             }
         )
         setLoading(false)
-      if(res.data.document != null){
+      if(res.data?.document){
+        const userData = res.data.document;
+        dispatch(setAuthData(userData));
+        dispatch(setFirstName(userData.firstName));
+        dispatch(setSureName(userData.sureName));
+        dispatch(setEmail(userData.email));
+        dispatch(setNim(userData.nim));
+        dispatch(setJurusan(userData.jurusan));
+        dispatch(setKode(userData.kode));
+        dispatch(setNum(userData.num));
         navigation.navigate("main")
       }else{
         Alert.alert('Error', "Username & password tidak sesuai", [
@@ -48,7 +69,7 @@ export default function LoginScreen({ navigation }) {
       }
         } catch (err) {
             setLoading(false)
-            alert('Salah')
+            Alert.alert("Error", err.message);
             // Alert.alert('Error', err.message, [
             //     {
             //         text: 'OK', onPress: () => {

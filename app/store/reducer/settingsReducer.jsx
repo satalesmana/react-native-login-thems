@@ -25,7 +25,7 @@ export const settingsSlice = createSlice({
 });
 
 // Action creators are generated for each case reducer function
-export const { setFirstName, setEmail, setPassword, setJurusan,setKode,setNim,setNumber,resetRegisterData } =
+export const { setEmail, setPassword, resetRegisterData } =
   settingsSlice.actions;
 
 export default settingsSlice.reducer;
