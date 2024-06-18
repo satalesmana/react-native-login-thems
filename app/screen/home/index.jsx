@@ -22,9 +22,6 @@ export default function HomeScreen(){
   const filter = useSelector((state) => state.users.formFilter)
   const [searchQuery, setSearchQuery] = useState("");
   const [filteredData, setFilteredData] = useState([]);
-  const widthAndHeight = 60;
-  const series = [321, 123];
-  const sliceColor = ["green", "white"];
 
   const fetchData = async ()=>{
     try{
@@ -102,16 +99,6 @@ export default function HomeScreen(){
           placeholderTextColor={"black"}
           onChangeText={handleSearch}
           value={searchQuery}/>
-           <View style={styles.searchContainer}>
-        <Icon name="search" size={22} color="black" style={styles.searchIcon} />
-        <TextInput
-          style={styles.searchInput}
-          placeholder="Search..."
-          placeholderTextColor={"black"}
-          onChangeText={handleSearch}
-          value={searchQuery}
-        />
-      </View>
       </View>
       <FlatList
           data={filteredData}
